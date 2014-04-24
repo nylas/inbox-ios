@@ -1,0 +1,860 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
+		43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */; };
+		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
+		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
+		43F22A7A19071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
+		43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A7E19071A1100A032D1 /* InfoPlist.strings */; };
+		43F22A8219071A1100A032D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22A8119071A1100A032D1 /* main.m */; };
+		43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22A8519071A1100A032D1 /* INAppDelegate.m */; };
+		43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A8D19071A1100A032D1 /* Images.xcassets */; };
+		43F22A9519071A1100A032D1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A9419071A1100A032D1 /* XCTest.framework */; };
+		43F22A9619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
+		43F22A9719071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
+		43F22A9F19071A1100A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A9D19071A1100A032D1 /* InfoPlist.strings */; };
+		43F22AA119071A1100A032D1 /* BigSurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AA019071A1100A032D1 /* BigSurTests.m */; };
+		43F22AB819071A3A00A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22AB619071A3A00A032D1 /* InfoPlist.strings */; };
+		43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */; };
+		43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC619071C5200A032D1 /* NSObject+Properties.m */; };
+		43F22ACF19071C5200A032D1 /* NSString+FormatConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC819071C5200A032D1 /* NSString+FormatConversion.m */; };
+		43F22AD019071C5200A032D1 /* INViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22ACB19071C5200A032D1 /* INViewController.m */; };
+		43F22AD119071C5200A032D1 /* INViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F22ACC19071C5200A032D1 /* INViewController.xib */; };
+		43F22AD419071D3600A032D1 /* INDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AD319071D3600A032D1 /* INDatabaseManager.m */; };
+		43F22AD619071F4000A032D1 /* initialization.sql in Resources */ = {isa = PBXBuildFile; fileRef = 43F22AD519071F4000A032D1 /* initialization.sql */; };
+		43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AD91907252400A032D1 /* FMDatabase+INModelQueries.m */; };
+		43F22ADC190729D100A032D1 /* from-1-to-2.sql in Resources */ = {isa = PBXBuildFile; fileRef = 43F22ADB190729D000A032D1 /* from-1-to-2.sql */; };
+		43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22ADE19072E6400A032D1 /* INModelObject.m */; };
+		43F22AE219072E6A00A032D1 /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE119072E6A00A032D1 /* INContact.m */; };
+		43F22AE6190736D300A032D1 /* INAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE5190736D300A032D1 /* INAPICall.m */; };
+		43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */; };
+		8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */; };
+		F4DE7859C9594238811D4985 /* libPods-BigSur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE531875BD974E65B85108A0 /* libPods-BigSur.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43F22A9819071A1100A032D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43F22A6A19071A1000A032D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43F22A7119071A1100A032D1;
+			remoteInfo = BigSur;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
+		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
+		43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+DatabaseCache.h"; path = "Models/INModelObject+DatabaseCache.h"; sourceTree = "<group>"; };
+		43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "INModelObject+DatabaseCache.m"; path = "Models/INModelObject+DatabaseCache.m"; sourceTree = "<group>"; };
+		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F22A7519071A1100A032D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		43F22A7719071A1100A032D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		43F22A7919071A1100A032D1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		43F22A7D19071A1100A032D1 /* BigSur-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSur-Info.plist"; sourceTree = "<group>"; };
+		43F22A7F19071A1100A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43F22A8119071A1100A032D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43F22A8319071A1100A032D1 /* BigSur-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigSur-Prefix.pch"; sourceTree = "<group>"; };
+		43F22A8419071A1100A032D1 /* INAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INAppDelegate.h; sourceTree = "<group>"; };
+		43F22A8519071A1100A032D1 /* INAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INAppDelegate.m; sourceTree = "<group>"; };
+		43F22A8D19071A1100A032D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		43F22A9319071A1100A032D1 /* BigSurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F22A9419071A1100A032D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		43F22A9C19071A1100A032D1 /* BigSurTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurTests-Info.plist"; sourceTree = "<group>"; };
+		43F22A9E19071A1100A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43F22AA019071A1100A032D1 /* BigSurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigSurTests.m; sourceTree = "<group>"; };
+		43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurCoreFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F22AB519071A3A00A032D1 /* BigSurCoreFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurCoreFramework-Info.plist"; sourceTree = "<group>"; };
+		43F22AB719071A3A00A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43F22AB919071A3A00A032D1 /* BigSurCoreFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigSurCoreFramework-Prefix.pch"; sourceTree = "<group>"; };
+		43F22AC319071C5200A032D1 /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
+		43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
+		43F22AC519071C5200A032D1 /* NSObject+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Properties.h"; sourceTree = "<group>"; };
+		43F22AC619071C5200A032D1 /* NSObject+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Properties.m"; sourceTree = "<group>"; };
+		43F22AC719071C5200A032D1 /* NSString+FormatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FormatConversion.h"; sourceTree = "<group>"; };
+		43F22AC819071C5200A032D1 /* NSString+FormatConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FormatConversion.m"; sourceTree = "<group>"; };
+		43F22ACA19071C5200A032D1 /* INViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INViewController.h; sourceTree = "<group>"; };
+		43F22ACB19071C5200A032D1 /* INViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INViewController.m; sourceTree = "<group>"; };
+		43F22ACC19071C5200A032D1 /* INViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INViewController.xib; sourceTree = "<group>"; };
+		43F22AD219071D3600A032D1 /* INDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDatabaseManager.h; path = BigSur/INDatabaseManager.h; sourceTree = SOURCE_ROOT; };
+		43F22AD319071D3600A032D1 /* INDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDatabaseManager.m; path = BigSur/INDatabaseManager.m; sourceTree = SOURCE_ROOT; };
+		43F22AD519071F4000A032D1 /* initialization.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = initialization.sql; path = BigSur/SQL/initialization.sql; sourceTree = "<group>"; };
+		43F22AD81907252400A032D1 /* FMDatabase+INModelQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+INModelQueries.h"; sourceTree = "<group>"; };
+		43F22AD91907252400A032D1 /* FMDatabase+INModelQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+INModelQueries.m"; sourceTree = "<group>"; };
+		43F22ADB190729D000A032D1 /* from-1-to-2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "from-1-to-2.sql"; path = "BigSur/SQL/from-1-to-2.sql"; sourceTree = "<group>"; };
+		43F22ADD19072E6400A032D1 /* INModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INModelObject.h; path = Models/INModelObject.h; sourceTree = "<group>"; };
+		43F22ADE19072E6400A032D1 /* INModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INModelObject.m; path = Models/INModelObject.m; sourceTree = "<group>"; };
+		43F22AE019072E6A00A032D1 /* INContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContact.h; sourceTree = "<group>"; };
+		43F22AE119072E6A00A032D1 /* INContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContact.m; sourceTree = "<group>"; };
+		43F22AE4190736D300A032D1 /* INAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAPICall.h; path = "Models/API Calls/INAPICall.h"; sourceTree = "<group>"; };
+		43F22AE5190736D300A032D1 /* INAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAPICall.m; path = "Models/API Calls/INAPICall.m"; sourceTree = "<group>"; };
+		43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMResultSet+INModelQueries.h"; sourceTree = "<group>"; };
+		43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMResultSet+INModelQueries.m"; sourceTree = "<group>"; };
+		8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSur.xcconfig"; path = "Pods/Pods-BigSur.xcconfig"; sourceTree = "<group>"; };
+		A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSurCoreFramework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSurCoreFramework.xcconfig"; path = "Pods/Pods-BigSurCoreFramework.xcconfig"; sourceTree = "<group>"; };
+		EE531875BD974E65B85108A0 /* libPods-BigSur.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSur.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43F22A6F19071A1100A032D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */,
+				43F22A7A19071A1100A032D1 /* UIKit.framework in Frameworks */,
+				43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */,
+				F4DE7859C9594238811D4985 /* libPods-BigSur.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22A9019071A1100A032D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22A9519071A1100A032D1 /* XCTest.framework in Frameworks */,
+				43F22A9719071A1100A032D1 /* UIKit.framework in Frameworks */,
+				43F22A9619071A1100A032D1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22AAC19071A3A00A032D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43F22A6919071A1000A032D1 = {
+			isa = PBXGroup;
+			children = (
+				43F22A7B19071A1100A032D1 /* BigSur */,
+				43F22AB319071A3A00A032D1 /* BigSur Core */,
+				43F22A9A19071A1100A032D1 /* BigSur Tests */,
+				43F22A7419071A1100A032D1 /* Frameworks */,
+				43F22A7319071A1100A032D1 /* Products */,
+				8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */,
+				B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		43F22A7319071A1100A032D1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43F22A7219071A1100A032D1 /* BigSur.app */,
+				43F22A9319071A1100A032D1 /* BigSurTests.xctest */,
+				43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43F22A7419071A1100A032D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43F22A7519071A1100A032D1 /* Foundation.framework */,
+				43F22A7719071A1100A032D1 /* CoreGraphics.framework */,
+				43F22A7919071A1100A032D1 /* UIKit.framework */,
+				43F22A9419071A1100A032D1 /* XCTest.framework */,
+				EE531875BD974E65B85108A0 /* libPods-BigSur.a */,
+				A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		43F22A7B19071A1100A032D1 /* BigSur */ = {
+			isa = PBXGroup;
+			children = (
+				43F22A8419071A1100A032D1 /* INAppDelegate.h */,
+				43F22A8519071A1100A032D1 /* INAppDelegate.m */,
+				43F22AD219071D3600A032D1 /* INDatabaseManager.h */,
+				43F22AD319071D3600A032D1 /* INDatabaseManager.m */,
+				43F22AD719071F4400A032D1 /* SQL */,
+				43F22AE319072E7300A032D1 /* Models */,
+				43F22AC219071C5200A032D1 /* Categories */,
+				43F22AC919071C5200A032D1 /* Controllers */,
+				43F22A7C19071A1100A032D1 /* Supporting Files */,
+				43F22A8D19071A1100A032D1 /* Images.xcassets */,
+			);
+			path = BigSur;
+			sourceTree = "<group>";
+		};
+		43F22A7C19071A1100A032D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43F22A7D19071A1100A032D1 /* BigSur-Info.plist */,
+				43F22A7E19071A1100A032D1 /* InfoPlist.strings */,
+				43F22A8119071A1100A032D1 /* main.m */,
+				43F22A8319071A1100A032D1 /* BigSur-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43F22A9A19071A1100A032D1 /* BigSur Tests */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AA019071A1100A032D1 /* BigSurTests.m */,
+				43F22A9B19071A1100A032D1 /* Supporting Files */,
+			);
+			name = "BigSur Tests";
+			path = BigSurTests;
+			sourceTree = "<group>";
+		};
+		43F22A9B19071A1100A032D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43F22A9C19071A1100A032D1 /* BigSurTests-Info.plist */,
+				43F22A9D19071A1100A032D1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43F22AB319071A3A00A032D1 /* BigSur Core */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AB419071A3A00A032D1 /* Supporting Files */,
+			);
+			name = "BigSur Core";
+			path = BigSurCoreFramework;
+			sourceTree = "<group>";
+		};
+		43F22AB419071A3A00A032D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AB519071A3A00A032D1 /* BigSurCoreFramework-Info.plist */,
+				43F22AB619071A3A00A032D1 /* InfoPlist.strings */,
+				43F22AB919071A3A00A032D1 /* BigSurCoreFramework-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43F22AC219071C5200A032D1 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AC319071C5200A032D1 /* NSObject+AssociatedObjects.h */,
+				43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */,
+				43F22AC519071C5200A032D1 /* NSObject+Properties.h */,
+				43F22AC619071C5200A032D1 /* NSObject+Properties.m */,
+				43F22AC719071C5200A032D1 /* NSString+FormatConversion.h */,
+				43F22AC819071C5200A032D1 /* NSString+FormatConversion.m */,
+				43F22AD81907252400A032D1 /* FMDatabase+INModelQueries.h */,
+				43F22AD91907252400A032D1 /* FMDatabase+INModelQueries.m */,
+				43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */,
+				43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */,
+				43D12B5719088E2100ACDCAB /* INPredicateConverter.h */,
+				43D12B5819088E2100ACDCAB /* INPredicateConverter.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		43F22AC919071C5200A032D1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				43F22ACA19071C5200A032D1 /* INViewController.h */,
+				43F22ACB19071C5200A032D1 /* INViewController.m */,
+				43F22ACC19071C5200A032D1 /* INViewController.xib */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		43F22AD719071F4400A032D1 /* SQL */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AD519071F4000A032D1 /* initialization.sql */,
+				43F22ADB190729D000A032D1 /* from-1-to-2.sql */,
+			);
+			name = SQL;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		43F22AE319072E7300A032D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AE7190736D600A032D1 /* API Calls */,
+				43F22ADD19072E6400A032D1 /* INModelObject.h */,
+				43F22ADE19072E6400A032D1 /* INModelObject.m */,
+				43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */,
+				43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */,
+				43F22AE019072E6A00A032D1 /* INContact.h */,
+				43F22AE119072E6A00A032D1 /* INContact.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		43F22AE7190736D600A032D1 /* API Calls */ = {
+			isa = PBXGroup;
+			children = (
+				43F22AE4190736D300A032D1 /* INAPICall.h */,
+				43F22AE5190736D300A032D1 /* INAPICall.m */,
+			);
+			name = "API Calls";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		43F22AAD19071A3A00A032D1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		43F22A7119071A1100A032D1 /* BigSur */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43F22AA419071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSur" */;
+			buildPhases = (
+				FF7605F5F805472081A19E2F /* Check Pods Manifest.lock */,
+				43F22A6E19071A1100A032D1 /* Sources */,
+				43F22A6F19071A1100A032D1 /* Frameworks */,
+				43F22A7019071A1100A032D1 /* Resources */,
+				7C3E1C59E7884C76BF05137A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BigSur;
+			productName = BigSur;
+			productReference = 43F22A7219071A1100A032D1 /* BigSur.app */;
+			productType = "com.apple.product-type.application";
+		};
+		43F22A9219071A1100A032D1 /* BigSurTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43F22AA719071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSurTests" */;
+			buildPhases = (
+				43F22A8F19071A1100A032D1 /* Sources */,
+				43F22A9019071A1100A032D1 /* Frameworks */,
+				43F22A9119071A1100A032D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43F22A9919071A1100A032D1 /* PBXTargetDependency */,
+			);
+			name = BigSurTests;
+			productName = BigSurTests;
+			productReference = 43F22A9319071A1100A032D1 /* BigSurTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		43F22AB119071A3A00A032D1 /* BigSurCoreFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurCoreFramework" */;
+			buildPhases = (
+				8FBE91C7391F4E6194714D01 /* Check Pods Manifest.lock */,
+				43F22AAA19071A3A00A032D1 /* ShellScript */,
+				43F22AAB19071A3A00A032D1 /* Sources */,
+				43F22AAC19071A3A00A032D1 /* Frameworks */,
+				43F22AAD19071A3A00A032D1 /* Headers */,
+				43F22AAE19071A3A00A032D1 /* Resources */,
+				43F22AAF19071A3A00A032D1 /* ShellScript */,
+				43F22AB019071A3A00A032D1 /* ShellScript */,
+				1D8940EE004146C192CB04A4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BigSurCoreFramework;
+			productName = BigSurCoreFramework;
+			productReference = 43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43F22A6A19071A1000A032D1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IN;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Inbox;
+				TargetAttributes = {
+					43F22A9219071A1100A032D1 = {
+						TestTargetID = 43F22A7119071A1100A032D1;
+					};
+				};
+			};
+			buildConfigurationList = 43F22A6D19071A1000A032D1 /* Build configuration list for PBXProject "BigSur" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 43F22A6919071A1000A032D1;
+			productRefGroup = 43F22A7319071A1100A032D1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43F22A7119071A1100A032D1 /* BigSur */,
+				43F22AB119071A3A00A032D1 /* BigSurCoreFramework */,
+				43F22A9219071A1100A032D1 /* BigSurTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43F22A7019071A1100A032D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22AD619071F4000A032D1 /* initialization.sql in Resources */,
+				43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */,
+				43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */,
+				43F22AD119071C5200A032D1 /* INViewController.xib in Resources */,
+				43F22ADC190729D100A032D1 /* from-1-to-2.sql in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22A9119071A1100A032D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22A9F19071A1100A032D1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22AAE19071A3A00A032D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22AB819071A3A00A032D1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D8940EE004146C192CB04A4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-BigSurCoreFramework-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F22AAA19071A3A00A032D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F22AAF19071A3A00A032D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "HEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Versions/$FRAMEWORK_VERSION/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$(find $FRAMEWORK_HEADERS_DIR/. -not -type d 2> /dev/null | sed -e \"s@.*/@@g\")\n\nFIND_OPTS=\"\"\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n  if [ -n \"$FIND_OPTS\" ]; then\n    FIND_OPTS=\"$FIND_OPTS -o\"\n  fi\n  FIND_OPTS=\"$FIND_OPTS -name '$PUBLIC_HEADER'\"\ndone\n\nif [ -n \"$FIND_OPTS\" ]; then\n  for ORIG_HEADER in $(eval \"find $HEADERS_ROOT/. $FIND_OPTS\" 2> /dev/null | sed -e \"s@^$HEADERS_ROOT/./@@g\"); do\n    PUBLIC_HEADER=$(basename $ORIG_HEADER)\n    RELATIVE_PATH=$(dirname $ORIG_HEADER)\n    if [ -e $FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER ]; then\n      mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n      mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\n    fi\n  done\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		43F22AB019071A3A00A032D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Make sure the other platform gets built\n\necho \"Build other platform\"\n\necho xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n\n\n# Build the fat static library binary\n\necho \"Create universal static library\"\n\nif [[ \"$XCODE_VERSION_MAJOR\" = \"0500\" ]]\nthen\n    echo \"$DT_TOOLCHAIN_DIR/usr/bin/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$DT_TOOLCHAIN_DIR/usr/bin/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\nelse\n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\nfi \n\necho mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nmv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n\n\n# Build framework structure\n\necho \"Build symlinks\"\n\necho ln -sfh $FRAMEWORK_VERSION \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\nln -sfh $FRAMEWORK_VERSION \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\necho ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\necho ln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\nln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\necho ln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\nln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\n\n\n# Link to binary for unit tests\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework\"\nln -sfh \"../${WRAPPER_NAME}/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework/.fake_fw_testing\"\n\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\n# Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n\necho \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n\necho rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\necho cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\ncp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C3E1C59E7884C76BF05137A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-BigSur-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FBE91C7391F4E6194714D01 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FF7605F5F805472081A19E2F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43F22A6E19071A1100A032D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
+				43F22AE219072E6A00A032D1 /* INContact.m in Sources */,
+				43F22AD419071D3600A032D1 /* INDatabaseManager.m in Sources */,
+				43F22AE6190736D300A032D1 /* INAPICall.m in Sources */,
+				43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */,
+				43F22ACF19071C5200A032D1 /* NSString+FormatConversion.m in Sources */,
+				43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */,
+				43F22A8219071A1100A032D1 /* main.m in Sources */,
+				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
+				43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */,
+				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
+				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
+				43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */,
+				43F22AD019071C5200A032D1 /* INViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22A8F19071A1100A032D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F22AA119071A1100A032D1 /* BigSurTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43F22AAB19071A3A00A032D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		43F22A9919071A1100A032D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43F22A7119071A1100A032D1 /* BigSur */;
+			targetProxy = 43F22A9819071A1100A032D1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		43F22A7E19071A1100A032D1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43F22A7F19071A1100A032D1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		43F22A9D19071A1100A032D1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43F22A9E19071A1100A032D1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		43F22AB619071A3A00A032D1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43F22AB719071A3A00A032D1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		43F22AA219071A1100A032D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		43F22AA319071A1100A032D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		43F22AA519071A1100A032D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
+				INFOPLIST_FILE = "BigSur/BigSur-Info.plist";
+				PRODUCT_NAME = BigSur;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		43F22AA619071A1100A032D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
+				INFOPLIST_FILE = "BigSur/BigSur-Info.plist";
+				PRODUCT_NAME = BigSur;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		43F22AA819071A1100A032D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
+				PRODUCT_NAME = BigSurTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		43F22AA919071A1100A032D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
+				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
+				PRODUCT_NAME = BigSurTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		43F22ABB19071A3A00A032D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSurCoreFramework/BigSurCoreFramework-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BigSurCoreFramework/BigSurCoreFramework-Info.plist";
+				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				PRODUCT_NAME = BigSurCoreFramework;
+				SKIP_INSTALL = YES;
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		43F22ABC19071A3A00A032D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSurCoreFramework/BigSurCoreFramework-Prefix.pch";
+				INFOPLIST_FILE = "BigSurCoreFramework/BigSurCoreFramework-Info.plist";
+				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				PRODUCT_NAME = BigSurCoreFramework;
+				SKIP_INSTALL = YES;
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43F22A6D19071A1000A032D1 /* Build configuration list for PBXProject "BigSur" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F22AA219071A1100A032D1 /* Debug */,
+				43F22AA319071A1100A032D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43F22AA419071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSur" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F22AA519071A1100A032D1 /* Debug */,
+				43F22AA619071A1100A032D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43F22AA719071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSurTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F22AA819071A1100A032D1 /* Debug */,
+				43F22AA919071A1100A032D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurCoreFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F22ABB19071A3A00A032D1 /* Debug */,
+				43F22ABC19071A3A00A032D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43F22A6A19071A1000A032D1 /* Project object */;
+}

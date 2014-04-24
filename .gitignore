@@ -6,3 +6,15 @@
 #
 # Pods/
 
+
+/Pods/
+/Podfile.lock
+/.DS_Store
+
+/DerivedData/
+
+/BigSur.xcodeproj/xcuserdata
+
+/BigSur.xcworkspace/xcuserdata
+
+*.DS_Store
