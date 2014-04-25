@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43329FCA1909B34D00D689F1 /* INAPIManager.m */; };
+		4332A01E1909E56900D689F1 /* INModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4332A01D1909E56900D689F1 /* INModelView.m */; };
 		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
 		43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
@@ -33,7 +35,7 @@
 		43F22ADC190729D100A032D1 /* from-1-to-2.sql in Resources */ = {isa = PBXBuildFile; fileRef = 43F22ADB190729D000A032D1 /* from-1-to-2.sql */; };
 		43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22ADE19072E6400A032D1 /* INModelObject.m */; };
 		43F22AE219072E6A00A032D1 /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE119072E6A00A032D1 /* INContact.m */; };
-		43F22AE6190736D300A032D1 /* INAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE5190736D300A032D1 /* INAPICall.m */; };
+		43F22AE6190736D300A032D1 /* INAPIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE5190736D300A032D1 /* INAPIAction.m */; };
 		43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */; };
 		8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */; };
 		F4DE7859C9594238811D4985 /* libPods-BigSur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE531875BD974E65B85108A0 /* libPods-BigSur.a */; };
@@ -50,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43329FC91909B34D00D689F1 /* INAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPIManager.h; sourceTree = "<group>"; };
+		43329FCA1909B34D00D689F1 /* INAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIManager.m; sourceTree = "<group>"; };
+		4332A01C1909E56900D689F1 /* INModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelView.h; sourceTree = "<group>"; };
+		4332A01D1909E56900D689F1 /* INModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelView.m; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
 		43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+DatabaseCache.h"; path = "Models/INModelObject+DatabaseCache.h"; sourceTree = "<group>"; };
@@ -93,8 +99,8 @@
 		43F22ADE19072E6400A032D1 /* INModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INModelObject.m; path = Models/INModelObject.m; sourceTree = "<group>"; };
 		43F22AE019072E6A00A032D1 /* INContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContact.h; sourceTree = "<group>"; };
 		43F22AE119072E6A00A032D1 /* INContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContact.m; sourceTree = "<group>"; };
-		43F22AE4190736D300A032D1 /* INAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAPICall.h; path = "Models/API Calls/INAPICall.h"; sourceTree = "<group>"; };
-		43F22AE5190736D300A032D1 /* INAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAPICall.m; path = "Models/API Calls/INAPICall.m"; sourceTree = "<group>"; };
+		43F22AE4190736D300A032D1 /* INAPIAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAPIAction.h; path = "Models/API Calls/INAPIAction.h"; sourceTree = "<group>"; };
+		43F22AE5190736D300A032D1 /* INAPIAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAPIAction.m; path = "Models/API Calls/INAPIAction.m"; sourceTree = "<group>"; };
 		43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMResultSet+INModelQueries.h"; sourceTree = "<group>"; };
 		43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMResultSet+INModelQueries.m"; sourceTree = "<group>"; };
 		8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSur.xcconfig"; path = "Pods/Pods-BigSur.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +185,8 @@
 				43F22A8519071A1100A032D1 /* INAppDelegate.m */,
 				43F22AD219071D3600A032D1 /* INDatabaseManager.h */,
 				43F22AD319071D3600A032D1 /* INDatabaseManager.m */,
+				43329FC91909B34D00D689F1 /* INAPIManager.h */,
+				43329FCA1909B34D00D689F1 /* INAPIManager.m */,
 				43F22AD719071F4400A032D1 /* SQL */,
 				43F22AE319072E7300A032D1 /* Models */,
 				43F22AC219071C5200A032D1 /* Categories */,
@@ -280,6 +288,8 @@
 		43F22AE319072E7300A032D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4332A01C1909E56900D689F1 /* INModelView.h */,
+				4332A01D1909E56900D689F1 /* INModelView.m */,
 				43F22AE7190736D600A032D1 /* API Calls */,
 				43F22ADD19072E6400A032D1 /* INModelObject.h */,
 				43F22ADE19072E6400A032D1 /* INModelObject.m */,
@@ -294,8 +304,8 @@
 		43F22AE7190736D600A032D1 /* API Calls */ = {
 			isa = PBXGroup;
 			children = (
-				43F22AE4190736D300A032D1 /* INAPICall.h */,
-				43F22AE5190736D300A032D1 /* INAPICall.m */,
+				43F22AE4190736D300A032D1 /* INAPIAction.h */,
+				43F22AE5190736D300A032D1 /* INAPIAction.m */,
 			);
 			name = "API Calls";
 			sourceTree = "<group>";
@@ -550,15 +560,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
+				43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */,
 				43F22AE219072E6A00A032D1 /* INContact.m in Sources */,
 				43F22AD419071D3600A032D1 /* INDatabaseManager.m in Sources */,
-				43F22AE6190736D300A032D1 /* INAPICall.m in Sources */,
+				43F22AE6190736D300A032D1 /* INAPIAction.m in Sources */,
 				43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */,
 				43F22ACF19071C5200A032D1 /* NSString+FormatConversion.m in Sources */,
 				43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */,
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
 				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
 				43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */,
+				4332A01E1909E56900D689F1 /* INModelView.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
 				43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */,
