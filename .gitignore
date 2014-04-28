@@ -18,3 +18,5 @@
 /BigSur.xcworkspace/xcuserdata
 
 *.DS_Store
+
+/build

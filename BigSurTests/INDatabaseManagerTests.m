@@ -1,18 +1,18 @@
 //
-//  BigSurTests.m
-//  BigSurTests
+//  INDatabaseManagerTests.m
+//  
 //
-//  Created by Ben Gotow on 4/22/14.
-//  Copyright (c) 2014 Inbox. All rights reserved.
+//  Created by Ben Gotow on 4/28/14.
+//
 //
 
 #import <XCTest/XCTest.h>
 
-@interface BigSurTests : XCTestCase
+@interface INDatabaseManagerTests : XCTestCase
 
 @end
 
-@implementation BigSurTests
+@implementation INDatabaseManagerTests
 
 - (void)setUp
 {

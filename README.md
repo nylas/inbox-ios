@@ -13,9 +13,11 @@ BigSur uses Cocoapods, a dependency management system for iOS apps similiar to n
 
 After Cocoapods has installed dependencies, open the project's .xcworkspace (not the .xcproj). Have fun.
 
-#### Testing
+#### Testing & Linting
 
-The core business logic of BigSur should be extensively tested. To run tests within Xcode, choose Product > Test from the menu.
+To run tests within Xcode, choose Product > Test from the menu.
+
+To run OCLint, choose the OCLint target and make sure you have OCLint installed. [Download it](http://oclint.org/downloads.html) and follow the [installation instructions](http://docs.oclint.org/en/dev/intro/installation.html) to add it to your $PATH. OCLint is really customizable, and we'll be using it in the future to do static analysis beyond what Xcode's analyzer provides. Check out [this article](http://codeascraft.com/2014/01/15/static-analysis-with-oclint/) for a few examples of what OClint can do.
 
 #### Core Principles
 

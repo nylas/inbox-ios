@@ -6,9 +6,24 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		43AAF513190ECC8E000FA5AF /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 43AAF514190ECC8E000FA5AF /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				43AAF517190ECCAE000FA5AF /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43329FCA1909B34D00D689F1 /* INAPIManager.m */; };
-		4332A01E1909E56900D689F1 /* INModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4332A01D1909E56900D689F1 /* INModelView.m */; };
+		4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4332A01D1909E56900D689F1 /* INModelProvider.m */; };
+		43AAF512190ECBA3000FA5AF /* INDatabaseManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */; };
 		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
 		43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
@@ -22,7 +37,6 @@
 		43F22A9619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A9719071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
 		43F22A9F19071A1100A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A9D19071A1100A032D1 /* InfoPlist.strings */; };
-		43F22AA119071A1100A032D1 /* BigSurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AA019071A1100A032D1 /* BigSurTests.m */; };
 		43F22AB819071A3A00A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22AB619071A3A00A032D1 /* InfoPlist.strings */; };
 		43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */; };
 		43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC619071C5200A032D1 /* NSObject+Properties.m */; };
@@ -54,8 +68,9 @@
 /* Begin PBXFileReference section */
 		43329FC91909B34D00D689F1 /* INAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPIManager.h; sourceTree = "<group>"; };
 		43329FCA1909B34D00D689F1 /* INAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIManager.m; sourceTree = "<group>"; };
-		4332A01C1909E56900D689F1 /* INModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelView.h; sourceTree = "<group>"; };
-		4332A01D1909E56900D689F1 /* INModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelView.m; sourceTree = "<group>"; };
+		4332A01C1909E56900D689F1 /* INModelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelProvider.h; sourceTree = "<group>"; };
+		4332A01D1909E56900D689F1 /* INModelProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProvider.m; sourceTree = "<group>"; };
+		43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDatabaseManagerTests.m; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
 		43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+DatabaseCache.h"; path = "Models/INModelObject+DatabaseCache.h"; sourceTree = "<group>"; };
@@ -75,7 +90,6 @@
 		43F22A9419071A1100A032D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43F22A9C19071A1100A032D1 /* BigSurTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurTests-Info.plist"; sourceTree = "<group>"; };
 		43F22A9E19071A1100A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		43F22AA019071A1100A032D1 /* BigSurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigSurTests.m; sourceTree = "<group>"; };
 		43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurCoreFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F22AB519071A3A00A032D1 /* BigSurCoreFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurCoreFramework-Info.plist"; sourceTree = "<group>"; };
 		43F22AB719071A3A00A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -187,6 +201,8 @@
 				43F22AD319071D3600A032D1 /* INDatabaseManager.m */,
 				43329FC91909B34D00D689F1 /* INAPIManager.h */,
 				43329FCA1909B34D00D689F1 /* INAPIManager.m */,
+				4332A01C1909E56900D689F1 /* INModelProvider.h */,
+				4332A01D1909E56900D689F1 /* INModelProvider.m */,
 				43F22AD719071F4400A032D1 /* SQL */,
 				43F22AE319072E7300A032D1 /* Models */,
 				43F22AC219071C5200A032D1 /* Categories */,
@@ -211,7 +227,7 @@
 		43F22A9A19071A1100A032D1 /* BigSur Tests */ = {
 			isa = PBXGroup;
 			children = (
-				43F22AA019071A1100A032D1 /* BigSurTests.m */,
+				43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */,
 				43F22A9B19071A1100A032D1 /* Supporting Files */,
 			);
 			name = "BigSur Tests";
@@ -288,8 +304,6 @@
 		43F22AE319072E7300A032D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4332A01C1909E56900D689F1 /* INModelView.h */,
-				4332A01D1909E56900D689F1 /* INModelView.m */,
 				43F22AE7190736D600A032D1 /* API Calls */,
 				43F22ADD19072E6400A032D1 /* INModelObject.h */,
 				43F22ADE19072E6400A032D1 /* INModelObject.m */,
@@ -360,9 +374,9 @@
 			productReference = 43F22A9319071A1100A032D1 /* BigSurTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		43F22AB119071A3A00A032D1 /* BigSurCoreFramework */ = {
+		43F22AB119071A3A00A032D1 /* BigSurFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurCoreFramework" */;
+			buildConfigurationList = 43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurFramework" */;
 			buildPhases = (
 				8FBE91C7391F4E6194714D01 /* Check Pods Manifest.lock */,
 				43F22AAA19071A3A00A032D1 /* ShellScript */,
@@ -378,7 +392,7 @@
 			);
 			dependencies = (
 			);
-			name = BigSurCoreFramework;
+			name = BigSurFramework;
 			productName = BigSurCoreFramework;
 			productReference = 43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */;
 			productType = "com.apple.product-type.bundle";
@@ -412,8 +426,9 @@
 			projectRoot = "";
 			targets = (
 				43F22A7119071A1100A032D1 /* BigSur */,
-				43F22AB119071A3A00A032D1 /* BigSurCoreFramework */,
+				43F22AB119071A3A00A032D1 /* BigSurFramework */,
 				43F22A9219071A1100A032D1 /* BigSurTests */,
+				43AAF513190ECC8E000FA5AF /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -464,6 +479,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-BigSurCoreFramework-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		43AAF517190ECCAE000FA5AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\ncd \"${TARGET_TEMP_DIR}\"\n\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd \"${SRCROOT}\"\n\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee \"${TARGET_TEMP_DIR}/xcodebuild.log\"\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd \"${TARGET_TEMP_DIR}\"\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp \"${TARGET_TEMP_DIR}/compile_commands.json\" \"${SRCROOT}/compile_commands.json\"\n\nfi\n\necho \"[*] starting analyzing\"\ncd \"${TARGET_TEMP_DIR}\"\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
 		};
 		43F22AAA19071A3A00A032D1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -570,7 +598,7 @@
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
 				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
 				43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */,
-				4332A01E1909E56900D689F1 /* INModelView.m in Sources */,
+				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
 				43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */,
@@ -582,7 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43F22AA119071A1100A032D1 /* BigSurTests.m in Sources */,
+				43AAF512190ECBA3000FA5AF /* INDatabaseManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +659,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		43AAF515190ECC8E000FA5AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		43AAF516190ECC8E000FA5AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		43F22AA219071A1100A032D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -830,6 +872,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43AAF514190ECC8E000FA5AF /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43AAF515190ECC8E000FA5AF /* Debug */,
+				43AAF516190ECC8E000FA5AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		43F22A6D19071A1000A032D1 /* Build configuration list for PBXProject "BigSur" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -857,7 +907,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurCoreFramework" */ = {
+		43F22ABA19071A3A00A032D1 /* Build configuration list for PBXNativeTarget "BigSurFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				43F22ABB19071A3A00A032D1 /* Debug */,
