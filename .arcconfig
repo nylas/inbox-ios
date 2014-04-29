@@ -1,0 +1,9 @@
+{
+  "project_id" : "bigsur",
+  "conduit_uri" : "https://review.inboxapp.com/",
+  "lint.engine" : "InboxUncrustifyLintEngine",
+  "lint.uncrustify.script": "uncrustify -c uncrustify.cfg -l OC --no-backup --mtime ",
+  "load" : [
+    "arclib"
+  ]
+}

@@ -1,0 +1,1 @@
+{"__symbol_cache_version__":11,"c04d6a5c54d3a7b7ce80cbe38ad327be":{"have":{"class":{"InboxUncrustifyLinter":19,"UncrustifyLintEngine":1112}},"need":{"function":{"Futures":410},"class":{"ArcanistLinter":49,"ArcanistLintEngine":1141,"ExecFuture":297,"ArcanistUsageException":760}},"xmap":{"InboxUncrustifyLinter":["ArcanistLinter"],"UncrustifyLintEngine":["ArcanistLintEngine"]}}}

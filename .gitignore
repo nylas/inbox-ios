@@ -20,3 +20,5 @@
 *.DS_Store
 
 /build
+
+/file_list
