@@ -30,7 +30,6 @@
 		43AAF524190F1E2D000FA5AF /* INNamespace.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF523190F1E2D000FA5AF /* INNamespace.m */; };
 		43AAF529190F20F6000FA5AF /* INModelArrayResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF528190F20F6000FA5AF /* INModelArrayResponseSerializer.m */; };
 		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
-		43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
 		43F22A7A19071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
@@ -86,8 +85,6 @@
 		43AAF528190F20F6000FA5AF /* INModelArrayResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelArrayResponseSerializer.m; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
-		43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+DatabaseCache.h"; path = "Models/INModelObject+DatabaseCache.h"; sourceTree = "<group>"; };
-		43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "INModelObject+DatabaseCache.m"; path = "Models/INModelObject+DatabaseCache.m"; sourceTree = "<group>"; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F22A7519071A1100A032D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43F22A7719071A1100A032D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -339,8 +336,6 @@
 				43F22AE5190736D300A032D1 /* INAPIOperation.m */,
 				43F22ADD19072E6400A032D1 /* INModelObject.h */,
 				43F22ADE19072E6400A032D1 /* INModelObject.m */,
-				43D12B5A19098EDA00ACDCAB /* INModelObject+DatabaseCache.h */,
-				43D12B5B19098EDA00ACDCAB /* INModelObject+DatabaseCache.m */,
 				43AAF518190EE558000FA5AF /* INModelObject+Uniquing.h */,
 				43AAF519190EE558000FA5AF /* INModelObject+Uniquing.m */,
 				43AAF527190F20F6000FA5AF /* INModelArrayResponseSerializer.h */,
@@ -625,7 +620,6 @@
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
 				43AAF51D190F037E000FA5AF /* INThread.m in Sources */,
 				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
-				43D12B5C19098EDA00ACDCAB /* INModelObject+DatabaseCache.m in Sources */,
 				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
@@ -908,6 +902,7 @@
 				43AAF516190ECC8E000FA5AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43F22A6D19071A1000A032D1 /* Build configuration list for PBXProject "BigSur" */ = {
 			isa = XCConfigurationList;
