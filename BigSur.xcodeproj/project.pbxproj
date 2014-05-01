@@ -29,6 +29,18 @@
 		43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF51F190F1B5D000FA5AF /* INThreadProvider.m */; };
 		43AAF524190F1E2D000FA5AF /* INNamespace.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF523190F1E2D000FA5AF /* INNamespace.m */; };
 		43AAF529190F20F6000FA5AF /* INModelArrayResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF528190F20F6000FA5AF /* INModelArrayResponseSerializer.m */; };
+		43AAF52F19117BED000FA5AF /* INAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF52E19117BED000FA5AF /* INAccount.m */; };
+		43AAF53219117C89000FA5AF /* INLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF53119117C89000FA5AF /* INLabel.m */; };
+		43AAF5361911B8E5000FA5AF /* INThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5341911B8E5000FA5AF /* INThreadViewController.m */; };
+		43AAF5371911B8E5000FA5AF /* INThreadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AAF5351911B8E5000FA5AF /* INThreadViewController.xib */; };
+		43AAF53A1911BD71000FA5AF /* INMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5391911BD71000FA5AF /* INMessage.m */; };
+		43AAF53D1911CFC0000FA5AF /* INMessageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF53C1911CFC0000FA5AF /* INMessageProvider.m */; };
+		43AAF5421912B05E000FA5AF /* NSDictionary+FormatConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5411912B05E000FA5AF /* NSDictionary+FormatConversion.m */; };
+		43AAF5491912D607000FA5AF /* INMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5481912D607000FA5AF /* INMessageCollectionViewCell.m */; };
+		43AAF54B1912D614000FA5AF /* INMessageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AAF54A1912D614000FA5AF /* INMessageCollectionViewCell.xib */; };
+		43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */; };
+		43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */; };
+		43AAF5531912F5D1000FA5AF /* message.css in Resources */ = {isa = PBXBuildFile; fileRef = 43AAF5521912F5D1000FA5AF /* message.css */; };
 		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
@@ -83,6 +95,27 @@
 		43AAF523190F1E2D000FA5AF /* INNamespace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INNamespace.m; path = Models/INNamespace.m; sourceTree = "<group>"; };
 		43AAF527190F20F6000FA5AF /* INModelArrayResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelArrayResponseSerializer.h; sourceTree = "<group>"; };
 		43AAF528190F20F6000FA5AF /* INModelArrayResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelArrayResponseSerializer.m; sourceTree = "<group>"; };
+		43AAF52D19117BED000FA5AF /* INAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAccount.h; path = Models/INAccount.h; sourceTree = "<group>"; };
+		43AAF52E19117BED000FA5AF /* INAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAccount.m; path = Models/INAccount.m; sourceTree = "<group>"; };
+		43AAF53019117C89000FA5AF /* INLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INLabel.h; path = Models/INLabel.h; sourceTree = "<group>"; };
+		43AAF53119117C89000FA5AF /* INLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INLabel.m; path = Models/INLabel.m; sourceTree = "<group>"; };
+		43AAF5331911B8E5000FA5AF /* INThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INThreadViewController.h; sourceTree = "<group>"; };
+		43AAF5341911B8E5000FA5AF /* INThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INThreadViewController.m; sourceTree = "<group>"; };
+		43AAF5351911B8E5000FA5AF /* INThreadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INThreadViewController.xib; sourceTree = "<group>"; };
+		43AAF5381911BD71000FA5AF /* INMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INMessage.h; path = BigSur/Models/INMessage.h; sourceTree = SOURCE_ROOT; };
+		43AAF5391911BD71000FA5AF /* INMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INMessage.m; path = BigSur/Models/INMessage.m; sourceTree = SOURCE_ROOT; };
+		43AAF53B1911CFC0000FA5AF /* INMessageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INMessageProvider.h; path = Models/INMessageProvider.h; sourceTree = "<group>"; };
+		43AAF53C1911CFC0000FA5AF /* INMessageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INMessageProvider.m; path = Models/INMessageProvider.m; sourceTree = "<group>"; };
+		43AAF5401912B05E000FA5AF /* NSDictionary+FormatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FormatConversion.h"; sourceTree = "<group>"; };
+		43AAF5411912B05E000FA5AF /* NSDictionary+FormatConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FormatConversion.m"; sourceTree = "<group>"; };
+		43AAF5471912D607000FA5AF /* INMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INMessageCollectionViewCell.h; sourceTree = "<group>"; };
+		43AAF5481912D607000FA5AF /* INMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INMessageCollectionViewCell.m; sourceTree = "<group>"; };
+		43AAF54A1912D614000FA5AF /* INMessageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INMessageCollectionViewCell.xib; sourceTree = "<group>"; };
+		43AAF54C1912E985000FA5AF /* INThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INThreadTableViewCell.h; sourceTree = "<group>"; };
+		43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INThreadTableViewCell.m; sourceTree = "<group>"; };
+		43AAF54F1912EB72000FA5AF /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
+		43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
+		43AAF5521912F5D1000FA5AF /* message.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = message.css; path = BigSur/CSS/message.css; sourceTree = SOURCE_ROOT; };
 		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,10 +212,16 @@
 			children = (
 				43AAF522190F1E2D000FA5AF /* INNamespace.h */,
 				43AAF523190F1E2D000FA5AF /* INNamespace.m */,
+				43AAF53019117C89000FA5AF /* INLabel.h */,
+				43AAF53119117C89000FA5AF /* INLabel.m */,
+				43AAF52D19117BED000FA5AF /* INAccount.h */,
+				43AAF52E19117BED000FA5AF /* INAccount.m */,
 				43F22AE019072E6A00A032D1 /* INContact.h */,
 				43F22AE119072E6A00A032D1 /* INContact.m */,
 				43AAF51B190F037E000FA5AF /* INThread.h */,
 				43AAF51C190F037E000FA5AF /* INThread.m */,
+				43AAF5381911BD71000FA5AF /* INMessage.h */,
+				43AAF5391911BD71000FA5AF /* INMessage.m */,
 			);
 			name = "Concrete Classes";
 			sourceTree = "<group>";
@@ -192,8 +231,31 @@
 			children = (
 				43AAF51E190F1B5D000FA5AF /* INThreadProvider.h */,
 				43AAF51F190F1B5D000FA5AF /* INThreadProvider.m */,
+				43AAF53B1911CFC0000FA5AF /* INMessageProvider.h */,
+				43AAF53C1911CFC0000FA5AF /* INMessageProvider.m */,
 			);
 			name = "Concrete Classes";
+			sourceTree = "<group>";
+		};
+		43AAF5461912D607000FA5AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				43AAF54C1912E985000FA5AF /* INThreadTableViewCell.h */,
+				43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */,
+				43AAF5471912D607000FA5AF /* INMessageCollectionViewCell.h */,
+				43AAF5481912D607000FA5AF /* INMessageCollectionViewCell.m */,
+				43AAF54A1912D614000FA5AF /* INMessageCollectionViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		43AAF5541912F5D6000FA5AF /* CSS */ = {
+			isa = PBXGroup;
+			children = (
+				43AAF5521912F5D1000FA5AF /* message.css */,
+			);
+			name = CSS;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		43F22A6919071A1000A032D1 = {
@@ -241,9 +303,11 @@
 				43F22AD319071D3600A032D1 /* INDatabaseManager.m */,
 				43329FC91909B34D00D689F1 /* INAPIManager.h */,
 				43329FCA1909B34D00D689F1 /* INAPIManager.m */,
+				43AAF5461912D607000FA5AF /* Views */,
 				43AAF521190F1B67000FA5AF /* Model Providers */,
 				43F22AE319072E7300A032D1 /* Models */,
 				43F22AC219071C5200A032D1 /* Categories */,
+				43AAF5541912F5D6000FA5AF /* CSS */,
 				43F22AC919071C5200A032D1 /* Controllers */,
 				43F22A7C19071A1100A032D1 /* Supporting Files */,
 				43F22A8D19071A1100A032D1 /* Images.xcassets */,
@@ -303,12 +367,16 @@
 		43F22AC219071C5200A032D1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				43AAF54F1912EB72000FA5AF /* UIView+FrameAdditions.h */,
+				43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */,
 				43F22AC319071C5200A032D1 /* NSObject+AssociatedObjects.h */,
 				43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */,
 				43F22AC519071C5200A032D1 /* NSObject+Properties.h */,
 				43F22AC619071C5200A032D1 /* NSObject+Properties.m */,
 				43F22AC719071C5200A032D1 /* NSString+FormatConversion.h */,
 				43F22AC819071C5200A032D1 /* NSString+FormatConversion.m */,
+				43AAF5401912B05E000FA5AF /* NSDictionary+FormatConversion.h */,
+				43AAF5411912B05E000FA5AF /* NSDictionary+FormatConversion.m */,
 				43F22AD81907252400A032D1 /* FMDatabase+INModelQueries.h */,
 				43F22AD91907252400A032D1 /* FMDatabase+INModelQueries.m */,
 				43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */,
@@ -325,6 +393,9 @@
 				43F22ACA19071C5200A032D1 /* INViewController.h */,
 				43F22ACB19071C5200A032D1 /* INViewController.m */,
 				43F22ACC19071C5200A032D1 /* INViewController.xib */,
+				43AAF5331911B8E5000FA5AF /* INThreadViewController.h */,
+				43AAF5341911B8E5000FA5AF /* INThreadViewController.m */,
+				43AAF5351911B8E5000FA5AF /* INThreadViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -459,9 +530,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AAF54B1912D614000FA5AF /* INMessageCollectionViewCell.xib in Resources */,
 				43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */,
+				43AAF5371911B8E5000FA5AF /* INThreadViewController.xib in Resources */,
 				43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */,
 				43F22AD119071C5200A032D1 /* INViewController.xib in Resources */,
+				43AAF5531912F5D1000FA5AF /* message.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,20 +681,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AAF524190F1E2D000FA5AF /* INNamespace.m in Sources */,
+				43AAF5361911B8E5000FA5AF /* INThreadViewController.m in Sources */,
 				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
 				43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */,
+				43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */,
 				43AAF529190F20F6000FA5AF /* INModelArrayResponseSerializer.m in Sources */,
+				43AAF5491912D607000FA5AF /* INMessageCollectionViewCell.m in Sources */,
 				43F22AE219072E6A00A032D1 /* INContact.m in Sources */,
 				43F22AD419071D3600A032D1 /* INDatabaseManager.m in Sources */,
+				43AAF5421912B05E000FA5AF /* NSDictionary+FormatConversion.m in Sources */,
 				43AAF51A190EE558000FA5AF /* INModelObject+Uniquing.m in Sources */,
 				43F22AE6190736D300A032D1 /* INAPIOperation.m in Sources */,
 				43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */,
+				43AAF53219117C89000FA5AF /* INLabel.m in Sources */,
 				43F22ACF19071C5200A032D1 /* NSString+FormatConversion.m in Sources */,
+				43AAF53D1911CFC0000FA5AF /* INMessageProvider.m in Sources */,
+				43AAF52F19117BED000FA5AF /* INAccount.m in Sources */,
 				43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */,
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
 				43AAF51D190F037E000FA5AF /* INThread.m in Sources */,
 				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
 				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
+				43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */,
+				43AAF53A1911BD71000FA5AF /* INMessage.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
 				43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */,
