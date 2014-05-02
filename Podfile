@@ -7,13 +7,13 @@ target "BigSur" do
 	pod 'NSDate+TimeAgo'
 end
 
-target "BigSurCoreFramework" do
+target "BigSurFramework" do
 	pod 'FMDB'
 	pod 'AFNetworking'
 	pod 'NSDate+TimeAgo'
 end
 
-target "BigSurTests" do
-
+target "BigSurTests", :exclusive => true do
+	pod 'Kiwi/XCTest'
 end
 

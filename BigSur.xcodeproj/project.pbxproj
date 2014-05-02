@@ -21,9 +21,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4317023C19132BA10002491F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A9419071A1100A032D1 /* XCTest.framework */; };
+		4317023D19132BA10002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
+		4317023E19132BA10002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
+		4317024419132BA10002491F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4317024219132BA10002491F /* InfoPlist.strings */; };
+		4317024619132BA10002491F /* BigSurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317024519132BA10002491F /* BigSurTests.m */; };
 		43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43329FCA1909B34D00D689F1 /* INAPIManager.m */; };
 		4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4332A01D1909E56900D689F1 /* INModelProvider.m */; };
-		43AAF512190ECBA3000FA5AF /* INDatabaseManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */; };
 		43AAF51A190EE558000FA5AF /* INModelObject+Uniquing.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF519190EE558000FA5AF /* INModelObject+Uniquing.m */; };
 		43AAF51D190F037E000FA5AF /* INThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF51C190F037E000FA5AF /* INThread.m */; };
 		43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF51F190F1B5D000FA5AF /* INThreadProvider.m */; };
@@ -49,10 +53,6 @@
 		43F22A8219071A1100A032D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22A8119071A1100A032D1 /* main.m */; };
 		43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22A8519071A1100A032D1 /* INAppDelegate.m */; };
 		43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A8D19071A1100A032D1 /* Images.xcassets */; };
-		43F22A9519071A1100A032D1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A9419071A1100A032D1 /* XCTest.framework */; };
-		43F22A9619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
-		43F22A9719071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
-		43F22A9F19071A1100A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22A9D19071A1100A032D1 /* InfoPlist.strings */; };
 		43F22AB819071A3A00A032D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F22AB619071A3A00A032D1 /* InfoPlist.strings */; };
 		43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC419071C5200A032D1 /* NSObject+AssociatedObjects.m */; };
 		43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AC619071C5200A032D1 /* NSObject+Properties.m */; };
@@ -66,11 +66,13 @@
 		43F22AE6190736D300A032D1 /* INAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE5190736D300A032D1 /* INAPIOperation.m */; };
 		43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */; };
 		8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */; };
+		E15CA3529CD04652A09EF492 /* libPods-BigSurFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC3F53319D74B529C87E055 /* libPods-BigSurFramework.a */; };
+		E3540A1C6D4D4A35B9541B0A /* libPods-BigSurTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B251294EBA94538841578AB /* libPods-BigSurTests.a */; };
 		F4DE7859C9594238811D4985 /* libPods-BigSur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE531875BD974E65B85108A0 /* libPods-BigSur.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		43F22A9819071A1100A032D1 /* PBXContainerItemProxy */ = {
+		4317024819132BA10002491F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43F22A6A19071A1000A032D1 /* Project object */;
 			proxyType = 1;
@@ -80,11 +82,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4317023B19132BA10002491F /* BigSurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4317024119132BA10002491F /* BigSurTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurTests-Info.plist"; sourceTree = "<group>"; };
+		4317024319132BA10002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4317024519132BA10002491F /* BigSurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigSurTests.m; sourceTree = "<group>"; };
+		4317024719132BA10002491F /* BigSurTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigSurTests-Prefix.pch"; sourceTree = "<group>"; };
+		4325D513191329DC00743CD4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		43329FC91909B34D00D689F1 /* INAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPIManager.h; sourceTree = "<group>"; };
 		43329FCA1909B34D00D689F1 /* INAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIManager.m; sourceTree = "<group>"; };
 		4332A01C1909E56900D689F1 /* INModelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelProvider.h; sourceTree = "<group>"; };
 		4332A01D1909E56900D689F1 /* INModelProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProvider.m; sourceTree = "<group>"; };
-		43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDatabaseManagerTests.m; sourceTree = "<group>"; };
 		43AAF518190EE558000FA5AF /* INModelObject+Uniquing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+Uniquing.h"; path = "Models/INModelObject+Uniquing.h"; sourceTree = "<group>"; };
 		43AAF519190EE558000FA5AF /* INModelObject+Uniquing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "INModelObject+Uniquing.m"; path = "Models/INModelObject+Uniquing.m"; sourceTree = "<group>"; };
 		43AAF51B190F037E000FA5AF /* INThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INThread.h; path = Models/INThread.h; sourceTree = "<group>"; };
@@ -129,10 +136,7 @@
 		43F22A8419071A1100A032D1 /* INAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INAppDelegate.h; sourceTree = "<group>"; };
 		43F22A8519071A1100A032D1 /* INAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INAppDelegate.m; sourceTree = "<group>"; };
 		43F22A8D19071A1100A032D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		43F22A9319071A1100A032D1 /* BigSurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F22A9419071A1100A032D1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		43F22A9C19071A1100A032D1 /* BigSurTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurTests-Info.plist"; sourceTree = "<group>"; };
-		43F22A9E19071A1100A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurCoreFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F22AB519071A3A00A032D1 /* BigSurCoreFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurCoreFramework-Info.plist"; sourceTree = "<group>"; };
 		43F22AB719071A3A00A032D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -158,13 +162,27 @@
 		43F22AE5190736D300A032D1 /* INAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAPIOperation.m; path = "Models/API Calls/INAPIOperation.m"; sourceTree = "<group>"; };
 		43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMResultSet+INModelQueries.h"; sourceTree = "<group>"; };
 		43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMResultSet+INModelQueries.m"; sourceTree = "<group>"; };
+		7ACFCC688CD14ACE9835C12A /* Pods-BigSurFramework.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSurFramework.xcconfig"; path = "Pods/Pods-BigSurFramework.xcconfig"; sourceTree = "<group>"; };
+		7BC3F53319D74B529C87E055 /* libPods-BigSurFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSurFramework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSur.xcconfig"; path = "Pods/Pods-BigSur.xcconfig"; sourceTree = "<group>"; };
+		9B251294EBA94538841578AB /* libPods-BigSurTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSurTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A001EFB96BFF4722BDE59D9F /* Pods-BigSurTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSurTests.xcconfig"; path = "Pods/Pods-BigSurTests.xcconfig"; sourceTree = "<group>"; };
 		A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSurCoreFramework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSurCoreFramework.xcconfig"; path = "Pods/Pods-BigSurCoreFramework.xcconfig"; sourceTree = "<group>"; };
 		EE531875BD974E65B85108A0 /* libPods-BigSur.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSur.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4317023819132BA10002491F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4317023C19132BA10002491F /* XCTest.framework in Frameworks */,
+				4317023E19132BA10002491F /* UIKit.framework in Frameworks */,
+				4317023D19132BA10002491F /* Foundation.framework in Frameworks */,
+				E3540A1C6D4D4A35B9541B0A /* libPods-BigSurTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43F22A6F19071A1100A032D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,27 +194,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		43F22A9019071A1100A032D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43F22A9519071A1100A032D1 /* XCTest.framework in Frameworks */,
-				43F22A9719071A1100A032D1 /* UIKit.framework in Frameworks */,
-				43F22A9619071A1100A032D1 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43F22AAC19071A3A00A032D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */,
+				E15CA3529CD04652A09EF492 /* libPods-BigSurFramework.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4317023F19132BA10002491F /* BigSurTests */ = {
+			isa = PBXGroup;
+			children = (
+				4317024519132BA10002491F /* BigSurTests.m */,
+				4317024019132BA10002491F /* Supporting Files */,
+			);
+			path = BigSurTests;
+			sourceTree = "<group>";
+		};
+		4317024019132BA10002491F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4317024119132BA10002491F /* BigSurTests-Info.plist */,
+				4317024219132BA10002491F /* InfoPlist.strings */,
+				4317024719132BA10002491F /* BigSurTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		43AAF521190F1B67000FA5AF /* Model Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,11 +291,12 @@
 			children = (
 				43F22A7B19071A1100A032D1 /* BigSur */,
 				43F22AB319071A3A00A032D1 /* BigSur Core */,
-				43F22A9A19071A1100A032D1 /* BigSur Tests */,
+				4317023F19132BA10002491F /* BigSurTests */,
 				43F22A7419071A1100A032D1 /* Frameworks */,
 				43F22A7319071A1100A032D1 /* Products */,
 				8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */,
-				B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */,
+				7ACFCC688CD14ACE9835C12A /* Pods-BigSurFramework.xcconfig */,
+				A001EFB96BFF4722BDE59D9F /* Pods-BigSurTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,8 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				43F22A7219071A1100A032D1 /* BigSur.app */,
-				43F22A9319071A1100A032D1 /* BigSurTests.xctest */,
 				43F22AB219071A3A00A032D1 /* BigSurCoreFramework.framework */,
+				4317023B19132BA10002491F /* BigSurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -290,6 +319,9 @@
 				43F22A9419071A1100A032D1 /* XCTest.framework */,
 				EE531875BD974E65B85108A0 /* libPods-BigSur.a */,
 				A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */,
+				7BC3F53319D74B529C87E055 /* libPods-BigSurFramework.a */,
+				9B251294EBA94538841578AB /* libPods-BigSurTests.a */,
+				4325D513191329DC00743CD4 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -322,25 +354,6 @@
 				43F22A7E19071A1100A032D1 /* InfoPlist.strings */,
 				43F22A8119071A1100A032D1 /* main.m */,
 				43F22A8319071A1100A032D1 /* BigSur-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		43F22A9A19071A1100A032D1 /* BigSur Tests */ = {
-			isa = PBXGroup;
-			children = (
-				43AAF511190ECBA3000FA5AF /* INDatabaseManagerTests.m */,
-				43F22A9B19071A1100A032D1 /* Supporting Files */,
-			);
-			name = "BigSur Tests";
-			path = BigSurTests;
-			sourceTree = "<group>";
-		};
-		43F22A9B19071A1100A032D1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				43F22A9C19071A1100A032D1 /* BigSurTests-Info.plist */,
-				43F22A9D19071A1100A032D1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -429,6 +442,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4317023A19132BA10002491F /* BigSurTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4317024A19132BA10002491F /* Build configuration list for PBXNativeTarget "BigSurTests" */;
+			buildPhases = (
+				0BA9CF6855EF498B9CA6C0A0 /* Check Pods Manifest.lock */,
+				4317023719132BA10002491F /* Sources */,
+				4317023819132BA10002491F /* Frameworks */,
+				4317023919132BA10002491F /* Resources */,
+				70D92777D9284523A44AF9BA /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4317024919132BA10002491F /* PBXTargetDependency */,
+			);
+			name = BigSurTests;
+			productName = BigSurTests;
+			productReference = 4317023B19132BA10002491F /* BigSurTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		43F22A7119071A1100A032D1 /* BigSur */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43F22AA419071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSur" */;
@@ -447,24 +480,6 @@
 			productName = BigSur;
 			productReference = 43F22A7219071A1100A032D1 /* BigSur.app */;
 			productType = "com.apple.product-type.application";
-		};
-		43F22A9219071A1100A032D1 /* BigSurTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43F22AA719071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSurTests" */;
-			buildPhases = (
-				43F22A8F19071A1100A032D1 /* Sources */,
-				43F22A9019071A1100A032D1 /* Frameworks */,
-				43F22A9119071A1100A032D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				43F22A9919071A1100A032D1 /* PBXTargetDependency */,
-			);
-			name = BigSurTests;
-			productName = BigSurTests;
-			productReference = 43F22A9319071A1100A032D1 /* BigSurTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		43F22AB119071A3A00A032D1 /* BigSurFramework */ = {
 			isa = PBXNativeTarget;
@@ -499,7 +514,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Inbox;
 				TargetAttributes = {
-					43F22A9219071A1100A032D1 = {
+					4317023A19132BA10002491F = {
 						TestTargetID = 43F22A7119071A1100A032D1;
 					};
 				};
@@ -518,14 +533,22 @@
 			projectRoot = "";
 			targets = (
 				43F22A7119071A1100A032D1 /* BigSur */,
+				4317023A19132BA10002491F /* BigSurTests */,
 				43F22AB119071A3A00A032D1 /* BigSurFramework */,
-				43F22A9219071A1100A032D1 /* BigSurTests */,
 				43AAF513190ECC8E000FA5AF /* OCLint */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4317023919132BA10002491F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4317024419132BA10002491F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43F22A7019071A1100A032D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,14 +559,6 @@
 				43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */,
 				43F22AD119071C5200A032D1 /* INViewController.xib in Resources */,
 				43AAF5531912F5D1000FA5AF /* message.css in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43F22A9119071A1100A032D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43F22A9F19071A1100A032D1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +573,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0BA9CF6855EF498B9CA6C0A0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		1D8940EE004146C192CB04A4 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,7 +600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-BigSurCoreFramework-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-BigSurFramework-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		43AAF517190ECCAE000FA5AF /* ShellScript */ = {
@@ -628,6 +658,21 @@
 			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\n\n# Make sure the other platform gets built\n\necho \"Build other platform\"\n\necho xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n\n\n# Build the fat static library binary\n\necho \"Create universal static library\"\n\nif [[ \"$XCODE_VERSION_MAJOR\" = \"0500\" ]]\nthen\n    echo \"$DT_TOOLCHAIN_DIR/usr/bin/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$DT_TOOLCHAIN_DIR/usr/bin/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\nelse\n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\nfi \n\necho mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nmv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n\n\n# Build framework structure\n\necho \"Build symlinks\"\n\necho ln -sfh $FRAMEWORK_VERSION \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\nln -sfh $FRAMEWORK_VERSION \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/Current\"\necho ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Headers\"\necho ln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\nln -sfh Versions/Current/Resources \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Resources\"\necho ln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\nln -sfh \"Versions/Current/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${EXECUTABLE_NAME}\"\n\n\n# Link to binary for unit tests\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework\"\nln -sfh \"../${WRAPPER_NAME}/${EXECUTABLE_NAME}\" \"${BUILT_PRODUCTS_DIR}/.fake_fw_testing.framework/.fake_fw_testing\"\n\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\n# Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n\necho \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n\necho rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\necho cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\ncp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		70D92777D9284523A44AF9BA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-BigSurTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7C3E1C59E7884C76BF05137A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -676,6 +721,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4317023719132BA10002491F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4317024619132BA10002491F /* BigSurTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43F22A6E19071A1100A032D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,14 +765,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		43F22A8F19071A1100A032D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43AAF512190ECBA3000FA5AF /* INDatabaseManagerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43F22AAB19071A3A00A032D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -730,26 +775,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		43F22A9919071A1100A032D1 /* PBXTargetDependency */ = {
+		4317024919132BA10002491F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43F22A7119071A1100A032D1 /* BigSur */;
-			targetProxy = 43F22A9819071A1100A032D1 /* PBXContainerItemProxy */;
+			targetProxy = 4317024819132BA10002491F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		43F22A7E19071A1100A032D1 /* InfoPlist.strings */ = {
+		4317024219132BA10002491F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				43F22A7F19071A1100A032D1 /* en */,
+				4317024319132BA10002491F /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		43F22A9D19071A1100A032D1 /* InfoPlist.strings */ = {
+		43F22A7E19071A1100A032D1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				43F22A9E19071A1100A032D1 /* en */,
+				43F22A7F19071A1100A032D1 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -765,6 +810,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4317024B19132BA10002491F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A001EFB96BFF4722BDE59D9F /* Pods-BigSurTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSurTests/BigSurTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		4317024C19132BA10002491F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A001EFB96BFF4722BDE59D9F /* Pods-BigSurTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BigSurTests/BigSurTests-Prefix.pch";
+				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		43AAF515190ECC8E000FA5AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -877,49 +974,9 @@
 			};
 			name = Release;
 		};
-		43F22AA819071A1100A032D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
-				PRODUCT_NAME = BigSurTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		43F22AA919071A1100A032D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BigSur.app/BigSur";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BigSur/BigSur-Prefix.pch";
-				INFOPLIST_FILE = "BigSurTests/BigSurTests-Info.plist";
-				PRODUCT_NAME = BigSurTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		43F22ABB19071A3A00A032D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */;
+			baseConfigurationReference = 7ACFCC688CD14ACE9835C12A /* Pods-BigSurFramework.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv6,
@@ -950,7 +1007,7 @@
 		};
 		43F22ABC19071A3A00A032D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7CA0D55A1E84B55869D657F /* Pods-BigSurCoreFramework.xcconfig */;
+			baseConfigurationReference = 7ACFCC688CD14ACE9835C12A /* Pods-BigSurFramework.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv6,
@@ -978,6 +1035,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4317024A19132BA10002491F /* Build configuration list for PBXNativeTarget "BigSurTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4317024B19132BA10002491F /* Debug */,
+				4317024C19132BA10002491F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		43AAF514190ECC8E000FA5AF /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1001,15 +1067,6 @@
 			buildConfigurations = (
 				43F22AA519071A1100A032D1 /* Debug */,
 				43F22AA619071A1100A032D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		43F22AA719071A1100A032D1 /* Build configuration list for PBXNativeTarget "BigSurTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43F22AA819071A1100A032D1 /* Debug */,
-				43F22AA919071A1100A032D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
