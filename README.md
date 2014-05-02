@@ -5,7 +5,7 @@ bigsur
 
 BigSur uses Cocoapods, a dependency management system for iOS apps similiar to npm and rpm. To set up your local development environment, you'll need to install cocoapods and do a pod install:
 
-1. `brew install cocoapods`
+1. `sudo gem install cocoapods`
 
 2. `cd <project directory>`
 
