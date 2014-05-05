@@ -5,7 +5,7 @@ bigsur
 
 BigSur uses Cocoapods, a dependency management system for iOS apps similiar to npm and rpm. To set up your local development environment, you'll need to install cocoapods and do a pod install:
 
-1. `sudo gem install cocoapods`
+1. `brew install cocoapods`
 
 2. `cd <project directory>`
 
@@ -37,19 +37,3 @@ There are several core design principles at the heart of BigSur. Before developi
 The [Charles web development proxy](http://www.charlesproxy.com) makes it easy to inspect network activity while the app is running.
 
 [Navicat for SQLLite](http://www.navicat.com/products/navicat-for-sqlite) allows you to interact with the app's SQLLite database while the app is running.
-
-#### Documentation
-
-The BigSur Documentation is compiled with [AppleDoc](http://gentlebytes.com/appledoc/). 
-
-xcode format:
-
-```
-appledoc --include ./Documentation/. --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "InboxApp, Inc." --company-id com.inbox.ios -d -n --docset-bundle-id com.inbox.ios  --docset-bundle-name "PARWorks iOS SDK Documentation"  --ignore=JSON --docset-copyright 2014 ./BigSur
-```
-
-html format:
-
-```
-appledoc --include ./Documentation/. --no-create-docset --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "InboxApp, Inc." --company-id com.inbox.ios --ignore=JSON ./BigSur
-```

@@ -25,9 +25,15 @@
 		4317023D19132BA10002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		4317023E19132BA10002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
 		4317024419132BA10002491F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4317024219132BA10002491F /* InfoPlist.strings */; };
-		4317024619132BA10002491F /* BigSurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317024519132BA10002491F /* BigSurTests.m */; };
+		4317024619132BA10002491F /* INModelProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317024519132BA10002491F /* INModelProviderTests.m */; };
+		431AAA2B19133633008751D8 /* NSPredicate+Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 431AAA2A19133633008751D8 /* NSPredicate+Inspection.m */; };
+		431AAA2D19133734008751D8 /* INModelProvider+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 431AAA2C19133734008751D8 /* INModelProvider+Private.h */; };
 		43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43329FCA1909B34D00D689F1 /* INAPIManager.m */; };
 		4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4332A01D1909E56900D689F1 /* INModelProvider.m */; };
+		439283BA191428E500926291 /* message.js in Resources */ = {isa = PBXBuildFile; fileRef = 439283B9191428E500926291 /* message.js */; };
+		439283BE19144B6F00926291 /* INConvenienceCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 439283BD19144B6F00926291 /* INConvenienceCategories.m */; };
+		439283C1191450AA00926291 /* INRecipientsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 439283C0191450AA00926291 /* INRecipientsLabel.m */; };
+		439283C41914582400926291 /* INPredicateToQueryParamConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 439283C31914582400926291 /* INPredicateToQueryParamConverter.m */; };
 		43AAF51A190EE558000FA5AF /* INModelObject+Uniquing.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF519190EE558000FA5AF /* INModelObject+Uniquing.m */; };
 		43AAF51D190F037E000FA5AF /* INThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF51C190F037E000FA5AF /* INThread.m */; };
 		43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF51F190F1B5D000FA5AF /* INThreadProvider.m */; };
@@ -45,7 +51,7 @@
 		43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */; };
 		43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */; };
 		43AAF5531912F5D1000FA5AF /* message.css in Resources */ = {isa = PBXBuildFile; fileRef = 43AAF5521912F5D1000FA5AF /* message.css */; };
-		43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateConverter.m */; };
+		43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
 		43F22A7A19071A1100A032D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7919071A1100A032D1 /* UIKit.framework */; };
@@ -85,13 +91,23 @@
 		4317023B19132BA10002491F /* BigSurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigSurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4317024119132BA10002491F /* BigSurTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BigSurTests-Info.plist"; sourceTree = "<group>"; };
 		4317024319132BA10002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4317024519132BA10002491F /* BigSurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigSurTests.m; sourceTree = "<group>"; };
+		4317024519132BA10002491F /* INModelProviderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INModelProviderTests.m; sourceTree = "<group>"; };
 		4317024719132BA10002491F /* BigSurTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BigSurTests-Prefix.pch"; sourceTree = "<group>"; };
+		431AAA2919133633008751D8 /* NSPredicate+Inspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+Inspection.h"; sourceTree = "<group>"; };
+		431AAA2A19133633008751D8 /* NSPredicate+Inspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+Inspection.m"; sourceTree = "<group>"; };
+		431AAA2C19133734008751D8 /* INModelProvider+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INModelProvider+Private.h"; sourceTree = "<group>"; };
 		4325D513191329DC00743CD4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		43329FC91909B34D00D689F1 /* INAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPIManager.h; sourceTree = "<group>"; };
 		43329FCA1909B34D00D689F1 /* INAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIManager.m; sourceTree = "<group>"; };
 		4332A01C1909E56900D689F1 /* INModelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelProvider.h; sourceTree = "<group>"; };
 		4332A01D1909E56900D689F1 /* INModelProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProvider.m; sourceTree = "<group>"; };
+		439283B9191428E500926291 /* message.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = message.js; path = ../CSS/message.js; sourceTree = "<group>"; };
+		439283BC19144B6F00926291 /* INConvenienceCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INConvenienceCategories.h; sourceTree = "<group>"; };
+		439283BD19144B6F00926291 /* INConvenienceCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INConvenienceCategories.m; sourceTree = "<group>"; };
+		439283BF191450AA00926291 /* INRecipientsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INRecipientsLabel.h; path = BigSur/Views/INRecipientsLabel.h; sourceTree = SOURCE_ROOT; };
+		439283C0191450AA00926291 /* INRecipientsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INRecipientsLabel.m; path = BigSur/Views/INRecipientsLabel.m; sourceTree = SOURCE_ROOT; };
+		439283C21914582400926291 /* INPredicateToQueryParamConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPredicateToQueryParamConverter.h; sourceTree = "<group>"; };
+		439283C31914582400926291 /* INPredicateToQueryParamConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPredicateToQueryParamConverter.m; sourceTree = "<group>"; };
 		43AAF518190EE558000FA5AF /* INModelObject+Uniquing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "INModelObject+Uniquing.h"; path = "Models/INModelObject+Uniquing.h"; sourceTree = "<group>"; };
 		43AAF519190EE558000FA5AF /* INModelObject+Uniquing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "INModelObject+Uniquing.m"; path = "Models/INModelObject+Uniquing.m"; sourceTree = "<group>"; };
 		43AAF51B190F037E000FA5AF /* INThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INThread.h; path = Models/INThread.h; sourceTree = "<group>"; };
@@ -123,8 +139,8 @@
 		43AAF54F1912EB72000FA5AF /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
 		43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
 		43AAF5521912F5D1000FA5AF /* message.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = message.css; path = BigSur/CSS/message.css; sourceTree = SOURCE_ROOT; };
-		43D12B5719088E2100ACDCAB /* INPredicateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateConverter.h; path = BigSur/INPredicateConverter.h; sourceTree = SOURCE_ROOT; };
-		43D12B5819088E2100ACDCAB /* INPredicateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateConverter.m; path = BigSur/INPredicateConverter.m; sourceTree = SOURCE_ROOT; };
+		43D12B5719088E2100ACDCAB /* INPredicateToSQLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateToSQLConverter.h; path = BigSur/INPredicateToSQLConverter.h; sourceTree = SOURCE_ROOT; };
+		43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateToSQLConverter.m; path = BigSur/INPredicateToSQLConverter.m; sourceTree = SOURCE_ROOT; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F22A7519071A1100A032D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43F22A7719071A1100A032D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -209,7 +225,7 @@
 		4317023F19132BA10002491F /* BigSurTests */ = {
 			isa = PBXGroup;
 			children = (
-				4317024519132BA10002491F /* BigSurTests.m */,
+				4317024519132BA10002491F /* INModelProviderTests.m */,
 				4317024019132BA10002491F /* Supporting Files */,
 			);
 			path = BigSurTests;
@@ -229,7 +245,12 @@
 			isa = PBXGroup;
 			children = (
 				4332A01C1909E56900D689F1 /* INModelProvider.h */,
+				431AAA2C19133734008751D8 /* INModelProvider+Private.h */,
 				4332A01D1909E56900D689F1 /* INModelProvider.m */,
+				43D12B5719088E2100ACDCAB /* INPredicateToSQLConverter.h */,
+				43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */,
+				439283C21914582400926291 /* INPredicateToQueryParamConverter.h */,
+				439283C31914582400926291 /* INPredicateToQueryParamConverter.m */,
 				43AAF526190F1E3E000FA5AF /* Concrete Classes */,
 			);
 			name = "Model Providers";
@@ -268,6 +289,8 @@
 		43AAF5461912D607000FA5AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				439283BF191450AA00926291 /* INRecipientsLabel.h */,
+				439283C0191450AA00926291 /* INRecipientsLabel.m */,
 				43AAF54C1912E985000FA5AF /* INThreadTableViewCell.h */,
 				43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */,
 				43AAF5471912D607000FA5AF /* INMessageCollectionViewCell.h */,
@@ -280,6 +303,7 @@
 		43AAF5541912F5D6000FA5AF /* CSS */ = {
 			isa = PBXGroup;
 			children = (
+				439283B9191428E500926291 /* message.js */,
 				43AAF5521912F5D1000FA5AF /* message.css */,
 			);
 			name = CSS;
@@ -337,8 +361,8 @@
 				43329FCA1909B34D00D689F1 /* INAPIManager.m */,
 				43AAF5461912D607000FA5AF /* Views */,
 				43AAF521190F1B67000FA5AF /* Model Providers */,
-				43F22AE319072E7300A032D1 /* Models */,
 				43F22AC219071C5200A032D1 /* Categories */,
+				43F22AE319072E7300A032D1 /* Models */,
 				43AAF5541912F5D6000FA5AF /* CSS */,
 				43F22AC919071C5200A032D1 /* Controllers */,
 				43F22A7C19071A1100A032D1 /* Supporting Files */,
@@ -380,6 +404,10 @@
 		43F22AC219071C5200A032D1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				439283BC19144B6F00926291 /* INConvenienceCategories.h */,
+				439283BD19144B6F00926291 /* INConvenienceCategories.m */,
+				431AAA2919133633008751D8 /* NSPredicate+Inspection.h */,
+				431AAA2A19133633008751D8 /* NSPredicate+Inspection.m */,
 				43AAF54F1912EB72000FA5AF /* UIView+FrameAdditions.h */,
 				43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */,
 				43F22AC319071C5200A032D1 /* NSObject+AssociatedObjects.h */,
@@ -394,8 +422,6 @@
 				43F22AD91907252400A032D1 /* FMDatabase+INModelQueries.m */,
 				43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */,
 				43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */,
-				43D12B5719088E2100ACDCAB /* INPredicateConverter.h */,
-				43D12B5819088E2100ACDCAB /* INPredicateConverter.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -436,6 +462,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431AAA2D19133734008751D8 /* INModelProvider+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +582,7 @@
 			files = (
 				43AAF54B1912D614000FA5AF /* INMessageCollectionViewCell.xib in Resources */,
 				43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */,
+				439283BA191428E500926291 /* message.js in Resources */,
 				43AAF5371911B8E5000FA5AF /* INThreadViewController.xib in Resources */,
 				43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */,
 				43F22AD119071C5200A032D1 /* INViewController.xib in Resources */,
@@ -725,7 +753,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4317024619132BA10002491F /* BigSurTests.m in Sources */,
+				4317024619132BA10002491F /* INModelProviderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,11 +781,15 @@
 				43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */,
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
 				43AAF51D190F037E000FA5AF /* INThread.m in Sources */,
-				43D12B5919088E2100ACDCAB /* INPredicateConverter.m in Sources */,
+				43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */,
+				439283C41914582400926291 /* INPredicateToQueryParamConverter.m in Sources */,
 				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
 				43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */,
+				439283BE19144B6F00926291 /* INConvenienceCategories.m in Sources */,
 				43AAF53A1911BD71000FA5AF /* INMessage.m in Sources */,
+				431AAA2B19133633008751D8 /* NSPredicate+Inspection.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
+				439283C1191450AA00926291 /* INRecipientsLabel.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
 				43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */,
 				43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */,

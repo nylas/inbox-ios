@@ -24,3 +24,5 @@
 /file_list
 
 *.uncrustify
+
+/html/
