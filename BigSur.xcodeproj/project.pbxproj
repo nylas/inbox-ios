@@ -51,6 +51,10 @@
 		43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */; };
 		43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */; };
 		43AAF5531912F5D1000FA5AF /* message.css in Resources */ = {isa = PBXBuildFile; fileRef = 43AAF5521912F5D1000FA5AF /* message.css */; };
+		43AE9B751918045C005D70C0 /* INContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9B731918045C005D70C0 /* INContactsViewController.m */; };
+		43AE9B761918045C005D70C0 /* INContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AE9B741918045C005D70C0 /* INContactsViewController.xib */; };
+		43AE9B7A191833AF005D70C0 /* INComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9B78191833AF005D70C0 /* INComposeViewController.m */; };
+		43AE9B7B191833AF005D70C0 /* INComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AE9B79191833AF005D70C0 /* INComposeViewController.xib */; };
 		43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
@@ -139,6 +143,12 @@
 		43AAF54F1912EB72000FA5AF /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
 		43AAF5501912EB72000FA5AF /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
 		43AAF5521912F5D1000FA5AF /* message.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = message.css; path = BigSur/CSS/message.css; sourceTree = SOURCE_ROOT; };
+		43AE9B721918045C005D70C0 /* INContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContactsViewController.h; sourceTree = "<group>"; };
+		43AE9B731918045C005D70C0 /* INContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContactsViewController.m; sourceTree = "<group>"; };
+		43AE9B741918045C005D70C0 /* INContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INContactsViewController.xib; sourceTree = "<group>"; };
+		43AE9B77191833AF005D70C0 /* INComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeViewController.h; sourceTree = "<group>"; };
+		43AE9B78191833AF005D70C0 /* INComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeViewController.m; sourceTree = "<group>"; };
+		43AE9B79191833AF005D70C0 /* INComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INComposeViewController.xib; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateToSQLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateToSQLConverter.h; path = BigSur/INPredicateToSQLConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateToSQLConverter.m; path = BigSur/INPredicateToSQLConverter.m; sourceTree = SOURCE_ROOT; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,9 +442,15 @@
 				43F22ACA19071C5200A032D1 /* INViewController.h */,
 				43F22ACB19071C5200A032D1 /* INViewController.m */,
 				43F22ACC19071C5200A032D1 /* INViewController.xib */,
+				43AE9B721918045C005D70C0 /* INContactsViewController.h */,
+				43AE9B731918045C005D70C0 /* INContactsViewController.m */,
+				43AE9B741918045C005D70C0 /* INContactsViewController.xib */,
 				43AAF5331911B8E5000FA5AF /* INThreadViewController.h */,
 				43AAF5341911B8E5000FA5AF /* INThreadViewController.m */,
 				43AAF5351911B8E5000FA5AF /* INThreadViewController.xib */,
+				43AE9B77191833AF005D70C0 /* INComposeViewController.h */,
+				43AE9B78191833AF005D70C0 /* INComposeViewController.m */,
+				43AE9B79191833AF005D70C0 /* INComposeViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -582,9 +598,11 @@
 			files = (
 				43AAF54B1912D614000FA5AF /* INMessageCollectionViewCell.xib in Resources */,
 				43F22A8E19071A1100A032D1 /* Images.xcassets in Resources */,
+				43AE9B761918045C005D70C0 /* INContactsViewController.xib in Resources */,
 				439283BA191428E500926291 /* message.js in Resources */,
 				43AAF5371911B8E5000FA5AF /* INThreadViewController.xib in Resources */,
 				43F22A8019071A1100A032D1 /* InfoPlist.strings in Resources */,
+				43AE9B7B191833AF005D70C0 /* INComposeViewController.xib in Resources */,
 				43F22AD119071C5200A032D1 /* INViewController.xib in Resources */,
 				43AAF5531912F5D1000FA5AF /* message.css in Resources */,
 			);
@@ -765,12 +783,14 @@
 				43AAF5361911B8E5000FA5AF /* INThreadViewController.m in Sources */,
 				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
 				43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */,
+				43AE9B7A191833AF005D70C0 /* INComposeViewController.m in Sources */,
 				43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */,
 				43AAF529190F20F6000FA5AF /* INModelArrayResponseSerializer.m in Sources */,
 				43AAF5491912D607000FA5AF /* INMessageCollectionViewCell.m in Sources */,
 				43F22AE219072E6A00A032D1 /* INContact.m in Sources */,
 				43F22AD419071D3600A032D1 /* INDatabaseManager.m in Sources */,
 				43AAF5421912B05E000FA5AF /* NSDictionary+FormatConversion.m in Sources */,
+				43AE9B751918045C005D70C0 /* INContactsViewController.m in Sources */,
 				43AAF51A190EE558000FA5AF /* INModelObject+Uniquing.m in Sources */,
 				43F22AE6190736D300A032D1 /* INAPIOperation.m in Sources */,
 				43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */,
