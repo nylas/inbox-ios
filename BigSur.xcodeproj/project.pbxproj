@@ -55,6 +55,10 @@
 		43AE9B761918045C005D70C0 /* INContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AE9B741918045C005D70C0 /* INContactsViewController.xib */; };
 		43AE9B7A191833AF005D70C0 /* INComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9B78191833AF005D70C0 /* INComposeViewController.m */; };
 		43AE9B7B191833AF005D70C0 /* INComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AE9B79191833AF005D70C0 /* INComposeViewController.xib */; };
+		43AE9BBF191841DE005D70C0 /* INComposeRecipientRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BBE191841DE005D70C0 /* INComposeRecipientRowView.m */; };
+		43AE9BC219185999005D70C0 /* INLeftJustifiedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC119185999005D70C0 /* INLeftJustifiedFlowLayout.m */; };
+		43AE9BC519185ACF005D70C0 /* INComposeRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC419185ACF005D70C0 /* INComposeRowView.m */; };
+		43AE9BC819185C46005D70C0 /* INComposeSubjectRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */; };
 		43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
@@ -149,6 +153,14 @@
 		43AE9B77191833AF005D70C0 /* INComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeViewController.h; sourceTree = "<group>"; };
 		43AE9B78191833AF005D70C0 /* INComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeViewController.m; sourceTree = "<group>"; };
 		43AE9B79191833AF005D70C0 /* INComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INComposeViewController.xib; sourceTree = "<group>"; };
+		43AE9BBD191841DE005D70C0 /* INComposeRecipientRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INComposeRecipientRowView.h; path = BigSur/Views/INComposeRecipientRowView.h; sourceTree = SOURCE_ROOT; };
+		43AE9BBE191841DE005D70C0 /* INComposeRecipientRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INComposeRecipientRowView.m; path = BigSur/Views/INComposeRecipientRowView.m; sourceTree = SOURCE_ROOT; };
+		43AE9BC019185999005D70C0 /* INLeftJustifiedFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLeftJustifiedFlowLayout.h; sourceTree = "<group>"; };
+		43AE9BC119185999005D70C0 /* INLeftJustifiedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INLeftJustifiedFlowLayout.m; sourceTree = "<group>"; };
+		43AE9BC319185ACF005D70C0 /* INComposeRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeRowView.h; sourceTree = "<group>"; };
+		43AE9BC419185ACF005D70C0 /* INComposeRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeRowView.m; sourceTree = "<group>"; };
+		43AE9BC619185C46005D70C0 /* INComposeSubjectRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeSubjectRowView.h; sourceTree = "<group>"; };
+		43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeSubjectRowView.m; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateToSQLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateToSQLConverter.h; path = BigSur/INPredicateToSQLConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateToSQLConverter.m; path = BigSur/INPredicateToSQLConverter.m; sourceTree = SOURCE_ROOT; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +313,14 @@
 			children = (
 				439283BF191450AA00926291 /* INRecipientsLabel.h */,
 				439283C0191450AA00926291 /* INRecipientsLabel.m */,
+				43AE9BC319185ACF005D70C0 /* INComposeRowView.h */,
+				43AE9BC419185ACF005D70C0 /* INComposeRowView.m */,
+				43AE9BBD191841DE005D70C0 /* INComposeRecipientRowView.h */,
+				43AE9BBE191841DE005D70C0 /* INComposeRecipientRowView.m */,
+				43AE9BC619185C46005D70C0 /* INComposeSubjectRowView.h */,
+				43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */,
+				43AE9BC019185999005D70C0 /* INLeftJustifiedFlowLayout.h */,
+				43AE9BC119185999005D70C0 /* INLeftJustifiedFlowLayout.m */,
 				43AAF54C1912E985000FA5AF /* INThreadTableViewCell.h */,
 				43AAF54D1912E985000FA5AF /* INThreadTableViewCell.m */,
 				43AAF5471912D607000FA5AF /* INMessageCollectionViewCell.h */,
@@ -782,6 +802,7 @@
 				43AAF524190F1E2D000FA5AF /* INNamespace.m in Sources */,
 				43AAF5361911B8E5000FA5AF /* INThreadViewController.m in Sources */,
 				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
+				43AE9BC519185ACF005D70C0 /* INComposeRowView.m in Sources */,
 				43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */,
 				43AE9B7A191833AF005D70C0 /* INComposeViewController.m in Sources */,
 				43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */,
@@ -797,6 +818,7 @@
 				43AAF53219117C89000FA5AF /* INLabel.m in Sources */,
 				43F22ACF19071C5200A032D1 /* NSString+FormatConversion.m in Sources */,
 				43AAF53D1911CFC0000FA5AF /* INMessageProvider.m in Sources */,
+				43AE9BC219185999005D70C0 /* INLeftJustifiedFlowLayout.m in Sources */,
 				43AAF52F19117BED000FA5AF /* INAccount.m in Sources */,
 				43F22ADA1907252400A032D1 /* FMDatabase+INModelQueries.m in Sources */,
 				43F22A8219071A1100A032D1 /* main.m in Sources */,
@@ -804,11 +826,13 @@
 				43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */,
 				439283C41914582400926291 /* INPredicateToQueryParamConverter.m in Sources */,
 				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
+				43AE9BC819185C46005D70C0 /* INComposeSubjectRowView.m in Sources */,
 				43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */,
 				439283BE19144B6F00926291 /* INConvenienceCategories.m in Sources */,
 				43AAF53A1911BD71000FA5AF /* INMessage.m in Sources */,
 				431AAA2B19133633008751D8 /* NSPredicate+Inspection.m in Sources */,
 				43F22A8619071A1100A032D1 /* INAppDelegate.m in Sources */,
+				43AE9BBF191841DE005D70C0 /* INComposeRecipientRowView.m in Sources */,
 				439283C1191450AA00926291 /* INRecipientsLabel.m in Sources */,
 				43F22ACD19071C5200A032D1 /* NSObject+AssociatedObjects.m in Sources */,
 				43AAF520190F1B5D000FA5AF /* INThreadProvider.m in Sources */,
