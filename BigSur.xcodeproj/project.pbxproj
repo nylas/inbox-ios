@@ -59,6 +59,8 @@
 		43AE9BC219185999005D70C0 /* INLeftJustifiedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC119185999005D70C0 /* INLeftJustifiedFlowLayout.m */; };
 		43AE9BC519185ACF005D70C0 /* INComposeRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC419185ACF005D70C0 /* INComposeRowView.m */; };
 		43AE9BC819185C46005D70C0 /* INComposeSubjectRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */; };
+		43AE9BCB19186DD1005D70C0 /* INPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BCA19186DD1005D70C0 /* INPlaceholderTextView.m */; };
+		43AE9BCE191943BB005D70C0 /* INThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AE9BCD191943BB005D70C0 /* INThemeManager.m */; };
 		43D12B5919088E2100ACDCAB /* INPredicateToSQLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */; };
 		43F22A7619071A1100A032D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7519071A1100A032D1 /* Foundation.framework */; };
 		43F22A7819071A1100A032D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F22A7719071A1100A032D1 /* CoreGraphics.framework */; };
@@ -79,6 +81,8 @@
 		43F22AE219072E6A00A032D1 /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE119072E6A00A032D1 /* INContact.m */; };
 		43F22AE6190736D300A032D1 /* INAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE5190736D300A032D1 /* INAPIOperation.m */; };
 		43F22AEA19073DDA00A032D1 /* FMResultSet+INModelQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */; };
+		43F788DA1919902100B6E0E5 /* INComposeRecipientCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F788D91919902100B6E0E5 /* INComposeRecipientCollectionViewCell.m */; };
+		43F788E01919991F00B6E0E5 /* INDeleteDetectingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F788DF1919991F00B6E0E5 /* INDeleteDetectingTextField.m */; };
 		8C8B9E462A8A415797003B95 /* libPods-BigSurCoreFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A28BBE2B2EE44F8D9D162151 /* libPods-BigSurCoreFramework.a */; };
 		E15CA3529CD04652A09EF492 /* libPods-BigSurFramework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC3F53319D74B529C87E055 /* libPods-BigSurFramework.a */; };
 		E3540A1C6D4D4A35B9541B0A /* libPods-BigSurTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B251294EBA94538841578AB /* libPods-BigSurTests.a */; };
@@ -161,6 +165,10 @@
 		43AE9BC419185ACF005D70C0 /* INComposeRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeRowView.m; sourceTree = "<group>"; };
 		43AE9BC619185C46005D70C0 /* INComposeSubjectRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeSubjectRowView.h; sourceTree = "<group>"; };
 		43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeSubjectRowView.m; sourceTree = "<group>"; };
+		43AE9BC919186DD1005D70C0 /* INPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPlaceholderTextView.h; sourceTree = "<group>"; };
+		43AE9BCA19186DD1005D70C0 /* INPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPlaceholderTextView.m; sourceTree = "<group>"; };
+		43AE9BCC191943BB005D70C0 /* INThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INThemeManager.h; sourceTree = "<group>"; };
+		43AE9BCD191943BB005D70C0 /* INThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INThemeManager.m; sourceTree = "<group>"; };
 		43D12B5719088E2100ACDCAB /* INPredicateToSQLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPredicateToSQLConverter.h; path = BigSur/INPredicateToSQLConverter.h; sourceTree = SOURCE_ROOT; };
 		43D12B5819088E2100ACDCAB /* INPredicateToSQLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPredicateToSQLConverter.m; path = BigSur/INPredicateToSQLConverter.m; sourceTree = SOURCE_ROOT; };
 		43F22A7219071A1100A032D1 /* BigSur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigSur.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +208,10 @@
 		43F22AE5190736D300A032D1 /* INAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAPIOperation.m; path = "Models/API Calls/INAPIOperation.m"; sourceTree = "<group>"; };
 		43F22AE819073DDA00A032D1 /* FMResultSet+INModelQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMResultSet+INModelQueries.h"; sourceTree = "<group>"; };
 		43F22AE919073DDA00A032D1 /* FMResultSet+INModelQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMResultSet+INModelQueries.m"; sourceTree = "<group>"; };
+		43F788D81919902100B6E0E5 /* INComposeRecipientCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INComposeRecipientCollectionViewCell.h; sourceTree = "<group>"; };
+		43F788D91919902100B6E0E5 /* INComposeRecipientCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INComposeRecipientCollectionViewCell.m; sourceTree = "<group>"; };
+		43F788DE1919991F00B6E0E5 /* INDeleteDetectingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDeleteDetectingTextField.h; sourceTree = "<group>"; };
+		43F788DF1919991F00B6E0E5 /* INDeleteDetectingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDeleteDetectingTextField.m; sourceTree = "<group>"; };
 		7ACFCC688CD14ACE9835C12A /* Pods-BigSurFramework.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSurFramework.xcconfig"; path = "Pods/Pods-BigSurFramework.xcconfig"; sourceTree = "<group>"; };
 		7BC3F53319D74B529C87E055 /* libPods-BigSurFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BigSurFramework.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC1E944BF5548068564D916 /* Pods-BigSur.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigSur.xcconfig"; path = "Pods/Pods-BigSur.xcconfig"; sourceTree = "<group>"; };
@@ -311,12 +323,18 @@
 		43AAF5461912D607000FA5AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43AE9BC919186DD1005D70C0 /* INPlaceholderTextView.h */,
+				43AE9BCA19186DD1005D70C0 /* INPlaceholderTextView.m */,
+				43F788DE1919991F00B6E0E5 /* INDeleteDetectingTextField.h */,
+				43F788DF1919991F00B6E0E5 /* INDeleteDetectingTextField.m */,
 				439283BF191450AA00926291 /* INRecipientsLabel.h */,
 				439283C0191450AA00926291 /* INRecipientsLabel.m */,
 				43AE9BC319185ACF005D70C0 /* INComposeRowView.h */,
 				43AE9BC419185ACF005D70C0 /* INComposeRowView.m */,
 				43AE9BBD191841DE005D70C0 /* INComposeRecipientRowView.h */,
 				43AE9BBE191841DE005D70C0 /* INComposeRecipientRowView.m */,
+				43F788D81919902100B6E0E5 /* INComposeRecipientCollectionViewCell.h */,
+				43F788D91919902100B6E0E5 /* INComposeRecipientCollectionViewCell.m */,
 				43AE9BC619185C46005D70C0 /* INComposeSubjectRowView.h */,
 				43AE9BC719185C46005D70C0 /* INComposeSubjectRowView.m */,
 				43AE9BC019185999005D70C0 /* INLeftJustifiedFlowLayout.h */,
@@ -389,6 +407,8 @@
 				43F22AD319071D3600A032D1 /* INDatabaseManager.m */,
 				43329FC91909B34D00D689F1 /* INAPIManager.h */,
 				43329FCA1909B34D00D689F1 /* INAPIManager.m */,
+				43AE9BCC191943BB005D70C0 /* INThemeManager.h */,
+				43AE9BCD191943BB005D70C0 /* INThemeManager.m */,
 				43AAF5461912D607000FA5AF /* Views */,
 				43AAF521190F1B67000FA5AF /* Model Providers */,
 				43F22AC219071C5200A032D1 /* Categories */,
@@ -801,10 +821,12 @@
 			files = (
 				43AAF524190F1E2D000FA5AF /* INNamespace.m in Sources */,
 				43AAF5361911B8E5000FA5AF /* INThreadViewController.m in Sources */,
+				43F788E01919991F00B6E0E5 /* INDeleteDetectingTextField.m in Sources */,
 				43F22ACE19071C5200A032D1 /* NSObject+Properties.m in Sources */,
 				43AE9BC519185ACF005D70C0 /* INComposeRowView.m in Sources */,
 				43329FCB1909B34D00D689F1 /* INAPIManager.m in Sources */,
 				43AE9B7A191833AF005D70C0 /* INComposeViewController.m in Sources */,
+				43F788DA1919902100B6E0E5 /* INComposeRecipientCollectionViewCell.m in Sources */,
 				43AAF54E1912E985000FA5AF /* INThreadTableViewCell.m in Sources */,
 				43AAF529190F20F6000FA5AF /* INModelArrayResponseSerializer.m in Sources */,
 				43AAF5491912D607000FA5AF /* INMessageCollectionViewCell.m in Sources */,
@@ -813,6 +835,7 @@
 				43AAF5421912B05E000FA5AF /* NSDictionary+FormatConversion.m in Sources */,
 				43AE9B751918045C005D70C0 /* INContactsViewController.m in Sources */,
 				43AAF51A190EE558000FA5AF /* INModelObject+Uniquing.m in Sources */,
+				43AE9BCE191943BB005D70C0 /* INThemeManager.m in Sources */,
 				43F22AE6190736D300A032D1 /* INAPIOperation.m in Sources */,
 				43F22ADF19072E6400A032D1 /* INModelObject.m in Sources */,
 				43AAF53219117C89000FA5AF /* INLabel.m in Sources */,
@@ -827,6 +850,7 @@
 				439283C41914582400926291 /* INPredicateToQueryParamConverter.m in Sources */,
 				4332A01E1909E56900D689F1 /* INModelProvider.m in Sources */,
 				43AE9BC819185C46005D70C0 /* INComposeSubjectRowView.m in Sources */,
+				43AE9BCB19186DD1005D70C0 /* INPlaceholderTextView.m in Sources */,
 				43AAF5511912EB72000FA5AF /* UIView+FrameAdditions.m in Sources */,
 				439283BE19144B6F00926291 /* INConvenienceCategories.m in Sources */,
 				43AAF53A1911BD71000FA5AF /* INMessage.m in Sources */,
