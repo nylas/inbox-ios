@@ -166,7 +166,7 @@ static void initialize_INAPIManager() {
 - (void)authenticate:(AuthenticationBlock)completionBlock
 {
 	// TODO: Insert auth to get user ID here
-	NSString * userID = @"q1fuaeq3qe8vjtbu7hglrzi5";
+	NSString * userID = @"aw0c1mxdeitsr4gx0t6pqcmxz";
 	NSString * authToken = @"whatevs";
 	
 	NSString * userPath = [NSString stringWithFormat: @"/u/%@", userID];

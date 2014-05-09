@@ -119,7 +119,7 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
    [mapping addEntriesFromDictionary: @{
      @"firstName": @"first_name",
      @"lastName": @"last_name",
-     @"emailAddress": @"email_address"
+     @"email": @"email"
    }];
    return mapping;
  }

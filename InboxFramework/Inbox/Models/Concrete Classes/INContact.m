@@ -18,7 +18,7 @@
 		@"source": @"source",
 		@"name": @"name",
 		@"providerName": @"provider_name",
-		@"emailAddress": @"email_address",
+		@"email": @"email",
 		@"accountID": @"account_id",
 		@"UID": @"uid"
 	}];
@@ -32,7 +32,7 @@
 
 + (NSArray *)databaseIndexProperties
 {
-	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"name", @"emailAddress", @"accountID"]];
+	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"name", @"email", @"accountID"]];
 }
 
 - (void)setup

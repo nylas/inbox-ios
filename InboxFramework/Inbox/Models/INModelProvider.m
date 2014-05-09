@@ -174,7 +174,7 @@
 
 - (NSDictionary *)queryParamsForPredicate:(NSPredicate*)predicate
 {
-	return @{};
+	return @{@"limit":@"10000"};
 }
 
 #pragma mark Receiving Updates from the Database

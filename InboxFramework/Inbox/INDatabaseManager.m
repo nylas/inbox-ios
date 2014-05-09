@@ -318,8 +318,10 @@ static void initialize_INDatabaseManager() {
 		}
 		
 		[query appendFormat:@" ORDER BY %@", [sortClauses componentsJoinedByString:@", "]];
-		[query appendFormat:@" LIMIT %d, %d", offset, limit]; // weird ordering, but correct!
 	}
+	
+	if (limit > 0)
+		[query appendFormat:@" LIMIT %d, %d", offset, limit]; // weird ordering, but correct!
 	
 	[self selectModelsOfClass:klass withQuery:query andParameters:nil andCallback:callback];
 }

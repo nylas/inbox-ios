@@ -11,7 +11,7 @@
 @interface INContact : INModelObject
 
 @property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSString * emailAddress;
+@property (nonatomic, strong) NSString * email;
 @property (nonatomic, strong) NSString * source;
 @property (nonatomic, strong) NSString * providerName;
 @property (nonatomic, strong) NSString * accountID;
