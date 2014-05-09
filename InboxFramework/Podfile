@@ -1,0 +1,13 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, "6.0"
+
+target "Inbox" do
+	pod 'FMDB'
+	pod 'AFNetworking'
+	pod 'NSDate+TimeAgo'
+end
+
+target "InboxTests", :exclusive => true do
+	pod 'Kiwi/XCTest'
+end
+

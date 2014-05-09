@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7DB5ED7D-015E-4C4B-A610-56E6C801C36A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Triage</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D1A4C748-D469-470B-8AC1-68D0126FFB95</key>
+		<string>ssh://github.com/inboxapp/bigsur.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>InboxExamples/Triage/Triage.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D1A4C748-D469-470B-8AC1-68D0126FFB95</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/inboxapp/bigsur.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D1A4C748-D469-470B-8AC1-68D0126FFB95</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D1A4C748-D469-470B-8AC1-68D0126FFB95</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Inbox BigSur</string>
+		</dict>
+	</array>
+</dict>
+</plist>
