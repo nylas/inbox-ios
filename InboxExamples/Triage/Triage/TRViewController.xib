@@ -70,6 +70,18 @@
                         <action selector="dismissReadMore:" destination="-1" eventType="touchUpInside" id="x7H-Xh-8KQ"/>
                     </connections>
                 </button>
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="anj-nq-jJN">
+                    <rect key="frame" x="274" y="19" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="↻">
+                        <color key="titleColor" red="0.69803921570000005" green="0.32156862749999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="refreshTapped:" destination="-1" eventType="touchUpInside" id="uaB-SI-xlh"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.91764705879999997" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

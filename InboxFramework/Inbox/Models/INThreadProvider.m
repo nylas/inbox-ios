@@ -31,7 +31,7 @@
 
 	// currently not useful, because the sort order is on item ID
 //	[params setObject:@(self.itemRange.location) forKey:@"offset"];
-//	[params setObject:@(self.itemRange.length) forKey:@"limit"];
+	[params setObject:@(1000) forKey:@"limit"];
 	
 	return params;
 }

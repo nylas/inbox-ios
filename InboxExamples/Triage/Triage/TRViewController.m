@@ -48,12 +48,19 @@
 {
 	INAccount * account = [[INAPIManager shared] account];
 	INNamespace * namespace = [[account namespaces] firstObject];
-	
-	self.threadsProvider = [namespace newThreadsProvider];
-	[_threadsProvider setItemSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]]];
-	[_threadsProvider setDelegate:self];
-	[_threadsProvider setItemRange: NSMakeRange(0, 10)];
+
+    if (!_threadsProvider || ([_threadsProvider namespaceID] != [namespace ID])) {
+        self.threadsProvider = [namespace newThreadsProvider];
+        [_threadsProvider setItemSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]]];
+        [_threadsProvider setDelegate:self];
+        [_threadsProvider setItemRange: NSMakeRange(0, 10)];
+    }
 	[_threadsProvider refresh];
+}
+
+- (IBAction)refreshTapped:(id)sender
+{
+    [_threadsProvider refresh];
 }
 
 - (void)providerDataChanged
@@ -290,9 +297,8 @@
         [_animator removeAllBehaviors];
 
         if (selectedButton != nil) {
-            CGPoint delta = CGPointMake(message.center.x - selectedButton.center.x, message.center.y - selectedButton.center.y);
             UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[message] mode:UIPushBehaviorModeContinuous];
-            [pushBehavior setAngle:atan2f(delta.y, 0) magnitude: -200];
+            [pushBehavior setAngle:atan2f(self.view.center.y - selectedButton.center.y, 0) magnitude: -200];
             [_animator addBehavior: pushBehavior];
 
             [_messageViews removeObject: message];
