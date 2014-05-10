@@ -20,7 +20,7 @@
 	[self.window makeKeyAndVisible];
     
     
-	if (![[INAPIManager shared] account]) {
+	if (![[INAPIManager shared] namespaces]) {
 		[[INAPIManager shared] authenticate:^(INAccount * account, NSError *error) {
 			if (error)
 				[[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];

@@ -37,8 +37,6 @@
 		43A1E2F5191C049A00EF660E /* INDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2BD191C049A00EF660E /* INDatabaseManager.m */; };
 		43A1E2F6191C049A00EF660E /* INAPIOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C0191C049A00EF660E /* INAPIOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2F7191C049A00EF660E /* INAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C1191C049A00EF660E /* INAPIOperation.m */; };
-		43A1E2F8191C049A00EF660E /* INAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C3191C049A00EF660E /* INAccount.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43A1E2F9191C049A00EF660E /* INAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C4191C049A00EF660E /* INAccount.m */; };
 		43A1E2FA191C049A00EF660E /* INContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C5191C049A00EF660E /* INContact.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2FB191C049A00EF660E /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C6191C049A00EF660E /* INContact.m */; };
 		43A1E2FC191C049A00EF660E /* INLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C7191C049A00EF660E /* INLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -110,8 +108,6 @@
 		43A1E2BD191C049A00EF660E /* INDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDatabaseManager.m; sourceTree = "<group>"; };
 		43A1E2C0191C049A00EF660E /* INAPIOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPIOperation.h; sourceTree = "<group>"; };
 		43A1E2C1191C049A00EF660E /* INAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIOperation.m; sourceTree = "<group>"; };
-		43A1E2C3191C049A00EF660E /* INAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAccount.h; sourceTree = "<group>"; };
-		43A1E2C4191C049A00EF660E /* INAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAccount.m; sourceTree = "<group>"; };
 		43A1E2C5191C049A00EF660E /* INContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContact.h; sourceTree = "<group>"; };
 		43A1E2C6191C049A00EF660E /* INContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContact.m; sourceTree = "<group>"; };
 		43A1E2C7191C049A00EF660E /* INLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLabel.h; sourceTree = "<group>"; };
@@ -252,8 +248,6 @@
 		43A1E2C2191C049A00EF660E /* Concrete Classes */ = {
 			isa = PBXGroup;
 			children = (
-				43A1E2C3191C049A00EF660E /* INAccount.h */,
-				43A1E2C4191C049A00EF660E /* INAccount.m */,
 				43A1E2C5191C049A00EF660E /* INContact.h */,
 				43A1E2C6191C049A00EF660E /* INContact.m */,
 				43A1E2C7191C049A00EF660E /* INLabel.h */,
@@ -329,7 +323,6 @@
 				43A1E302191C049A00EF660E /* INThread.h in Headers */,
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
 				43A1E2FC191C049A00EF660E /* INLabel.h in Headers */,
-				43A1E2F8191C049A00EF660E /* INAccount.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
 				43A1E2EA191C049A00EF660E /* INModelArrayResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
@@ -541,7 +534,6 @@
 				43A1E2FB191C049A00EF660E /* INContact.m in Sources */,
 				43A1E309191C049A00EF660E /* INModelObject.m in Sources */,
 				43A1E30C191C049A00EF660E /* INModelProvider.m in Sources */,
-				43A1E2F9191C049A00EF660E /* INAccount.m in Sources */,
 				43A1E307191C049A00EF660E /* INModelObject+Uniquing.m in Sources */,
 				43A1E2ED191C049A00EF660E /* INPredicateToQueryParamConverter.m in Sources */,
 				43A1E30E191C049A00EF660E /* INThreadProvider.m in Sources */,

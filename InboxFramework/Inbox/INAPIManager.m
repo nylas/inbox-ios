@@ -8,7 +8,10 @@
 
 #import "INAPIManager.h"
 #import "INAPIOperation.h"
-#import "INAccount.h"
+#import "INNamespace.h"
+#import "INModelArrayResponseSerializer.h"
+#import "INDatabaseManager.h"
+#import "FMResultSet+INModelQueries.h"
 
 #if DEBUG
   #define API_URL		[NSURL URLWithString:@"http://localhost:5555/"]
@@ -45,12 +48,9 @@ static void initialize_INAPIManager() {
 		[self setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
 		[self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
 		
-		INAccount * account = [self account];
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[account reload: NULL];
-		});
-		
-		[self.requestSerializer setAuthorizationHeaderFieldWithUsername:account.authToken password:nil];
+        NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:@"inbox-auth-token"];
+		[self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
+
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveOperations) name:UIApplicationWillTerminateNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationFinished:) name:AFNetworkingOperationDidFinishNotification object:nil];
 		[self loadOperations];
@@ -166,58 +166,51 @@ static void initialize_INAPIManager() {
 - (void)authenticate:(AuthenticationBlock)completionBlock
 {
 	// TODO: Insert auth to get user ID here
-	NSString * userID = @"aw0c1mxdeitsr4gx0t6pqcmxz";
 	NSString * authToken = @"whatevs";
 	
-	NSString * userPath = [NSString stringWithFormat: @"/u/%@", userID];
-	
 	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
-	[self GET:userPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-		INAccount * account = [[INAccount alloc] init];
-		[account updateWithResourceDictionary: responseObject];
-		[account setAuthToken: authToken];
-		
-		int __block __loading = 0;
-		for (INNamespace * namespace in [account namespaces]) {
-			__loading+=1;
-			
-			[namespace reload:^(NSError *error) {
-				__loading -=1;
-				if (__loading == 0) {
-					// initialize all namespace objects before we announce an account change
-					[self setAccount: account];
-					
-					if (completionBlock)
-						completionBlock(account, nil);
-				}
-			}];
-		}
+    [[INDatabaseManager shared] resetDatabase];
+
+    AFHTTPRequestOperation * operation = [self GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
+        // broadcast a notification about this change
+        [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
+        if (completionBlock)
+            completionBlock(namespaces, nil);
 
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		if (completionBlock)
 			completionBlock(nil, error);
 	}];
+    
+    INModelArrayResponseSerializer * serializer = [[INModelArrayResponseSerializer alloc] initWithModelClass: [INNamespace class]];
+    [operation setResponseSerializer: serializer];
 }
 
-- (INAccount*)account
+- (NSArray*)namespaces
 {
-	if (_account)
-		return _account;
-	
-	_account = (INAccount*)[[INDatabaseManager shared] selectModelOfClass: [INAccount class] withID: nil];
-	return _account;
+	if (!_namespaces) {
+        [[[INDatabaseManager shared] queue] inDatabase:^(FMDatabase * db) {
+            NSString * query = [NSString stringWithFormat:@"SELECT * FROM %@", [INNamespace databaseTableName]];
+            NSMutableArray * namespaces = [NSMutableArray array];
+            FMResultSet * result = [db executeQuery:query];
+            INModelObject * namespace = nil;
+            while ((namespace = [result nextModelOfClass: [INNamespace class]]))
+                [namespaces addObject: namespace];
+            [result close];
+            
+            _namespaces = namespaces;
+        }];
+    }
+    
+    if ([_namespaces count] == 0)
+        return nil;
+    
+	return _namespaces;
 }
 
-- (void)setAccount:(INAccount *)account
+- (NSArray*)namespaceEmailAddresses
 {
-	_account = account;
-
-	// destroy our local cache
-	[[INDatabaseManager shared] resetDatabase];
-	[[INDatabaseManager shared] persistModel: _account];
-
-	// broadcast a notification about this change
-    [[NSNotificationCenter defaultCenter] postNotificationName:INAccountChangedNotification object:nil];
+    return [[self namespaces] valueForKey:@"emailAddress"];
 }
 
 @end

@@ -274,6 +274,15 @@ static void initialize_INDatabaseManager() {
 
 	NSString * query = [NSString stringWithFormat:@"REPLACE INTO %@ (%@) VALUES (%@)", tableName, columnsStr, columnPlaceholdersStr];
 	[db executeUpdate:query withArgumentsInArray:values];
+    
+    if ([db hadError]) {
+        if ([[db lastErrorMessage] rangeOfString:@"has no column"].location != NSNotFound) {
+            // the table schema must have changed. We don't currently do migrations automatically,
+            // so let's just blow away the cache for this table and let it get rebuilt
+            [db executeUpdate: [NSString stringWithFormat: @"DROP TABLE `%@`", tableName]];
+            [_initializedModelClasses removeObjectForKey: NSStringFromClass([model class])];
+        }
+    }
 }
 
 #pragma mark Finding Objects

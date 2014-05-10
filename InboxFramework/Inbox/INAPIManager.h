@@ -10,7 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
-static NSString * INAccountChangedNotification = @"INAccountChangedNotification";
+static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
 
 @class INAPIOperation;
 @class INModelObject;
@@ -36,7 +36,7 @@ typedef void (^ VoidBlock)();
 */
 @interface INAPIManager : AFHTTPRequestOperationManager
 {
-	INAccount * _account;
+	NSArray * _namespaces;
 }
 
 + (INAPIManager *)shared;
@@ -54,8 +54,13 @@ typedef void (^ VoidBlock)();
 - (void)authenticate:(AuthenticationBlock)completionBlock;
 
 /**
- @return The currently authenticated Inbox account, if one exists.
+ @return The currently authenticated Inbox namespaces.
 */
-- (INAccount*)account;
+- (NSArray*)namespaces;
+
+/**
+ @return The email addresses of the currently authenticated namespaces.
+*/
+- (NSArray*)namespaceEmailAddresses;
 
 @end
