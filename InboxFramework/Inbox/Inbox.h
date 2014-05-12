@@ -16,7 +16,6 @@
 #import "INModelObject.h"
 #import "INMessage.h"
 #import "INContact.h"
-#import "INAccount.h"
 #import "INNamespace.h"
 
 #endif
