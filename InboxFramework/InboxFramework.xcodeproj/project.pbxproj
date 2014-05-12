@@ -62,6 +62,7 @@
 		43A1E318191C04A000EF660E /* INModelProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E314191C04A000EF660E /* INModelProviderTests.m */; };
 		43A96845191C073600F24844 /* libPods-Inbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A96844191C073600F24844 /* libPods-Inbox.a */; };
 		43A9684D191C093000F24844 /* Inbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A9684C191C08F300F24844 /* Inbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65D218EFC607488E89A71371 /* libPods-Inbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC3B614A35D48B69D020AB1 /* libPods-Inbox.a */; };
 		A5654F0C546049149E031845 /* libPods-InboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5378CE7CFD44EC968BB8E0 /* libPods-InboxTests.a */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D218EFC607488E89A71371 /* libPods-Inbox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,6 +602,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
@@ -627,6 +630,7 @@
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				UNLOCALIZED_RESOURCES_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Resources";
