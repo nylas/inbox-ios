@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSArray * participants;
 @property (nonatomic, strong) NSDate * lastMessageDate;
 @property (nonatomic, strong) NSArray * messageIDs;
+@property (nonatomic, assign) BOOL unread;
 
 - (INModelProvider*)newMessageProvider;
 

@@ -134,4 +134,15 @@ This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:of
 */
 - (void)selectModelsOfClass:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback;
 
+/**
+Find the number of models that match a particular query, synchronously.
+
+ @param klass The type of models. Must be a subclass of INModelObject.
+ @param wherePredicate A comparison or compound NSPredicate.
+
+ @return The number of models that would be returned by a subsequent select, given the same where predicate and no limit.
+*/
+- (long)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate;
+
+
 @end

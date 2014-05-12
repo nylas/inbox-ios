@@ -20,7 +20,8 @@
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"messages",
-		@"snippet": @"snippet"
+		@"snippet": @"snippet",
+		@"unread":@"unread"
 	}];
 	return mapping;
 }
@@ -32,7 +33,7 @@
 
 + (NSArray *)databaseIndexProperties
 {
-	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"lastMessageDate", @"subject"]];
+	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"lastMessageDate", @"subject", @"unread"]];
 }
 
 - (INModelProvider*)newMessageProvider

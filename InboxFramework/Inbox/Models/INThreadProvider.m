@@ -7,6 +7,7 @@
 //
 
 #import "INThreadProvider.h"
+#import "INModelProvider+Private.h"
 #import "INAPIManager.h"
 #import "INThread.h"
 #import "INModelArrayResponseSerializer.h"
@@ -34,6 +35,22 @@
 	[params setObject:@(10000) forKey:@"limit"];
 	
 	return params;
+}
+
+- (void)refresh
+{
+	_numberOfUnreadItems = NSNotFound;
+	[super refresh];
+}
+
+- (long)numberOfUnreadItems
+{
+	if (_numberOfUnreadItems == NSNotFound) {
+		NSPredicate * unreadPredicate = [NSComparisonPredicate predicateWithFormat:@"unread = 1"];
+		NSPredicate * predicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:@[[self fetchPredicate], unreadPredicate]];
+		_numberOfUnreadItems = [[INDatabaseManager shared] countModelsOfClass:[INThread class] matching:predicate];
+	}
+	return _numberOfUnreadItems;
 }
 
 @end

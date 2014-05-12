@@ -151,6 +151,9 @@ static void initialize_INDatabaseManager() {
 
 			if ([type isEqualToString:@"int"])
 				colType = @"INTEGER";
+			
+			if ([type isEqualToString:@"Tc"]) // char or bool
+				colType = @"INTEGER";
 
 			else if ([type isEqualToString:@"float"])
 				colType = @"REAL";
@@ -364,6 +367,29 @@ static void initialize_INDatabaseManager() {
 	});
 }
 
+- (long)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate
+{
+	if (![self checkModelTable:klass])
+		return NSNotFound;
+	
+	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT COUNT(*) AS count FROM %@", [klass databaseTableName]];
+	INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
+	
+	[converter setTargetModelClass: klass];
+	
+	if (wherePredicate) {
+		NSString * whereClause = [converter SQLFilterForPredicate:wherePredicate];
+		[query appendFormat:@" WHERE %@", whereClause];
+	}
+	
+	long __block result = NSNotFound;
+	[_queue inDatabase:^(FMDatabase *db) {
+		FMResultSet * results = [db executeQuery: query];
+		result = [results longForColumn:@"count"];
+	}];
+
+	return result;
+}
 
 
 @end
