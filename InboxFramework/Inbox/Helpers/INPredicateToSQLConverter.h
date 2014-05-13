@@ -10,9 +10,12 @@
 
 @interface INPredicateToSQLConverter : NSObject
 
-@property (nonatomic, strong) Class targetModelClass;
+@property (nonatomic, strong) Class modelClass;
+@property (nonatomic, strong) NSMutableArray * additionalJoins;
 
-- (NSString *)SQLFilterForPredicate:(NSPredicate *)predicate;
-- (NSString *)SQLSortForSortDescriptor:(NSSortDescriptor *)descriptor;
++ (INPredicateToSQLConverter*)converterForModelClass:(Class)modelClass;
+
+- (NSString *)SQLForPredicate:(NSPredicate*)predicate;
+- (NSString *)SQLForSortDescriptors:(NSArray*)descriptors;
 
 @end

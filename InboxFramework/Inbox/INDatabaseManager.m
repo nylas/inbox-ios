@@ -128,74 +128,81 @@ static void initialize_INDatabaseManager() {
 		
 	NSAssert([klass isSubclassOfClass:[INModelObject class]], @"Only subclasses of INModelObject can be cached.");
 
-	if (!_initializedModelClasses[NSStringFromClass(klass)]) {
-		[_initializedModelClasses setObject:@(YES) forKey:NSStringFromClass(klass)];
-		return [self initializeModelTable:klass];
+	if (!_initializedModelClasses[[klass databaseTableName]]) {
+		[_initializedModelClasses setObject:@(YES) forKey:[klass databaseTableName]];
+		
+		BOOL __block succeeded = YES;
+		[_queue inTransaction:^(FMDatabase * db, BOOL * rollback) {
+			[self initializeModelTable:klass inDatabase:db];
+			[self initializeModelJOINTables:klass inDatabase: db];
+			if ([klass resolveClassMethod: @selector(afterDatabaseSetup:)])
+				[klass afterDatabaseSetup: db];
+			
+			if ([db hadError]) {
+				*rollback = YES;
+				succeeded = NO;
+			}
+		}];
+		return succeeded;
 	}
 	return YES;
 }
 
-- (BOOL)initializeModelTable:(Class)klass
+- (void)initializeModelTable:(Class)klass inDatabase:(FMDatabase*)db
 {
-	BOOL __block succeeded = YES;
-	
-	[_queue inTransaction:^(FMDatabase * db, BOOL * rollback) {
-		NSMutableArray * cols = [@[@"id TEXT PRIMARY KEY", @"data BLOB"] mutableCopy];
-		NSMutableArray * colIndexQueries = [NSMutableArray array];
-		NSString * tableName = [klass databaseTableName];
+	NSMutableArray * cols = [@[@"id TEXT PRIMARY KEY", @"data BLOB"] mutableCopy];
+	NSMutableArray * colIndexSQLs = [NSMutableArray array];
+	NSString * tableName = [klass databaseTableName];
 
-		for (NSString * propertyName in [klass databaseIndexProperties]) {
-			NSString * colName = [klass resourceMapping][propertyName];
-			NSString * colType = nil;
-			NSString * type = [klass typeOfPropertyNamed: propertyName];
+	for (NSString * propertyName in [klass databaseIndexProperties]) {
+		NSString * colName = [klass resourceMapping][propertyName];
+		NSString * colType = nil;
+		NSString * type = [klass typeOfPropertyNamed: propertyName];
 
-			if ([type isEqualToString:@"int"])
-				colType = @"INTEGER";
+		if ([colName isEqualToString:@"id"] || [colName isEqualToString:@"data"])
+			continue;
 			
-			if ([type isEqualToString:@"Tc"]) // char or bool
-				colType = @"INTEGER";
-
-			else if ([type isEqualToString:@"float"])
-				colType = @"REAL";
-
-			else if ([type isEqualToString:@"T@\"NSString\""])
-				colType = @"TEXT";
-			
-			else if ([type isEqualToString:@"T@\"NSDate\""])
-				colType = @"INTEGER";
-
-			NSAssert(colType && colName, @"Cannot create an index on the property %@ of type %@", propertyName, type);
-
-			[cols addObject:[NSString stringWithFormat:@"`%@` %@", colName, colType]];
-			[colIndexQueries addObject:[NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS \"%@\" ON \"%@\" (\"%@\")", colName, tableName, colName]];
-		}
-
-		NSString * colsString = [cols componentsJoinedByString:@","];
-		NSString * query = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS `%@` (%@);", tableName, colsString];
-
-		[db executeUpdate:query];
-
-		for (NSString * indexQuery in colIndexQueries)
-			[db executeUpdate:indexQuery];
+		if ([type isEqualToString:@"int"])
+			colType = @"INTEGER";
 		
-		// create an additional tables for storing join properties
-		for (NSString * property in [klass databaseJoinTableProperties]) {
-			NSString * tableName = [NSString stringWithFormat: @"%@-%@", NSStringFromClass(klass), property];
-			NSString * tableSQL = [NSString stringWithFormat: @"CREATE TABLE IF NOT EXISTS `%@` (id TEXT KEY, %@ TEXT)", tableName, property];
-			NSString * indexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `id` ON `%@` (`id`)", tableName];
-			[db executeUpdate: tableSQL];
-			[db executeUpdate: indexSQL];
-		}
+		if ([type isEqualToString:@"Tc"]) // char or bool
+			colType = @"INTEGER";
 
-		if ([klass resolveClassMethod: @selector(afterDatabaseSetup:)])
-			[klass afterDatabaseSetup: db];
-			
-		if ([db hadError]) {
-			*rollback = YES;
-			succeeded = NO;
-		}
-	}];
-	return succeeded;
+		else if ([type isEqualToString:@"float"])
+			colType = @"REAL";
+
+		else if ([type isEqualToString:@"T@\"NSString\""])
+			colType = @"TEXT";
+		
+		else if ([type isEqualToString:@"T@\"NSDate\""])
+			colType = @"INTEGER";
+
+		NSAssert(colType && colName, @"Cannot create an index on the property %@ of type %@", propertyName, type);
+
+		[cols addObject:[NSString stringWithFormat:@"`%@` %@", colName, colType]];
+		[colIndexSQLs addObject:[NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS \"%@\" ON \"%@\" (\"%@\")", colName, tableName, colName]];
+	}
+
+	NSString * colsString = [cols componentsJoinedByString:@","];
+	NSString * tableSQL = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS `%@` (%@);", tableName, colsString];
+
+	[db executeUpdate:tableSQL];
+	for (NSString * indexSQL in colIndexSQLs)
+		[db executeUpdate:indexSQL];
+}
+
+- (void)initializeModelJOINTables:(Class)klass inDatabase:(FMDatabase*)db
+{
+	// create an additional tables for storing join properties
+	for (NSString * property in [klass databaseJoinTableProperties]) {
+		NSString * tableName = [NSString stringWithFormat: @"%@-%@", NSStringFromClass(klass), property];
+		NSString * tableSQL = [NSString stringWithFormat: @"CREATE TABLE IF NOT EXISTS `%@` (id TEXT KEY, `value` TEXT)", tableName];
+		NSString * IDIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `id` ON `%@` (`id`)", tableName];
+		NSString * ValueIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `value` ON `%@` (`value`)", tableName];
+		[db executeUpdate: tableSQL];
+		[db executeUpdate: IDIndexSQL];
+		[db executeUpdate: ValueIndexSQL];
+	}
 }
 
 #pragma mark Persisting Objects
@@ -312,7 +319,7 @@ static void initialize_INDatabaseManager() {
 	for (NSString * property in [[model class] databaseJoinTableProperties]) {
 		NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
 		NSString * deleteSQL = [NSString stringWithFormat: @"DELETE FROM `%@` WHERE id = ?", propertyTableName];
-		NSString * addSQL = [NSString stringWithFormat: @"INSERT INTO `%@` (`id`, `%@`) VALUES (\"%@\",?)", propertyTableName, property, model.ID];
+		NSString * addSQL = [NSString stringWithFormat: @"INSERT INTO `%@` (`id`, `value`) VALUES (\"%@\",?)", propertyTableName, model.ID];
 		
 		[db executeUpdate:  deleteSQL];
 		for (NSString * value in [model valueForKey: property])
@@ -361,47 +368,16 @@ static void initialize_INDatabaseManager() {
 	return obj;
 }
 
-- (NSString*)whereClauseForClass:(Class)klass matching:(NSPredicate*)wherePredicate
-{
-	INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
-	[converter setTargetModelClass: klass];
-
-	NSMutableString * where = [NSMutableString string];
-	
-	// Automtically join all of the join tables used by this class. In the future, we may want to
-	// selectively join only the tables that are required by the wherePredicate. But for now, all of them!
-	NSString * tableName = NSStringFromClass(klass);
-	NSArray * joinProperties = [klass databaseJoinTableProperties];
-	for (NSString * property in joinProperties) {
-		NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
-		[where appendFormat: @" INNER JOIN `%@` ON `%@`.`id` = `%@`.`id`", propertyTableName, propertyTableName, tableName];
-	}
-	
-	// Use our helper to assemble the WHERE clause. It's important that we group the results, because the
-	// inner joins often result in multiple rows per matching object.
-	[where appendFormat:@" WHERE %@ GROUP BY `id`", [converter SQLFilterForPredicate:wherePredicate]];
-	return where;
-}
-
 - (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(int)limit offset:(int)offset withCallback:(ResultsBlock)callback
 {
 	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT * FROM %@", [klass databaseTableName]];
+	INPredicateToSQLConverter * converter = [INPredicateToSQLConverter converterForModelClass: klass];
 
-	if (wherePredicate) {
-		[query appendString: [self whereClauseForClass: klass matching:wherePredicate]];
-	}
+	if (wherePredicate)
+		[query appendString: [converter SQLForPredicate:wherePredicate]];
 	
-	if ([sortDescriptors count] > 0) {
-		NSMutableArray * sortClauses = [NSMutableArray array];
-		INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
-		[converter setTargetModelClass: klass];
-		
-		for (NSSortDescriptor * descriptor in sortDescriptors) {
-			NSString * sql = [converter SQLSortForSortDescriptor:descriptor];
-			if (sql) [sortClauses addObject:sql];
-		}
-		[query appendFormat:@" ORDER BY %@", [sortClauses componentsJoinedByString:@", "]];
-	}
+	if ([sortDescriptors count] > 0)
+		[query appendString: [converter SQLForSortDescriptors: sortDescriptors]];
 
 	if (limit > 0)
 		[query appendFormat:@" LIMIT %d, %d", offset, limit]; // weird ordering, but correct!
@@ -444,9 +420,10 @@ static void initialize_INDatabaseManager() {
 		return NSNotFound;
 	
 	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT COUNT(*) AS count FROM %@", [klass databaseTableName]];
-	if (wherePredicate)
-		[query appendString: [self whereClauseForClass: klass matching:wherePredicate]];
-	
+	if (wherePredicate) {
+		INPredicateToSQLConverter * converter = [INPredicateToSQLConverter converterForModelClass: klass];
+		[query appendString: [converter SQLForPredicate:wherePredicate]];
+	}
 	long __block result = NSNotFound;
 	[_queue inDatabase:^(FMDatabase *db) {
 		FMResultSet * results = [db executeQuery: query];

@@ -225,7 +225,7 @@
 
 + (NSArray *)databaseIndexProperties
 {
-	return @[@"namespaceID"];
+	return @[@"ID", @"namespaceID"];
 }
 
 + (NSArray *)databaseJoinTableProperties
@@ -241,6 +241,31 @@
 - (void)setup
 {
 	// override point for subclasses
+}
+
++ (void)afterDatabaseSetup:(FMDatabase*)db
+{
+	// override point for subclasses
+}
+
+- (void)beforePersist:(FMDatabase*)db
+{
+	// override point for subclasses
+}
+
+- (void)afterPersist:(FMDatabase*)db
+{
+	// override point for subclasses
+}
+
+- (void)beforeUnpersist:(FMDatabase*)db
+{
+	// override point for subclasses
+}
+
+- (void)afterUnpersist:(FMDatabase*)db
+{
+	
 }
 
 #pragma mark Getting and Setting Resource Properties
