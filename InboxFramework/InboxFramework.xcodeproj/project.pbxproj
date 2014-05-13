@@ -41,8 +41,8 @@
 		43A1E2F7191C049A00EF660E /* INAPIOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C1191C049A00EF660E /* INAPIOperation.m */; };
 		43A1E2FA191C049A00EF660E /* INContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C5191C049A00EF660E /* INContact.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2FB191C049A00EF660E /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C6191C049A00EF660E /* INContact.m */; };
-		43A1E2FC191C049A00EF660E /* INLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C7191C049A00EF660E /* INLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43A1E2FD191C049A00EF660E /* INLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C8191C049A00EF660E /* INLabel.m */; };
+		43A1E2FC191C049A00EF660E /* INTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C7191C049A00EF660E /* INTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A1E2FD191C049A00EF660E /* INTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C8191C049A00EF660E /* INTag.m */; };
 		43A1E2FE191C049A00EF660E /* INMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C9191C049A00EF660E /* INMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2FF191C049A00EF660E /* INMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2CA191C049A00EF660E /* INMessage.m */; };
 		43A1E300191C049A00EF660E /* INNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2CB191C049A00EF660E /* INNamespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -112,8 +112,8 @@
 		43A1E2C1191C049A00EF660E /* INAPIOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPIOperation.m; sourceTree = "<group>"; };
 		43A1E2C5191C049A00EF660E /* INContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContact.h; sourceTree = "<group>"; };
 		43A1E2C6191C049A00EF660E /* INContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContact.m; sourceTree = "<group>"; };
-		43A1E2C7191C049A00EF660E /* INLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INLabel.h; sourceTree = "<group>"; };
-		43A1E2C8191C049A00EF660E /* INLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INLabel.m; sourceTree = "<group>"; };
+		43A1E2C7191C049A00EF660E /* INTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTag.h; sourceTree = "<group>"; };
+		43A1E2C8191C049A00EF660E /* INTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTag.m; sourceTree = "<group>"; };
 		43A1E2C9191C049A00EF660E /* INMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INMessage.h; sourceTree = "<group>"; };
 		43A1E2CA191C049A00EF660E /* INMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INMessage.m; sourceTree = "<group>"; };
 		43A1E2CB191C049A00EF660E /* INNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INNamespace.h; sourceTree = "<group>"; };
@@ -249,8 +249,8 @@
 			children = (
 				43A1E2C5191C049A00EF660E /* INContact.h */,
 				43A1E2C6191C049A00EF660E /* INContact.m */,
-				43A1E2C7191C049A00EF660E /* INLabel.h */,
-				43A1E2C8191C049A00EF660E /* INLabel.m */,
+				43A1E2C7191C049A00EF660E /* INTag.h */,
+				43A1E2C8191C049A00EF660E /* INTag.m */,
 				43A1E2C9191C049A00EF660E /* INMessage.h */,
 				43A1E2CA191C049A00EF660E /* INMessage.m */,
 				43A1E2CB191C049A00EF660E /* INNamespace.h */,
@@ -320,7 +320,7 @@
 				43A1E2FE191C049A00EF660E /* INMessage.h in Headers */,
 				43A1E302191C049A00EF660E /* INThread.h in Headers */,
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
-				43A1E2FC191C049A00EF660E /* INLabel.h in Headers */,
+				43A1E2FC191C049A00EF660E /* INTag.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
 				43A1E2EA191C049A00EF660E /* INModelArrayResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
@@ -539,7 +539,7 @@
 				43A1E2DB191C049A00EF660E /* FMDatabase+INModelQueries.m in Sources */,
 				43A1E2E7191C049A00EF660E /* NSPredicate+Inspection.m in Sources */,
 				43A1E2E1191C049A00EF660E /* NSDictionary+FormatConversion.m in Sources */,
-				43A1E2FD191C049A00EF660E /* INLabel.m in Sources */,
+				43A1E2FD191C049A00EF660E /* INTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

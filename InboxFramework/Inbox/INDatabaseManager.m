@@ -38,7 +38,7 @@ static void initialize_INDatabaseManager() {
 	self = [super init];
 
 	if (self) {
-		NSLog(@"%@", DATABASE_PATH);
+		NSLog(@"%@ SQLite v. %s", DATABASE_PATH, sqlite3_version);
 		
 		_queue = [FMDatabaseQueue databaseQueueWithPath: DATABASE_PATH];
 		_queryDispatchQueue = dispatch_queue_create("INDatabaseManager Queue", DISPATCH_QUEUE_CONCURRENT);
@@ -177,7 +177,19 @@ static void initialize_INDatabaseManager() {
 
 		for (NSString * indexQuery in colIndexQueries)
 			[db executeUpdate:indexQuery];
+		
+		// create an additional tables for storing join properties
+		for (NSString * property in [klass databaseJoinTableProperties]) {
+			NSString * tableName = [NSString stringWithFormat: @"%@-%@", NSStringFromClass(klass), property];
+			NSString * tableSQL = [NSString stringWithFormat: @"CREATE TABLE IF NOT EXISTS `%@` (id TEXT KEY, %@ TEXT)", tableName, property];
+			NSString * indexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `id` ON `%@` (`id`)", tableName];
+			[db executeUpdate: tableSQL];
+			[db executeUpdate: indexSQL];
+		}
 
+		if ([klass resolveClassMethod: @selector(afterDatabaseSetup:)])
+			[klass afterDatabaseSetup: db];
+			
 		if ([db hadError]) {
 			*rollback = YES;
 			succeeded = NO;
@@ -230,9 +242,21 @@ static void initialize_INDatabaseManager() {
 	
 	dispatch_async(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+			if ([model respondsToSelector:@selector(beforeUnpersist:)])
+				[model beforeUnpersist: db];
+			
 			NSString * tableName = [[model class] databaseTableName];
 			NSString * query = [NSString stringWithFormat:@"DELETE FROM %@ WHERE id = ?", tableName];
 			[db executeUpdate: query withArgumentsInArray:@[[model ID]]];
+
+			for (NSString * property in [[model class] databaseJoinTableProperties]) {
+				NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
+				NSString * deleteSQL = [NSString stringWithFormat: @"DELETE * FROM `%@` WHERE id = `?`", propertyTableName];
+				[db executeUpdate: deleteSQL, model.ID];
+			}
+
+			if ([model respondsToSelector:@selector(afterUnpersist:)])
+				[model afterUnpersist: db];
 		}];
 
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -246,11 +270,15 @@ static void initialize_INDatabaseManager() {
 {
 	NSAssert([model ID] != nil, @"Unsaved models should not be written to the cache.");
 
+	if ([model respondsToSelector:@selector(beforePersist:)])
+		[model beforePersist: db];
+
 	NSString * tableName = [[model class] databaseTableName];
 	NSMutableArray * columns = [@[@"id", @"data"] mutableCopy];
 	NSMutableArray * columnPlaceholders = [@[@"?", @"?"] mutableCopy];
 	NSMutableArray * values = [NSMutableArray array];
 
+	// serialize the model to JSON that we can store in the 'data' blob
 	NSError * jsonError = nil;
 	NSData * json = [NSJSONSerialization dataWithJSONObject:[model resourceDictionary] options:NSJSONWritingPrettyPrinted error:&jsonError];
 
@@ -261,13 +289,13 @@ static void initialize_INDatabaseManager() {
 	[values addObject:[model ID]];
 	[values addObject:json];
 
+	// for each index column, grab the model's current value for that key
 	for (NSString * propertyName in [[model class] databaseIndexProperties]) {
 		NSString * colName = [[model class] resourceMapping][propertyName];
 		[columns addObject:colName];
 		[columnPlaceholders addObject:@"?"];
 
 		id value = [model valueForKey:propertyName];
-
 		if (!value) value = [NSNull null];
 		[values addObject:value];
 	}
@@ -275,23 +303,48 @@ static void initialize_INDatabaseManager() {
 	NSString * columnsStr = [NSString stringWithFormat:@"`%@`", [columns componentsJoinedByString:@"`,`"]];
 	NSString * columnPlaceholdersStr = [columnPlaceholders componentsJoinedByString:@","];
 
+	// execute the query to update the model in database
 	NSString * query = [NSString stringWithFormat:@"REPLACE INTO %@ (%@) VALUES (%@)", tableName, columnsStr, columnPlaceholdersStr];
 	[db executeUpdate:query withArgumentsInArray:values];
     
+	// for each join table property, find all of the items in the join table for
+	// this model and delete them. Insert each value back into the table.
+	for (NSString * property in [[model class] databaseJoinTableProperties]) {
+		NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
+		NSString * deleteSQL = [NSString stringWithFormat: @"DELETE FROM `%@` WHERE id = ?", propertyTableName];
+		NSString * addSQL = [NSString stringWithFormat: @"INSERT INTO `%@` (`id`, `%@`) VALUES (\"%@\",?)", propertyTableName, property, model.ID];
+		
+		[db executeUpdate:  deleteSQL];
+		for (NSString * value in [model valueForKey: property])
+			[db executeUpdate: addSQL, value];
+	}
+	
+	// if we encountered errors, try to recover
     if ([db hadError]) {
-        if ([[db lastErrorMessage] rangeOfString:@"has no column"].location != NSNotFound) {
-            // the table schema must have changed. We don't currently do migrations automatically,
-            // so let's just blow away the cache for this table and let it get rebuilt
+        if (([[db lastErrorMessage] rangeOfString:@"has no column"].location != NSNotFound) ||
+ 		    ([[db lastErrorMessage] rangeOfString:@"no such table:"].location != NSNotFound)) {
+			// the table schema must have changed. We don't currently do migrations automatically,
+			// so let's just blow away the cache for this table and let it get rebuilt
             [db executeUpdate: [NSString stringWithFormat: @"DROP TABLE `%@`", tableName]];
+			for (NSString * property in [[model class] databaseJoinTableProperties]) {
+				NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
+				[db executeUpdate: [NSString stringWithFormat: @"DROP TABLE `%@`", propertyTableName]];
+			}
             [_initializedModelClasses removeObjectForKey: NSStringFromClass([model class])];
         }
-    }
+    } else {
+		if ([model respondsToSelector:@selector(afterPersist:)])
+			[model afterPersist: db];
+	}
 }
 
 #pragma mark Finding Objects
 
 - (INModelObject*)selectModelOfClass:(Class)klass withID:(NSString *)ID
 {
+	if (![self checkModelTable:klass])
+		return nil;
+	
 	INModelObject __block * obj = nil;
 	[_queue inDatabase:^(FMDatabase * db) {
 		FMResultSet * result = nil;
@@ -308,30 +361,48 @@ static void initialize_INDatabaseManager() {
 	return obj;
 }
 
+- (NSString*)whereClauseForClass:(Class)klass matching:(NSPredicate*)wherePredicate
+{
+	INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
+	[converter setTargetModelClass: klass];
+
+	NSMutableString * where = [NSMutableString string];
+	
+	// Automtically join all of the join tables used by this class. In the future, we may want to
+	// selectively join only the tables that are required by the wherePredicate. But for now, all of them!
+	NSString * tableName = NSStringFromClass(klass);
+	NSArray * joinProperties = [klass databaseJoinTableProperties];
+	for (NSString * property in joinProperties) {
+		NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
+		[where appendFormat: @" INNER JOIN `%@` ON `%@`.`id` = `%@`.`id`", propertyTableName, propertyTableName, tableName];
+	}
+	
+	// Use our helper to assemble the WHERE clause. It's important that we group the results, because the
+	// inner joins often result in multiple rows per matching object.
+	[where appendFormat:@" WHERE %@ GROUP BY `id`", [converter SQLFilterForPredicate:wherePredicate]];
+	return where;
+}
+
 - (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(int)limit offset:(int)offset withCallback:(ResultsBlock)callback
 {
 	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT * FROM %@", [klass databaseTableName]];
-	INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
-	
-	[converter setTargetModelClass: klass];
-	
+
 	if (wherePredicate) {
-		NSString * whereClause = [converter SQLFilterForPredicate:wherePredicate];
-		[query appendFormat:@" WHERE %@", whereClause];
+		[query appendString: [self whereClauseForClass: klass matching:wherePredicate]];
 	}
 	
 	if ([sortDescriptors count] > 0) {
 		NSMutableArray * sortClauses = [NSMutableArray array];
+		INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
+		[converter setTargetModelClass: klass];
 		
 		for (NSSortDescriptor * descriptor in sortDescriptors) {
 			NSString * sql = [converter SQLSortForSortDescriptor:descriptor];
-			
 			if (sql) [sortClauses addObject:sql];
 		}
-		
 		[query appendFormat:@" ORDER BY %@", [sortClauses componentsJoinedByString:@", "]];
 	}
-	
+
 	if (limit > 0)
 		[query appendFormat:@" LIMIT %d, %d", offset, limit]; // weird ordering, but correct!
 	
@@ -373,14 +444,8 @@ static void initialize_INDatabaseManager() {
 		return NSNotFound;
 	
 	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT COUNT(*) AS count FROM %@", [klass databaseTableName]];
-	INPredicateToSQLConverter * converter = [[INPredicateToSQLConverter alloc] init];
-	
-	[converter setTargetModelClass: klass];
-	
-	if (wherePredicate) {
-		NSString * whereClause = [converter SQLFilterForPredicate:wherePredicate];
-		[query appendFormat:@" WHERE %@", whereClause];
-	}
+	if (wherePredicate)
+		[query appendString: [self whereClauseForClass: klass matching:wherePredicate]];
 	
 	long __block result = NSNotFound;
 	[_queue inDatabase:^(FMDatabase *db) {

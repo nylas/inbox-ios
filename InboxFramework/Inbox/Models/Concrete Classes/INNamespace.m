@@ -7,7 +7,7 @@
 //
 
 #import "INNamespace.h"
-#import "INLabel.h"
+#import "INTag.h"
 #import "INContact.h"
 #import "INThreadProvider.h"
 #import "INThread.h"

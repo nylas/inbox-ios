@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INLabel.h"
+#import "INTag.h"
 #import "INNamespace.h"
 
-@implementation INLabel
+@implementation INTag
 
 + (NSString *)resourceAPIName
 {
-	return @"labels";
+	return @"tags";
 }
 
 @end

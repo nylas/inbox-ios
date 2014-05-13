@@ -98,16 +98,17 @@ static NSString * SQLNullValueString = @"NULL";
 	if (_targetModelClass) {
 		// check to make sure this column is allowed. You can only query against columns
 		// listed in the databaseIndexProperties.
-		NSString * key = [[_targetModelClass resourceMapping] objectForKey:propertyName];
-		NSArray * allowedPropertyNames = [@[@"ID"] arrayByAddingObjectsFromArray :[_targetModelClass databaseIndexProperties]];
-		if (![allowedPropertyNames containsObject:propertyName])
-			NSAssert(false, @"Sorry, this class can only be queried by %@. There is no index on %@!", allowedPropertyNames, propertyName);
+		NSMutableArray * allowedPropertyNames = [[@[@"ID"] arrayByAddingObjectsFromArray :[_targetModelClass databaseIndexProperties]] mutableCopy];
+		if ([allowedPropertyNames containsObject:propertyName])
+			return [[_targetModelClass resourceMapping] objectForKey:propertyName];
 
-		return key;
-	
-	} else {
-		return propertyName;
+		if ([[_targetModelClass databaseJoinTableProperties] containsObject: propertyName])
+			return propertyName;
+			
+		NSAssert(false, @"Sorry, this class can only be queried by %@ and %@. There is no index on %@!", allowedPropertyNames, [_targetModelClass databaseJoinTableProperties], propertyName);
 	}
+	
+	return propertyName;
 }
 
 - (NSString *)SQLExpressionForLeftKeyPath:(NSString *)keyPath

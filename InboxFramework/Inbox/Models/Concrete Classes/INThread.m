@@ -8,6 +8,7 @@
 
 #import "INThread.h"
 #import "INMessageProvider.h"
+#import "INTag.h"
 
 @implementation INThread
 
@@ -20,8 +21,8 @@
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"messages",
-		@"snippet": @"snippet",
-		@"unread":@"unread"
+		@"tagIDs": @"tags",
+		@"snippet": @"snippet"
 	}];
 	return mapping;
 }
@@ -31,9 +32,22 @@
 	return @"threads";
 }
 
-+ (NSArray *)databaseIndexProperties
+- (NSArray*)tags
 {
-	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"lastMessageDate", @"subject", @"unread"]];
+	NSMutableArray * tags = [NSMutableArray array];
+	for (NSString * ID in [self tagIDs])
+		[tags addObject: [INTag instanceWithID: ID]];
+	return tags;
+}
+
+- (NSArray*)tagIDs
+{
+	return @[@"unread", @"inbox"];
+}
+
+- (BOOL)hasTagWithID:(NSString*)ID
+{
+	return [[self tagIDs] containsObject: ID];
 }
 
 - (INModelProvider*)newMessageProvider
@@ -41,5 +55,16 @@
 	return [[INMessageProvider alloc] initWithThreadID: [self ID] andNamespaceID:[self namespaceID]];
 }
 
+#pragma mark Database
+
++ (NSArray *)databaseIndexProperties
+{
+	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"lastMessageDate", @"subject"]];
+}
+
++ (NSArray *)databaseJoinTableProperties
+{
+	return @[@"tagIDs"];
+}
 
 @end

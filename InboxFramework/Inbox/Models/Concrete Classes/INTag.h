@@ -8,6 +8,10 @@
 
 #import "INModelObject.h"
 
-@interface INLabel : INModelObject
+static NSString * INTagIDUnread = @"unread";
+static NSString * INTagIDArchive = @"archive";
+
+
+@interface INTag : INModelObject
 
 @end

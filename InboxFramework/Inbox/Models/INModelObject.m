@@ -228,6 +228,11 @@
 	return @[@"namespaceID"];
 }
 
++ (NSArray *)databaseJoinTableProperties
+{
+	return @[];
+}
+
 - (NSString *)resourceAPIPath
 {
 	return [NSString stringWithFormat: @"/n/%@/%@/%@", [self namespaceID], [[self class] resourceAPIName], [self ID]];

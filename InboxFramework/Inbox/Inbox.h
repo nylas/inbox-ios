@@ -17,5 +17,6 @@
 #import "INMessage.h"
 #import "INContact.h"
 #import "INNamespace.h"
+#import "INTag.h"
 
 #endif

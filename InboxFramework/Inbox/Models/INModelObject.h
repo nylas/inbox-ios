@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "INAPIManager.h"
 
+@class FMDatabase;
 @class INAPIOperation;
 
 static NSString * INModelObjectChangedNotification = @"model_changed";
@@ -151,10 +152,54 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
 + (NSArray *)databaseIndexProperties;
 
 /**
+ @return An array of NSArray properties that should use separate tables to enable
+ indexing in a one-to-many fashion.
+*/
++ (NSArray *)databaseJoinTableProperties;
+
+/**
  Setup should be overridden in subclasses to perform additional initialization
  that needs to take place after -initWithCoder: or -initWithResourceDictionary: The base class
  implementation does nothing.
  */
 - (void)setup;
+
+/** 
+ May be implemented by subclasses to perform additional setup after the main database table
+ for caching the class has been initialized and indexes have been created.
+ 
+ The default implementation of this method does nothing.
+ 
+ @param db An FMDatabase for performing additional queries.
+ */
++ (void)afterDatabaseSetup:(FMDatabase*)db;
+
+/**
+ May be implemented to perform additional work before the instance is saved to the local cache.
+
+@param db An FMDatabase for performing additional queries.
+*/
+- (void)beforePersist:(FMDatabase*)db;
+
+/**
+ May be implemented to perform additional work after the instance is saved to the local cache.
+ 
+ @param db An FMDatabase for performing additional queries.
+ */
+- (void)afterPersist:(FMDatabase*)db;
+
+/**
+ May be implemented to perform additional work before the instance is removed from the local cache.
+ 
+ @param db An FMDatabase for performing additional queries.
+ */
+- (void)beforeUnpersist:(FMDatabase*)db;
+
+/**
+ May be implemented to perform additional work after the instance is removed from the local cache.
+ 
+ @param db An FMDatabase for performing additional queries.
+ */
+- (void)afterUnpersist:(FMDatabase*)db;
 
 @end

@@ -10,6 +10,7 @@
 #import "INModelProvider+Private.h"
 #import "INAPIManager.h"
 #import "INThread.h"
+#import "INTag.h"
 #import "INModelArrayResponseSerializer.h"
 #import "INPredicateToQueryParamConverter.h"
 
@@ -46,7 +47,7 @@
 - (long)numberOfUnreadItems
 {
 	if (_numberOfUnreadItems == NSNotFound) {
-		NSPredicate * unreadPredicate = [NSComparisonPredicate predicateWithFormat:@"unread = 1"];
+		NSPredicate * unreadPredicate = [NSComparisonPredicate predicateWithFormat:@"ANY tagIDs = %@", INTagIDUnread];
 		NSPredicate * predicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:@[[self fetchPredicate], unreadPredicate]];
 		_numberOfUnreadItems = [[INDatabaseManager shared] countModelsOfClass:[INThread class] matching:predicate];
 	}

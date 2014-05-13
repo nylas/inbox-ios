@@ -12,6 +12,7 @@
 #import <FMDB/FMResultSet.h>
 #import "INModelObject.h"
 
+
 @protocol INDatabaseObserver <NSObject>
 @required
 /**
@@ -115,7 +116,7 @@
  Note that predicates and sort descriptors should reference class properties, not the underlying
  database columns. ("namespaceID", not "namespace_id"). The predicates and sort descriptors you
  create can only reference properties returned from [class databaseIndexProperties], which have 
- been indexed and have their own table columns under the hood.
+ been indexed and have their own table columns under the hood, or [class databaseJoinTableProperties].
  
  @param klass The type of models. Must be a subclass of INModelObject.
  @param wherePredicate A comparison or compound NSPredicate.
