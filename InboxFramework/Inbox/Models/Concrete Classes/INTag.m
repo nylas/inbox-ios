@@ -25,4 +25,9 @@
     return self.ID;
 }
 
+- (UIColor*)color
+{
+	return [UIColor colorWithWhite:0.6 alpha:1];
+}
+
 @end

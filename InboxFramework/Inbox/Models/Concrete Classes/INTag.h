@@ -18,5 +18,6 @@ static NSString * INTagIDSent = @"sent";
 @interface INTag : INModelObject
 
 - (NSString*)name;
+- (UIColor*)color;
 
 @end
