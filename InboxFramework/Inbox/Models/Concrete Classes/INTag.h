@@ -11,6 +11,9 @@
 static NSString * INTagIDUnread = @"unread";
 static NSString * INTagIDArchive = @"archive";
 static NSString * INTagIDInbox = @"inbox";
+static NSString * INTagIDFlagged = @"flagged";
+static NSString * INTagIDDraft = @"draft";
+static NSString * INTagIDSent = @"sent";
 
 @interface INTag : INModelObject
 

@@ -1,5 +1,5 @@
 //
-//  Inb.xh.h
+//  Inbox.h
 //  InboxFramework
 //
 //  Created by Ben Gotow on 5/8/14.

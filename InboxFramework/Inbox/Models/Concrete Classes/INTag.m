@@ -19,10 +19,10 @@
 - (NSString*)name
 {
     // pretend we have localization
-    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread"};
+    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDFlagged: @"Flagged", INTagIDDraft: @"Draft"};
     if ([localized objectForKey: self.ID])
         return [localized objectForKey: self.ID];
-    return self.name;
+    return self.ID;
 }
 
 @end
