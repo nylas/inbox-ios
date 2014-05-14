@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) Class modelClass;
 @property (nonatomic, strong) NSMutableArray * additionalJoins;
+@property (nonatomic, strong) NSMutableArray * additionalJoinRHSExpressions;
 
 + (INPredicateToSQLConverter*)converterForModelClass:(Class)modelClass;
 

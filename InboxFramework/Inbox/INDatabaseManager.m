@@ -9,7 +9,9 @@
 #import "INDatabaseManager.h"
 #import "INPredicateToSQLConverter.h"
 #import "FMResultSet+INModelQueries.h"
+#import "FMDatabaseAdditions.h"
 #import "NSObject+Properties.h"
+#import "INModelObject+Uniquing.h"
 
 #define SCHEMA_VERSION 2
 #define DATABASE_PATH [@"~/Documents/cache.db" stringByExpandingTildeInPath]
@@ -150,18 +152,20 @@ static void initialize_INDatabaseManager() {
 
 - (void)initializeModelTable:(Class)klass inDatabase:(FMDatabase*)db
 {
+	NSString * tableName = [klass databaseTableName];
 	NSMutableArray * cols = [@[@"id TEXT PRIMARY KEY", @"data BLOB"] mutableCopy];
 	NSMutableArray * colIndexSQLs = [NSMutableArray array];
-	NSString * tableName = [klass databaseTableName];
-
+    
+    [colIndexSQLs addObject: [NSString stringWithFormat: @"CREATE INDEX IF NOT EXISTS `id` ON `%@` (`id`)", tableName]];
+    
 	for (NSString * propertyName in [klass databaseIndexProperties]) {
 		NSString * colName = [klass resourceMapping][propertyName];
 		NSString * colType = nil;
 		NSString * type = [klass typeOfPropertyNamed: propertyName];
 
-		if ([colName isEqualToString:@"id"] || [colName isEqualToString:@"data"])
-			continue;
-			
+		if ([colName isEqualToString:@"id"])
+            continue;
+        
 		if ([type isEqualToString:@"int"])
 			colType = @"INTEGER";
 		
@@ -179,8 +183,8 @@ static void initialize_INDatabaseManager() {
 
 		NSAssert(colType && colName, @"Cannot create an index on the property %@ of type %@", propertyName, type);
 
-		[cols addObject:[NSString stringWithFormat:@"`%@` %@", colName, colType]];
-		[colIndexSQLs addObject:[NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS \"%@\" ON \"%@\" (\"%@\")", colName, tableName, colName]];
+        [cols addObject:[NSString stringWithFormat:@"`%@` %@", colName, colType]];
+		[colIndexSQLs addObject:[NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `%@` ON `%@` (`%@`)", colName, tableName, colName]];
 	}
 
 	NSString * colsString = [cols componentsJoinedByString:@","];
@@ -197,11 +201,11 @@ static void initialize_INDatabaseManager() {
 	for (NSString * property in [klass databaseJoinTableProperties]) {
 		NSString * tableName = [NSString stringWithFormat: @"%@-%@", NSStringFromClass(klass), property];
 		NSString * tableSQL = [NSString stringWithFormat: @"CREATE TABLE IF NOT EXISTS `%@` (id TEXT KEY, `value` TEXT)", tableName];
-		NSString * IDIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `id` ON `%@` (`id`)", tableName];
-		NSString * ValueIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `value` ON `%@` (`value`)", tableName];
+		NSString * idIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `id+value` ON `%@` (`id`,`value`)", tableName];
+		NSString * valueIndexSQL = [NSString stringWithFormat:@"CREATE INDEX IF NOT EXISTS `value` ON `%@` (`value`)", tableName];
 		[db executeUpdate: tableSQL];
-		[db executeUpdate: IDIndexSQL];
-		[db executeUpdate: ValueIndexSQL];
+		[db executeUpdate: idIndexSQL];
+		[db executeUpdate: valueIndexSQL];
 	}
 }
 
@@ -318,10 +322,10 @@ static void initialize_INDatabaseManager() {
 	// this model and delete them. Insert each value back into the table.
 	for (NSString * property in [[model class] databaseJoinTableProperties]) {
 		NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
-		NSString * deleteSQL = [NSString stringWithFormat: @"DELETE FROM `%@` WHERE id = ?", propertyTableName];
+		NSString * deleteSQL = [NSString stringWithFormat: @"DELETE FROM `%@` WHERE `id` = ?", propertyTableName];
 		NSString * addSQL = [NSString stringWithFormat: @"INSERT INTO `%@` (`id`, `value`) VALUES (\"%@\",?)", propertyTableName, model.ID];
 		
-		[db executeUpdate:  deleteSQL];
+		[db executeUpdate:  deleteSQL, model.ID];
 		for (NSString * value in [model valueForKey: property])
 			[db executeUpdate: addSQL, value];
 	}
@@ -362,8 +366,15 @@ static void initialize_INDatabaseManager() {
 			NSString * query = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT 1", [klass databaseTableName]];
 			result = [db executeQuery:query];
 		}
-		obj = [result nextModelOfClass: klass];
-		[result close];
+        
+        if ([NSThread isMainThread])
+            obj = [result nextModelOfClass: klass];
+        else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                obj = [result nextModelOfClass: klass];
+            });
+        }
+        [result close];
 	}];
 	return obj;
 }
@@ -388,49 +399,104 @@ static void initialize_INDatabaseManager() {
 
 - (void)selectModelsOfClass:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback
 {
+	dispatch_async(_queryDispatchQueue, ^{
+        [self selectModelsOfClassSync:klass withQuery:query andParameters:arguments andCallback:callback];
+	});
+}
+
+- (void)selectModelsOfClassSync:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback
+{
 	NSAssert(callback, @"-selectModelsOfClass called without a valid callback.");
 	NSAssert(query, @"-selectModelsOfClass called without a valid query.");
 	
 	if (![self checkModelTable:klass])
 		return;
-
-	dispatch_async(_queryDispatchQueue, ^{
-		[_queue inDatabase:^(FMDatabase * db) {
-			FMResultSet * result = [db executeQuery:query withParameterDictionary:arguments];
-
-			dispatch_sync(dispatch_get_main_queue(), ^{
-				NSMutableArray __block * objects = [@[] mutableCopy];
-				INModelObject * obj = nil;
-				while ((obj = [result nextModelOfClass:klass]))
-					[objects addObject:obj];
-				
-				[result close];
-
-				NSLog(@"%@ RETRIEVED %lu %@s", query, (unsigned long)[objects count], NSStringFromClass(klass));
-				if (callback)
-					callback(objects);
-			});
-		}];
-	});
+    
+    NSMutableArray * __block __results = [NSMutableArray array];
+    NSDate * __block startDB = nil;
+    NSDate * __block endDB = nil;
+    NSDate * __block startMT = nil;
+    NSDate * __block endMT = nil;
+    
+    // Execute the actual database query on the database's dispatch queue and read the
+    // resulting data into shared memory.
+    [_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        startDB = [NSDate date];
+        FMResultSet * resultSet = [db executeQuery:query withParameterDictionary:arguments];
+        endDB = [NSDate date];
+        while ([resultSet next]) {
+            NSData * jsonData = [resultSet dataForColumn:@"data"];
+            [__results addObject: jsonData];
+        }
+        [resultSet close];
+    }];
+    
+    // Inflate the data into JSON on our background query processing queue.
+    for (int ii = [__results count] - 1; ii >= 0; ii --) {
+        NSError * err = nil;
+        NSData * jsonData = [__results objectAtIndex: ii];
+        NSDictionary * json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&err];
+        if (!err) {
+            [__results replaceObjectAtIndex: ii withObject: json];
+        } else {
+            [__results removeObjectAtIndex: ii];
+        }
+    }
+    
+    VoidBlock processResults = ^{
+        startMT = [NSDate date];
+        for (int ii = [__results count] - 1; ii >= 0; ii --) {
+            BOOL created = NO;
+            NSDictionary * json = [__results objectAtIndex: ii];
+            INModelObject * model = [klass attachedInstanceMatchingID: json[@"id"] createIfNecessary:YES didCreate: &created];
+            if (created) {
+                [model updateWithResourceDictionary: json];
+                [model setup];
+            }
+            
+            [__results replaceObjectAtIndex:ii withObject:model];
+        }
+        
+        endMT = [NSDate date];
+        NSLog(@"%@ RETRIEVED %lu %@s. \nDatabase thread time: %f sec\nMain thread time: %f sec\n", query, (unsigned long)[__results count], NSStringFromClass(klass), [endDB timeIntervalSinceDate:startDB], [endMT timeIntervalSinceDate: startMT]);
+        if (callback)
+            callback(__results);
+    };
+    
+    // Incorporate the JSON into the living model objects. This must always happen
+    // on the main thread. If we were called from the background, let's do this on the main
+    // queue in the next run through the run loop. If we're already on the main queue, make sure
+    // we do everything immediately - this is a synchronous request! (Probably for a very
+    // small number of known models, like namespaces, that will be returned.)
+    if ([[NSThread currentThread] isMainThread])
+        processResults();
+    else
+        dispatch_async(dispatch_get_main_queue(), processResults);
 }
 
-- (long)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate
+- (void)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate withCallback:(LongBlock)callback
 {
-	if (![self checkModelTable:klass])
-		return NSNotFound;
-	
-	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT COUNT(*) AS count FROM %@", [klass databaseTableName]];
-	if (wherePredicate) {
-		INPredicateToSQLConverter * converter = [INPredicateToSQLConverter converterForModelClass: klass];
-		[query appendString: [converter SQLForPredicate:wherePredicate]];
-	}
-	long __block result = NSNotFound;
-	[_queue inDatabase:^(FMDatabase *db) {
-		FMResultSet * results = [db executeQuery: query];
-		result = [results longForColumn:@"count"];
-	}];
+	dispatch_async(_queryDispatchQueue, ^{
+        if (![self checkModelTable:klass])
+            return;
+           
+        // because our predicate is sometimes converted to a complex where clause with JOINs and GROUP BY
+        // statements, we can't just count results. We have to use a sub-select and then count that.
+        INPredicateToSQLConverter * converter = [INPredicateToSQLConverter converterForModelClass: klass];
 
-	return result;
+        long __block result = NSNotFound;
+        [_queue inDatabase:^(FMDatabase *db) {
+            NSDate * start = [NSDate date];
+            NSString * sql = [NSString stringWithFormat: @"SELECT COUNT(1) as count FROM (SELECT 1 FROM %@ %@)", [klass databaseTableName], [converter SQLForPredicate:wherePredicate]];
+            result = [db longForQuery: sql];
+            NSLog(@"Count took %f seconds.", [[NSDate date] timeIntervalSinceDate: start]);
+        }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (callback)
+                callback(result);
+        });
+    });
 }
 
 

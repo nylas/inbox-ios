@@ -16,6 +16,6 @@
 
 - (id)initWithNamespaceID:(NSString *)namespaceID;
 
-- (long)numberOfUnreadItems;
+- (void)countUnreadItemsWithCallback:(LongBlock)callback;
 
 @end

@@ -168,6 +168,8 @@ static void initialize_INAPIManager() {
 	// TODO: Insert auth to get user ID here
 	NSString * authToken = @"whatevs";
 	
+    NSLog(@"Beginning login process. Requesting /n/");
+    
 	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
     [[INDatabaseManager shared] resetDatabase];
 
@@ -189,16 +191,8 @@ static void initialize_INAPIManager() {
 - (NSArray*)namespaces
 {
 	if (!_namespaces) {
-        [[[INDatabaseManager shared] queue] inDatabase:^(FMDatabase * db) {
-            NSString * query = [NSString stringWithFormat:@"SELECT * FROM %@", [INNamespace databaseTableName]];
-            NSMutableArray * namespaces = [NSMutableArray array];
-            FMResultSet * result = [db executeQuery:query];
-            INModelObject * namespace = nil;
-            while ((namespace = [result nextModelOfClass: [INNamespace class]]))
-                [namespaces addObject: namespace];
-            [result close];
-            
-            _namespaces = namespaces;
+        [[INDatabaseManager shared] selectModelsOfClassSync:[INNamespace class] withQuery:@"SELECT * FROM INNamespace" andParameters:nil andCallback:^(NSArray *objects) {
+            _namespaces = objects;
         }];
     }
     

@@ -165,13 +165,22 @@ static NSString * SQLNullValueString = @"NULL";
 	NSString * leftSQLExpression = nil;
 	
 	if ([[_modelClass databaseJoinTableProperties] containsObject: leftPropertyName]) {
-		if (!_additionalJoins)
+		if (!_additionalJoins) {
 			_additionalJoins = [NSMutableArray array];
+            _additionalJoinRHSExpressions = [NSMutableArray array];
+        }
+        
+        // are we already doing a JOIN scan for this value? Don't do it again! These
+        // are hugely expensive. No more WHERE unread AND unread.
+        if ([_additionalJoinRHSExpressions containsObject: rightSQLExpression])
+            return @"1 = 1";
+        
 		NSString * as = NSF(@"T%d", [_additionalJoins count]);
 		NSString * joinTable = NSF(@"%@-%@", [_modelClass databaseTableName], leftPropertyName);
 		NSString * joinSQL = NSF(@"INNER JOIN '%@' as '%@' ON '%@'.id = '%@'.id", joinTable, as, as, [_modelClass databaseTableName]);
 		[_additionalJoins addObject: joinSQL];
-		
+		[_additionalJoinRHSExpressions addObject: rightSQLExpression];
+        
 		leftSQLExpression = NSF(@"'%@'.value", as);
 	} else {
 		leftSQLExpression = [self SQLColumnForPropertyName: leftPropertyName];
@@ -300,7 +309,7 @@ static NSString * SQLNullValueString = @"NULL";
 	NSString * joins = [_additionalJoins componentsJoinedByString: @" "];
 	if (joins == nil) joins = @"";
 	
-	return NSF(@" %@ WHERE %@ GROUP BY `id`", joins, where);
+	return NSF(@" %@ WHERE %@ GROUP BY %@.`id`", joins, where, [_modelClass databaseTableName]);
 }
 
 @end

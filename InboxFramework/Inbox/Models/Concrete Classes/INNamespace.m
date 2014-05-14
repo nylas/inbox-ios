@@ -37,12 +37,17 @@
 	return [NSString stringWithFormat:@"/n/%@", self.ID];
 }
 
-- (INModelProvider *)newContactsProvider
+- (INModelProvider *)newContactProvider
 {
 	return [[INModelProvider alloc] initWithClass:[INContact class] andNamespaceID:[self ID] andUnderlyingPredicate:nil];
 }
 
-- (INModelProvider *)newThreadsProvider
+- (INModelProvider *)newTagProvider
+{
+	return [[INModelProvider alloc] initWithClass:[INTag class] andNamespaceID:[self ID] andUnderlyingPredicate:nil];
+}
+
+- (INThreadProvider *)newThreadProvider
 {
 	return [[INThreadProvider alloc] initWithNamespaceID: [self ID]];
 }

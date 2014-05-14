@@ -9,6 +9,8 @@
 #import "INModelObject.h"
 #import "INModelProvider.h"
 
+@class INThreadProvider;
+
 @interface INNamespace : INModelObject
 
 @property (nonatomic, strong) NSString * emailAddress;
@@ -17,7 +19,8 @@
 @property (nonatomic, strong) NSArray * scope;
 @property (nonatomic, strong) NSDate * lastSync;
 
-- (INModelProvider *)newContactsProvider;
-- (INModelProvider *)newThreadsProvider;
+- (INModelProvider *)newContactProvider;
+- (INThreadProvider *)newThreadProvider;
+- (INModelProvider *)newTagProvider;
 
 @end

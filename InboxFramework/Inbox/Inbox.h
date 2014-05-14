@@ -12,6 +12,7 @@
 #import "INAPIManager.h"
 #import "INDatabaseManager.h"
 #import "INMessageProvider.h"
+#import "INThreadProvider.h"
 #import "INThread.h"
 #import "INModelObject.h"
 #import "INMessage.h"

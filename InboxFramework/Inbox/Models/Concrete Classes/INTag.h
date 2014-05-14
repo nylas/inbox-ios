@@ -10,8 +10,10 @@
 
 static NSString * INTagIDUnread = @"unread";
 static NSString * INTagIDArchive = @"archive";
-
+static NSString * INTagIDInbox = @"inbox";
 
 @interface INTag : INModelObject
+
+- (NSString*)name;
 
 @end

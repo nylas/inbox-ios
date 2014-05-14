@@ -14,11 +14,11 @@ static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotific
 
 @class INAPIOperation;
 @class INModelObject;
-@class INAccount;
 
 typedef void (^ ResultsBlock)(NSArray * objects);
 typedef void (^ ModelBlock)(INModelObject * object);
-typedef void (^ AuthenticationBlock)(INAccount * account, NSError * error);
+typedef void (^ LongBlock)(long count);
+typedef void (^ AuthenticationBlock)(NSArray * namespaces, NSError * error);
 typedef void (^ ErrorBlock)(NSError * error);
 typedef void (^ VoidBlock)();
 

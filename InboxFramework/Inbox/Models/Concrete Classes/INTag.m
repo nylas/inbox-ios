@@ -16,4 +16,13 @@
 	return @"tags";
 }
 
+- (NSString*)name
+{
+    // pretend we have localization
+    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread"};
+    if ([localized objectForKey: self.ID])
+        return [localized objectForKey: self.ID];
+    return self.name;
+}
+
 @end
