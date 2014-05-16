@@ -8,6 +8,8 @@
 
 #import "INModelObject.h"
 
+@class INThread;
+
 @interface INMessage : INModelObject
 
 @property (nonatomic, strong) NSString * body;
@@ -16,5 +18,7 @@
 @property (nonatomic, strong) NSString * threadID;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
+
+- (INThread*)thread;
 
 @end

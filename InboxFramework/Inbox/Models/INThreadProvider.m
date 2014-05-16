@@ -11,7 +11,7 @@
 #import "INAPIManager.h"
 #import "INThread.h"
 #import "INTag.h"
-#import "INModelArrayResponseSerializer.h"
+#import "INModelResponseSerializer.h"
 #import "INPredicateToQueryParamConverter.h"
 
 @implementation INThreadProvider
@@ -33,7 +33,7 @@
 
 	// currently not useful, because the sort order is on item ID
 //	[params setObject:@(self.itemRange.location) forKey:@"offset"];
-	[params setObject:@(10000) forKey:@"limit"];
+	[params setObject:@(100) forKey:@"limit"];
 	
 	return params;
 }

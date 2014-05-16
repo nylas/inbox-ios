@@ -84,25 +84,23 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  */
 - (void)beginUpdates;
 
-/**
- Commit a set of changes to the object's properties and initiates an API call to
- save the changes.
- */
-- (INAPIOperation *)commitUpdates;
+- (void)rollbackUpdates;
+
 
 /**
  Save the model to the server. This method may be overriden in subclasses. The
  default implementation does a PUT to the APIPath for objects with IDs, and a POST
  to the APIPath (without an ID) for new objects.
-
- Note that -save is eventually persistent. The save operation may be held in queue
+ 
+ Note that -commitUpdates is eventually persistent. The save operation may be held in queue
  until network connectivity is available.
-
+ 
  @return An INAPIOperation that you can use to track the progress of the save operation.
- INAPIOperation's are a subclass of AFHTTPRequestOperation, so you can add completion 
+ INAPIOperation's are a subclass of AFHTTPRequestOperation, so you can add completion
  blocks, etc.
  */
-- (INAPIOperation *)save;
+- (INAPIOperation *)commitUpdates;
+
 
 /** @name Override Points & Subclassing Support */
 

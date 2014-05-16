@@ -7,6 +7,7 @@
 //
 
 #import "INMessage.h"
+#import "INThread.h"
 #import "NSString+FormatConversion.h"
 
 @implementation INMessage
@@ -36,6 +37,9 @@
 	return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"threadID", @"subject", @"date"]];
 }
 
-
+- (INThread*)thread
+{
+    return [INThread instanceWithID: [self threadID]];
+}
 
 @end

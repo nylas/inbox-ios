@@ -9,7 +9,7 @@
 #import "INAPIManager.h"
 #import "INAPIOperation.h"
 #import "INNamespace.h"
-#import "INModelArrayResponseSerializer.h"
+#import "INModelResponseSerializer.h"
 #import "INDatabaseManager.h"
 #import "FMResultSet+INModelQueries.h"
 
@@ -20,6 +20,7 @@
 #endif
 
 #define OPERATIONS_FILE [@"~/Documents/operations.plist" stringByExpandingTildeInPath]
+#define AUTH_TOKEN_KEY  @"inbox-auth-token"
 
 __attribute__((constructor))
 static void initialize_INAPIManager() {
@@ -48,28 +49,32 @@ static void initialize_INAPIManager() {
 		[self setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
 		[self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
 		
-        NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:@"inbox-auth-token"];
-		[self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
+        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveOperations) name:UIApplicationWillTerminateNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationFinished:) name:AFNetworkingOperationDidFinishNotification object:nil];
-		[self loadOperations];
-		
-		[[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-
-		typeof(self) __weak __self = self;
+        typeof(self) __weak __self = self;
 		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [API_URL host]];
 		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 			BOOL hasConnection = (status == AFNetworkReachabilityStatusReachableViaWiFi) || (status == AFNetworkReachabilityStatusReachableViaWWAN);
 			BOOL hasSuspended = [__self.operationQueue isSuspended];
-
+            
 			if (hasConnection && hasSuspended)
 				[__self setOperationsSuspended: NO];
 			else if (!hasConnection && !hasSuspended)
 				[__self setOperationsSuspended: YES];
 		}];
 		[self.reachabilityManager startMonitoring];
-	}
+
+        NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN_KEY];
+        if (token) {
+            // refresh the namespaces available to our token if we have one
+            [self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
+            [self fetchNamespaces: NULL];
+        }
+        
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveOperations) name:UIApplicationWillTerminateNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationFinished:) name:AFNetworkingOperationDidFinishNotification object:nil];
+		[self loadOperations];
+    }
 	return self;
 }
 
@@ -105,7 +110,8 @@ static void initialize_INAPIManager() {
 
 - (void)queueAPIOperation:(INAPIOperation *)operation
 {
-	operation.responseSerializer = self.responseSerializer;
+    if (!operation.responseSerializer)
+        operation.responseSerializer = self.responseSerializer;
 	operation.shouldUseCredentialStorage = self.shouldUseCredentialStorage;
 	operation.credential = self.credential;
 	operation.securityPolicy = self.securityPolicy;
@@ -163,18 +169,48 @@ static void initialize_INAPIManager() {
 
 #pragma Authentication
 
-- (void)authenticate:(AuthenticationBlock)completionBlock
+- (BOOL)isSignedIn
 {
-	// TODO: Insert auth to get user ID here
-	NSString * authToken = @"whatevs";
-	
-    NSLog(@"Beginning login process. Requesting /n/");
+    return ([[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN_KEY] != nil);
+}
+
+- (void)signIn:(ErrorBlock)completionBlock
+{
+    NSString * authToken = @"whatevs";
     
 	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
-    [[INDatabaseManager shared] resetDatabase];
+    [self fetchNamespaces:^(NSArray *namespaces, NSError *error) {
+        if (error) {
+            [[self requestSerializer] clearAuthorizationHeader];
+            completionBlock(error);
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN_KEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
+            completionBlock(nil);
+        }
+    }];
+}
 
+- (void)signOut
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey: AUTH_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[self requestSerializer] clearAuthorizationHeader];
+    [[INDatabaseManager shared] resetDatabase];
+    _namespaces = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
+}
+
+- (void)fetchNamespaces:(AuthenticationBlock)completionBlock
+{
+    NSLog(@"Fetching Namespaces (/n/)");
     AFHTTPRequestOperation * operation = [self GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
         // broadcast a notification about this change
+        _namespaces = namespaces;
         [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
         if (completionBlock)
             completionBlock(namespaces, nil);
@@ -184,7 +220,7 @@ static void initialize_INAPIManager() {
 			completionBlock(nil, error);
 	}];
     
-    INModelArrayResponseSerializer * serializer = [[INModelArrayResponseSerializer alloc] initWithModelClass: [INNamespace class]];
+    INModelResponseSerializer * serializer = [[INModelResponseSerializer alloc] initWithModelClass: [INNamespace class]];
     [operation setResponseSerializer: serializer];
 }
 

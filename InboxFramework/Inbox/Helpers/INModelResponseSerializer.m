@@ -6,14 +6,13 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INModelArrayResponseSerializer.h"
+#import "INModelResponseSerializer.h"
 #import "INModelObject.h"
 #import "INModelObject+Uniquing.h"
 #import "INDatabaseManager.h"
 
-#define ALREADY_PARSED_RESPONSE @"model-response-parsed"
 
-@implementation INModelArrayResponseSerializer
+@implementation INModelResponseSerializer
 
 - (id)initWithModelClass:(Class)klass
 {
@@ -29,7 +28,9 @@
 - (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError * __autoreleasing *)error
 {
 	id responseObject = [super responseObjectForResponse:response data:data error:error];
-
+    if (!responseObject && error)
+        return nil;
+    
 	BOOL badJSONClass = ([responseObject isKindOfClass:[NSArray class]] == NO);
 	BOOL badAPIResponse = ([responseObject isKindOfClass: [NSDictionary class]] && [responseObject[@"type"] isEqualToString: @"api_error"]);
 	
@@ -80,3 +81,4 @@
 }
 
 @end
+

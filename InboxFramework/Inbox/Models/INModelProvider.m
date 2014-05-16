@@ -8,7 +8,7 @@
 
 #import "INModelProvider.h"
 #import "INModelObject.h"
-#import "INModelArrayResponseSerializer.h"
+#import "INModelResponseSerializer.h"
 #import "NSObject+AssociatedObjects.h"
 
 @implementation INModelProviderChange : NSObject
@@ -168,7 +168,7 @@
 		_fetchOperation = nil;
 	}];
 	
-	INModelArrayResponseSerializer * serializer = [[INModelArrayResponseSerializer alloc] initWithModelClass: _modelClass];
+	INModelResponseSerializer * serializer = [[INModelResponseSerializer alloc] initWithModelClass: _modelClass];
 	[_fetchOperation setResponseSerializer:serializer];
 }
 

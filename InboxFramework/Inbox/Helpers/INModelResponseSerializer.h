@@ -15,7 +15,7 @@
  listening on these models.
 */
 
-@interface INModelArrayResponseSerializer : AFJSONResponseSerializer
+@interface INModelResponseSerializer : AFJSONResponseSerializer
 
 @property (nonatomic, strong) Class modelClass;
 

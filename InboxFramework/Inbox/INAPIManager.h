@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
+static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
 
 @class INAPIOperation;
 @class INModelObject;
@@ -51,7 +52,14 @@ typedef void (^ VoidBlock)();
 
 #pragma Authentication
 
-- (void)authenticate:(AuthenticationBlock)completionBlock;
+- (BOOL)isSignedIn;
+
+- (void)signIn:(ErrorBlock)completionBlock;
+
+- (void)signOut;
+
+
+- (void)fetchNamespaces:(AuthenticationBlock)completionBlock;
 
 /**
  @return The currently authenticated Inbox namespaces.

@@ -15,7 +15,7 @@
 #import "NSDictionary+FormatConversion.h"
 #import "INPredicateToSQLConverter.h"
 #import "INDatabaseManager.h"
-
+#import "INModelResponseSerializer.h"
 
 @implementation INModelObject
 
@@ -40,6 +40,16 @@
 }
 
 #pragma NSCoding Support
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setID: [NSString generateUUIDWithExtension: @"-selfdefined"]];
+		[self setup];
+    }
+    return self;
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -174,25 +184,22 @@
 	_precommitResourceDictionary = [self resourceDictionary];
 }
 
+- (void)rollbackUpdates
+{
+    [self updateWithResourceDictionary: _precommitResourceDictionary];
+}
+
 - (INAPIOperation *)commitUpdates
 {
 	NSAssert(_precommitResourceDictionary, @"You need to call -beginUpdates before calling -commitUpdates to save a model.");
-	INAPIOperation * operation = [INAPIOperation operationWithMethod:@"PUT" forModel:self];
+
+    NSString * method = ([self ID] ? @"PUT" : @"POST");
+	INAPIOperation * operation = [INAPIOperation operationWithMethod:method forModel:self];
+    [operation setResponseSerializer: [[INModelResponseSerializer alloc] initWithModelClass: [self class]]];
 	[operation setModelRollbackDictionary: _precommitResourceDictionary];
 	[[INAPIManager shared] queueAPIOperation:operation];
 	[[INDatabaseManager shared] persistModel:self];
 	_precommitResourceDictionary = nil;
-	return operation;
-}
-
-- (INAPIOperation *)save
-{
-	if ([self ID])
-		return [self commitUpdates];
-		
-	INAPIOperation * operation = [INAPIOperation operationWithMethod:@"POST" forModel:self];
-	[[INAPIManager shared] queueAPIOperation:operation];
-	[[INDatabaseManager shared] persistModel:self];
 	return operation;
 }
 

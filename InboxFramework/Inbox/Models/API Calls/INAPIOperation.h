@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "INModelObject.h"
 
+@class INMessage;
+
 static NSString * INAPIOperationCompleteNotification = @"INAPIOperationCompleteNotification";
 
 @interface INAPIOperation : AFHTTPRequestOperation <NSCoding>
 
-@property (nonatomic, strong) Class modelClass;
+@property (nonatomic, strong) INModelObject * model;
 @property (nonatomic, strong) NSDictionary * modelRollbackDictionary;
 
 + (INAPIOperation *)operationWithMethod:(NSString *)method forModel:(INModelObject *)model;
@@ -37,5 +39,13 @@ static NSString * INAPIOperationCompleteNotification = @"INAPIOperationCompleteN
  that was stored when the operation was created.
 */
 - (void)rollback;
+
+@end
+
+@interface INAPISaveDraftOperation : INAPIOperation
+
+@end
+
+@interface INAPIAddRemoveTagsOperation : INAPIOperation
 
 @end

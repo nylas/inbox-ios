@@ -27,8 +27,8 @@
 		43A1E2E7191C049A00EF660E /* NSPredicate+Inspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2AE191C049A00EF660E /* NSPredicate+Inspection.m */; };
 		43A1E2E8191C049A00EF660E /* NSString+FormatConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2AF191C049A00EF660E /* NSString+FormatConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2E9191C049A00EF660E /* NSString+FormatConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2B0191C049A00EF660E /* NSString+FormatConversion.m */; };
-		43A1E2EA191C049A00EF660E /* INModelArrayResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2B2191C049A00EF660E /* INModelArrayResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43A1E2EB191C049A00EF660E /* INModelArrayResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2B3191C049A00EF660E /* INModelArrayResponseSerializer.m */; };
+		43A1E2EA191C049A00EF660E /* INModelResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2B2191C049A00EF660E /* INModelResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2B3191C049A00EF660E /* INModelResponseSerializer.m */; };
 		43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2B4191C049A00EF660E /* INPredicateToQueryParamConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2ED191C049A00EF660E /* INPredicateToQueryParamConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2B5191C049A00EF660E /* INPredicateToQueryParamConverter.m */; };
 		43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2B6191C049A00EF660E /* INPredicateToSQLConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,8 +96,8 @@
 		43A1E2AE191C049A00EF660E /* NSPredicate+Inspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+Inspection.m"; sourceTree = "<group>"; };
 		43A1E2AF191C049A00EF660E /* NSString+FormatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FormatConversion.h"; sourceTree = "<group>"; };
 		43A1E2B0191C049A00EF660E /* NSString+FormatConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FormatConversion.m"; sourceTree = "<group>"; };
-		43A1E2B2191C049A00EF660E /* INModelArrayResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelArrayResponseSerializer.h; sourceTree = "<group>"; };
-		43A1E2B3191C049A00EF660E /* INModelArrayResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelArrayResponseSerializer.m; sourceTree = "<group>"; };
+		43A1E2B2191C049A00EF660E /* INModelResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelResponseSerializer.h; sourceTree = "<group>"; };
+		43A1E2B3191C049A00EF660E /* INModelResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelResponseSerializer.m; sourceTree = "<group>"; };
 		43A1E2B4191C049A00EF660E /* INPredicateToQueryParamConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPredicateToQueryParamConverter.h; sourceTree = "<group>"; };
 		43A1E2B5191C049A00EF660E /* INPredicateToQueryParamConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPredicateToQueryParamConverter.m; sourceTree = "<group>"; };
 		43A1E2B6191C049A00EF660E /* INPredicateToSQLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPredicateToSQLConverter.h; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		43A1E2B1191C049A00EF660E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				43A1E2B2191C049A00EF660E /* INModelArrayResponseSerializer.h */,
-				43A1E2B3191C049A00EF660E /* INModelArrayResponseSerializer.m */,
+				43A1E2B2191C049A00EF660E /* INModelResponseSerializer.h */,
+				43A1E2B3191C049A00EF660E /* INModelResponseSerializer.m */,
 				43A1E2B4191C049A00EF660E /* INPredicateToQueryParamConverter.h */,
 				43A1E2B5191C049A00EF660E /* INPredicateToQueryParamConverter.m */,
 				43A1E2B6191C049A00EF660E /* INPredicateToSQLConverter.h */,
@@ -322,7 +322,7 @@
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
 				43A1E2FC191C049A00EF660E /* INTag.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
-				43A1E2EA191C049A00EF660E /* INModelArrayResponseSerializer.h in Headers */,
+				43A1E2EA191C049A00EF660E /* INModelResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
 				43A1E2E6191C049A00EF660E /* NSPredicate+Inspection.h in Headers */,
 				43A1E2F6191C049A00EF660E /* INAPIOperation.h in Headers */,
@@ -527,7 +527,7 @@
 				43A1E305191C049A00EF660E /* INMessageProvider.m in Sources */,
 				43A1E303191C049A00EF660E /* INThread.m in Sources */,
 				43A1E301191C049A00EF660E /* INNamespace.m in Sources */,
-				43A1E2EB191C049A00EF660E /* INModelArrayResponseSerializer.m in Sources */,
+				43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */,
 				43A1E2E5191C049A00EF660E /* NSObject+Properties.m in Sources */,
 				43A1E2FB191C049A00EF660E /* INContact.m in Sources */,
 				43A1E309191C049A00EF660E /* INModelObject.m in Sources */,
