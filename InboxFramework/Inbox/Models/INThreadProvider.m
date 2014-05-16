@@ -30,11 +30,7 @@
 	[converter setKeysToParamsTable: @{@"to": @"to", @"from": @"from", @"cc": @"cc", @"bcc": @"bcc", @"threadID": @"thread", @"label": @"label"}];
 
 	NSMutableDictionary * params = [[converter paramsForPredicate: predicate] mutableCopy];
-
-	// currently not useful, because the sort order is on item ID
-//	[params setObject:@(self.itemRange.location) forKey:@"offset"];
-	[params setObject:@(100) forKey:@"limit"];
-	
+    [params addEntriesFromDictionary: [super queryParamsForPredicate: predicate]];
 	return params;
 }
 

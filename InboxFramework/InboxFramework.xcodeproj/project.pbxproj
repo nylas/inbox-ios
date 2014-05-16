@@ -13,6 +13,7 @@
 		435764F619269E2B00E6B340 /* INAddRemoveTagsChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */; };
 		435764F919269E3900E6B340 /* INSaveDraftChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F719269E3900E6B340 /* INSaveDraftChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		435764FA19269E3900E6B340 /* INSaveDraftChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F819269E3900E6B340 /* INSaveDraftChange.m */; };
+		438BE9FF1926C8A400E5C67D /* INSyncEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BE9FE1926C8A400E5C67D /* INSyncEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E28A191C02A800EF660E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF123C191AF2E70043E2E6 /* XCTest.framework */; };
 		43A1E28B191C02A800EF660E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF122E191AF2E70043E2E6 /* Foundation.framework */; };
 		43A1E28D191C02A800EF660E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A1E28C191C02A800EF660E /* UIKit.framework */; };
@@ -87,6 +88,7 @@
 		435764F719269E3900E6B340 /* INSaveDraftChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSaveDraftChange.h; sourceTree = "<group>"; };
 		435764F819269E3900E6B340 /* INSaveDraftChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSaveDraftChange.m; sourceTree = "<group>"; };
 		436F7D4E191AF6E4005A4489 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		438BE9FE1926C8A400E5C67D /* INSyncEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSyncEngine.h; sourceTree = "<group>"; };
 		43A1E27A191C02A800EF660E /* Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E289191C02A800EF660E /* InboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E28C191C02A800EF660E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -180,6 +182,7 @@
 				43A1E2B9191C049A00EF660E /* INAPIManager.m */,
 				43A1E2BC191C049A00EF660E /* INDatabaseManager.h */,
 				43A1E2BD191C049A00EF660E /* INDatabaseManager.m */,
+				438BE9FE1926C8A400E5C67D /* INSyncEngine.h */,
 				43A1E2BE191C049A00EF660E /* Models */,
 				43A1E2A0191C049A00EF660E /* Categories */,
 				43A1E2B1191C049A00EF660E /* Helpers */,
@@ -345,6 +348,7 @@
 				43A1E2E0191C049A00EF660E /* NSDictionary+FormatConversion.h in Headers */,
 				43A1E30B191C049A00EF660E /* INModelProvider.h in Headers */,
 				43A1E2FA191C049A00EF660E /* INContact.h in Headers */,
+				438BE9FF1926C8A400E5C67D /* INSyncEngine.h in Headers */,
 				43A1E308191C049A00EF660E /* INModelObject.h in Headers */,
 				43A1E2DC191C049A00EF660E /* FMResultSet+INModelQueries.h in Headers */,
 				43A1E304191C049A00EF660E /* INMessageProvider.h in Headers */,

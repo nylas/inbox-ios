@@ -15,6 +15,7 @@ static NSString * INAuthenticationChangedNotification = @"INAuthenticationChange
 
 @class INModelChange;
 @class INModelObject;
+@protocol INSyncEngine;
 
 typedef void (^ ResultsBlock)(NSArray * objects);
 typedef void (^ ModelBlock)(INModelObject * object);
@@ -43,6 +44,9 @@ typedef void (^ VoidBlock)();
 }
 
 @property (nonatomic, assign) BOOL changeQueueSuspended;
+
+@property (nonatomic, strong) NSObject<INSyncEngine> * syncEngine;
+
 
 + (INAPIManager *)shared;
 

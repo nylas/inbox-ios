@@ -7,6 +7,7 @@
 //
 
 #import "INMessageProvider.h"
+#import "INModelProvider+Private.h"
 #import "INPredicateToQueryParamConverter.h"
 #import "INThread.h"
 
@@ -27,8 +28,7 @@
 	[converter setKeysToParamsTable: @{@"to": @"to", @"from": @"from", @"cc": @"cc", @"bcc": @"bcc", @"threadID": @"thread", @"label": @"label"}];
 
 	NSMutableDictionary * params = [[converter paramsForPredicate: predicate] mutableCopy];
-	[params setObject:@(20) forKey:@"limit"];
-	
+	[params addEntriesFromDictionary: [super queryParamsForPredicate: predicate]];
 	return params;
 }
 

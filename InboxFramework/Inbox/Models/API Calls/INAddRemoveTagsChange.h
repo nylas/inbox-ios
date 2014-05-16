@@ -10,4 +10,7 @@
 
 @interface INAddRemoveTagsChange : INModelChange
 
+- (NSMutableArray *)tagIDsToAdd;
+- (NSMutableArray *)tagIDsToRemove;
+
 @end

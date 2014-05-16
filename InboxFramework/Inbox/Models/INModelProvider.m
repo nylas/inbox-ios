@@ -10,6 +10,7 @@
 #import "INModelObject.h"
 #import "INModelResponseSerializer.h"
 #import "NSObject+AssociatedObjects.h"
+#import "INSyncEngine.h"
 
 @implementation INModelProviderChange : NSObject
 
@@ -62,7 +63,11 @@
 		_namespaceID = namespaceID;
 		_underlyingPredicate = predicate;
 		
-		_itemCachePolicy = INModelProviderCacheThenNetwork;
+        if ([[[INAPIManager shared] syncEngine] providesCompleteCacheOf: modelClass])
+            _itemCachePolicy = INModelProviderCacheOnly;
+        else
+            _itemCachePolicy = INModelProviderCacheThenNetwork;
+        
 		_itemRange = NSMakeRange(0, 1000);
 
 		// subscribe to updates about the local database cache. This creates
@@ -174,7 +179,7 @@
 
 - (NSDictionary *)queryParamsForPredicate:(NSPredicate*)predicate
 {
-	return @{@"limit":@"10000"};
+	return @{@"limit":@(_itemRange.length), @"offset":@(_itemRange.location)};
 }
 
 #pragma mark Receiving Updates from the Database

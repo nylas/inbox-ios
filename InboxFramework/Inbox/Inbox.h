@@ -22,5 +22,7 @@
 #import "INModelChange.h"
 #import "INAddRemoveTagsChange.h"
 #import "INSaveDraftChange.h"
+#import "INSyncEngine.h"
+#import "INModelResponseSerializer.h"
 
 #endif
