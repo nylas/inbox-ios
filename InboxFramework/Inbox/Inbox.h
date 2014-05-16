@@ -19,5 +19,8 @@
 #import "INContact.h"
 #import "INNamespace.h"
 #import "INTag.h"
+#import "INModelChange.h"
+#import "INAddRemoveTagsChange.h"
+#import "INSaveDraftChange.h"
 
 #endif

@@ -10,7 +10,7 @@
 #import "INAPIManager.h"
 
 @class FMDatabase;
-@class INAPIOperation;
+@class INModelChange;
 
 static NSString * INModelObjectChangedNotification = @"model_changed";
 
@@ -19,9 +19,6 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  core functionality related to object serialization and is intended to be subclassed.
 */
 @interface INModelObject : NSObject <NSCoding>
-{
-	NSDictionary * _precommitResourceDictionary;
-}
 
 @property (nonatomic, strong) NSString * ID;
 @property (nonatomic, strong) NSString * namespaceID;
@@ -41,6 +38,8 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  UI accordingly. */
 + (id)instanceWithID:(NSString*)ID;
 
+
+- (BOOL)hasSelfAssignedID;
 
 /** @name Resource Representation */
 
@@ -77,29 +76,6 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  */
 - (void)reload:(ErrorBlock)callback;
 
-/**
- Open an update block for saving changes to the object. Changes made to models should
- always be done within an update block so that changes rejected upstream can be properly
- restored.
- */
-- (void)beginUpdates;
-
-- (void)rollbackUpdates;
-
-
-/**
- Save the model to the server. This method may be overriden in subclasses. The
- default implementation does a PUT to the APIPath for objects with IDs, and a POST
- to the APIPath (without an ID) for new objects.
- 
- Note that -commitUpdates is eventually persistent. The save operation may be held in queue
- until network connectivity is available.
- 
- @return An INAPIOperation that you can use to track the progress of the save operation.
- INAPIOperation's are a subclass of AFHTTPRequestOperation, so you can add completion
- blocks, etc.
- */
-- (INAPIOperation *)commitUpdates;
 
 
 /** @name Override Points & Subclassing Support */

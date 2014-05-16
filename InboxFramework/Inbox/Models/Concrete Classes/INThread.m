@@ -40,11 +40,6 @@
 	return tags;
 }
 
-- (NSArray*)tagIDs
-{
-	return @[@"unread", @"inbox"];
-}
-
 - (BOOL)hasTagWithID:(NSString*)ID
 {
 	return [[self tagIDs] containsObject: ID];

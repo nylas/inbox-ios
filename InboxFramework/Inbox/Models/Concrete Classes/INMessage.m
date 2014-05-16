@@ -39,6 +39,8 @@
 
 - (INThread*)thread
 {
+    if (!_threadID)
+        return nil;
     return [INThread instanceWithID: [self threadID]];
 }
 

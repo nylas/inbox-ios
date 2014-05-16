@@ -13,7 +13,7 @@
 static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
 static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
 
-@class INAPIOperation;
+@class INModelChange;
 @class INModelObject;
 
 typedef void (^ ResultsBlock)(NSArray * objects);
@@ -38,7 +38,11 @@ typedef void (^ VoidBlock)();
 @interface INAPIManager : AFHTTPRequestOperationManager
 {
 	NSArray * _namespaces;
+    NSMutableArray * _changeQueue;
+    int _changesInProgress;
 }
+
+@property (nonatomic, assign) BOOL changeQueueSuspended;
 
 + (INAPIManager *)shared;
 
@@ -48,7 +52,10 @@ typedef void (^ VoidBlock)();
 
  @param operation The INAPIOperation to be performed.
 */
-- (void)queueAPIOperation:(INAPIOperation *)operation;
+- (void)queueChange:(INModelChange *)change;
+
+- (void)setChangeQueueSuspended:(BOOL)suspended;
+
 
 #pragma Authentication
 

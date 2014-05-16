@@ -7,7 +7,7 @@
 //
 
 #import "INAPIManager.h"
-#import "INAPIOperation.h"
+#import "INModelChange.h"
 #import "INNamespace.h"
 #import "INModelResponseSerializer.h"
 #import "INDatabaseManager.h"
@@ -44,7 +44,7 @@ static void initialize_INAPIManager() {
 {
 	self = [super initWithBaseURL: API_URL];
 	if (self) {
-        [[self operationQueue] setMaxConcurrentOperationCount: 1]; // for testing
+        [[self operationQueue] setMaxConcurrentOperationCount: 5];
 		[self setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments]];
 		[self setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
 		[self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
@@ -55,12 +55,12 @@ static void initialize_INAPIManager() {
 		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [API_URL host]];
 		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 			BOOL hasConnection = (status == AFNetworkReachabilityStatusReachableViaWiFi) || (status == AFNetworkReachabilityStatusReachableViaWWAN);
-			BOOL hasSuspended = [__self.operationQueue isSuspended];
+			BOOL hasSuspended = __self.changeQueueSuspended;
             
 			if (hasConnection && hasSuspended)
-				[__self setOperationsSuspended: NO];
+				[__self setChangeQueueSuspended: NO];
 			else if (!hasConnection && !hasSuspended)
-				[__self setOperationsSuspended: YES];
+				[__self setChangeQueueSuspended: YES];
 		}];
 		[self.reachabilityManager startMonitoring];
 
@@ -70,102 +70,94 @@ static void initialize_INAPIManager() {
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
             [self fetchNamespaces: NULL];
         }
-        
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveOperations) name:UIApplicationWillTerminateNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(operationFinished:) name:AFNetworkingOperationDidFinishNotification object:nil];
-		[self loadOperations];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadChangeQueue];
+        });
     }
 	return self;
 }
 
-- (void)loadOperations
+- (void)loadChangeQueue
 {
-	NSArray * operations = [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE];
+    _changeQueue = [NSMutableArray array];
+    [_changeQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
 
-	// restore only INAPIOperations
-	for (INAPIOperation * operation in operations)
-		if ([operation isKindOfClass:[INAPIOperation class]])
-			[self queueAPIOperation:operation];
+	for (INModelChange * change in _changeQueue)
+        [self tryStartChange: change];
 	
-	NSLog(@"Restored (%lu) pending operations from disk.", (unsigned long)self.operationQueue.operationCount);
+    [self describeChangeQueue];
 }
 
-- (void)saveOperations
+- (void)saveChangeQueue
 {
-	NSArray * operations = self.operationQueue.operations;
-	if (![NSKeyedArchiver archiveRootObject:operations toFile:OPERATIONS_FILE])
-		NSLog(@"Writing operations to disk failed? Path may be invalid.");
-	else
-		NSLog(@"Wrote (%lu) operations to disk.", (unsigned long)self.operationQueue.operationCount);
+	if (![NSKeyedArchiver archiveRootObject:_changeQueue toFile:OPERATIONS_FILE])
+		NSLog(@"Writing pending changes to disk failed? Path may be invalid.");
 }
 
-- (void)setOperationsSuspended:(BOOL)suspended
+- (void)setChangeQueueSuspended:(BOOL)suspended
 {
-	[self.operationQueue setSuspended: suspended];
-	if (suspended)
-		NSLog(@"Suspended operation queue.");
-	else
-		NSLog(@"Resumed operation queue.");
+    NSLog(@"Change processing is %@.", (suspended ? @"off" : @"on"));
+
+    _changeQueueSuspended = suspended;
+	if (!suspended) {
+        for (INModelChange * change in _changeQueue)
+            [self tryStartChange: change];
+    }
 }
 
-- (void)queueAPIOperation:(INAPIOperation *)operation
+- (void)queueChange:(INModelChange *)change
 {
-    if (!operation.responseSerializer)
-        operation.responseSerializer = self.responseSerializer;
-	operation.shouldUseCredentialStorage = self.shouldUseCredentialStorage;
-	operation.credential = self.credential;
-	operation.securityPolicy = self.securityPolicy;
+    [_changeQueue addObject: change];
 
-	// does this operation "squash" any other operations? For example, a previous
-	// "save" on the same message that hasn't been performed yet? If so, replace those.
-	// This avoids the scenario where two PUTs to the same URL run concurrently and
-	// produce an undefined end state.
-	NSOperationQueue * queue = self.operationQueue;
-	for (NSInteger ii = [queue operationCount] - 1; ii >= 0; ii--) {
-		INAPIOperation * existing = [[queue operations] objectAtIndex:ii];
-		if ([existing isCancelled] || [existing isExecuting] || [existing isFinished])
-			continue;
-		if (![existing isKindOfClass: [INAPIOperation class]])
-			continue;
-			
-		if ([operation invalidatesPreviousQueuedOperation:existing]) {
-			[operation setModelRollbackDictionary: [existing modelRollbackDictionary]];
-			[existing cancel];
-		}
-	}
+    if (![change dependentOnChangesIn: _changeQueue]) {
+        [change applyLocally];
+        [self tryStartChange: change];
+    }
 
-	[self.operationQueue addOperation:operation];
+    [self describeChangeQueue];
+    [self saveChangeQueue];
 }
 
-- (void)operationFinished:(NSNotification*)notif
+- (void)describeChangeQueue
 {
-	INAPIOperation * operation = [notif object];
-	NSInteger code = [[operation response] statusCode];
-	
-	if (![operation isKindOfClass: [INAPIOperation class]])
-		return;
-		
-	// success
-	if ((code >= 200) && (code <= 204)) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:INAPIOperationCompleteNotification object:operation userInfo:@{@"success": @(YES)}];
-	
-	// no connection, server error / unavailable, use proxy, proxy auth required, request timeout
-	} else if ((code == 0) || (code >= 500) || (code == 305) || (code == 407) || (code == 408)) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:INAPIOperationCompleteNotification object:operation userInfo:@{@"success": @(NO)}];
-
-		// We received an error that indicates future API calls will fail too.
-		// Pause the operations queue and add this operation to it again.
-		[self setOperationsSuspended: YES];
-		[self.operationQueue addOperation: [operation copy]];
-		
-	// unknown error
-	} else {
-		// For some reason, we reached inbox and it rejected this operation. To maintain the consistency
-		// of our cache, roll back the operation.
-		NSLog(@"The server rejected %@ %@. Response code %d. To maintain the cache consistency, the update is being rolled back.", [[operation request] HTTPMethod], [[operation request] URL], code);
-		[(INAPIOperation*)operation rollback];
-	}
+    NSLog(@" ------ Change Queue (%d) ------", _changeQueue.count);
+    NSLog(@"%@", [_changeQueue description]);
 }
+    
+- (BOOL)tryStartChange:(INModelChange *)change
+{
+    if (_changesInProgress > 5)
+        return NO;
+    
+    if (_changeQueueSuspended)
+        return NO;
+    
+    if ([change dependentOnChangesIn: _changeQueue])
+        return NO;
+
+    if ([change inProgress])
+        return NO;
+    
+    _changesInProgress += 1;
+    [change startWithCallback: ^(INModelChange * change, BOOL finished) {
+        _changesInProgress -= 1;
+        
+        if (!finished) {
+            [self setChangeQueueSuspended: YES];
+
+        } else {
+            [_changeQueue removeObject: change];
+            for (INModelChange * change in _changeQueue)
+                if ([self tryStartChange: change])
+                    break;
+        }
+
+        [self describeChangeQueue];
+        [self saveChangeQueue];
+    }];
+    return YES;
+}
+
 
 #pragma Authentication
 

@@ -9,7 +9,7 @@
 #import "INModelObject.h"
 #import "INModelObject+Uniquing.h"
 #import "INAPIManager.h"
-#import "INAPIOperation.h"
+#import "INModelChange.h"
 #import "NSObject+Properties.h"
 #import "NSString+FormatConversion.h"
 #import "NSDictionary+FormatConversion.h"
@@ -82,6 +82,11 @@
 		else if (value)
 			NSLog(@"Value of %@ (%@) does not comply to NSCoding.", key, [value description]);
 	}];
+}
+
+- (BOOL)hasSelfAssignedID
+{
+    return [self.ID hasSuffix:@"-selfdefined"];
 }
 
 #pragma mark Resource Representation
@@ -179,38 +184,6 @@
 	}];
 }
 
-- (void)beginUpdates
-{
-	_precommitResourceDictionary = [self resourceDictionary];
-}
-
-- (void)rollbackUpdates
-{
-    [self updateWithResourceDictionary: _precommitResourceDictionary];
-}
-
-- (INAPIOperation *)commitUpdates
-{
-	NSAssert(_precommitResourceDictionary, @"You need to call -beginUpdates before calling -commitUpdates to save a model.");
-
-    NSString * method = ([self ID] ? @"PUT" : @"POST");
-	INAPIOperation * operation = [INAPIOperation operationWithMethod:method forModel:self];
-    [operation setResponseSerializer: [[INModelResponseSerializer alloc] initWithModelClass: [self class]]];
-	[operation setModelRollbackDictionary: _precommitResourceDictionary];
-	[[INAPIManager shared] queueAPIOperation:operation];
-	[[INDatabaseManager shared] persistModel:self];
-	_precommitResourceDictionary = nil;
-	return operation;
-}
-
-- (INAPIOperation *)delete
-{
-	INAPIOperation * operation = [INAPIOperation operationWithMethod:@"DELETE" forModel:self];
-	[[INAPIManager shared] queueAPIOperation:operation];
-	[[INDatabaseManager shared] unpersistModel:self];
-	
-	return operation;
-}
 
 #pragma Override Points & Subclassing Support
 
