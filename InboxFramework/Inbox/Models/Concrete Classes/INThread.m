@@ -21,7 +21,7 @@
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"messages",
-		@"tagIDs": @"tags",
+		@"tagObjects": @"tags",
 		@"snippet": @"snippet"
 	}];
 	return mapping;
@@ -38,6 +38,11 @@
 	for (NSString * ID in [self tagIDs])
 		[tags addObject: [INTag tagWithID: ID]];
 	return tags;
+}
+
+- (NSArray*)tagIDs
+{
+    return [_tagObjects valueForKey: @"id"];
 }
 
 - (BOOL)hasTagWithID:(NSString*)ID

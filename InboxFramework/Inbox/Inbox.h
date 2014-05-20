@@ -9,6 +9,10 @@
 #ifndef InboxFramework_Inb_xh_h
 #define InboxFramework_Inb_xh_h
 
+/** If you're getting errors saying "Header could not be found," select the
+ header file in Xcode and make sure it's visibility is "Public" in the framework
+ build target.
+*/
 #import "INAPIManager.h"
 #import "INDatabaseManager.h"
 #import "INMessageProvider.h"
@@ -22,6 +26,7 @@
 #import "INModelChange.h"
 #import "INAddRemoveTagsChange.h"
 #import "INSaveDraftChange.h"
+#import "INDeleteDraftChange.h"
 #import "INSyncEngine.h"
 #import "INModelResponseSerializer.h"
 

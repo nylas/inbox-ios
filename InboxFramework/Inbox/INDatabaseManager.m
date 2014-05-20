@@ -216,6 +216,8 @@ static void initialize_INDatabaseManager() {
 	if (![self checkModelTable:[model class]])
 		return;
 	
+    [[model class] attachInstance: model];
+    
 	dispatch_async(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
 			[self writeModel:model toDatabase:db];

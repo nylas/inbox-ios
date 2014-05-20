@@ -231,7 +231,7 @@
 		NSMutableArray * changes = [NSMutableArray array];
 		
 		for (INModelObject * item in removedModels) {
-			NSInteger index = [allItems indexOfObjectIdenticalTo:item];
+			NSInteger index = [self.items indexOfObjectIdenticalTo:item];
 			[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
 		}
 
@@ -244,7 +244,10 @@
 		for (INModelObject * item in self.items) {
 			if ([allItemsInRange indexOfObjectIdenticalTo:item] == NSNotFound) {
 				NSInteger index = [self.items indexOfObjectIdenticalTo:item];
-				[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
+                BOOL alreadyRemoved = [removedModels containsObject:item];
+
+				if (!alreadyRemoved)
+                    [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
 			}
 		}
 

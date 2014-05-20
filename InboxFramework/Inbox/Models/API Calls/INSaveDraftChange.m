@@ -21,7 +21,16 @@
     NSError * error = nil;
     NSString * path = [NSString stringWithFormat:@"/n/%@/create_draft", [self.model namespaceID]];
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:[self.model resourceDictionary] error:&error];
+    
+    NSMutableDictionary * params = [[self.model resourceDictionary] mutableCopy];
+    INThread * thread = [(INMessage*)self.model thread];
+    
+    NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
+    [messageIDs removeObject: [self.model ID]];
+    if ([messageIDs count] > 1)
+        [params setObject:[thread ID] forKey:@"reply_to"];
+    
+    return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
@@ -46,21 +55,24 @@
 - (void)applyLocally
 {
     INMessage * message = (INMessage *)[self model];
-    [[INDatabaseManager shared] persistModel: message];
     
     // Until we're able to save the draft, it's orphaned because it has no thread.
     // In order to present it in the app and give it the draft tag, let's create a
     // thread with a self-assigned ID for it. We'll keep that thread object in sync
     // and when this operation succeeds we'll destroy it.
     INThread * thread = [message thread];
-    if (!thread) {
+    BOOL createThread = (thread == nil);
+    
+    if (createThread) {
         thread = [[INThread alloc] init];
         [thread setNamespaceID: [message namespaceID]];
         [thread setCreatedAt: [NSDate date]];
         [message setThreadID: [thread ID]];
     }
-    
-    if ([thread isUnsynced]) {
+
+    [[INDatabaseManager shared] persistModel: message];
+
+    if (createThread || [thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
         [thread setTagIDs: @[INTagIDDraft]];
