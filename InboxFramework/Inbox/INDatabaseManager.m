@@ -215,8 +215,6 @@ static void initialize_INDatabaseManager() {
 {
 	if (![self checkModelTable:[model class]])
 		return;
-	
-    [[model class] attachInstance: model];
     
 	dispatch_async(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
@@ -282,6 +280,8 @@ static void initialize_INDatabaseManager() {
 - (void)writeModel:(INModelObject *)model toDatabase:(FMDatabase *)db
 {
 	NSAssert([model ID] != nil, @"Unsaved models should not be written to the cache.");
+
+    [[model class] attachInstance: model];
 
 	if ([model respondsToSelector:@selector(beforePersist:)])
 		[model beforePersist: db];

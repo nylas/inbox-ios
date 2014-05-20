@@ -32,7 +32,11 @@
 
 - (UIColor*)color
 {
-	return [UIColor colorWithWhite:0.6 alpha:1];
+	NSInteger count = 0;
+	for (int ii = 0; ii < [[self name] length]; ii ++)
+		count += [[self name] characterAtIndex:ii];
+	
+	return [UIColor colorWithHue:(count % 1000) / 1000.0 saturation:0.8 brightness:0.6 alpha:1];
 }
 
 @end
