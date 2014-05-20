@@ -16,12 +16,13 @@
 #import "INPredicateToSQLConverter.h"
 #import "INDatabaseManager.h"
 #import "INModelResponseSerializer.h"
+#import "INNamespace.h"
 
 @implementation INModelObject
 
 #pragma Getting Instances
 
-+ (id)instanceWithID:(NSString*)ID
++ (id)instanceWithID:(NSString*)ID inNamespaceID:(NSString*)namespaceID
 {
 	// do we have an instance in memory that matches this ID?
 	INModelObject __block * match = [self attachedInstanceMatchingID: ID createIfNecessary:NO didCreate:NULL];
@@ -34,6 +35,7 @@
 	if (!match) {
 		match = [[self alloc] init];
 		[match setID: ID];
+        [match setNamespaceID: namespaceID];
 	}
 	
 	return match;
@@ -65,7 +67,8 @@
 			return YES;
 		}];
 
-		[self setup];
+        _isDataAvailable = YES;
+        [self setup];
 	}
 	return self;
 }
@@ -84,9 +87,19 @@
 	}];
 }
 
-- (BOOL)hasSelfAssignedID
+- (BOOL)isUnsynced
 {
     return [self.ID hasSuffix:@"-selfdefined"];
+}
+
+- (BOOL)isDataAvailable
+{
+    return _isDataAvailable;
+}
+
+- (INNamespace*)namespace
+{
+    return [INNamespace instanceWithID:[self namespaceID] inNamespaceID:nil];
 }
 
 #pragma mark Resource Representation
@@ -145,9 +158,6 @@
 	if ([json isKindOfClass:[NSDictionary class]] == NO)
 		NSAssert(false, @"updateWithResourceDictionary called with json that is not a dictionary");
 	
-	if ([json objectForKey: @"id"] && [self ID] && ([[self ID] isEqualToString: [json objectForKey: @"id"]] == NO))
-		NSAssert(false, @"Updating with resource dictionary %@ would change the ID of the model!", json);
-		
 	NSDictionary * mapping = [[self class] resourceMapping];
 	NSArray * properties = [mapping allKeys];
 	
@@ -160,7 +170,8 @@
 		return YES;
 	}];
 
-	[[NSNotificationCenter defaultCenter] postNotificationName:INModelObjectChangedNotification object:self];
+    _isDataAvailable = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:INModelObjectChangedNotification object:self];
 }
 
 - (NSString *)description

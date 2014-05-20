@@ -17,6 +17,8 @@ static NSString * INTagIDSent = @"sent";
 
 @interface INTag : INModelObject
 
++ (instancetype)tagWithID:(NSString*)ID;
+
 - (NSString*)name;
 - (UIColor*)color;
 

@@ -12,6 +12,7 @@
 
 static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
 static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
+static NSString * INChangeQueueChangedNotification = @"INChangeQueueChangedNotification";
 
 @class INModelChange;
 @class INModelObject;
@@ -50,6 +51,7 @@ typedef void (^ VoidBlock)();
 
 + (INAPIManager *)shared;
 
+- (NSArray*)changeQueue;
 /**
  Queue the API operation provided. API operations are persisted to disk until they are
  completed and automatically restarted after network reachability changes occur. 

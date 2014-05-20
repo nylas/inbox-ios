@@ -287,7 +287,8 @@
 		NSMutableArray * changes = [NSMutableArray array];
 		for (INModelObject * item in models) {
 			NSInteger index = [self.items indexOfObjectIdenticalTo:item];
-			[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
+            if (index != NSNotFound)
+                [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
 		}
 
 		self.items = newItems;

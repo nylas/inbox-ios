@@ -11,6 +11,11 @@
 
 @implementation INTag
 
++ (instancetype)tagWithID:(NSString*)ID
+{
+    return [self instanceWithID: ID inNamespaceID: nil];
+}
+
 + (NSString *)resourceAPIName
 {
 	return @"tags";

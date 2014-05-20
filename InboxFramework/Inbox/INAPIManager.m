@@ -85,6 +85,7 @@ static void initialize_INAPIManager() {
 	for (INModelChange * change in _changeQueue)
         [self tryStartChange: change];
 	
+    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
     [self describeChangeQueue];
 }
 
@@ -94,11 +95,18 @@ static void initialize_INAPIManager() {
 		NSLog(@"Writing pending changes to disk failed? Path may be invalid.");
 }
 
+- (NSArray*)changeQueue
+{
+    return [_changeQueue copy];
+}
+
 - (void)setChangeQueueSuspended:(BOOL)suspended
 {
     NSLog(@"Change processing is %@.", (suspended ? @"off" : @"on"));
 
     _changeQueueSuspended = suspended;
+    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
+
 	if (!suspended) {
         for (INModelChange * change in _changeQueue)
             [self tryStartChange: change];
@@ -114,6 +122,7 @@ static void initialize_INAPIManager() {
         [self tryStartChange: change];
     }
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
     [self describeChangeQueue];
     [self saveChangeQueue];
 }
@@ -152,6 +161,7 @@ static void initialize_INAPIManager() {
                     break;
         }
 
+        [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
         [self describeChangeQueue];
         [self saveChangeQueue];
     }];

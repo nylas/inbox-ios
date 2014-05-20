@@ -42,7 +42,9 @@
 	if (self) {
         Class modelClass = NSClassFromString([aDecoder decodeObjectForKey: @"modelClass"]);
         NSString * modelID = [aDecoder decodeObjectForKey: @"modelID"];
-		_model = [modelClass instanceWithID: modelID];
+        NSString * modelNamespaceID = [aDecoder decodeObjectForKey: @"modelNamespaceID"];
+		_model = [modelClass instanceWithID: modelID inNamespaceID: modelNamespaceID];
+
         _ID = [aDecoder decodeObjectForKey:@"ID"];
         _data = [aDecoder decodeObjectForKey: @"data"];
         _dependencies = [aDecoder decodeObjectForKey:@"dependencies"];
@@ -54,6 +56,7 @@
 {
 	[aCoder encodeObject:NSStringFromClass([_model class]) forKey:@"modelClass"];
     [aCoder encodeObject:[_model ID] forKey:@"modelID"];
+    [aCoder encodeObject:[_model namespaceID] forKey:@"modelNamespaceID"];
     [aCoder encodeObject:_ID forKey:@"ID"];
     [aCoder encodeObject:_data forKey:@"data"];
     [aCoder encodeObject:_dependencies forKey:@"dependencies"];

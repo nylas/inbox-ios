@@ -15,7 +15,10 @@
 
 - (NSURLRequest *)buildRequest
 {
-	NSError * error = nil;
+    NSAssert(self.model, @"INSaveDraftChange asked to buildRequest with no model!");
+	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
+	
+    NSError * error = nil;
     NSString * path = [NSString stringWithFormat:@"/n/%@/create_draft", [self.model namespaceID]];
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
 	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:[self.model resourceDictionary] error:&error];
@@ -31,9 +34,13 @@
     
     // if we've orphaned a temporary thread object, go ahead and clean it up
     if ([[oldThread ID] isEqualToString: [[message thread] ID]] == NO) {
-        if ([oldThread hasSelfAssignedID])
+        if ([oldThread isUnsynced])
             [[INDatabaseManager shared] unpersistModel: oldThread];
     }
+    
+    // if we've created a new thread, fetch it so we have more than it's ID
+    if ([[message thread] namespaceID] == nil)
+        [[message thread] reload: NULL];
 }
 
 - (void)applyLocally
@@ -49,15 +56,18 @@
     if (!thread) {
         thread = [[INThread alloc] init];
         [thread setNamespaceID: [message namespaceID]];
+        [thread setCreatedAt: [NSDate date]];
         [message setThreadID: [thread ID]];
     }
     
-    if ([thread hasSelfAssignedID]) {
+    if ([thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
         [thread setTagIDs: @[INTagIDDraft]];
         [thread setSnippet: [message body]];
         [thread setMessageIDs: @[[message ID]]];
+        [thread setUpdatedAt: [NSDate date]];
+        [thread setLastMessageDate: [NSDate date]];
         [[INDatabaseManager shared] persistModel: thread];
     }
 }

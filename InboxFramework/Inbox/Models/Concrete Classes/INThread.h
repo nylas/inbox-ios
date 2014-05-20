@@ -27,5 +27,6 @@
 - (BOOL)hasTagWithID:(NSString*)ID;
 
 - (INModelProvider*)newMessageProvider;
+- (INMessage*)currentDraft;
 
 @end

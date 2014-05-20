@@ -11,6 +11,7 @@
 
 @class FMDatabase;
 @class INModelChange;
+@class INNamespace;
 
 static NSString * INModelObjectChangedNotification = @"model_changed";
 
@@ -19,12 +20,13 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  core functionality related to object serialization and is intended to be subclassed.
 */
 @interface INModelObject : NSObject <NSCoding>
-
+{
+    BOOL _isDataAvailable;
+}
 @property (nonatomic, strong) NSString * ID;
 @property (nonatomic, strong) NSString * namespaceID;
 @property (nonatomic, strong) NSDate * createdAt;
 @property (nonatomic, strong) NSDate * updatedAt;
-
 
 #pragma Getting Instances
 
@@ -36,10 +38,13 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  retrieved from cache. If no copy of the object is available, an empty instance is returned.
  Subscribe to this instance to be notified when it's data becomes available and update your
  UI accordingly. */
-+ (id)instanceWithID:(NSString*)ID;
++ (id)instanceWithID:(NSString*)ID inNamespaceID:(NSString*)namespaceID;
 
+- (BOOL)isUnsynced;
 
-- (BOOL)hasSelfAssignedID;
+- (BOOL)isDataAvailable;
+
+- (INNamespace*)namespace;
 
 /** @name Resource Representation */
 

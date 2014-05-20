@@ -30,12 +30,15 @@
     if ([self.model isKindOfClass: [INThread class]])
         return (INThread*)self.model;
     if ([self.model isKindOfClass: [INMessage class]])
-        return [INThread instanceWithID: [(INMessage*)self.model threadID]];
+        return [(INMessage*)self.model thread];
     return nil;
 }
 
 - (NSURLRequest *)buildRequest
 {
+    NSAssert(self.model, @"INSaveDraftChange asked to buildRequest with no model!");
+	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
+
 	NSError * error = nil;
     NSString * path = [[self thread] resourceAPIPath];
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];

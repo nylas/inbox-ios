@@ -36,7 +36,7 @@
 {
 	NSMutableArray * tags = [NSMutableArray array];
 	for (NSString * ID in [self tagIDs])
-		[tags addObject: [INTag instanceWithID: ID]];
+		[tags addObject: [INTag tagWithID: ID]];
 	return tags;
 }
 
@@ -48,6 +48,11 @@
 - (INModelProvider*)newMessageProvider
 {
 	return [[INMessageProvider alloc] initWithThreadID: [self ID] andNamespaceID:[self namespaceID]];
+}
+
+- (INMessage*)currentDraft
+{
+    return [INMessage instanceWithID:[[self messageIDs] lastObject] inNamespaceID:[self namespaceID]];
 }
 
 #pragma mark Database

@@ -9,6 +9,7 @@
 #import "INModelObject.h"
 
 @class INThread;
+@class INNamespace;
 
 @interface INMessage : INModelObject
 
@@ -18,6 +19,10 @@
 @property (nonatomic, strong) NSString * threadID;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
+@property (nonatomic, assign) BOOL isDraft;
+
+- (id)initAsDraftIn:(INNamespace*)namespace;
+- (id)initAsDraftIn:(INNamespace*)namespace inReplyTo:(INThread*)thread;
 
 - (INThread*)thread;
 
