@@ -20,7 +20,6 @@
 @property (nonatomic, strong) NSDate * lastMessageDate;
 @property (nonatomic, strong) NSArray * messageIDs;
 @property (nonatomic, strong) NSArray * tagIDs;
-@property (nonatomic, strong) NSArray * tagObjects;
 @property (nonatomic, assign) BOOL unread;
 
 - (NSArray*)tags;

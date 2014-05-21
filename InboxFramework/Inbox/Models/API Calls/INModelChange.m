@@ -96,7 +96,7 @@
         NSURLRequest * request = [operation request];
         NSInteger code = [[operation response] statusCode];
 
-        if ((code == 0) || (code >= 500) || (code == 305) || (code == 407) || (code == 408)) {
+        if ((code == 0) || (code >= 500) || (code == 305) || (code == 407) || (code == 408) || (code == 404) || (code == 405)) {
             // no connection, server error / unavailable, use proxy, proxy auth required, request timeout
             // We received an error that indicates future API calls will fail too.
             // Pause the operations queue and add this operation to it again.

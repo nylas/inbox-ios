@@ -281,8 +281,6 @@ static void initialize_INDatabaseManager() {
 {
 	NSAssert([model ID] != nil, @"Unsaved models should not be written to the cache.");
 
-    [[model class] attachInstance: model];
-
 	if ([model respondsToSelector:@selector(beforePersist:)])
 		[model beforePersist: db];
 
@@ -348,6 +346,11 @@ static void initialize_INDatabaseManager() {
     } else {
 		if ([model respondsToSelector:@selector(afterPersist:)])
 			[model afterPersist: db];
+        
+        [[model class] attachInstance: model];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:INModelObjectChangedNotification object:model];
+        });
 	}
 }
 

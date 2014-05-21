@@ -21,7 +21,7 @@
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"messages",
-		@"tagObjects": @"tags",
+		@"tagIDs": @"tags",
 		@"snippet": @"snippet"
 	}];
 	return mapping;
@@ -40,9 +40,20 @@
 	return tags;
 }
 
-- (NSArray*)tagIDs
+- (void)updateWithResourceDictionary:(NSDictionary *)dict
 {
-    return [_tagObjects valueForKey: @"id"];
+    [super updateWithResourceDictionary:dict];
+    if ([[[self tagIDs] firstObject] isKindOfClass: [NSDictionary class]])
+        _tagIDs = [_tagIDs valueForKey: @"id"];
+}
+
+- (void)setTagIDs:(NSArray *)tagIDs
+{
+    NSMutableArray * unique = [NSMutableArray array];
+    for (NSString * ID in tagIDs)
+        if (![unique containsObject: ID])
+            [unique addObject: ID];
+    _tagIDs = unique;
 }
 
 - (BOOL)hasTagWithID:(NSString*)ID
@@ -57,7 +68,24 @@
 
 - (INMessage*)currentDraft
 {
-    return [INMessage instanceWithID:[[self messageIDs] lastObject] inNamespaceID:[self namespaceID]];
+    // TODO may not always get the right item if data is not loaded!
+    // This should be replaced by a draft_id on the thread that points to the
+    // draft message at all times.
+    
+    if (![self hasTagWithID: INTagIDDraft])
+        return nil;
+    
+    INMessage * __block draft = nil;
+    [[INDatabaseManager shared] selectModelsOfClassSync:[INMessage class] withQuery:@"SELECT * FROM INMessage WHERE thread = :thread" andParameters:@{@"thread":[self ID]} andCallback:^(NSArray *objects) {
+        for (INMessage * message in objects)
+            if ([message isDraft])
+                draft = message;
+    }];
+    
+    if (!draft)
+        draft = [INMessage instanceWithID:[[self messageIDs] lastObject] inNamespaceID:[self namespaceID]];
+    
+    return draft;
 }
 
 #pragma mark Database

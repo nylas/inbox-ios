@@ -48,7 +48,7 @@
     }
     
     // if we've created a new thread, fetch it so we have more than it's ID
-    if ([[message thread] namespaceID] == nil)
+    if (![[message thread] isDataAvailable])
         [[message thread] reload: NULL];
 }
 
@@ -70,18 +70,23 @@
         [message setThreadID: [thread ID]];
     }
 
-    [[INDatabaseManager shared] persistModel: message];
-
-    if (createThread || [thread isUnsynced]) {
+    if ([thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
-        [thread setTagIDs: @[INTagIDDraft]];
         [thread setSnippet: [message body]];
         [thread setMessageIDs: @[[message ID]]];
         [thread setUpdatedAt: [NSDate date]];
         [thread setLastMessageDate: [NSDate date]];
-        [[INDatabaseManager shared] persistModel: thread];
     }
+    
+    if ([thread hasTagWithID: INTagIDDraft] == NO) {
+        NSMutableArray * tags = [[thread tagIDs] mutableCopy];
+        [tags addObject: INTagIDDraft];
+        [thread setTagIDs: tags];
+    }
+    
+    [[INDatabaseManager shared] persistModel: message];
+    [[INDatabaseManager shared] persistModel: thread];
 }
 
 @end

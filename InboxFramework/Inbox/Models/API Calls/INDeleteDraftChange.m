@@ -10,6 +10,7 @@
 
 @implementation INDeleteDraftChange
 
+
 - (NSURLRequest *)buildRequest
 {
     NSAssert(self.model, @"INDeleteDraftChange asked to buildRequest with no model!");
@@ -17,7 +18,7 @@
 	
     NSError * error = nil;
     NSString * url = [[NSURL URLWithString:[self.model resourceAPIPath] relativeToURL:[INAPIManager shared].baseURL] absoluteString];
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:[self.model resourceDictionary] error:&error];
+	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:nil error:&error];
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
@@ -50,11 +51,19 @@
         [messageIDs removeObject: [self.model ID]];
         
         if ([messageIDs count]) {
+            // remove the message from the message IDs
             [thread setMessageIDs: messageIDs];
+
+            // remove the draft tag from the tag IDs
+            NSMutableArray * tagIDs = [[thread tagIDs] mutableCopy];
+            [tagIDs removeObject: INTagIDDraft];
+            [thread setTagIDs: tagIDs];
+            
+            // save the thread
             [[INDatabaseManager shared] persistModel: thread];
         } else {
+            // destroy the thread
             [[INDatabaseManager shared] unpersistModel: thread];
-
         }
     }
 }
@@ -65,23 +74,19 @@
     [[INDatabaseManager shared] persistModel: message];
     
     INThread * thread = [message thread];
-
     if ([thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
         [thread setTagIDs: @[INTagIDDraft]];
         [thread setSnippet: [message body]];
-        [thread setMessageIDs: @[[message ID]]];
         [thread setUpdatedAt: [NSDate date]];
         [thread setLastMessageDate: [NSDate date]];
     }
     
-    if (thread) {
-        NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
-        [messageIDs addObject: [self.model ID]];
-        [thread setMessageIDs: messageIDs];
-        [[INDatabaseManager shared] persistModel: thread];
-    }
+    NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
+    [messageIDs addObject: [self.model ID]];
+    [thread setMessageIDs: messageIDs];
+    [[INDatabaseManager shared] persistModel: thread];
 }
 
 @end

@@ -25,6 +25,7 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 
 + (instancetype)operationForModel:(INModelObject *)model;
 
+- (id)initWithModel:(INModelObject*)model;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 

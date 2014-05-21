@@ -43,6 +43,8 @@
 {
     NSAssert(namespace, @"initAsDraftIn: called with a nil namespace.");
     INMessage * m = [[INMessage alloc] init];
+    [m setIsDraft: YES];
+    [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
     [m setNamespaceID: [namespace ID]];
     return m;
 }
@@ -58,6 +60,8 @@
             [recipients addObject: recipient];
     
     [m setTo: recipients];
+    [m setIsDraft: YES];
+    [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
     [m setSubject: thread.subject];
     [m setThreadID: [thread ID]];
     
