@@ -27,8 +27,6 @@
 {
     if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftChange class]])
         return YES;
-    if ([other isKindOfClass: [INDeleteDraftChange class]] && [[(INMessage*)[other model] thread] isEqual: [(INMessage*)self.model thread]])
-        return YES;
     return NO;
 }
 
@@ -82,7 +80,6 @@
     // and when this operation succeeds we'll destroy it.
     INThread * thread = [message thread];
 
-    BOOL replaceThreadDraft = ([thread currentDraft] && ([thread currentDraft] != message));
     BOOL createThread = (thread == nil);
     
     if (createThread) {

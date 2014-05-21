@@ -110,6 +110,7 @@
             // no connection, server error / unavailable, use proxy, proxy auth required, request timeout
             // We received an error that indicates future API calls will fail too.
             // Pause the operations queue and add this operation to it again.
+            NSLog(@"The server returned response code %d for %@ %@. Change %@ failed.", code, [request HTTPMethod], [request URL], NSStringFromClass([self class]));
             callback(self, NO);
         } else {
             // For some reason, we reached inbox and it rejected this operation. To maintain the consistency

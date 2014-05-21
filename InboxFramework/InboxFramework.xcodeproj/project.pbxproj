@@ -20,6 +20,8 @@
 		438BEA22192C35C900E5C67D /* INSendDraftChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA20192C35C900E5C67D /* INSendDraftChange.m */; };
 		438BEA25192C364100E5C67D /* INArchiveThreadChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA23192C364100E5C67D /* INArchiveThreadChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		438BEA26192C364100E5C67D /* INArchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA24192C364100E5C67D /* INArchiveThreadChange.m */; };
+		43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */; };
 		43A1E28A191C02A800EF660E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF123C191AF2E70043E2E6 /* XCTest.framework */; };
 		43A1E28B191C02A800EF660E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF122E191AF2E70043E2E6 /* Foundation.framework */; };
 		43A1E28D191C02A800EF660E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A1E28C191C02A800EF660E /* UIKit.framework */; };
@@ -101,6 +103,8 @@
 		438BEA20192C35C900E5C67D /* INSendDraftChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSendDraftChange.m; sourceTree = "<group>"; };
 		438BEA23192C364100E5C67D /* INArchiveThreadChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INArchiveThreadChange.h; sourceTree = "<group>"; };
 		438BEA24192C364100E5C67D /* INArchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INArchiveThreadChange.m; sourceTree = "<group>"; };
+		43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUnarchiveThreadChange.h; sourceTree = "<group>"; };
+		43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUnarchiveThreadChange.m; sourceTree = "<group>"; };
 		43A1E27A191C02A800EF660E /* Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E289191C02A800EF660E /* InboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E28C191C02A800EF660E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -271,6 +275,8 @@
 				435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */,
 				438BEA23192C364100E5C67D /* INArchiveThreadChange.h */,
 				438BEA24192C364100E5C67D /* INArchiveThreadChange.m */,
+				43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */,
+				43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */,
 				438BEA1F192C35C900E5C67D /* INSendDraftChange.h */,
 				438BEA20192C35C900E5C67D /* INSendDraftChange.m */,
 			);
@@ -354,6 +360,7 @@
 				43A1E302191C049A00EF660E /* INThread.h in Headers */,
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
 				43A1E2FC191C049A00EF660E /* INTag.h in Headers */,
+				43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
 				43A1E2EA191C049A00EF660E /* INModelResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
@@ -569,6 +576,7 @@
 				43A1E301191C049A00EF660E /* INNamespace.m in Sources */,
 				43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */,
 				43A1E2E5191C049A00EF660E /* NSObject+Properties.m in Sources */,
+				43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */,
 				438BEA26192C364100E5C67D /* INArchiveThreadChange.m in Sources */,
 				43A1E2FB191C049A00EF660E /* INContact.m in Sources */,
 				438BEA22192C35C900E5C67D /* INSendDraftChange.m in Sources */,
