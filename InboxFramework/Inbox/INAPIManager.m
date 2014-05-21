@@ -232,10 +232,12 @@ static void initialize_INAPIManager() {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey: AUTH_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+	[_changeQueue removeAllObjects];
     [[self requestSerializer] clearAuthorizationHeader];
     [[INDatabaseManager shared] resetDatabase];
     _namespaces = nil;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
 }
