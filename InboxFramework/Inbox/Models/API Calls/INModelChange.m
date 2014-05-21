@@ -47,7 +47,6 @@
 
         _ID = [aDecoder decodeObjectForKey:@"ID"];
         _data = [aDecoder decodeObjectForKey: @"data"];
-        _dependencies = [aDecoder decodeObjectForKey:@"dependencies"];
 	}
 	return self;
 }
@@ -59,20 +58,11 @@
     [aCoder encodeObject:[_model namespaceID] forKey:@"modelNamespaceID"];
     [aCoder encodeObject:_ID forKey:@"ID"];
     [aCoder encodeObject:_data forKey:@"data"];
-    [aCoder encodeObject:_dependencies forKey:@"dependencies"];
 }
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"%@ on %@ <%p>\r     - in progress: %d\r     - dependencies: %@", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model, _inProgress, [_dependencies componentsJoinedByString:@", "]];
-}
-
-- (BOOL)dependentOnChangesIn:(NSArray*)others
-{
-    for (INModelChange * change in others)
-        if ([_dependencies containsObject: [change ID]])
-            return YES;
-    return NO;
+    return [NSString stringWithFormat:@"%@ on %@ <%p>\r     - in progress: %d\r", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model, _inProgress];
 }
 
 - (BOOL)canCancelPendingChange:(INModelChange*)other
@@ -85,11 +75,9 @@
     return YES;
 }
 
-- (void)addDependency:(INModelChange*)otherChange
+- (BOOL)dependentOnChangesIn:(NSArray*)others
 {
-    if (!_dependencies)
-        _dependencies = [NSMutableArray array];
-    [_dependencies addObject: [otherChange ID]];
+	return NO;
 }
 
 - (void)startWithCallback:(CallbackBlock)callback

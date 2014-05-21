@@ -154,7 +154,7 @@ static void initialize_INAPIManager() {
 
 - (void)describeChangeQueue
 {
-    NSLog(@" ------ Change Queue (%d) ------", _changeQueue.count);
+    NSLog(@" ------ Change Queue (%d) Suspended: %d ------", _changeQueue.count, _changeQueueSuspended);
     NSLog(@"%@", [_changeQueue description]);
 }
     

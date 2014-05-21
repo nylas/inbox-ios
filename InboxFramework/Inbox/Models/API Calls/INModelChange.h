@@ -14,9 +14,6 @@
 typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 
 @interface INModelChange : NSObject <NSCoding>
-{
-    NSMutableArray * _dependencies;
-}
 
 @property (nonatomic, strong) NSString * ID;
 @property (nonatomic, strong) INModelObject * model;
@@ -34,7 +31,6 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 - (BOOL)dependentOnChangesIn:(NSArray*)others;
 - (BOOL)canCancelPendingChange:(INModelChange*)other;
 - (BOOL)canStartAfterChange:(INModelChange*)other;
-- (void)addDependency:(INModelChange*)otherChange;
 
 - (void)applyLocally;
 - (void)rollbackLocally;

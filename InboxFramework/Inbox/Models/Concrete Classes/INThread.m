@@ -8,6 +8,8 @@
 
 #import "INThread.h"
 #import "INMessageProvider.h"
+#import "INArchiveThreadChange.h"
+#import "INUnarchiveThreadChange.h"
 #import "INTag.h"
 
 @implementation INThread
@@ -94,6 +96,20 @@
 + (NSArray *)databaseJoinTableProperties
 {
 	return @[@"tagIDs"];
+}
+
+#pragma mark Operations on Threads
+
+- (void)archive
+{
+	INArchiveThreadChange * archive = [INArchiveThreadChange operationForModel: self];
+    [[INAPIManager shared] queueChange: archive];
+}
+
+- (void)unarchive
+{
+	INUnarchiveThreadChange * unarchive = [INUnarchiveThreadChange operationForModel: self];
+    [[INAPIManager shared] queueChange: unarchive];
 }
 
 @end

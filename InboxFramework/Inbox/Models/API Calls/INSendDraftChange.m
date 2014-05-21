@@ -39,4 +39,13 @@
     return NO;
 }
 
+- (BOOL)dependentOnChangesIn:(NSArray*)others
+{
+	for (INModelChange * other in others) {
+		if ([other isKindOfClass: [INSaveDraftChange class]] && [[other model] isEqual: [self model]])
+			return YES;
+	}
+	return NO;
+}
+
 @end

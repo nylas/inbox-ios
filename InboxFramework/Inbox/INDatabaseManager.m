@@ -491,10 +491,8 @@ static void initialize_INDatabaseManager() {
 
         long __block result = NSNotFound;
         [_queue inDatabase:^(FMDatabase *db) {
-            NSDate * start = [NSDate date];
             NSString * sql = [NSString stringWithFormat: @"SELECT COUNT(1) as count FROM (SELECT 1 FROM %@ %@)", [klass databaseTableName], [converter SQLForPredicate:wherePredicate]];
             result = [db longForQuery: sql];
-            NSLog(@"Count took %f seconds.", [[NSDate date] timeIntervalSinceDate: start]);
         }];
         
         dispatch_async(dispatch_get_main_queue(), ^{

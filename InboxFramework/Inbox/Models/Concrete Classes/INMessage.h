@@ -26,4 +26,11 @@
 
 - (INThread*)thread;
 
+#pragma mark Operations on Drafts
+
+- (void)save;
+- (void)send;
+- (void)delete;
+
+
 @end

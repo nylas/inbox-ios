@@ -88,7 +88,7 @@
         [thread setCreatedAt: [NSDate date]];
         [message setThreadID: [thread ID]];
     }
-
+	
     if ([thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];

@@ -29,4 +29,9 @@
 - (INModelProvider*)newMessageProvider;
 - (INMessage*)currentDraft;
 
+
+#pragma mark Operations on Threads
+- (void)archive;
+- (void)unarchive;
+
 @end

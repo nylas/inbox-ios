@@ -10,6 +10,9 @@
 #import "INThread.h"
 #import "NSString+FormatConversion.h"
 #import "INNamespace.h"
+#import "INSaveDraftChange.h"
+#import "INSendDraftChange.h"
+#import "INDeleteDraftChange.h"
 
 @implementation INMessage
 
@@ -74,6 +77,32 @@
     if (!_threadID)
         return nil;
     return [INThread instanceWithID: [self threadID] inNamespaceID: [self namespaceID]];
+}
+
+#pragma mark Operations on Drafts
+
+- (void)save
+{
+	NSAssert([self isDraft], @"Only draft messages can be saved.");
+
+	INSaveDraftChange * save = [INSaveDraftChange operationForModel: self];
+	[[INAPIManager shared] queueChange: save];
+}
+
+- (void)send
+{
+	NSAssert([self isDraft], @"Only draft messages can be sent.");
+	
+	INSendDraftChange * send = [INSendDraftChange operationForModel: self];
+	[[INAPIManager shared] queueChange: send];
+}
+
+- (void)delete
+{
+	NSAssert([self isDraft], @"Only draft messages can be deleted.");
+
+	INDeleteDraftChange * delete = [INDeleteDraftChange operationForModel: self];
+	[[INAPIManager shared] queueChange: delete];
 }
 
 @end

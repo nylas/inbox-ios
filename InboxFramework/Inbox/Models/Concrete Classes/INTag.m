@@ -27,7 +27,7 @@
     NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDFlagged: @"Flagged", INTagIDDraft: @"Draft"};
     if ([localized objectForKey: self.ID])
         return [localized objectForKey: self.ID];
-    return self.ID;
+    return [self.ID capitalizedString];
 }
 
 - (UIColor*)color
