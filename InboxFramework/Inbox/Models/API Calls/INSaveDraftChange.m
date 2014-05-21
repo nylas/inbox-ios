@@ -31,7 +31,7 @@
 }
 
 
-- (NSURLRequest *)buildRequest
+- (NSURLRequest *)buildAPIRequest
 {
     NSAssert(self.model, @"INSaveDraftChange asked to buildRequest with no model!");
 	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");

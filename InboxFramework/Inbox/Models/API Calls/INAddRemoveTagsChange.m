@@ -37,7 +37,7 @@
     return nil;
 }
 
-- (NSURLRequest *)buildRequest
+- (NSURLRequest *)buildAPIRequest
 {
     NSAssert([self thread], @"INSaveDraftChange asked to buildRequest with no access to a thread model!");
 	NSAssert([[self thread] namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
@@ -51,14 +51,6 @@
     [params setObject:[self tagIDsToRemove] forKey:@"remove_tags"];
     
 	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
-}
-
-- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
-{
-    if ([responseObject isKindOfClass: [NSDictionary class]]) {
-        [[self thread] updateWithResourceDictionary: responseObject];
-        [[INDatabaseManager shared] persistModel: [self thread]];
-    }
 }
 
 - (void)applyLocally
@@ -77,6 +69,14 @@
     [newTagIDs addObjectsFromArray: self.tagIDsToRemove];
     [[self thread] setTagIDs: newTagIDs];
     [[INDatabaseManager shared] persistModel: [self thread]];
+}
+
+- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
+{
+    if ([responseObject isKindOfClass: [NSDictionary class]]) {
+        [[self thread] updateWithResourceDictionary: responseObject];
+        [[INDatabaseManager shared] persistModel: [self thread]];
+    }
 }
 
 @end

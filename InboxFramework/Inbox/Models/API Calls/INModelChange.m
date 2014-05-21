@@ -62,7 +62,7 @@
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"%@ on %@ <%p>\r     - in progress: %d\r", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model, _inProgress];
+    return [NSString stringWithFormat:@"%@ on %@ <%p>", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model];
 }
 
 - (BOOL)canCancelPendingChange:(INModelChange*)other
@@ -75,14 +75,19 @@
     return YES;
 }
 
-- (BOOL)dependentOnChangesIn:(NSArray*)others
+- (NSArray*)dependenciesIn:(NSArray*)others
 {
-	return NO;
+	return nil;
 }
 
-- (void)startWithCallback:(CallbackBlock)callback
+- (void)applyLocally
 {
-    AFHTTPRequestOperation * op = [[INAPIManager shared] HTTPRequestOperationWithRequest:[self buildRequest] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+}
+
+- (void)applyRemotelyWithCallback:(CallbackBlock)callback
+{
+    AFHTTPRequestOperation * op = [[INAPIManager shared] HTTPRequestOperationWithRequest:[self buildAPIRequest] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self handleSuccess: operation withResponse: responseObject];
         [self setInProgress: NO];
         callback(self, YES);
@@ -113,9 +118,12 @@
     [[[INAPIManager shared] operationQueue] addOperation: op];
 }
 
-#pragma Subclassing Hooks
+- (void)rollbackLocally
+{
+    
+}
 
-- (NSURLRequest*)buildRequest
+- (NSURLRequest*)buildAPIRequest
 {
     return nil;
 }
@@ -128,38 +136,6 @@
 - (void)handleFailure:(AFHTTPRequestOperation *)operation withError:(NSError*)error
 {
     
-}
-
-- (void)applyLocally
-{
-    
-}
-
-- (void)rollbackLocally
-{
-    
-}
-
-@end
-
-@implementation INAPISaveOperation
-
-- (NSURLRequest *)buildRequest
-{
-	NSError * error = nil;
-    NSString * url = [[NSURL URLWithString:[[self model] resourceAPIPath] relativeToURL:[INAPIManager shared].baseURL] absoluteString];
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"PUT" URLString:url parameters:[self.model resourceDictionary] error:&error];
-}
-
-- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
-{
-    if ([responseObject isKindOfClass: [NSDictionary class]])
-        [[self model] updateWithResourceDictionary: responseObject];
-}
-
-- (void)applyLocally
-{
-    [[INDatabaseManager shared] persistModel: self.model];
 }
 
 @end

@@ -140,7 +140,7 @@ static void initialize_INAPIManager() {
 
     [_changeQueue addObject: change];
 
-    if (![change dependentOnChangesIn: _changeQueue]) {
+    if ([[change dependenciesIn: _changeQueue] count] == 0) {
         [change applyLocally];
         [self tryStartChange: change];
     }
@@ -154,8 +154,16 @@ static void initialize_INAPIManager() {
 
 - (void)describeChangeQueue
 {
-    NSLog(@" ------ Change Queue (%d) Suspended: %d ------", _changeQueue.count, _changeQueueSuspended);
-    NSLog(@"%@", [_changeQueue description]);
+	NSMutableString * description = [NSMutableString string];
+	[description appendFormat:@"\r------- Change Queue (%d) Suspended: %d -------", _changeQueue.count, _changeQueueSuspended];
+
+	for (INModelChange * change in _changeQueue) {
+		NSString * dependencyIDs = [[[change dependenciesIn: _changeQueue] valueForKey: @"description"] componentsJoinedByString:@"\r"];
+		[description appendFormat:@"\r%@\r     - in progress: %d \r     - dependencies: %@", [change description], [change inProgress], dependencyIDs];
+	}
+    [description appendFormat:@"\r-------- ------ ------ ------ ------ ---------"];
+
+	NSLog(@"%@", description);
 }
     
 - (BOOL)tryStartChange:(INModelChange *)change
@@ -166,14 +174,14 @@ static void initialize_INAPIManager() {
     if (_changeQueueSuspended)
         return NO;
     
-    if ([change dependentOnChangesIn: _changeQueue])
+    if ([[change dependenciesIn: _changeQueue] count] > 0)
         return NO;
 
     if ([change inProgress])
         return NO;
     
     _changesInProgress += 1;
-    [change startWithCallback: ^(INModelChange * change, BOOL finished) {
+    [change applyRemotelyWithCallback: ^(INModelChange * change, BOOL finished) {
         _changesInProgress -= 1;
         
         if (!finished) {

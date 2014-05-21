@@ -39,13 +39,17 @@
     return NO;
 }
 
-- (BOOL)dependentOnChangesIn:(NSArray*)others
+- (NSArray*)dependenciesIn:(NSArray*)others
 {
+	NSMutableArray * dependencies = [NSMutableArray array];
 	for (INModelChange * other in others) {
+		if (other == self)
+			continue;
+		
 		if ([other isKindOfClass: [INSaveDraftChange class]] && [[other model] isEqual: [self model]])
-			return YES;
+			[dependencies addObject: other];
 	}
-	return NO;
+	return dependencies;
 }
 
 @end

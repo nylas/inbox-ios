@@ -23,12 +23,14 @@
 
 - (BOOL)canStartAfterChange:(INModelChange*)other
 {
+	// If the other operation is sending the draft, it's too late!
+	// Gotta tell the user the draft couldn't be deleted.
     if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
         return NO;
     return YES;
 }
 
-- (NSURLRequest *)buildRequest
+- (NSURLRequest *)buildAPIRequest
 {
     NSAssert(self.model, @"INDeleteDraftChange asked to buildRequest with no model!");
 	NSAssert([self.model namespaceID], @"INDeleteDraftChange asked to buildRequest with no namespace!");
@@ -36,35 +38,6 @@
     NSError * error = nil;
     NSString * url = [[NSURL URLWithString:[self.model resourceAPIPath] relativeToURL:[INAPIManager shared].baseURL] absoluteString];
 	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:nil error:&error];
-}
-
-- (void)startWithCallback:(CallbackBlock)callback
-{
-    // If we're deleting a draft that was never synced to the server, there's no need for
-    // an API call. Just return.
-    if ([self.model isUnsynced])
-        callback(self, YES);
-    else
-        [super startWithCallback: callback];
-}
-
-- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
-{
-    INMessage * message = (INMessage *)[self model];
-    INThread * oldThread = [message thread];
-    
-    if ([responseObject isKindOfClass: [NSDictionary class]])
-        [message updateWithResourceDictionary: responseObject];
-    
-    // if we've orphaned a temporary thread object, go ahead and clean it up
-    if ([[oldThread ID] isEqualToString: [[message thread] ID]] == NO) {
-        if ([oldThread isUnsynced])
-            [[INDatabaseManager shared] unpersistModel: oldThread];
-    }
-    
-    // if we've created a new thread, fetch it so we have more than it's ID
-    if ([[message thread] namespaceID] == nil)
-        [[message thread] reload: NULL];
 }
 
 - (void)applyLocally
@@ -95,6 +68,16 @@
     }
 }
 
+- (void)applyRemotelyWithCallback:(CallbackBlock)callback
+{
+    // If we're deleting a draft that was never synced to the server, there's no need for
+    // an API call. Just return.
+    if ([self.model isUnsynced])
+        callback(self, YES);
+    else
+        [super applyRemotelyWithCallback: callback];
+}
+
 - (void)rollbackLocally
 {
     INMessage * message = (INMessage *)[self model];
@@ -115,5 +98,26 @@
     [thread setMessageIDs: messageIDs];
     [[INDatabaseManager shared] persistModel: thread];
 }
+
+
+- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
+{
+    INMessage * message = (INMessage *)[self model];
+    INThread * oldThread = [message thread];
+    
+    if ([responseObject isKindOfClass: [NSDictionary class]])
+        [message updateWithResourceDictionary: responseObject];
+    
+    // if we've orphaned a temporary thread object, go ahead and clean it up
+    if ([[oldThread ID] isEqualToString: [[message thread] ID]] == NO) {
+        if ([oldThread isUnsynced])
+            [[INDatabaseManager shared] unpersistModel: oldThread];
+    }
+    
+    // if we've created a new thread, fetch it so we have more than it's ID
+    if ([[message thread] namespaceID] == nil)
+        [[message thread] reload: NULL];
+}
+
 
 @end

@@ -26,28 +26,12 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 
-- (void)startWithCallback:(CallbackBlock)callback;
-
-- (BOOL)dependentOnChangesIn:(NSArray*)others;
 - (BOOL)canCancelPendingChange:(INModelChange*)other;
 - (BOOL)canStartAfterChange:(INModelChange*)other;
+- (NSArray*)dependenciesIn:(NSArray*)others;
 
 - (void)applyLocally;
+- (void)applyRemotelyWithCallback:(CallbackBlock)callback;
 - (void)rollbackLocally;
-
-@end
-
-@interface INAPISaveOperation : INModelChange
-
-@end
-
-@interface INAPISaveDraftOperation : INModelChange
-
-@end
-
-@interface INAPIAddRemoveTagsOperation : INModelChange
-
-- (NSMutableArray *)tagIDsToAdd;
-- (NSMutableArray *)tagIDsToRemove;
 
 @end
