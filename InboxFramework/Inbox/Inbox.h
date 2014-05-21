@@ -25,6 +25,8 @@
 #import "INTag.h"
 #import "INModelChange.h"
 #import "INAddRemoveTagsChange.h"
+#import "INSendDraftChange.h"
+#import "INArchiveThreadChange.h"
 #import "INSaveDraftChange.h"
 #import "INDeleteDraftChange.h"
 #import "INSyncEngine.h"

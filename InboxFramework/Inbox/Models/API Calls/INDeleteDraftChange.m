@@ -10,6 +10,23 @@
 
 @implementation INDeleteDraftChange
 
+- (BOOL)canCancelPendingChange:(INModelChange*)other
+{
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftChange class]])
+        return YES;
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+        return YES;
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
+        return YES;
+    return NO;
+}
+
+- (BOOL)canStartAfterChange:(INModelChange*)other
+{
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+        return NO;
+    return YES;
+}
 
 - (NSURLRequest *)buildRequest
 {
@@ -19,6 +36,16 @@
     NSError * error = nil;
     NSString * url = [[NSURL URLWithString:[self.model resourceAPIPath] relativeToURL:[INAPIManager shared].baseURL] absoluteString];
 	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:nil error:&error];
+}
+
+- (void)startWithCallback:(CallbackBlock)callback
+{
+    // If we're deleting a draft that was never synced to the server, there's no need for
+    // an API call. Just return.
+    if ([self.model isUnsynced])
+        callback(self, YES);
+    else
+        [super startWithCallback: callback];
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject

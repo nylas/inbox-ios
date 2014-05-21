@@ -32,6 +32,8 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 - (void)startWithCallback:(CallbackBlock)callback;
 
 - (BOOL)dependentOnChangesIn:(NSArray*)others;
+- (BOOL)canCancelPendingChange:(INModelChange*)other;
+- (BOOL)canStartAfterChange:(INModelChange*)other;
 - (void)addDependency:(INModelChange*)otherChange;
 
 - (void)applyLocally;

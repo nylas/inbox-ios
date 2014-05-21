@@ -57,8 +57,10 @@ typedef void (^ VoidBlock)();
  completed and automatically restarted after network reachability changes occur. 
 
  @param operation The INAPIOperation to be performed.
-*/
-- (void)queueChange:(INModelChange *)change;
+ @return YES, if the change was successfully queued. NO if the change could not be
+ queued because of another change that is already in progress and would conflict.
+ */
+- (BOOL)queueChange:(INModelChange *)change;
 
 - (void)setChangeQueueSuspended:(BOOL)suspended;
 

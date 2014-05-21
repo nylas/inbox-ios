@@ -81,8 +81,9 @@ static void initialize_INAPIManager() {
 {
     _changeQueue = [NSMutableArray array];
     [_changeQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
-
-	for (INModelChange * change in _changeQueue)
+    
+    NSArray * toStart = [_changeQueue copy];
+	for (INModelChange * change in toStart)
         [self tryStartChange: change];
 	
     [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
@@ -113,8 +114,30 @@ static void initialize_INAPIManager() {
     }
 }
 
-- (void)queueChange:(INModelChange *)change
+- (BOOL)queueChange:(INModelChange *)change
 {
+    NSAssert([NSThread isMainThread], @"Sorry, INAPIManager's change queue is not threadsafe. Please call this method on the main thread.");
+    
+    for (int ii = [_changeQueue count] - 1; ii >= 0; ii -- ) {
+        INModelChange * a = [_changeQueue objectAtIndex: ii];
+
+        // Can the change we're currently queuing obviate the need for A? If it
+        // can, there's no need to make the API call for A.
+        // Example: DeleteDraft cancels pending SaveDraft or SendDraft
+        if (![a inProgress] && [change canCancelPendingChange: a]) {
+            NSLog(@"%@ CANCELLING CHANGE %@", NSStringFromClass([change class]), NSStringFromClass([a class]));
+            [_changeQueue removeObjectAtIndex: ii];
+        }
+        
+        // Can the change we're currently queueing happen after A? We can't cancel
+        // A since it's already started.
+        // Example: DeleteDraft can't be queued if SendDraft has started.
+        if ([a inProgress] && ![change canStartAfterChange: a]) {
+            NSLog(@"%@ CANNOT BE QUEUED AFTER %@", NSStringFromClass([change class]), NSStringFromClass([a class]));
+            return NO;
+        }
+    }
+
     [_changeQueue addObject: change];
 
     if (![change dependentOnChangesIn: _changeQueue]) {
@@ -125,6 +148,8 @@ static void initialize_INAPIManager() {
     [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
     [self describeChangeQueue];
     [self saveChangeQueue];
+
+    return YES;
 }
 
 - (void)describeChangeQueue

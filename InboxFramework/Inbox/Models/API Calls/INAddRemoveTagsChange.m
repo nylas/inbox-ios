@@ -7,6 +7,9 @@
 //
 
 #import "INAddRemoveTagsChange.h"
+#import "INThread.h"
+#import "INMessage.h"
+#import "INDatabaseManager.h"
 
 @implementation INAddRemoveTagsChange
 

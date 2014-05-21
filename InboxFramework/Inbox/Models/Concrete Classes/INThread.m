@@ -71,10 +71,6 @@
     // TODO may not always get the right item if data is not loaded!
     // This should be replaced by a draft_id on the thread that points to the
     // draft message at all times.
-    
-    if (![self hasTagWithID: INTagIDDraft])
-        return nil;
-    
     INMessage * __block draft = nil;
     [[INDatabaseManager shared] selectModelsOfClassSync:[INMessage class] withQuery:@"SELECT * FROM INMessage WHERE thread = :thread" andParameters:@{@"thread":[self ID]} andCallback:^(NSArray *objects) {
         for (INMessage * message in objects)
@@ -82,7 +78,7 @@
                 draft = message;
     }];
     
-    if (!draft)
+    if (!draft && [self hasTagWithID: INTagIDDraft])
         draft = [INMessage instanceWithID:[[self messageIDs] lastObject] inNamespaceID:[self namespaceID]];
     
     return draft;

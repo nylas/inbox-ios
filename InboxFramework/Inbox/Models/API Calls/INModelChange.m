@@ -75,6 +75,16 @@
     return NO;
 }
 
+- (BOOL)canCancelPendingChange:(INModelChange*)other
+{
+    return NO;
+}
+
+- (BOOL)canStartAfterChange:(INModelChange*)other
+{
+    return YES;
+}
+
 - (void)addDependency:(INModelChange*)otherChange
 {
     if (!_dependencies)
