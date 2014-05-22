@@ -8,6 +8,7 @@
 
 #import "INMessage.h"
 #import "INThread.h"
+#import "INAttachment.h"
 #import "NSString+FormatConversion.h"
 #import "INNamespace.h"
 #import "INSaveDraftChange.h"
@@ -27,6 +28,7 @@
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",
+	 @"attachmentIDs":@"attachments",
      @"isDraft": @"is_draft"
 	}];
 	return mapping;
@@ -77,6 +79,44 @@
     if (!_threadID)
         return nil;
     return [INThread instanceWithID: [self threadID] inNamespaceID: [self namespaceID]];
+}
+
+- (NSArray*)attachments
+{
+	NSMutableArray * attachments = [NSMutableArray array];
+	for (NSString * ID in _attachmentIDs) {
+		INAttachment * attachment = [INAttachment instanceWithID:ID inNamespaceID:[self namespaceID]];
+		[attachments addObject: attachment];
+	}
+	return attachments;
+}
+
+- (void)addAttachment:(INAttachment*)attachment
+{
+	[self addAttachment:attachment atIndex:0];
+}
+
+- (void)addAttachment:(INAttachment*)attachment atIndex:(NSInteger)index
+{
+	NSMutableArray * IDs = [_attachmentIDs mutableCopy];
+	if (!IDs) IDs = [NSMutableArray array];
+	if (![IDs containsObject: [attachment ID]])
+		[IDs insertObject:[attachment ID] atIndex: index];
+	_attachmentIDs = IDs;
+}
+
+- (void)removeAttachment:(INAttachment*)attachment
+{
+	NSMutableArray * IDs = [_attachmentIDs mutableCopy];
+	[IDs removeObject: [attachment ID]];
+	_attachmentIDs = IDs;
+}
+
+- (void)removeAttachmentAtIndex:(NSInteger)index
+{
+	NSMutableArray * IDs = [_attachmentIDs mutableCopy];
+	[IDs removeObjectAtIndex: index];
+	_attachmentIDs = IDs;
 }
 
 #pragma mark Operations on Drafts

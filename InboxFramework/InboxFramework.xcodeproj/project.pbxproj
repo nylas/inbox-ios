@@ -76,6 +76,10 @@
 		43A1E315191C04A000EF660E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43A1E310191C04A000EF660E /* InfoPlist.strings */; };
 		43A1E318191C04A000EF660E /* INModelProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E314191C04A000EF660E /* INModelProviderTests.m */; };
 		43A9684D191C093000F24844 /* Inbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A9684C191C08F300F24844 /* Inbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43ADE9FE192D56A30048272B /* INUploadAttachmentChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43ADE9FF192D56A30048272B /* INUploadAttachmentChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */; };
+		43ADEA06192D58160048272B /* INAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADEA04192D58160048272B /* INAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43ADEA07192D58160048272B /* INAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADEA05192D58160048272B /* INAttachment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +165,10 @@
 		43A1E312191C04A000EF660E /* InboxTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InboxTests-Info.plist"; sourceTree = "<group>"; };
 		43A1E314191C04A000EF660E /* INModelProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProviderTests.m; sourceTree = "<group>"; };
 		43A9684C191C08F300F24844 /* Inbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inbox.h; sourceTree = "<group>"; };
+		43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUploadAttachmentChange.h; sourceTree = "<group>"; };
+		43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUploadAttachmentChange.m; sourceTree = "<group>"; };
+		43ADEA04192D58160048272B /* INAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAttachment.h; sourceTree = "<group>"; };
+		43ADEA05192D58160048272B /* INAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAttachment.m; sourceTree = "<group>"; };
 		43FF122E191AF2E70043E2E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43FF123C191AF2E70043E2E6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6934FC4E75994D9D989C3502 /* Pods-InboxTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InboxTests.xcconfig"; path = "Pods/Pods-InboxTests.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +281,8 @@
 				438BEA1C192BC8CC00E5C67D /* INDeleteDraftChange.m */,
 				435764F319269E2B00E6B340 /* INAddRemoveTagsChange.h */,
 				435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */,
+				43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */,
+				43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */,
 				438BEA23192C364100E5C67D /* INArchiveThreadChange.h */,
 				438BEA24192C364100E5C67D /* INArchiveThreadChange.m */,
 				43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */,
@@ -292,6 +302,8 @@
 				43A1E2C8191C049A00EF660E /* INTag.m */,
 				43A1E2C9191C049A00EF660E /* INMessage.h */,
 				43A1E2CA191C049A00EF660E /* INMessage.m */,
+				43ADEA04192D58160048272B /* INAttachment.h */,
+				43ADEA05192D58160048272B /* INAttachment.m */,
 				43A1E2CB191C049A00EF660E /* INNamespace.h */,
 				43A1E2CC191C049A00EF660E /* INNamespace.m */,
 				43A1E2CD191C049A00EF660E /* INThread.h */,
@@ -352,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A9684D191C093000F24844 /* Inbox.h in Headers */,
+				43ADEA06192D58160048272B /* INAttachment.h in Headers */,
 				43A1E306191C049A00EF660E /* INModelObject+Uniquing.h in Headers */,
 				43A1E2F4191C049A00EF660E /* INDatabaseManager.h in Headers */,
 				43A1E2F0191C049A00EF660E /* INAPIManager.h in Headers */,
@@ -371,6 +384,7 @@
 				435764F919269E3900E6B340 /* INSaveDraftChange.h in Headers */,
 				43A1E300191C049A00EF660E /* INNamespace.h in Headers */,
 				43A1E2E0191C049A00EF660E /* NSDictionary+FormatConversion.h in Headers */,
+				43ADE9FE192D56A30048272B /* INUploadAttachmentChange.h in Headers */,
 				438BEA1D192BC8CC00E5C67D /* INDeleteDraftChange.h in Headers */,
 				43A1E30B191C049A00EF660E /* INModelProvider.h in Headers */,
 				43A1E2FA191C049A00EF660E /* INContact.h in Headers */,
@@ -572,6 +586,7 @@
 				43A1E2E3191C049A00EF660E /* NSObject+AssociatedObjects.m in Sources */,
 				43A1E305191C049A00EF660E /* INMessageProvider.m in Sources */,
 				43A1E303191C049A00EF660E /* INThread.m in Sources */,
+				43ADEA07192D58160048272B /* INAttachment.m in Sources */,
 				438BEA1E192BC8CC00E5C67D /* INDeleteDraftChange.m in Sources */,
 				43A1E301191C049A00EF660E /* INNamespace.m in Sources */,
 				43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */,
@@ -587,6 +602,7 @@
 				435764FA19269E3900E6B340 /* INSaveDraftChange.m in Sources */,
 				43A1E30E191C049A00EF660E /* INThreadProvider.m in Sources */,
 				43A1E2DD191C049A00EF660E /* FMResultSet+INModelQueries.m in Sources */,
+				43ADE9FF192D56A30048272B /* INUploadAttachmentChange.m in Sources */,
 				43A1E2DB191C049A00EF660E /* FMDatabase+INModelQueries.m in Sources */,
 				43A1E2E7191C049A00EF660E /* NSPredicate+Inspection.m in Sources */,
 				435764F619269E2B00E6B340 /* INAddRemoveTagsChange.m in Sources */,

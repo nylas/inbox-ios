@@ -10,6 +10,7 @@
 
 @class INThread;
 @class INNamespace;
+@class INAttachment;
 
 @interface INMessage : INModelObject
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) NSString * subject;
 @property (nonatomic, strong) NSString * threadID;
+@property (nonatomic, strong) NSArray * attachmentIDs;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
 @property (nonatomic, assign) BOOL isDraft;
@@ -25,6 +27,12 @@
 - (id)initAsDraftIn:(INNamespace*)namespace inReplyTo:(INThread*)thread;
 
 - (INThread*)thread;
+
+- (NSArray*)attachments;
+- (void)addAttachment:(INAttachment*)attachment;
+- (void)addAttachment:(INAttachment*)attachment atIndex:(NSInteger)index;
+- (void)removeAttachment:(INAttachment*)attachment;
+- (void)removeAttachmentAtIndex:(NSInteger)index;
 
 #pragma mark Operations on Drafts
 

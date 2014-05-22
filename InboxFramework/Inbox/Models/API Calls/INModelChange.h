@@ -11,6 +11,8 @@
 
 @class INMessage;
 
+static NSString * INModelChangeUploadProgressNotification = @"INModelChangeUploadProgressNotification";
+
 typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 
 @interface INModelChange : NSObject <NSCoding>
@@ -19,6 +21,7 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 @property (nonatomic, strong) INModelObject * model;
 @property (nonatomic, strong) NSMutableDictionary * data;
 @property (nonatomic, assign) BOOL inProgress;
+@property (nonatomic, assign) float percentComplete;
 
 + (instancetype)operationForModel:(INModelObject *)model;
 

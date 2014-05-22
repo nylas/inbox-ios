@@ -30,6 +30,21 @@
     return NO;
 }
 
+- (NSArray*)dependenciesIn:(NSArray *)others
+{
+	NSMutableArray * dependencies = [NSMutableArray array];
+	INMessage * draft = (INMessage *)[self model];
+
+	// are any requests uploading attachments that are referenced in our draft?
+	// we need to wait for those to finish...
+	for (INModelChange * other in others) {
+		if ([other isKindOfClass: [INUploadAttachmentChange class]]
+			&& [[draft attachmentIDs] containsObject: [[other model] ID]])
+			[dependencies addObject: other];
+	}
+	
+	return dependencies;
+}
 
 - (NSURLRequest *)buildAPIRequest
 {
@@ -74,15 +89,14 @@
 {
     INMessage * message = (INMessage *)[self model];
     
-    // Until we're able to save the draft, it's orphaned because it has no thread.
-    // In order to present it in the app and give it the draft tag, let's create a
-    // thread with a self-assigned ID for it. We'll keep that thread object in sync
-    // and when this operation succeeds we'll destroy it.
     INThread * thread = [message thread];
-
     BOOL createThread = (thread == nil);
     
     if (createThread) {
+		// Until we're able to save this draft, it's orphaned because it has no thread.
+		// In order to present it in the app and give it the draft tag, let's create a
+		// thread with a self-assigned ID for it. We'll keep that thread object in sync
+		// and when this operation succeeds we'll destroy it.
         thread = [[INThread alloc] init];
         [thread setNamespaceID: [message namespaceID]];
         [thread setCreatedAt: [NSDate date]];
@@ -90,6 +104,8 @@
     }
 	
     if ([thread isUnsynced]) {
+		// our thread hasn't been synced with the server - it's a local object only.
+		// update it's properties (subject, snippet, etc.) to reflect the message.
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
         [thread setSnippet: [message body]];
@@ -99,6 +115,8 @@
     }
     
     if ([thread hasTagWithID: INTagIDDraft] == NO) {
+		// our thread doesn't have the draft tag. Add the draft tag (the server will
+		// do this when the save succeeds)
         NSMutableArray * tags = [[thread tagIDs] mutableCopy];
         [tags addObject: INTagIDDraft];
         [thread setTagIDs: tags];
@@ -106,6 +124,12 @@
     
     [[INDatabaseManager shared] persistModel: message];
     [[INDatabaseManager shared] persistModel: thread];
+}
+
+- (void)rollbackLocally
+{
+	// we deliberately do not roll back draft saves. They shouldn't ever be rejected
+	// by the server, and we don't want to loose people's data under any circumstance.
 }
 
 @end

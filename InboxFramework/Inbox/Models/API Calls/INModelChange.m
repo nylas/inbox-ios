@@ -60,6 +60,12 @@
     [aCoder encodeObject:_data forKey:@"data"];
 }
 
+- (void)setPercentComplete:(float)percentComplete
+{
+	_percentComplete = percentComplete;
+	[[NSNotificationCenter defaultCenter] postNotificationName:INModelChangeUploadProgressNotification object:self];
+}
+
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"%@ on %@ <%p>", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model];
@@ -95,6 +101,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self handleFailure:operation withError:error];
         [self setInProgress: NO];
+		[self setPercentComplete: 0];
 
         NSURLRequest * request = [operation request];
         NSInteger code = [[operation response] statusCode];
@@ -114,7 +121,12 @@
         }
     }];
     
+	[op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+		[self setPercentComplete: (double)totalBytesWritten / (double)totalBytesExpectedToWrite];
+	}];
+
     [self setInProgress: YES];
+	[self setPercentComplete: 0.01];
     [[[INAPIManager shared] operationQueue] addOperation: op];
 }
 

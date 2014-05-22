@@ -44,28 +44,31 @@
 {
     INMessage * message = (INMessage *)[self model];
     INThread * thread = [message thread];
-    [[INDatabaseManager shared] unpersistModel: message];
     
-    if (thread) {
-        NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
-        [messageIDs removeObject: [self.model ID]];
-        
-        if ([messageIDs count]) {
-            // remove the message from the message IDs
-            [thread setMessageIDs: messageIDs];
+	// destroy our message model locally
+	[[INDatabaseManager shared] unpersistModel: message];
 
-            // remove the draft tag from the tag IDs
-            NSMutableArray * tagIDs = [[thread tagIDs] mutableCopy];
-            [tagIDs removeObject: INTagIDDraft];
-            [thread setTagIDs: tagIDs];
-            
-            // save the thread
-            [[INDatabaseManager shared] persistModel: thread];
-        } else {
-            // destroy the thread
-            [[INDatabaseManager shared] unpersistModel: thread];
-        }
-    }
+	// compute the message IDs that will be on our thread
+	// now that this message is gone.
+	NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
+	[messageIDs removeObject: [self.model ID]];
+
+	if ([messageIDs count]) {
+		// remove our message from the list of messages
+		[thread setMessageIDs: messageIDs];
+
+		// remove the draft tag
+		NSMutableArray * tagIDs = [[thread tagIDs] mutableCopy];
+		[tagIDs removeObject: INTagIDDraft];
+		[thread setTagIDs: tagIDs];
+		
+		// save the thread
+		[[INDatabaseManager shared] persistModel: thread];
+	} else {
+
+		// destroy the thread. We just removed the last message.
+		[[INDatabaseManager shared] unpersistModel: thread];
+	}
 }
 
 - (void)applyRemotelyWithCallback:(CallbackBlock)callback
@@ -80,19 +83,26 @@
 
 - (void)rollbackLocally
 {
+	// re-persist the message to the database
     INMessage * message = (INMessage *)[self model];
     [[INDatabaseManager shared] persistModel: message];
     
+	// create our parent thread (if necessary) and populate it if it's unsynced
     INThread * thread = [message thread];
     if ([thread isUnsynced]) {
         [thread setSubject: [message subject]];
         [thread setParticipants: [message to]];
-        [thread setTagIDs: @[INTagIDDraft]];
         [thread setSnippet: [message body]];
         [thread setUpdatedAt: [NSDate date]];
         [thread setLastMessageDate: [NSDate date]];
     }
     
+	// add the draft tag to the thread
+	NSMutableArray * tagIDs = [[thread tagIDs] mutableCopy];
+	[tagIDs addObject: INTagIDDraft];
+	[thread setTagIDs: tagIDs];
+	
+	// add the message to it's parent thread
     NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
     [messageIDs addObject: [self.model ID]];
     [thread setMessageIDs: messageIDs];

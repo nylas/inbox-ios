@@ -158,7 +158,7 @@ static void initialize_INAPIManager() {
 	[description appendFormat:@"\r------- Change Queue (%d) Suspended: %d -------", _changeQueue.count, _changeQueueSuspended];
 
 	for (INModelChange * change in _changeQueue) {
-		NSString * dependencyIDs = [[[change dependenciesIn: _changeQueue] valueForKey: @"description"] componentsJoinedByString:@"\r"];
+		NSString * dependencyIDs = [[[change dependenciesIn: _changeQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
 		[description appendFormat:@"\r%@\r     - in progress: %d \r     - dependencies: %@", [change description], [change inProgress], dependencyIDs];
 	}
     [description appendFormat:@"\r-------- ------ ------ ------ ------ ---------"];

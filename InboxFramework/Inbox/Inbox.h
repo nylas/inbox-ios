@@ -28,9 +28,11 @@
 #import "INSendDraftChange.h"
 #import "INArchiveThreadChange.h"
 #import "INUnarchiveThreadChange.h"
+#import "INUploadAttachmentChange.h"
 #import "INSaveDraftChange.h"
 #import "INDeleteDraftChange.h"
 #import "INSyncEngine.h"
 #import "INModelResponseSerializer.h"
+#import "INAttachment.h"
 
 #endif
