@@ -1,13 +1,13 @@
 //
-//  INUnarchiveThreadChange.h
+//  INArchiveThreadChange.h
 //  InboxFramework
 //
 //  Created by Ben Gotow on 5/20/14.
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import <Inbox/Inbox.h>
+#import "INAddRemoveTagsTask.h"
 
-@interface INUnarchiveThreadChange : INAddRemoveTagsChange
+@interface INArchiveThreadTask : INAddRemoveTagsTask
 
 @end

@@ -11,11 +11,11 @@
 
 @class INMessage;
 
-static NSString * INModelChangeUploadProgressNotification = @"INModelChangeUploadProgressNotification";
+static NSString * INTaskProgressNotification = @"INTaskProgressNotification";
 
-typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
+typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 
-@interface INModelChange : NSObject <NSCoding>
+@interface INAPITask : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString * ID;
 @property (nonatomic, strong) INModelObject * model;
@@ -29,8 +29,8 @@ typedef void (^ CallbackBlock)(INModelChange * change, BOOL finished);
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other;
-- (BOOL)canStartAfterChange:(INModelChange*)other;
+- (BOOL)canCancelPendingTask:(INAPITask*)other;
+- (BOOL)canStartAfterTask:(INAPITask*)other;
 - (NSArray*)dependenciesIn:(NSArray*)others;
 
 - (void)applyLocally;

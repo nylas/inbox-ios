@@ -47,14 +47,14 @@
 
 - (void)upload
 {
-	INUploadAttachmentChange * upload = [[INUploadAttachmentChange alloc] initWithModel: self];
-	[[INAPIManager shared] queueChange: upload];
+	INUploadAttachmentTask * upload = [[INUploadAttachmentTask alloc] initWithModel: self];
+	[[INAPIManager shared] queueTask: upload];
 }
 
-- (INUploadAttachmentChange*)uploadTask
+- (INUploadAttachmentTask*)uploadTask
 {
-	for (INUploadAttachmentChange * change in [[INAPIManager shared] changeQueue]) {
-		if ([change isKindOfClass: [INUploadAttachmentChange class]] && [[change model] isEqual: self])
+	for (INUploadAttachmentTask * change in [[INAPIManager shared] taskQueue]) {
+		if ([change isKindOfClass: [INUploadAttachmentTask class]] && [[change model] isEqual: self])
 			return change;
 	}
 	return nil;

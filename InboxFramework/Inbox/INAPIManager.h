@@ -12,9 +12,9 @@
 
 static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
 static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
-static NSString * INChangeQueueChangedNotification = @"INChangeQueueChangedNotification";
+static NSString * INTaskQueueChangedNotification = @"INTaskQueueChangedNotification";
 
-@class INModelChange;
+@class INAPITask;
 @class INModelObject;
 @protocol INSyncEngine;
 
@@ -40,18 +40,18 @@ typedef void (^ VoidBlock)();
 @interface INAPIManager : AFHTTPRequestOperationManager
 {
 	NSArray * _namespaces;
-    NSMutableArray * _changeQueue;
+    NSMutableArray * _taskQueue;
     int _changesInProgress;
 }
 
-@property (nonatomic, assign) BOOL changeQueueSuspended;
+@property (nonatomic, assign) BOOL taskQueueSuspended;
 
 @property (nonatomic, strong) NSObject<INSyncEngine> * syncEngine;
 
 
 + (INAPIManager *)shared;
 
-- (NSArray*)changeQueue;
+- (NSArray*)taskQueue;
 /**
  Queue the API operation provided. API operations are persisted to disk until they are
  completed and automatically restarted after network reachability changes occur. 
@@ -60,9 +60,9 @@ typedef void (^ VoidBlock)();
  @return YES, if the change was successfully queued. NO if the change could not be
  queued because of another change that is already in progress and would conflict.
  */
-- (BOOL)queueChange:(INModelChange *)change;
+- (BOOL)queueTask:(INAPITask *)change;
 
-- (void)setChangeQueueSuspended:(BOOL)suspended;
+- (void)setTaskQueueSuspended:(BOOL)suspended;
 
 
 #pragma Authentication

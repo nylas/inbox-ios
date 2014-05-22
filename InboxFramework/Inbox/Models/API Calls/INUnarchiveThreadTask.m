@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INUnarchiveThreadChange.h"
-#import "INArchiveThreadChange.h"
+#import "INUnarchiveThreadTask.h"
+#import "INArchiveThreadTask.h"
 
-@implementation INUnarchiveThreadChange
+@implementation INUnarchiveThreadTask
 
 - (id)initWithModel:(INModelObject *)model
 {
@@ -22,11 +22,11 @@
 }
 
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other
+- (BOOL)canCancelPendingTask:(INAPITask*)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INArchiveThreadChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INArchiveThreadTask class]])
         return YES;
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INUnarchiveThreadChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INUnarchiveThreadTask class]])
         return YES;
     return NO;
 }

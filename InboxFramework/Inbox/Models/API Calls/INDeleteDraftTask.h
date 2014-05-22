@@ -8,6 +8,6 @@
 
 #import <Inbox/Inbox.h>
 
-@interface INDeleteDraftChange : INModelChange
+@interface INDeleteDraftTask : INAPITask
 
 @end

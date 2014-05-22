@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INModelChange.h"
+#import "INAPITask.h"
 
-@interface INSaveDraftChange : INModelChange
+@interface INSaveDraftTask : INAPITask
 
 @end

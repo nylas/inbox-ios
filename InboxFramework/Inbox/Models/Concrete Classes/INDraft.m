@@ -9,9 +9,9 @@
 #import "INDraft.h"
 #import "INNamespace.h"
 #import "INThread.h"
-#import "INSaveDraftChange.h"
-#import "INSendDraftChange.h"
-#import "INDeleteDraftChange.h"
+#import "INSaveDraftTask.h"
+#import "INSendDraftTask.h"
+#import "INDeleteDraftTask.h"
 
 @implementation INDraft
 
@@ -100,20 +100,20 @@
 
 - (void)save
 {
-	INSaveDraftChange * save = [INSaveDraftChange operationForModel: self];
-	[[INAPIManager shared] queueChange: save];
+	INSaveDraftTask * save = [INSaveDraftTask operationForModel: self];
+	[[INAPIManager shared] queueTask: save];
 }
 
 - (void)send
 {
-	INSendDraftChange * send = [INSendDraftChange operationForModel: self];
-	[[INAPIManager shared] queueChange: send];
+	INSendDraftTask * send = [INSendDraftTask operationForModel: self];
+	[[INAPIManager shared] queueTask: send];
 }
 
 - (void)delete
 {
-	INDeleteDraftChange * delete = [INDeleteDraftChange operationForModel: self];
-	[[INAPIManager shared] queueChange: delete];
+	INDeleteDraftTask * delete = [INDeleteDraftTask operationForModel: self];
+	[[INAPIManager shared] queueTask: delete];
 }
 
 @end

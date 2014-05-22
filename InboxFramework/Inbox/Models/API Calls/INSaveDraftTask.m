@@ -6,29 +6,29 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INSaveDraftChange.h"
+#import "INSaveDraftTask.h"
 #import "INThread.h"
 #import "INThread+Private.h"
 #import "INTag.h"
-#import "INDeleteDraftChange.h"
-#import "INSendDraftChange.h"
+#import "INDeleteDraftTask.h"
+#import "INSendDraftTask.h"
 #import "INModelObject+Uniquing.h"
 
 
-@implementation INSaveDraftChange
+@implementation INSaveDraftTask
 
-- (BOOL)canStartAfterChange:(INModelChange *)other
+- (BOOL)canStartAfterTask:(INAPITask *)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftTask class]])
         return NO;
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftTask class]])
         return NO;
     return YES;
 }
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other
+- (BOOL)canCancelPendingTask:(INAPITask*)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftTask class]])
         return YES;
     return NO;
 }
@@ -40,8 +40,8 @@
 
 	// are any requests uploading attachments that are referenced in our draft?
 	// we need to wait for those to finish...
-	for (INModelChange * other in others) {
-		if ([other isKindOfClass: [INUploadAttachmentChange class]]
+	for (INAPITask * other in others) {
+		if ([other isKindOfClass: [INUploadAttachmentTask class]]
 			&& [[draft attachmentIDs] containsObject: [[other model] ID]])
 			[dependencies addObject: other];
 	}

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INAddRemoveTagsChange.h"
+#import "INAddRemoveTagsTask.h"
 #import "INThread.h"
 #import "INMessage.h"
 #import "INDatabaseManager.h"
 
-@implementation INAddRemoveTagsChange
+@implementation INAddRemoveTagsTask
 
 
 - (NSMutableArray *)tagIDsToAdd

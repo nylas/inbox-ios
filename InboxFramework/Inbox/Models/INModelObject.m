@@ -9,7 +9,7 @@
 #import "INModelObject.h"
 #import "INModelObject+Uniquing.h"
 #import "INAPIManager.h"
-#import "INModelChange.h"
+#import "INAPITask.h"
 #import "NSObject+Properties.h"
 #import "NSString+FormatConversion.h"
 #import "NSDictionary+FormatConversion.h"

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INModelChange.h"
+#import "INAPITask.h"
 
-@interface INUploadAttachmentChange : INModelChange
+@interface INUploadAttachmentTask : INAPITask
 
 - (NSMutableArray *)waitingDrafts;
 

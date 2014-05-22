@@ -7,7 +7,7 @@
 //
 
 #import "INAPIManager.h"
-#import "INModelChange.h"
+#import "INAPITask.h"
 #import "INNamespace.h"
 #import "INModelResponseSerializer.h"
 #import "INDatabaseManager.h"
@@ -55,12 +55,12 @@ static void initialize_INAPIManager() {
 		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [API_URL host]];
 		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 			BOOL hasConnection = (status == AFNetworkReachabilityStatusReachableViaWiFi) || (status == AFNetworkReachabilityStatusReachableViaWWAN);
-			BOOL hasSuspended = __self.changeQueueSuspended;
+			BOOL hasSuspended = __self.taskQueueSuspended;
             
 			if (hasConnection && hasSuspended)
-				[__self setChangeQueueSuspended: NO];
+				[__self setTaskQueueSuspended: NO];
 			else if (!hasConnection && !hasSuspended)
-				[__self setChangeQueueSuspended: YES];
+				[__self setTaskQueueSuspended: YES];
 		}];
 		[self.reachabilityManager startMonitoring];
 
@@ -71,68 +71,68 @@ static void initialize_INAPIManager() {
             [self fetchNamespaces: NULL];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self loadChangeQueue];
+            [self loadTasks];
         });
     }
 	return self;
 }
 
-- (void)loadChangeQueue
+- (void)loadTasks
 {
-    _changeQueue = [NSMutableArray array];
-    [_changeQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
+    _taskQueue = [NSMutableArray array];
+    [_taskQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
     
-    NSArray * toStart = [_changeQueue copy];
-	for (INModelChange * change in toStart)
-        [self tryStartChange: change];
+    NSArray * toStart = [_taskQueue copy];
+	for (INAPITask * task in toStart)
+        [self tryStartTask: task];
 	
-    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
-    [self describeChangeQueue];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
+    [self describeTasks];
 }
 
-- (void)saveChangeQueue
+- (void)saveTasks
 {
-	if (![NSKeyedArchiver archiveRootObject:_changeQueue toFile:OPERATIONS_FILE])
+	if (![NSKeyedArchiver archiveRootObject:_taskQueue toFile:OPERATIONS_FILE])
 		NSLog(@"Writing pending changes to disk failed? Path may be invalid.");
 }
 
-- (NSArray*)changeQueue
+- (NSArray*)taskQueue
 {
-    return [_changeQueue copy];
+    return [_taskQueue copy];
 }
 
-- (void)setChangeQueueSuspended:(BOOL)suspended
+- (void)setTaskQueueSuspended:(BOOL)suspended
 {
     NSLog(@"Change processing is %@.", (suspended ? @"off" : @"on"));
 
-    _changeQueueSuspended = suspended;
-    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
+    _taskQueueSuspended = suspended;
+    [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
 
 	if (!suspended) {
-        for (INModelChange * change in _changeQueue)
-            [self tryStartChange: change];
+        for (INAPITask * change in _taskQueue)
+            [self tryStartTask: change];
     }
 }
 
-- (BOOL)queueChange:(INModelChange *)change
+- (BOOL)queueTask:(INAPITask *)change
 {
     NSAssert([NSThread isMainThread], @"Sorry, INAPIManager's change queue is not threadsafe. Please call this method on the main thread.");
     
-    for (int ii = [_changeQueue count] - 1; ii >= 0; ii -- ) {
-        INModelChange * a = [_changeQueue objectAtIndex: ii];
+    for (int ii = [_taskQueue count] - 1; ii >= 0; ii -- ) {
+        INAPITask * a = [_taskQueue objectAtIndex: ii];
 
         // Can the change we're currently queuing obviate the need for A? If it
         // can, there's no need to make the API call for A.
         // Example: DeleteDraft cancels pending SaveDraft or SendDraft
-        if (![a inProgress] && [change canCancelPendingChange: a]) {
+        if (![a inProgress] && [change canCancelPendingTask: a]) {
             NSLog(@"%@ CANCELLING CHANGE %@", NSStringFromClass([change class]), NSStringFromClass([a class]));
-            [_changeQueue removeObjectAtIndex: ii];
+            [_taskQueue removeObjectAtIndex: ii];
         }
         
         // Can the change we're currently queueing happen after A? We can't cancel
         // A since it's already started.
         // Example: DeleteDraft can't be queued if SendDraft has started.
-        if ([a inProgress] && ![change canStartAfterChange: a]) {
+        if ([a inProgress] && ![change canStartAfterTask: a]) {
             NSLog(@"%@ CANNOT BE QUEUED AFTER %@", NSStringFromClass([change class]), NSStringFromClass([a class]));
             return NO;
         }
@@ -141,23 +141,23 @@ static void initialize_INAPIManager() {
     // Local effects always take effect immediately
     [change applyLocally];
 
-    [_changeQueue addObject: change];
-    [self tryStartChange: change];
+    [_taskQueue addObject: change];
+    [self tryStartTask: change];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
-    [self describeChangeQueue];
-    [self saveChangeQueue];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
+    [self describeTasks];
+    [self saveTasks];
 
     return YES;
 }
 
-- (void)describeChangeQueue
+- (void)describeTasks
 {
 	NSMutableString * description = [NSMutableString string];
-	[description appendFormat:@"\r------- Change Queue (%d) Suspended: %d -------", _changeQueue.count, _changeQueueSuspended];
+	[description appendFormat:@"\r---------- Tasks (%d) Suspended: %d ----------", _taskQueue.count, _taskQueueSuspended];
 
-	for (INModelChange * change in _changeQueue) {
-		NSString * dependencyIDs = [[[change dependenciesIn: _changeQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
+	for (INAPITask * change in _taskQueue) {
+		NSString * dependencyIDs = [[[change dependenciesIn: _taskQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
 		[description appendFormat:@"\r%@\r     - in progress: %d \r     - dependencies: %@", [change description], [change inProgress], dependencyIDs];
 	}
     [description appendFormat:@"\r-------- ------ ------ ------ ------ ---------"];
@@ -165,37 +165,37 @@ static void initialize_INAPIManager() {
 	NSLog(@"%@", description);
 }
     
-- (BOOL)tryStartChange:(INModelChange *)change
+- (BOOL)tryStartTask:(INAPITask *)change
 {
     if (_changesInProgress > 5)
         return NO;
     
-    if (_changeQueueSuspended)
+    if (_taskQueueSuspended)
         return NO;
     
-    if ([[change dependenciesIn: _changeQueue] count] > 0)
+    if ([[change dependenciesIn: _taskQueue] count] > 0)
         return NO;
 
     if ([change inProgress])
         return NO;
     
     _changesInProgress += 1;
-    [change applyRemotelyWithCallback: ^(INModelChange * change, BOOL finished) {
+    [change applyRemotelyWithCallback: ^(INAPITask * change, BOOL finished) {
         _changesInProgress -= 1;
         
         if (!finished) {
-            [self setChangeQueueSuspended: YES];
+            [self setTaskQueueSuspended: YES];
 
         } else {
-            [_changeQueue removeObject: change];
-            for (INModelChange * change in _changeQueue)
-                if ([self tryStartChange: change])
+            [_taskQueue removeObject: change];
+            for (INAPITask * change in _taskQueue)
+                if ([self tryStartTask: change])
                     break;
         }
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
-        [self describeChangeQueue];
-        [self saveChangeQueue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
+        [self describeTasks];
+        [self saveTasks];
     }];
     return YES;
 }
@@ -231,12 +231,12 @@ static void initialize_INAPIManager() {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey: AUTH_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-	[_changeQueue removeAllObjects];
+	[_taskQueue removeAllObjects];
     [[self requestSerializer] clearAuthorizationHeader];
     [[INDatabaseManager shared] resetDatabase];
     _namespaces = nil;
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
 }

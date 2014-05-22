@@ -6,28 +6,28 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INDeleteDraftChange.h"
+#import "INDeleteDraftTask.h"
 #import "INThread+Private.h"
 
 
-@implementation INDeleteDraftChange
+@implementation INDeleteDraftTask
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other
+- (BOOL)canCancelPendingTask:(INAPITask*)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSaveDraftTask class]])
         return YES;
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftTask class]])
         return YES;
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftTask class]])
         return YES;
     return NO;
 }
 
-- (BOOL)canStartAfterChange:(INModelChange*)other
+- (BOOL)canStartAfterTask:(INAPITask*)other
 {
 	// If the other operation is sending the draft, it's too late!
 	// Gotta tell the user the draft couldn't be deleted.
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftTask class]])
         return NO;
     return YES;
 }

@@ -10,7 +10,7 @@
 #import "INAPIManager.h"
 
 @class FMDatabase;
-@class INModelChange;
+@class INAPITask;
 @class INNamespace;
 
 static NSString * INModelObjectChangedNotification = @"model_changed";

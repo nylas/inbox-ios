@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INModelChange.h"
+#import "INAPITask.h"
 #import "INAPIManager.h"
 #import "INModelObject.h"
 #import "INModelObject+Uniquing.h"
@@ -18,7 +18,7 @@
 #import "INTag.h"
 
 
-@implementation INModelChange
+@implementation INAPITask
 
 + (instancetype)operationForModel:(INModelObject *)model
 {
@@ -63,7 +63,7 @@
 - (void)setPercentComplete:(float)percentComplete
 {
 	_percentComplete = percentComplete;
-	[[NSNotificationCenter defaultCenter] postNotificationName:INModelChangeUploadProgressNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:INTaskProgressNotification object:self];
 }
 
 - (NSString*)description
@@ -71,12 +71,12 @@
     return [NSString stringWithFormat:@"%@ on %@ <%p>", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model];
 }
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other
+- (BOOL)canCancelPendingTask:(INAPITask*)other
 {
     return NO;
 }
 
-- (BOOL)canStartAfterChange:(INModelChange*)other
+- (BOOL)canStartAfterTask:(INAPITask*)other
 {
     return YES;
 }

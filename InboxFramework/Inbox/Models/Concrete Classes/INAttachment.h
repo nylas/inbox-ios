@@ -8,7 +8,7 @@
 
 #import "INModelObject.h"
 #import "INAPIManager.h"
-#import "INUploadAttachmentChange.h"
+#import "INUploadAttachmentTask.h"
 
 typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 
@@ -23,6 +23,6 @@ typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 - (id)initWithFilename:(NSString*)filename mimetype:(NSString*)mimetype andData:(NSData*)data andPreview:(UIImage*)previewOrNil inNamespace:(INNamespace*)namespace;
 
 - (void)upload;
-- (INUploadAttachmentChange*)uploadTask;
+- (INUploadAttachmentTask*)uploadTask;
 
 @end

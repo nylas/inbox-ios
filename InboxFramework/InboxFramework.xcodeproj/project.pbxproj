@@ -9,19 +9,19 @@
 /* Begin PBXBuildFile section */
 		2B1BB2A864104F519B880280 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6AA3EAE06C40EDB2393D2E /* libPods.a */; };
 		3C5C8D7CD9254C4A8A59C2A1 /* libPods-InboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC5C0E723F64C9CBF7CB02E /* libPods-InboxTests.a */; };
-		435764F519269E2B00E6B340 /* INAddRemoveTagsChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F319269E2B00E6B340 /* INAddRemoveTagsChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		435764F619269E2B00E6B340 /* INAddRemoveTagsChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */; };
-		435764F919269E3900E6B340 /* INSaveDraftChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F719269E3900E6B340 /* INSaveDraftChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		435764FA19269E3900E6B340 /* INSaveDraftChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F819269E3900E6B340 /* INSaveDraftChange.m */; };
+		435764F519269E2B00E6B340 /* INAddRemoveTagsTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		435764F619269E2B00E6B340 /* INAddRemoveTagsTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */; };
+		435764F919269E3900E6B340 /* INSaveDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F719269E3900E6B340 /* INSaveDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		435764FA19269E3900E6B340 /* INSaveDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F819269E3900E6B340 /* INSaveDraftTask.m */; };
 		438BE9FF1926C8A400E5C67D /* INSyncEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BE9FE1926C8A400E5C67D /* INSyncEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		438BEA1D192BC8CC00E5C67D /* INDeleteDraftChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1B192BC8CC00E5C67D /* INDeleteDraftChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		438BEA1E192BC8CC00E5C67D /* INDeleteDraftChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA1C192BC8CC00E5C67D /* INDeleteDraftChange.m */; };
-		438BEA21192C35C900E5C67D /* INSendDraftChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1F192C35C900E5C67D /* INSendDraftChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		438BEA22192C35C900E5C67D /* INSendDraftChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA20192C35C900E5C67D /* INSendDraftChange.m */; };
-		438BEA25192C364100E5C67D /* INArchiveThreadChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA23192C364100E5C67D /* INArchiveThreadChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		438BEA26192C364100E5C67D /* INArchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA24192C364100E5C67D /* INArchiveThreadChange.m */; };
-		43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */; };
+		438BEA1D192BC8CC00E5C67D /* INDeleteDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1B192BC8CC00E5C67D /* INDeleteDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		438BEA1E192BC8CC00E5C67D /* INDeleteDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA1C192BC8CC00E5C67D /* INDeleteDraftTask.m */; };
+		438BEA21192C35C900E5C67D /* INSendDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1F192C35C900E5C67D /* INSendDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		438BEA22192C35C900E5C67D /* INSendDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA20192C35C900E5C67D /* INSendDraftTask.m */; };
+		438BEA25192C364100E5C67D /* INArchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA23192C364100E5C67D /* INArchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		438BEA26192C364100E5C67D /* INArchiveThreadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA24192C364100E5C67D /* INArchiveThreadTask.m */; };
+		43A14744192C447A001AF02F /* INUnarchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A14745192C447A001AF02F /* INUnarchiveThreadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */; };
 		43A14748192E75B7001AF02F /* INDraft.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14746192E75B7001AF02F /* INDraft.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A14749192E75B7001AF02F /* INDraft.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14747192E75B7001AF02F /* INDraft.m */; };
 		43A1474C192E7E1E001AF02F /* INThread+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1474A192E7E1E001AF02F /* INThread+Private.h */; };
@@ -54,8 +54,8 @@
 		43A1E2F1191C049A00EF660E /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2B9191C049A00EF660E /* INAPIManager.m */; };
 		43A1E2F4191C049A00EF660E /* INDatabaseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2BC191C049A00EF660E /* INDatabaseManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2F5191C049A00EF660E /* INDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2BD191C049A00EF660E /* INDatabaseManager.m */; };
-		43A1E2F6191C049A00EF660E /* INModelChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C0191C049A00EF660E /* INModelChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43A1E2F7191C049A00EF660E /* INModelChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C1191C049A00EF660E /* INModelChange.m */; };
+		43A1E2F6191C049A00EF660E /* INAPITask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C0191C049A00EF660E /* INAPITask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A1E2F7191C049A00EF660E /* INAPITask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C1191C049A00EF660E /* INAPITask.m */; };
 		43A1E2FA191C049A00EF660E /* INContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C5191C049A00EF660E /* INContact.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A1E2FB191C049A00EF660E /* INContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C6191C049A00EF660E /* INContact.m */; };
 		43A1E2FC191C049A00EF660E /* INTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C7191C049A00EF660E /* INTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,8 +80,8 @@
 		43A1E315191C04A000EF660E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43A1E310191C04A000EF660E /* InfoPlist.strings */; };
 		43A1E318191C04A000EF660E /* INModelProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E314191C04A000EF660E /* INModelProviderTests.m */; };
 		43A9684D191C093000F24844 /* Inbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A9684C191C08F300F24844 /* Inbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43ADE9FE192D56A30048272B /* INUploadAttachmentChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43ADE9FF192D56A30048272B /* INUploadAttachmentChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */; };
+		43ADE9FE192D56A30048272B /* INUploadAttachmentTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43ADE9FF192D56A30048272B /* INUploadAttachmentTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */; };
 		43ADEA06192D58160048272B /* INAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADEA04192D58160048272B /* INAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43ADEA07192D58160048272B /* INAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADEA05192D58160048272B /* INAttachment.m */; };
 /* End PBXBuildFile section */
@@ -99,20 +99,20 @@
 /* Begin PBXFileReference section */
 		11594C80534A4232B023C8B4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		1D6AA3EAE06C40EDB2393D2E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		435764F319269E2B00E6B340 /* INAddRemoveTagsChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAddRemoveTagsChange.h; sourceTree = "<group>"; };
-		435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAddRemoveTagsChange.m; sourceTree = "<group>"; };
-		435764F719269E3900E6B340 /* INSaveDraftChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSaveDraftChange.h; sourceTree = "<group>"; };
-		435764F819269E3900E6B340 /* INSaveDraftChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSaveDraftChange.m; sourceTree = "<group>"; };
+		435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAddRemoveTagsTask.h; sourceTree = "<group>"; };
+		435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAddRemoveTagsTask.m; sourceTree = "<group>"; };
+		435764F719269E3900E6B340 /* INSaveDraftTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSaveDraftTask.h; sourceTree = "<group>"; };
+		435764F819269E3900E6B340 /* INSaveDraftTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSaveDraftTask.m; sourceTree = "<group>"; };
 		436F7D4E191AF6E4005A4489 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		438BE9FE1926C8A400E5C67D /* INSyncEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSyncEngine.h; sourceTree = "<group>"; };
-		438BEA1B192BC8CC00E5C67D /* INDeleteDraftChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDeleteDraftChange.h; sourceTree = "<group>"; };
-		438BEA1C192BC8CC00E5C67D /* INDeleteDraftChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDeleteDraftChange.m; sourceTree = "<group>"; };
-		438BEA1F192C35C900E5C67D /* INSendDraftChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSendDraftChange.h; sourceTree = "<group>"; };
-		438BEA20192C35C900E5C67D /* INSendDraftChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSendDraftChange.m; sourceTree = "<group>"; };
-		438BEA23192C364100E5C67D /* INArchiveThreadChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INArchiveThreadChange.h; sourceTree = "<group>"; };
-		438BEA24192C364100E5C67D /* INArchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INArchiveThreadChange.m; sourceTree = "<group>"; };
-		43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUnarchiveThreadChange.h; sourceTree = "<group>"; };
-		43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUnarchiveThreadChange.m; sourceTree = "<group>"; };
+		438BEA1B192BC8CC00E5C67D /* INDeleteDraftTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDeleteDraftTask.h; sourceTree = "<group>"; };
+		438BEA1C192BC8CC00E5C67D /* INDeleteDraftTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDeleteDraftTask.m; sourceTree = "<group>"; };
+		438BEA1F192C35C900E5C67D /* INSendDraftTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSendDraftTask.h; sourceTree = "<group>"; };
+		438BEA20192C35C900E5C67D /* INSendDraftTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSendDraftTask.m; sourceTree = "<group>"; };
+		438BEA23192C364100E5C67D /* INArchiveThreadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INArchiveThreadTask.h; sourceTree = "<group>"; };
+		438BEA24192C364100E5C67D /* INArchiveThreadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INArchiveThreadTask.m; sourceTree = "<group>"; };
+		43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUnarchiveThreadTask.h; sourceTree = "<group>"; };
+		43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUnarchiveThreadTask.m; sourceTree = "<group>"; };
 		43A14746192E75B7001AF02F /* INDraft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDraft.h; sourceTree = "<group>"; };
 		43A14747192E75B7001AF02F /* INDraft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDraft.m; sourceTree = "<group>"; };
 		43A1474A192E7E1E001AF02F /* INThread+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INThread+Private.h"; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		43A1E2BB191C049A00EF660E /* Inbox-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Inbox-Prefix.pch"; sourceTree = "<group>"; };
 		43A1E2BC191C049A00EF660E /* INDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDatabaseManager.h; sourceTree = "<group>"; };
 		43A1E2BD191C049A00EF660E /* INDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDatabaseManager.m; sourceTree = "<group>"; };
-		43A1E2C0191C049A00EF660E /* INModelChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INModelChange.h; sourceTree = "<group>"; };
-		43A1E2C1191C049A00EF660E /* INModelChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelChange.m; sourceTree = "<group>"; };
+		43A1E2C0191C049A00EF660E /* INAPITask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAPITask.h; sourceTree = "<group>"; };
+		43A1E2C1191C049A00EF660E /* INAPITask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAPITask.m; sourceTree = "<group>"; };
 		43A1E2C5191C049A00EF660E /* INContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContact.h; sourceTree = "<group>"; };
 		43A1E2C6191C049A00EF660E /* INContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContact.m; sourceTree = "<group>"; };
 		43A1E2C7191C049A00EF660E /* INTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTag.h; sourceTree = "<group>"; };
@@ -173,8 +173,8 @@
 		43A1E312191C04A000EF660E /* InboxTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InboxTests-Info.plist"; sourceTree = "<group>"; };
 		43A1E314191C04A000EF660E /* INModelProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProviderTests.m; sourceTree = "<group>"; };
 		43A9684C191C08F300F24844 /* Inbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inbox.h; sourceTree = "<group>"; };
-		43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUploadAttachmentChange.h; sourceTree = "<group>"; };
-		43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUploadAttachmentChange.m; sourceTree = "<group>"; };
+		43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUploadAttachmentTask.h; sourceTree = "<group>"; };
+		43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUploadAttachmentTask.m; sourceTree = "<group>"; };
 		43ADEA04192D58160048272B /* INAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAttachment.h; sourceTree = "<group>"; };
 		43ADEA05192D58160048272B /* INAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAttachment.m; sourceTree = "<group>"; };
 		43FF122E191AF2E70043E2E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -281,22 +281,22 @@
 		43A1E2BF191C049A00EF660E /* API Calls */ = {
 			isa = PBXGroup;
 			children = (
-				43A1E2C0191C049A00EF660E /* INModelChange.h */,
-				43A1E2C1191C049A00EF660E /* INModelChange.m */,
-				435764F719269E3900E6B340 /* INSaveDraftChange.h */,
-				435764F819269E3900E6B340 /* INSaveDraftChange.m */,
-				438BEA1B192BC8CC00E5C67D /* INDeleteDraftChange.h */,
-				438BEA1C192BC8CC00E5C67D /* INDeleteDraftChange.m */,
-				435764F319269E2B00E6B340 /* INAddRemoveTagsChange.h */,
-				435764F419269E2B00E6B340 /* INAddRemoveTagsChange.m */,
-				43ADE9FC192D56A30048272B /* INUploadAttachmentChange.h */,
-				43ADE9FD192D56A30048272B /* INUploadAttachmentChange.m */,
-				438BEA23192C364100E5C67D /* INArchiveThreadChange.h */,
-				438BEA24192C364100E5C67D /* INArchiveThreadChange.m */,
-				43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */,
-				43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */,
-				438BEA1F192C35C900E5C67D /* INSendDraftChange.h */,
-				438BEA20192C35C900E5C67D /* INSendDraftChange.m */,
+				43A1E2C0191C049A00EF660E /* INAPITask.h */,
+				43A1E2C1191C049A00EF660E /* INAPITask.m */,
+				435764F719269E3900E6B340 /* INSaveDraftTask.h */,
+				435764F819269E3900E6B340 /* INSaveDraftTask.m */,
+				438BEA1B192BC8CC00E5C67D /* INDeleteDraftTask.h */,
+				438BEA1C192BC8CC00E5C67D /* INDeleteDraftTask.m */,
+				435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */,
+				435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */,
+				43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */,
+				43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */,
+				438BEA23192C364100E5C67D /* INArchiveThreadTask.h */,
+				438BEA24192C364100E5C67D /* INArchiveThreadTask.m */,
+				43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */,
+				43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */,
+				438BEA1F192C35C900E5C67D /* INSendDraftTask.h */,
+				438BEA20192C35C900E5C67D /* INSendDraftTask.m */,
 			);
 			path = "API Calls";
 			sourceTree = "<group>";
@@ -385,31 +385,31 @@
 				43A1E302191C049A00EF660E /* INThread.h in Headers */,
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
 				43A1E2FC191C049A00EF660E /* INTag.h in Headers */,
-				43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */,
+				43A14744192C447A001AF02F /* INUnarchiveThreadTask.h in Headers */,
 				43A14748192E75B7001AF02F /* INDraft.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
 				43A1474C192E7E1E001AF02F /* INThread+Private.h in Headers */,
 				43A1E2EA191C049A00EF660E /* INModelResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
 				43A1E2E6191C049A00EF660E /* NSPredicate+Inspection.h in Headers */,
-				43A1E2F6191C049A00EF660E /* INModelChange.h in Headers */,
+				43A1E2F6191C049A00EF660E /* INAPITask.h in Headers */,
 				43A1E2E8191C049A00EF660E /* NSString+FormatConversion.h in Headers */,
 				43A1E2DA191C049A00EF660E /* FMDatabase+INModelQueries.h in Headers */,
-				435764F919269E3900E6B340 /* INSaveDraftChange.h in Headers */,
+				435764F919269E3900E6B340 /* INSaveDraftTask.h in Headers */,
 				43A1E300191C049A00EF660E /* INNamespace.h in Headers */,
 				43A1E2E0191C049A00EF660E /* NSDictionary+FormatConversion.h in Headers */,
-				43ADE9FE192D56A30048272B /* INUploadAttachmentChange.h in Headers */,
-				438BEA1D192BC8CC00E5C67D /* INDeleteDraftChange.h in Headers */,
+				43ADE9FE192D56A30048272B /* INUploadAttachmentTask.h in Headers */,
+				438BEA1D192BC8CC00E5C67D /* INDeleteDraftTask.h in Headers */,
 				43A1E30B191C049A00EF660E /* INModelProvider.h in Headers */,
 				43A1E2FA191C049A00EF660E /* INContact.h in Headers */,
-				438BEA25192C364100E5C67D /* INArchiveThreadChange.h in Headers */,
+				438BEA25192C364100E5C67D /* INArchiveThreadTask.h in Headers */,
 				438BE9FF1926C8A400E5C67D /* INSyncEngine.h in Headers */,
-				438BEA21192C35C900E5C67D /* INSendDraftChange.h in Headers */,
+				438BEA21192C35C900E5C67D /* INSendDraftTask.h in Headers */,
 				43A1E308191C049A00EF660E /* INModelObject.h in Headers */,
 				43A1E2DC191C049A00EF660E /* FMResultSet+INModelQueries.h in Headers */,
 				43A1E304191C049A00EF660E /* INMessageProvider.h in Headers */,
 				43A1E2E4191C049A00EF660E /* NSObject+Properties.h in Headers */,
-				435764F519269E2B00E6B340 /* INAddRemoveTagsChange.h in Headers */,
+				435764F519269E2B00E6B340 /* INAddRemoveTagsTask.h in Headers */,
 				43A1E30A191C049A00EF660E /* INModelProvider+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,7 +594,7 @@
 				43A1E2EF191C049A00EF660E /* INPredicateToSQLConverter.m in Sources */,
 				43A1E2F1191C049A00EF660E /* INAPIManager.m in Sources */,
 				43A1E2E9191C049A00EF660E /* NSString+FormatConversion.m in Sources */,
-				43A1E2F7191C049A00EF660E /* INModelChange.m in Sources */,
+				43A1E2F7191C049A00EF660E /* INAPITask.m in Sources */,
 				43A1E2F5191C049A00EF660E /* INDatabaseManager.m in Sources */,
 				43A1474D192E7E1E001AF02F /* INThread+Private.m in Sources */,
 				43A1E2FF191C049A00EF660E /* INMessage.m in Sources */,
@@ -602,26 +602,26 @@
 				43A1E305191C049A00EF660E /* INMessageProvider.m in Sources */,
 				43A1E303191C049A00EF660E /* INThread.m in Sources */,
 				43ADEA07192D58160048272B /* INAttachment.m in Sources */,
-				438BEA1E192BC8CC00E5C67D /* INDeleteDraftChange.m in Sources */,
+				438BEA1E192BC8CC00E5C67D /* INDeleteDraftTask.m in Sources */,
 				43A1E301191C049A00EF660E /* INNamespace.m in Sources */,
 				43A14749192E75B7001AF02F /* INDraft.m in Sources */,
 				43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */,
 				43A1E2E5191C049A00EF660E /* NSObject+Properties.m in Sources */,
-				43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */,
-				438BEA26192C364100E5C67D /* INArchiveThreadChange.m in Sources */,
+				43A14745192C447A001AF02F /* INUnarchiveThreadTask.m in Sources */,
+				438BEA26192C364100E5C67D /* INArchiveThreadTask.m in Sources */,
 				43A1E2FB191C049A00EF660E /* INContact.m in Sources */,
-				438BEA22192C35C900E5C67D /* INSendDraftChange.m in Sources */,
+				438BEA22192C35C900E5C67D /* INSendDraftTask.m in Sources */,
 				43A1E309191C049A00EF660E /* INModelObject.m in Sources */,
 				43A1E30C191C049A00EF660E /* INModelProvider.m in Sources */,
 				43A1E307191C049A00EF660E /* INModelObject+Uniquing.m in Sources */,
 				43A1E2ED191C049A00EF660E /* INPredicateToQueryParamConverter.m in Sources */,
-				435764FA19269E3900E6B340 /* INSaveDraftChange.m in Sources */,
+				435764FA19269E3900E6B340 /* INSaveDraftTask.m in Sources */,
 				43A1E30E191C049A00EF660E /* INThreadProvider.m in Sources */,
 				43A1E2DD191C049A00EF660E /* FMResultSet+INModelQueries.m in Sources */,
-				43ADE9FF192D56A30048272B /* INUploadAttachmentChange.m in Sources */,
+				43ADE9FF192D56A30048272B /* INUploadAttachmentTask.m in Sources */,
 				43A1E2DB191C049A00EF660E /* FMDatabase+INModelQueries.m in Sources */,
 				43A1E2E7191C049A00EF660E /* NSPredicate+Inspection.m in Sources */,
-				435764F619269E2B00E6B340 /* INAddRemoveTagsChange.m in Sources */,
+				435764F619269E2B00E6B340 /* INAddRemoveTagsTask.m in Sources */,
 				43A1E2E1191C049A00EF660E /* NSDictionary+FormatConversion.m in Sources */,
 				43A1E2FD191C049A00EF660E /* INTag.m in Sources */,
 			);

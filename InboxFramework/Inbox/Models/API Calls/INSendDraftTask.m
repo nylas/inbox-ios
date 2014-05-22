@@ -6,24 +6,24 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INSendDraftChange.h"
-#import "INDeleteDraftChange.h"
+#import "INSendDraftTask.h"
+#import "INDeleteDraftTask.h"
 #import "INTag.h"
 
-@implementation INSendDraftChange
+@implementation INSendDraftTask
 
-- (BOOL)canStartAfterChange:(INModelChange *)other
+- (BOOL)canStartAfterTask:(INAPITask *)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftTask class]])
         return NO;
     return YES;
 }
 
-- (BOOL)canCancelPendingChange:(INModelChange*)other
+- (BOOL)canCancelPendingTask:(INAPITask*)other
 {
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INSendDraftTask class]])
         return YES;
-    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftTask class]])
         return YES;
     return NO;
 }
@@ -43,11 +43,11 @@
 - (NSArray*)dependenciesIn:(NSArray*)others
 {
 	NSMutableArray * dependencies = [NSMutableArray array];
-	for (INModelChange * other in others) {
+	for (INAPITask * other in others) {
 		if (other == self)
 			continue;
 		
-		if ([other isKindOfClass: [INSaveDraftChange class]] && [[other model] isEqual: [self model]])
+		if ([other isKindOfClass: [INSaveDraftTask class]] && [[other model] isEqual: [self model]])
 			[dependencies addObject: other];
 	}
 	return dependencies;

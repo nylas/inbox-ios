@@ -8,8 +8,8 @@
 
 #import "INThread.h"
 #import "INMessageProvider.h"
-#import "INArchiveThreadChange.h"
-#import "INUnarchiveThreadChange.h"
+#import "INArchiveThreadTask.h"
+#import "INUnarchiveThreadTask.h"
 #import "INTag.h"
 
 @implementation INThread
@@ -90,14 +90,14 @@
 
 - (void)archive
 {
-	INArchiveThreadChange * archive = [INArchiveThreadChange operationForModel: self];
-    [[INAPIManager shared] queueChange: archive];
+	INArchiveThreadTask * archive = [INArchiveThreadTask operationForModel: self];
+    [[INAPIManager shared] queueTask: archive];
 }
 
 - (void)unarchive
 {
-	INUnarchiveThreadChange * unarchive = [INUnarchiveThreadChange operationForModel: self];
-    [[INAPIManager shared] queueChange: unarchive];
+	INUnarchiveThreadTask * unarchive = [INUnarchiveThreadTask operationForModel: self];
+    [[INAPIManager shared] queueTask: unarchive];
 }
 
 @end

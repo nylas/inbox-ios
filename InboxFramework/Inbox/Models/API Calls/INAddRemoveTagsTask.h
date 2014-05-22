@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INModelChange.h"
+#import "INAPITask.h"
 
-@interface INAddRemoveTagsChange : INModelChange
+@interface INAddRemoveTagsTask : INAPITask
 
 - (NSMutableArray *)tagIDsToAdd;
 - (NSMutableArray *)tagIDsToRemove;

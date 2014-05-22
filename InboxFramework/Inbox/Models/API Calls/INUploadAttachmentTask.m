@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INUploadAttachmentChange.h"
+#import "INUploadAttachmentTask.h"
 #import "INAttachment.h"
 #import "INDatabaseManager.h"
 #import "INDraft.h"
 
-@implementation INUploadAttachmentChange
+@implementation INUploadAttachmentTask
 
 - (NSURLRequest *)buildAPIRequest
 {
