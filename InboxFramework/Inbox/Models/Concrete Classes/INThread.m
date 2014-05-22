@@ -23,6 +23,7 @@
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"messages",
+        @"draftIDs": @"drafts",
 		@"tagIDs": @"tags",
 		@"snippet": @"snippet"
 	}];
@@ -65,25 +66,12 @@
 
 - (INModelProvider*)newMessageProvider
 {
-	return [[INMessageProvider alloc] initWithThreadID: [self ID] andNamespaceID:[self namespaceID]];
+	return [[INMessageProvider alloc] initForMessagesInThread: [self ID] andNamespaceID:[self namespaceID]];
 }
 
-- (INMessage*)currentDraft
+- (INModelProvider*)newDraftProvider
 {
-    // TODO may not always get the right item if data is not loaded!
-    // This should be replaced by a draft_id on the thread that points to the
-    // draft message at all times.
-    INMessage * __block draft = nil;
-    [[INDatabaseManager shared] selectModelsOfClassSync:[INMessage class] withQuery:@"SELECT * FROM INMessage WHERE thread = :thread" andParameters:@{@"thread":[self ID]} andCallback:^(NSArray *objects) {
-        for (INMessage * message in objects)
-            if ([message isDraft])
-                draft = message;
-    }];
-    
-    if (!draft && [self hasTagWithID: INTagIDDraft])
-        draft = [INMessage instanceWithID:[[self messageIDs] lastObject] inNamespaceID:[self namespaceID]];
-    
-    return draft;
+	return [[INMessageProvider alloc] initForDraftsInThread:[self ID] andNamespaceID:[self namespaceID]];
 }
 
 #pragma mark Database

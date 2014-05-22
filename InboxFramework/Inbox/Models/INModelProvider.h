@@ -29,7 +29,7 @@ typedef enum : NSUInteger {
  update your UI in a granular way, ie. updating a particlar message row rather than refreshing
  the entire view.
  
- To get a changes, implement INModelProvider's -providerDataAltered: delegate method.
+ To get a changes, implement INModelProvider's -provider:(INModelProvider*)provider dataAltered: delegate method.
 */
 @interface INModelProviderChange : NSObject
 @property (nonatomic, assign) INModelProviderChangeType type;
@@ -54,15 +54,26 @@ typedef enum : NSUInteger {
 /**
  Returns an array of index paths for rows that have changed in a particular way. 
  Note that this function assumes your UITableView or UICollectionView only has 
- one section.
+ one section. If you want to pass a section, use -indexPathsFor:assumingSection:
  
  @param changeType The type of change you want index paths for.
  @return An array of index paths.
 */
 - (NSArray*)indexPathsFor:(INModelProviderChangeType)changeType;
+
+
+/**
+ Equivalent to indexPathsFor:, but returned NSIndexPath objects have the section value you provide.
+ 
+ @param changeType The type of change you want index paths for.
+ @param section The section you are displaying this provider in.
+ @return An array of index paths.
+ */
+- (NSArray*)indexPathsFor:(INModelProviderChangeType)changeType assumingSection:(int)section;
+
 @end
 
-
+@class INModelProvider;
 
 @protocol INModelProviderDelegate <NSObject>
 @optional
@@ -70,7 +81,7 @@ typedef enum : NSUInteger {
  Called when the items array of the provider has changed substantially. You should
  refresh your interface completely to reflect the new items array.
 */
-- (void)providerDataChanged;
+- (void)providerDataChanged:(INModelProvider*)provider;
 
 /**
  Called when objects have been added, removed, or modified in the items array, usually
@@ -80,7 +91,7 @@ typedef enum : NSUInteger {
  
  @param changeSet The set of items and indexes that have been modified.
  */
-- (void)providerDataAltered:(INModelProviderChangeSet *)changeSet;
+- (void)provider:(INModelProvider*)provider dataAltered:(INModelProviderChangeSet *)changeSet;
 
 /**
  Called when an attempt to load data from the Inbox API has failed. If you requested
@@ -89,13 +100,13 @@ typedef enum : NSUInteger {
 
  @param error The error, with a display-ready message in -localizedDescription.
 */
-- (void)providerDataFetchFailed:(NSError *)error;
+- (void)provider:(INModelProvider*)provider dataFetchFailed:(NSError *)error;
 
 /**
  Called when the provider has fully refresh in response to an explicit refresh request
  or a change in the item filter predicate or sort descriptors.
 */
-- (void)providerDataFetchCompleted;
+- (void)providerDataFetchCompleted:(INModelProvider*)provider;
 
 @end
 
@@ -110,9 +121,9 @@ typedef enum : NSUInteger {
  Providers retrieve items from the local cache and also initiate requests to the 
  Inbox API. When you set up a provider, you may receive several delegate calls
  as data is first retrieved from the cache and later merged with updated data
- provided by the API. It's important to implement -providerDataAltered: so your 
+ provided by the API. It's important to implement -provider:(INModelProvider*)provider dataAltered: so your 
  controller can react to incremental changes in the provider's items array. In
- the future, the Inbox server will push data to your app, and -providerDataAltered:
+ the future, the Inbox server will push data to your app, and -provider:(INModelProvider*)provider dataAltered:
  may be called at any time.
 */
 @interface INModelProvider : NSObject <INDatabaseObserver>

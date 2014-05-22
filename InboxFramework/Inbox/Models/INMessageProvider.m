@@ -13,7 +13,7 @@
 
 @implementation INMessageProvider
 
-- (id)initWithThreadID:(NSString *)threadID andNamespaceID:(NSString*)namespaceID
+- (id)initForMessagesInThread:(NSString *)threadID andNamespaceID:(NSString*)namespaceID
 {
 	NSPredicate * threadPredicate = [NSComparisonPredicate predicateWithFormat:@"threadID = %@", threadID];
 	self = [super initWithClass:[INMessage class] andNamespaceID:namespaceID andUnderlyingPredicate:threadPredicate];
@@ -21,6 +21,17 @@
 	}
 	return self;
 }
+
+
+- (id)initForDraftsInThread:(NSString *)threadID andNamespaceID:(NSString*)namespaceID
+{
+	NSPredicate * threadPredicate = [NSComparisonPredicate predicateWithFormat:@"threadID = %@", threadID];
+	self = [super initWithClass:[INDraft class] andNamespaceID:namespaceID andUnderlyingPredicate:threadPredicate];
+	if (self) {
+	}
+	return self;
+}
+
 
 - (NSDictionary *)queryParamsForPredicate:(NSPredicate*)predicate
 {

@@ -8,9 +8,12 @@
 
 #import "INSaveDraftChange.h"
 #import "INThread.h"
+#import "INThread+Private.h"
 #import "INTag.h"
 #import "INDeleteDraftChange.h"
 #import "INSendDraftChange.h"
+#import "INModelObject+Uniquing.h"
+
 
 @implementation INSaveDraftChange
 
@@ -52,78 +55,50 @@
 	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
 	
     NSError * error = nil;
-    NSString * path = [NSString stringWithFormat:@"/n/%@/create_draft", [self.model namespaceID]];
+    NSString * path = [NSString stringWithFormat:@"/n/%@/drafts", [self.model namespaceID]];
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
     
     NSMutableDictionary * params = [[self.model resourceDictionary] mutableCopy];
-    INThread * thread = [(INMessage*)self.model thread];
-    
-    NSMutableArray * messageIDs = [[thread messageIDs] mutableCopy];
-    [messageIDs removeObject: [self.model ID]];
-    if ([messageIDs count] > 1)
-        [params setObject:[thread ID] forKey:@"reply_to"];
+    INThread * thread = [(INDraft*)self.model thread];
+    if (thread) [params setObject:[thread ID] forKey:@"replying_to_thread"];
     
     return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
 {
-    INMessage * message = (INMessage *)[self model];
-    INThread * oldThread = [message thread];
+    if (![responseObject isKindOfClass: [NSDictionary class]])
+        return NSLog(@"SaveDraft weird response: %@", responseObject);
     
-    if ([responseObject isKindOfClass: [NSDictionary class]])
-        [message updateWithResourceDictionary: responseObject];
-    
-    // if we've orphaned a temporary thread object, go ahead and clean it up
-    if ([[oldThread ID] isEqualToString: [[message thread] ID]] == NO) {
-        if ([oldThread isUnsynced])
-            [[INDatabaseManager shared] unpersistModel: oldThread];
+    INDraft * draft = (INDraft *)[self model];
+    NSString * draftInitialID = [draft ID];
+
+    // remove the draft from the local cache and then update it with the API response
+    // and save it again. This is important, because the JSON that comes back gives the
+    // draft a different ID and we want to replace the old draft since it's outdated.
+    [[INDatabaseManager shared] unpersistModel: draft];
+    [draft updateWithResourceDictionary: responseObject];
+    [[INDatabaseManager shared] persistModel: draft];
+
+    // if the draft ID changed, update our local cache so it has the new draft ID
+    if (![draftInitialID isEqualToString: [draft ID]]) {
+        INThread * thread = [draft thread];
+        [thread removeDraftID: draftInitialID];
+        [thread addDraftID: [draft ID]];
+        [[INDatabaseManager shared] persistModel: thread];
     }
-    
-    // if we've created a new thread, fetch it so we have more than it's ID
-    if (![[message thread] isDataAvailable])
-        [[message thread] reload: NULL];
 }
 
 - (void)applyLocally
 {
-    INMessage * message = (INMessage *)[self model];
-    
-    INThread * thread = [message thread];
-    BOOL createThread = (thread == nil);
-    
-    if (createThread) {
-		// Until we're able to save this draft, it's orphaned because it has no thread.
-		// In order to present it in the app and give it the draft tag, let's create a
-		// thread with a self-assigned ID for it. We'll keep that thread object in sync
-		// and when this operation succeeds we'll destroy it.
-        thread = [[INThread alloc] init];
-        [thread setNamespaceID: [message namespaceID]];
-        [thread setCreatedAt: [NSDate date]];
-        [message setThreadID: [thread ID]];
+    INDraft * draft = (INDraft *)[self model];
+    if ([draft thread]) {
+        INThread * thread = [draft thread];
+        [thread addDraftID: [draft ID]];
+        [[INDatabaseManager shared] persistModel: thread];
     }
-	
-    if ([thread isUnsynced]) {
-		// our thread hasn't been synced with the server - it's a local object only.
-		// update it's properties (subject, snippet, etc.) to reflect the message.
-        [thread setSubject: [message subject]];
-        [thread setParticipants: [message to]];
-        [thread setSnippet: [message body]];
-        [thread setMessageIDs: @[[message ID]]];
-        [thread setUpdatedAt: [NSDate date]];
-        [thread setLastMessageDate: [NSDate date]];
-    }
-    
-    if ([thread hasTagWithID: INTagIDDraft] == NO) {
-		// our thread doesn't have the draft tag. Add the draft tag (the server will
-		// do this when the save succeeds)
-        NSMutableArray * tags = [[thread tagIDs] mutableCopy];
-        [tags addObject: INTagIDDraft];
-        [thread setTagIDs: tags];
-    }
-    
-    [[INDatabaseManager shared] persistModel: message];
-    [[INDatabaseManager shared] persistModel: thread];
+
+    [[INDatabaseManager shared] persistModel: draft];
 }
 
 - (void)rollbackLocally

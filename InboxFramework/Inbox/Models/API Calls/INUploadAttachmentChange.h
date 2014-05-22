@@ -10,4 +10,6 @@
 
 @interface INUploadAttachmentChange : INModelChange
 
+- (NSMutableArray *)waitingDrafts;
+
 @end

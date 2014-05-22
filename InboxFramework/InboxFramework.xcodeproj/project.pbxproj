@@ -22,6 +22,10 @@
 		438BEA26192C364100E5C67D /* INArchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA24192C364100E5C67D /* INArchiveThreadChange.m */; };
 		43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */; };
+		43A14748192E75B7001AF02F /* INDraft.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14746192E75B7001AF02F /* INDraft.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A14749192E75B7001AF02F /* INDraft.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14747192E75B7001AF02F /* INDraft.m */; };
+		43A1474C192E7E1E001AF02F /* INThread+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1474A192E7E1E001AF02F /* INThread+Private.h */; };
+		43A1474D192E7E1E001AF02F /* INThread+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1474B192E7E1E001AF02F /* INThread+Private.m */; };
 		43A1E28A191C02A800EF660E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF123C191AF2E70043E2E6 /* XCTest.framework */; };
 		43A1E28B191C02A800EF660E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF122E191AF2E70043E2E6 /* Foundation.framework */; };
 		43A1E28D191C02A800EF660E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A1E28C191C02A800EF660E /* UIKit.framework */; };
@@ -109,6 +113,10 @@
 		438BEA24192C364100E5C67D /* INArchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INArchiveThreadChange.m; sourceTree = "<group>"; };
 		43A14742192C447A001AF02F /* INUnarchiveThreadChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUnarchiveThreadChange.h; sourceTree = "<group>"; };
 		43A14743192C447A001AF02F /* INUnarchiveThreadChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUnarchiveThreadChange.m; sourceTree = "<group>"; };
+		43A14746192E75B7001AF02F /* INDraft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDraft.h; sourceTree = "<group>"; };
+		43A14747192E75B7001AF02F /* INDraft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDraft.m; sourceTree = "<group>"; };
+		43A1474A192E7E1E001AF02F /* INThread+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INThread+Private.h"; sourceTree = "<group>"; };
+		43A1474B192E7E1E001AF02F /* INThread+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INThread+Private.m"; sourceTree = "<group>"; };
 		43A1E27A191C02A800EF660E /* Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E289191C02A800EF660E /* InboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E28C191C02A800EF660E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -302,12 +310,16 @@
 				43A1E2C8191C049A00EF660E /* INTag.m */,
 				43A1E2C9191C049A00EF660E /* INMessage.h */,
 				43A1E2CA191C049A00EF660E /* INMessage.m */,
+				43A14746192E75B7001AF02F /* INDraft.h */,
+				43A14747192E75B7001AF02F /* INDraft.m */,
 				43ADEA04192D58160048272B /* INAttachment.h */,
 				43ADEA05192D58160048272B /* INAttachment.m */,
 				43A1E2CB191C049A00EF660E /* INNamespace.h */,
 				43A1E2CC191C049A00EF660E /* INNamespace.m */,
 				43A1E2CD191C049A00EF660E /* INThread.h */,
 				43A1E2CE191C049A00EF660E /* INThread.m */,
+				43A1474A192E7E1E001AF02F /* INThread+Private.h */,
+				43A1474B192E7E1E001AF02F /* INThread+Private.m */,
 			);
 			path = "Concrete Classes";
 			sourceTree = "<group>";
@@ -374,7 +386,9 @@
 				43A1E2EC191C049A00EF660E /* INPredicateToQueryParamConverter.h in Headers */,
 				43A1E2FC191C049A00EF660E /* INTag.h in Headers */,
 				43A14744192C447A001AF02F /* INUnarchiveThreadChange.h in Headers */,
+				43A14748192E75B7001AF02F /* INDraft.h in Headers */,
 				43A1E2E2191C049A00EF660E /* NSObject+AssociatedObjects.h in Headers */,
+				43A1474C192E7E1E001AF02F /* INThread+Private.h in Headers */,
 				43A1E2EA191C049A00EF660E /* INModelResponseSerializer.h in Headers */,
 				43A1E2EE191C049A00EF660E /* INPredicateToSQLConverter.h in Headers */,
 				43A1E2E6191C049A00EF660E /* NSPredicate+Inspection.h in Headers */,
@@ -582,6 +596,7 @@
 				43A1E2E9191C049A00EF660E /* NSString+FormatConversion.m in Sources */,
 				43A1E2F7191C049A00EF660E /* INModelChange.m in Sources */,
 				43A1E2F5191C049A00EF660E /* INDatabaseManager.m in Sources */,
+				43A1474D192E7E1E001AF02F /* INThread+Private.m in Sources */,
 				43A1E2FF191C049A00EF660E /* INMessage.m in Sources */,
 				43A1E2E3191C049A00EF660E /* NSObject+AssociatedObjects.m in Sources */,
 				43A1E305191C049A00EF660E /* INMessageProvider.m in Sources */,
@@ -589,6 +604,7 @@
 				43ADEA07192D58160048272B /* INAttachment.m in Sources */,
 				438BEA1E192BC8CC00E5C67D /* INDeleteDraftChange.m in Sources */,
 				43A1E301191C049A00EF660E /* INNamespace.m in Sources */,
+				43A14749192E75B7001AF02F /* INDraft.m in Sources */,
 				43A1E2EB191C049A00EF660E /* INModelResponseSerializer.m in Sources */,
 				43A1E2E5191C049A00EF660E /* NSObject+Properties.m in Sources */,
 				43A14745192C447A001AF02F /* INUnarchiveThreadChange.m in Sources */,

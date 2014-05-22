@@ -10,6 +10,7 @@
 #import "INTag.h"
 #import "INContact.h"
 #import "INThreadProvider.h"
+#import "INMessageProvider.h"
 #import "INThread.h"
 
 @implementation INNamespace
@@ -50,6 +51,11 @@
 - (INThreadProvider *)newThreadProvider
 {
 	return [[INThreadProvider alloc] initWithNamespaceID: [self ID]];
+}
+
+- (INMessageProvider *)newDraftsProvider
+{
+    return [[INMessageProvider alloc] initWithClass:[INDraft class] andNamespaceID:[self ID] andUnderlyingPredicate:nil];
 }
 
 @end

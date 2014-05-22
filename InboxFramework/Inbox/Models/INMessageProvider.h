@@ -10,6 +10,7 @@
 
 @interface INMessageProvider : INModelProvider
 
-- (id)initWithThreadID:(NSString *)threadID andNamespaceID:(NSString*)namespaceID;
+- (id)initForMessagesInThread:(NSString *)threadID andNamespaceID:(NSString*)namespaceID;
+- (id)initForDraftsInThread:(NSString *)threadID andNamespaceID:(NSString*)namespaceID;
 
 @end

@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import <Inbox/Inbox.h>
+#import "INModelObject.h"
 #import "INAPIManager.h"
+#import "INUploadAttachmentChange.h"
 
 typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 

@@ -8,6 +8,7 @@
 
 #import "INAttachment.h"
 #import "INModelObject+Uniquing.h"
+#import "INNamespace.h"
 
 @implementation INAttachment
 

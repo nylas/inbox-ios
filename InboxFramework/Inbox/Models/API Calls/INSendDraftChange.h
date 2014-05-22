@@ -8,6 +8,6 @@
 
 #import "INAddRemoveTagsChange.h"
 
-@interface INSendDraftChange : INAddRemoveTagsChange
+@interface INSendDraftChange : INModelChange
 
 @end

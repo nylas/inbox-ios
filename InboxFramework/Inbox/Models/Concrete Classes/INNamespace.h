@@ -10,6 +10,7 @@
 #import "INModelProvider.h"
 
 @class INThreadProvider;
+@class INMessageProvider;
 
 @interface INNamespace : INModelObject
 
@@ -22,5 +23,6 @@
 - (INModelProvider *)newContactProvider;
 - (INThreadProvider *)newThreadProvider;
 - (INModelProvider *)newTagProvider;
+- (INMessageProvider *)newDraftsProvider;
 
 @end

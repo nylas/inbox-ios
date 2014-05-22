@@ -12,17 +12,6 @@
 
 @implementation INSendDraftChange
 
-
-- (id)initWithModel:(INModelObject *)model
-{
-    self = [super initWithModel: model];
-    if (self) {
-        [[self tagIDsToRemove] addObject: INTagIDDraft];
-        [[self tagIDsToAdd] addObject: INTagIDSent];
-    }
-    return self;
-}
-
 - (BOOL)canStartAfterChange:(INModelChange *)other
 {
     if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
@@ -37,6 +26,18 @@
     if ([[other model] isEqual: self.model] && [other isKindOfClass: [INDeleteDraftChange class]])
         return YES;
     return NO;
+}
+
+- (NSURLRequest *)buildAPIRequest
+{
+    NSAssert(self.model, @"INSendDraftChange asked to buildRequest with no model!");
+	NSAssert([self.model namespaceID], @"INSendDraftChange asked to buildRequest with no namespace!");
+	
+    NSError * error = nil;
+    NSString * sendPath = [NSString stringWithFormat:@"/n/%@/send", [self.model namespaceID]];
+    NSString * url = [[NSURL URLWithString:sendPath relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    
+	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:@{@"draft_id": [self.model ID]} error:&error];
 }
 
 - (NSArray*)dependenciesIn:(NSArray*)others

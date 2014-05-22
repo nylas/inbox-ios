@@ -21,24 +21,10 @@
 @property (nonatomic, strong) NSArray * attachmentIDs;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
-@property (nonatomic, assign) BOOL isDraft;
-
-- (id)initAsDraftIn:(INNamespace*)namespace;
-- (id)initAsDraftIn:(INNamespace*)namespace inReplyTo:(INThread*)thread;
 
 - (INThread*)thread;
 
 - (NSArray*)attachments;
-- (void)addAttachment:(INAttachment*)attachment;
-- (void)addAttachment:(INAttachment*)attachment atIndex:(NSInteger)index;
-- (void)removeAttachment:(INAttachment*)attachment;
-- (void)removeAttachmentAtIndex:(NSInteger)index;
-
-#pragma mark Operations on Drafts
-
-- (void)save;
-- (void)send;
-- (void)delete;
 
 
 @end

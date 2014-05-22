@@ -36,10 +36,15 @@
 
 - (NSArray*)indexPathsFor:(INModelProviderChangeType)changeType
 {
+    return [self indexPathsFor:changeType assumingSection:0];
+}
+
+- (NSArray*)indexPathsFor:(INModelProviderChangeType)changeType assumingSection:(int)section
+{
 	NSMutableArray * indexPaths = [NSMutableArray array];
 	for (INModelProviderChange * change in self.changes) {
 		if (change.type == changeType)
-			[indexPaths addObject: [NSIndexPath indexPathForItem:change.index inSection:0]];
+			[indexPaths addObject: [NSIndexPath indexPathForItem:change.index inSection:section]];
 	}
 	return indexPaths;
 }
@@ -135,8 +140,8 @@
 	[[INDatabaseManager shared] selectModelsOfClass:_modelClass matching:[self fetchPredicate] sortedBy:_itemSortDescriptors limit:_itemRange.length offset:_itemRange.location withCallback:^(NSArray * matchingItems) {
 		self.items = matchingItems;
 
-		if ([self.delegate respondsToSelector:@selector(providerDataChanged)])
-			[self.delegate providerDataChanged];
+		if ([self.delegate respondsToSelector:@selector(providerDataChanged:)])
+			[self.delegate providerDataChanged:self];
 	}];
 }
 
@@ -164,12 +169,12 @@
 			[self fetchFromAPI];
 		}
 
-		if ([self.delegate respondsToSelector:@selector(providerDataFetchCompleted)])
-			[self.delegate providerDataFetchCompleted];
+		if ([self.delegate respondsToSelector:@selector(providerDataFetchCompleted:)])
+			[self.delegate providerDataFetchCompleted: self];
 		
 	} failure:^(AFHTTPRequestOperation * operation, NSError * error) {
-		if ([self.delegate respondsToSelector:@selector(providerDataFetchFailed:)])
-			[self.delegate providerDataFetchFailed:error];
+		if ([self.delegate respondsToSelector:@selector(provider:dataFetchFailed:)])
+			[self.delegate provider:self dataFetchFailed:error];
 		_fetchOperation = nil;
 	}];
 	
@@ -190,7 +195,7 @@
 	
 	NSMutableSet * savedModels = [NSMutableSet set];
 	for (INModelObject * model in savedArray)
-		if ([model isKindOfClass: _modelClass])
+		if ([model isMemberOfClass: _modelClass])
 			[savedModels addObject: model];
 
 	if ([savedModels count] == 0) {
@@ -227,7 +232,7 @@
 	// If our delegate wants to be notified of item-level changes, compute those. Please
 	// note that this code was designed for readability over efficiency. If it's too slow
 	// we'll come back to it :-)
-	if ([self.delegate respondsToSelector:@selector(providerDataAltered:)] && ([self.items count] > 0)) {
+	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)] && ([self.items count] > 0)) {
 		NSMutableArray * changes = [NSMutableArray array];
 		
 		for (INModelObject * item in removedModels) {
@@ -267,15 +272,15 @@
 		if ([changes count] > 0) {
 			INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
 			[set setChanges: changes];
-			[self.delegate providerDataAltered:set];
+			[self.delegate provider:self dataAltered:set];
 		}
 								
-	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged)]) {
+	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged:)]) {
 		[allItems addObjectsFromArray: [addedModels allObjects]];
 		[allItems removeObjectsInArray: [removedModels allObjects]];
 		[allItems sortUsingDescriptors:self.itemSortDescriptors];
 		self.items = [allItems subarrayWithRange: NSMakeRange(MIN(_itemRange.location, [allItems count]-1), MIN(_itemRange.length, [allItems count] - _itemRange.location))];
-		[self.delegate providerDataChanged];
+		[self.delegate providerDataChanged:self];
 	}
 }
 
@@ -286,7 +291,7 @@
 	NSMutableArray * newItems = [NSMutableArray arrayWithArray: self.items];
 	[newItems removeObjectsInArray: models];
 	
-	if ([self.delegate respondsToSelector:@selector(providerDataAltered:)]) {
+	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]) {
 		NSMutableArray * changes = [NSMutableArray array];
 		for (INModelObject * item in models) {
 			NSInteger index = [self.items indexOfObjectIdenticalTo:item];
@@ -298,11 +303,11 @@
 
 		INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
 		[set setChanges: changes];
-		[self.delegate providerDataAltered:set];
+		[self.delegate provider:self dataAltered:set];
 
-	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged)]) {
+	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged:)]) {
 		self.items = newItems;
-		[self.delegate providerDataChanged];
+		[self.delegate providerDataChanged:self];
 
 	} else {
 		self.items = newItems;

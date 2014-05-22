@@ -34,5 +34,6 @@
 #import "INSyncEngine.h"
 #import "INModelResponseSerializer.h"
 #import "INAttachment.h"
+#import "INDraft.h"
 
 #endif

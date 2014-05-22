@@ -9,6 +9,7 @@
 #import "INModelObject.h"
 #import "INModelProvider.h"
 #import "INMessage.h"
+#import "INDraft.h"
 
 @class INTag;
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSArray * participants;
 @property (nonatomic, strong) NSDate * lastMessageDate;
 @property (nonatomic, strong) NSArray * messageIDs;
+@property (nonatomic, strong) NSArray * draftIDs;
 @property (nonatomic, strong) NSArray * tagIDs;
 @property (nonatomic, assign) BOOL unread;
 
@@ -27,7 +29,7 @@
 - (BOOL)hasTagWithID:(NSString*)ID;
 
 - (INModelProvider*)newMessageProvider;
-- (INMessage*)currentDraft;
+- (INModelProvider*)newDraftProvider;
 
 
 #pragma mark Operations on Threads

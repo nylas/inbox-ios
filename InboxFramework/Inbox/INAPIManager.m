@@ -138,12 +138,11 @@ static void initialize_INAPIManager() {
         }
     }
 
-    [_changeQueue addObject: change];
+    // Local effects always take effect immediately
+    [change applyLocally];
 
-    if ([[change dependenciesIn: _changeQueue] count] == 0) {
-        [change applyLocally];
-        [self tryStartChange: change];
-    }
+    [_changeQueue addObject: change];
+    [self tryStartChange: change];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:INChangeQueueChangedNotification object:nil];
     [self describeChangeQueue];
