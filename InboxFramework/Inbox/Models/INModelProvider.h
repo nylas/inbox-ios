@@ -29,7 +29,7 @@ typedef enum : NSUInteger {
  update your UI in a granular way, ie. updating a particlar message row rather than refreshing
  the entire view.
  
- To get a changes, implement INModelProvider's -provider:(INModelProvider*)provider dataAltered: delegate method.
+ To get a changes, implement INModelProvider's -provider:dataAltered: delegate method.
 */
 @interface INModelProviderChange : NSObject
 @property (nonatomic, assign) INModelProviderChangeType type;
@@ -121,9 +121,9 @@ typedef enum : NSUInteger {
  Providers retrieve items from the local cache and also initiate requests to the 
  Inbox API. When you set up a provider, you may receive several delegate calls
  as data is first retrieved from the cache and later merged with updated data
- provided by the API. It's important to implement -provider:(INModelProvider*)provider dataAltered: so your 
+ provided by the API. It's important to implement -provider:dataAltered: so your
  controller can react to incremental changes in the provider's items array. In
- the future, the Inbox server will push data to your app, and -provider:(INModelProvider*)provider dataAltered:
+ the future, the Inbox server will push data to your app, and -provider:dataAltered:
  may be called at any time.
 */
 @interface INModelProvider : NSObject <INDatabaseObserver>
@@ -166,6 +166,8 @@ typedef enum : NSUInteger {
  when you modify the itemsFilterPredicate, itemRange or itemSortDescriptors.
 */
 - (void)refresh;
+
+- (void)extendItemRange:(int)count;
 
 
 @end

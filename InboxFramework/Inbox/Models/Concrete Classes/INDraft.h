@@ -9,9 +9,16 @@
 #import "INMessage.h"
 #import "INAttachment.h"
 
+typedef enum : NSUInteger {
+    INDraftStateUnsent,
+    INDraftStateSending,
+    INDraftStateSendingFailed,
+    INDraftStateSent
+} INDraftState;
+
 @interface INDraft : INMessage
 
-@property (nonatomic, strong) NSString * state;
+@property (nonatomic, strong) NSString * internalState;
 
 - (id)initInNamespace:(INNamespace*)namespace;
 - (id)initInNamespace:(INNamespace*)namespace inReplyTo:(INThread*)thread;
@@ -22,6 +29,8 @@
 - (void)removeAttachmentAtIndex:(NSInteger)index;
 
 - (void)attachmentWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID;
+
+- (INDraftState)state;
 
 #pragma mark Operations on Drafts
 

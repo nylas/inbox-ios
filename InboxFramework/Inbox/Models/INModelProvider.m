@@ -27,7 +27,7 @@
 
 - (NSString*)description
 {
-	return [NSString stringWithFormat:@"<INModelProviderChange: %p> type: %d, item: %@, index: %d", self, _type, _item, _index];
+	return [NSString stringWithFormat:@"<INModelProviderChange: %p> type: %@, item: %@, index: %d", self, @[@"Add",@"Remove", @"Update"][_type], _item, _index];
 }
 
 @end
@@ -107,6 +107,11 @@
 		
 	_itemRange = itemRange;
 	[self performSelectorOnMainThreadOnce:@selector(refresh)];
+}
+
+- (void)extendItemRange:(int)count
+{
+    [self setItemRange: NSMakeRange(_itemRange.location, _itemRange.length + count)];
 }
 
 - (void)refresh

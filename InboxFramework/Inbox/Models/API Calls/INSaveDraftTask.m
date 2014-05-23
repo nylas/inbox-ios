@@ -55,9 +55,14 @@
 	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
 	
     NSError * error = nil;
-    NSString * path = [NSString stringWithFormat:@"/n/%@/drafts", [self.model namespaceID]];
-    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * path = nil;
     
+    if ([self.model isUnsynced])
+        path = [NSString stringWithFormat:@"/n/%@/drafts", [self.model namespaceID]];
+    else
+        path = [NSString stringWithFormat:@"/n/%@/drafts/%@", [self.model namespaceID], [self.model ID]];
+
+    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
     NSMutableDictionary * params = [[self.model resourceDictionary] mutableCopy];
     INThread * thread = [(INDraft*)self.model thread];
     if (thread) [params setObject:[thread ID] forKey:@"replying_to_thread"];

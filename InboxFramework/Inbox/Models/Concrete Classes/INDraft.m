@@ -18,7 +18,7 @@
 + (NSMutableDictionary *)resourceMapping
 {
 	NSMutableDictionary * mapping = [super resourceMapping];
-	[mapping addEntriesFromDictionary:@{ @"state": @"state" }];
+	[mapping addEntriesFromDictionary:@{ @"internalState": @"state" }];
 	return mapping;
 }
 
@@ -48,10 +48,8 @@
             [recipients addObject: recipient];
     
     [m setTo: recipients];
-    [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
     [m setSubject: thread.subject];
     [m setThreadID: [thread ID]];
-    [m setDate: [NSDate date]];
     
     return m;
 }
@@ -96,6 +94,17 @@
     if ([IDs containsObject: ID])
         [IDs replaceObjectAtIndex:[IDs indexOfObject: ID] withObject:uploadedID];
     [self setAttachmentIDs: IDs];
+}
+
+- (INDraftState)state
+{
+    if ([_internalState isEqualToString: @"sending"])
+        return INDraftStateSending;
+    else if ([_internalState isEqualToString: @"sending_failed"])
+        return INDraftStateSendingFailed;
+    else if ([_internalState isEqualToString: @"sent"])
+        return INDraftStateSent;
+    return INDraftStateUnsent;
 }
 
 #pragma mark Operations on Drafts
