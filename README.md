@@ -13,6 +13,10 @@ BigSur uses Cocoapods, a dependency management system for iOS apps similiar to n
 
 After Cocoapods has installed dependencies, open the project's .xcworkspace (not the .xcproj). Have fun.
 
+The Inbox Framework is an actual static framework. Unfortunately, Xcode doesn't support building frameworks for the iOS platform out of the box. You can extend Xcode to support framework targets by downloading the repository at [https://github.com/kstenerud/iOS-Universal-Framework](https://github.com/kstenerud/iOS-Universal-Framework), and running the `setup.sh` script found in the Real Framework folder.
+
+***You need to do this before you'll be able to build Inbox.framework***
+
 #### Testing & Linting
 
 To run tests within Xcode, choose Product > Test from the menu.
