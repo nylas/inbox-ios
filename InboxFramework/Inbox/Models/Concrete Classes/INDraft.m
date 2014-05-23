@@ -12,6 +12,7 @@
 #import "INSaveDraftTask.h"
 #import "INSendDraftTask.h"
 #import "INDeleteDraftTask.h"
+#import "INUploadAttachmentTask.h"
 
 @implementation INDraft
 

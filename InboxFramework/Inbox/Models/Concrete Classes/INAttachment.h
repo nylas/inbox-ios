@@ -8,7 +8,8 @@
 
 #import "INModelObject.h"
 #import "INAPIManager.h"
-#import "INUploadAttachmentTask.h"
+
+@class INUploadAttachmentTask;
 
 typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 

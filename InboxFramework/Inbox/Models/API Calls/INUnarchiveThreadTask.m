@@ -8,6 +8,7 @@
 
 #import "INUnarchiveThreadTask.h"
 #import "INArchiveThreadTask.h"
+#import "INTag.h"
 
 @implementation INUnarchiveThreadTask
 

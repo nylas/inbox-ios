@@ -9,6 +9,7 @@
 #import "INAttachment.h"
 #import "INModelObject+Uniquing.h"
 #import "INNamespace.h"
+#import "INUploadAttachmentTask.h"
 
 @implementation INAttachment
 

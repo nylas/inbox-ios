@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import <Inbox/Inbox.h>
+#import "INAddRemoveTagsTask.h"
 
 @interface INUnarchiveThreadTask : INAddRemoveTagsTask
 

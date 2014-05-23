@@ -8,7 +8,8 @@
 
 #import "INDeleteDraftTask.h"
 #import "INThread+Private.h"
-
+#import "INSaveDraftTask.h"
+#import "INSendDraftTask.h"
 
 @implementation INDeleteDraftTask
 

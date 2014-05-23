@@ -13,7 +13,7 @@
 #import "INDeleteDraftTask.h"
 #import "INSendDraftTask.h"
 #import "INModelObject+Uniquing.h"
-
+#import "INUploadAttachmentTask.h"
 
 @implementation INSaveDraftTask
 
