@@ -125,7 +125,7 @@
  @param offset The initial offset into the results. Useful when paging.
  @param callback A block that accepts an array of INModelObjects. At this time, the callback is called synchronously.
 */
-- (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(int)limit offset:(int)offset withCallback:(ResultsBlock)callback;
+- (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(NSUInteger)limit offset:(NSUInteger)offset withCallback:(ResultsBlock)callback;
 
 /**
 Find models using the provided query and query parameters (substitutions for ? in the query).

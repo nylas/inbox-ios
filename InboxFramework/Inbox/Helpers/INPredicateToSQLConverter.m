@@ -175,7 +175,7 @@ static NSString * SQLNullValueString = @"NULL";
         if ([_additionalJoinRHSExpressions containsObject: rightSQLExpression])
             return @"1 = 1";
         
-		NSString * as = NSF(@"T%d", [_additionalJoins count]);
+		NSString * as = NSF(@"T%d", (int)[_additionalJoins count]);
 		NSString * joinTable = NSF(@"%@-%@", [_modelClass databaseTableName], leftPropertyName);
 		NSString * joinSQL = NSF(@"INNER JOIN '%@' as '%@' ON '%@'.id = '%@'.id", joinTable, as, as, [_modelClass databaseTableName]);
 		[_additionalJoins addObject: joinSQL];

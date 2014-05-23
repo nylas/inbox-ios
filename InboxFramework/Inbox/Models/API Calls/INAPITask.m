@@ -121,7 +121,7 @@
             // no connection, server error / unavailable, use proxy, proxy auth required, request timeout
             // We received an error that indicates future API calls will fail too.
             // Pause the operations queue and add this operation to it again.
-            NSString * errorString = [NSString stringWithFormat:@"The server returned response code %d for %@ %@", code, [request HTTPMethod], [request URL]];
+            NSString * errorString = [NSString stringWithFormat:@"The server returned response code %d for %@ %@", (int)code, [request HTTPMethod], [request URL]];
             [_data setObject:errorString forKey:@"error"];
             NSLog(@"%@. Change %@ failed.",errorString, NSStringFromClass([self class]));
 
@@ -130,7 +130,7 @@
         } else {
             // For some reason, we reached inbox and it rejected this operation. To maintain the consistency
             // of our cache, roll back the operation and we DO NOT try to send it again.
-            NSLog(@"The server rejected %@ %@. Response code %d. To maintain the cache consistency, the update is being rolled back.", [request HTTPMethod], [request URL], code);
+            NSLog(@"The server rejected %@ %@. Response code %d. To maintain the cache consistency, the update is being rolled back.", [request HTTPMethod], [request URL], (int)code);
             [self setState: INAPITaskStateServerRejected];
             [self rollbackLocally];
             callback(self, YES);

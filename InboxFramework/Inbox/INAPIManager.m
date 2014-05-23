@@ -118,7 +118,7 @@ static void initialize_INAPIManager() {
 {
     NSAssert([NSThread isMainThread], @"Sorry, INAPIManager's change queue is not threadsafe. Please call this method on the main thread.");
     
-    for (int ii = [_taskQueue count] - 1; ii >= 0; ii -- ) {
+    for (NSInteger ii = [_taskQueue count] - 1; ii >= 0; ii -- ) {
         INAPITask * a = [_taskQueue objectAtIndex: ii];
 
         // Can the change we're currently queuing obviate the need for A? If it
@@ -164,7 +164,7 @@ static void initialize_INAPIManager() {
 - (void)describeTasks
 {
 	NSMutableString * description = [NSMutableString string];
-	[description appendFormat:@"\r---------- Tasks (%d) Suspended: %d -----------", _taskQueue.count, _taskQueueSuspended];
+	[description appendFormat:@"\r---------- Tasks (%lu) Suspended: %d -----------", (unsigned long)_taskQueue.count, _taskQueueSuspended];
 
 	for (INAPITask * change in _taskQueue) {
 		NSString * dependencyIDs = [[[change dependenciesIn: _taskQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];

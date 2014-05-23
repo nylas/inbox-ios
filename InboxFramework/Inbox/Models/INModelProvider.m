@@ -27,7 +27,7 @@
 
 - (NSString*)description
 {
-	return [NSString stringWithFormat:@"<INModelProviderChange: %p> type: %@, item: %@, index: %d", self, @[@"Add",@"Remove", @"Update"][_type], _item, _index];
+	return [NSString stringWithFormat:@"<INModelProviderChange: %p> type: %@, item: %@, index: %d", self, @[@"Add",@"Remove", @"Update"][_type], _item, (int)_index];
 }
 
 @end

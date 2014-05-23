@@ -386,7 +386,7 @@ static void initialize_INDatabaseManager() {
 	return obj;
 }
 
-- (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(int)limit offset:(int)offset withCallback:(ResultsBlock)callback
+- (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(NSUInteger)limit offset:(NSUInteger)offset withCallback:(ResultsBlock)callback
 {
 	NSMutableString * query = [[NSMutableString alloc] initWithFormat:@"SELECT * FROM %@", [klass databaseTableName]];
 	INPredicateToSQLConverter * converter = [INPredicateToSQLConverter converterForModelClass: klass];
@@ -398,8 +398,8 @@ static void initialize_INDatabaseManager() {
 		[query appendString: [converter SQLForSortDescriptors: sortDescriptors]];
 
 	if (limit > 0)
-		[query appendFormat:@" LIMIT %d, %d", offset, limit]; // weird ordering, but correct!
-	
+		[query appendFormat:@" LIMIT %lu, %lu", (unsigned long)offset, (unsigned long)limit];
+    
 	[self selectModelsOfClass:klass withQuery:query andParameters:nil andCallback:callback];
 }
 
@@ -439,7 +439,7 @@ static void initialize_INDatabaseManager() {
     }];
     
     // Inflate the data into JSON on our background query processing queue.
-    for (int ii = [__results count] - 1; ii >= 0; ii --) {
+    for (int ii = (int)[__results count] - 1; ii >= 0; ii --) {
         NSError * err = nil;
         NSData * jsonData = [__results objectAtIndex: ii];
         NSDictionary * json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&err];
@@ -452,7 +452,7 @@ static void initialize_INDatabaseManager() {
     
     VoidBlock processResults = ^{
         startMT = [NSDate date];
-        for (int ii = [__results count] - 1; ii >= 0; ii --) {
+        for (int ii = (int)[__results count] - 1; ii >= 0; ii --) {
             BOOL created = NO;
             NSDictionary * json = [__results objectAtIndex: ii];
             INModelObject * model = [klass attachedInstanceMatchingID: json[@"id"] createIfNecessary:YES didCreate: &created];
