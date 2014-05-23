@@ -13,6 +13,16 @@
 
 static NSString * INTaskProgressNotification = @"INTaskProgressNotification";
 
+typedef enum : NSUInteger {
+    INAPITaskStateWaiting,
+    INAPITaskStateInProgress,
+    INAPITaskStateFinished,
+    INAPITaskStateCancelled,
+    INAPITaskStateServerUnreachable,
+    INAPITaskStateServerRejected
+} INAPITaskState;
+
+
 typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 
 @interface INAPITask : NSObject <NSCoding>
@@ -20,7 +30,7 @@ typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 @property (nonatomic, strong) NSString * ID;
 @property (nonatomic, strong) INModelObject * model;
 @property (nonatomic, strong) NSMutableDictionary * data;
-@property (nonatomic, assign) BOOL inProgress;
+@property (nonatomic, assign) INAPITaskState state;
 @property (nonatomic, assign) float percentComplete;
 
 + (instancetype)operationForModel:(INModelObject *)model;
@@ -32,6 +42,9 @@ typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 - (BOOL)canCancelPendingTask:(INAPITask*)other;
 - (BOOL)canStartAfterTask:(INAPITask*)other;
 - (NSArray*)dependenciesIn:(NSArray*)others;
+
+- (BOOL)inProgress;
+- (NSString*)error;
 
 - (void)applyLocally;
 - (void)applyRemotelyWithCallback:(CallbackBlock)callback;

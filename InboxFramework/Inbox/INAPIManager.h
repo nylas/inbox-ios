@@ -62,6 +62,8 @@ typedef void (^ VoidBlock)();
  */
 - (BOOL)queueTask:(INAPITask *)change;
 
+- (void)retryTasks;
+
 - (void)setTaskQueueSuspended:(BOOL)suspended;
 
 

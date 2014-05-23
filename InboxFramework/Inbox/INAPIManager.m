@@ -126,6 +126,7 @@ static void initialize_INAPIManager() {
         // Example: DeleteDraft cancels pending SaveDraft or SendDraft
         if (![a inProgress] && [change canCancelPendingTask: a]) {
             NSLog(@"%@ CANCELLING CHANGE %@", NSStringFromClass([change class]), NSStringFromClass([a class]));
+            [a setState: INAPITaskStateCancelled];
             [_taskQueue removeObjectAtIndex: ii];
         }
         
@@ -141,8 +142,17 @@ static void initialize_INAPIManager() {
     // Local effects always take effect immediately
     [change applyLocally];
 
+    // Queue the task, and try to start it after a short delay. The delay is purely for
+    // asthethic purposes. Things almost always look better when they appear to take a
+    // short amount of time, and lots of animations look like shit when they happen too
+    // fast. This ensures that, for example, the "draft synced" passive reload doesn't
+    // happen while the "draft saved!" animation is still playing, which results in the
+    // animation being disrupted. Unless there's really a good reason to make developers
+    // worry about stuff like that themselves, let's keep this here.
     [_taskQueue addObject: change];
-    [self tryStartTask: change];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self tryStartTask: change];
+    });
 
     [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
     [self describeTasks];
@@ -154,19 +164,32 @@ static void initialize_INAPIManager() {
 - (void)describeTasks
 {
 	NSMutableString * description = [NSMutableString string];
-	[description appendFormat:@"\r---------- Tasks (%d) Suspended: %d ----------", _taskQueue.count, _taskQueueSuspended];
+	[description appendFormat:@"\r---------- Tasks (%d) Suspended: %d -----------", _taskQueue.count, _taskQueueSuspended];
 
 	for (INAPITask * change in _taskQueue) {
 		NSString * dependencyIDs = [[[change dependenciesIn: _taskQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
-		[description appendFormat:@"\r%@\r     - in progress: %d \r     - dependencies: %@", [change description], [change inProgress], dependencyIDs];
+        NSString * stateString = @[@"waiting", @"in progress", @"finished", @"server-unreachable", @"server-rejected"][[change state]];
+		[description appendFormat:@"\r%@\r     - state: %@ \r     - error: %@ \r     - dependencies: %@", [change description], stateString, [change error], dependencyIDs];
 	}
     [description appendFormat:@"\r-------- ------ ------ ------ ------ ---------"];
 
 	NSLog(@"%@", description);
 }
-    
+
+- (void)retryTasks
+{
+    for (INAPITask * task in _taskQueue) {
+        if ([task state] == INAPITaskStateServerUnreachable)
+            [task setState: INAPITaskStateWaiting];
+        [self tryStartTask: task];
+    }
+}
+
 - (BOOL)tryStartTask:(INAPITask *)change
 {
+    if ([change state] != INAPITaskStateWaiting)
+        return NO;
+    
     if (_changesInProgress > 5)
         return NO;
     
@@ -176,17 +199,11 @@ static void initialize_INAPIManager() {
     if ([[change dependenciesIn: _taskQueue] count] > 0)
         return NO;
 
-    if ([change inProgress])
-        return NO;
-    
     _changesInProgress += 1;
     [change applyRemotelyWithCallback: ^(INAPITask * change, BOOL finished) {
         _changesInProgress -= 1;
         
-        if (!finished) {
-            [self setTaskQueueSuspended: YES];
-
-        } else {
+        if (finished) {
             [_taskQueue removeObject: change];
             for (INAPITask * change in _taskQueue)
                 if ([self tryStartTask: change])

@@ -33,6 +33,7 @@
     INDraft * m = [[INDraft alloc] init];
     [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
     [m setNamespaceID: [namespace ID]];
+    [m setDate: [NSDate date]];
     return m;
 }
 
@@ -50,6 +51,7 @@
     [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
     [m setSubject: thread.subject];
     [m setThreadID: [thread ID]];
+    [m setDate: [NSDate date]];
     
     return m;
 }

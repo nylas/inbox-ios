@@ -32,6 +32,7 @@
         _model = model;
         _data = [NSMutableDictionary dictionary];
         _ID = [NSString generateUUIDWithExtension: NSStringFromClass([self class])];
+        _state = INAPITaskStateWaiting;
     }
     return self;
 }
@@ -47,6 +48,7 @@
 
         _ID = [aDecoder decodeObjectForKey:@"ID"];
         _data = [aDecoder decodeObjectForKey: @"data"];
+        _state = INAPITaskStateWaiting;
 	}
 	return self;
 }
@@ -69,6 +71,16 @@
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"%@ on %@ <%p>", NSStringFromClass([self class]), NSStringFromClass([[self model] class]), self.model];
+}
+
+- (NSString*)error
+{
+    return _data[@"error"];
+}
+
+- (BOOL)inProgress
+{
+    return (_state == INAPITaskStateInProgress);
 }
 
 - (BOOL)canCancelPendingTask:(INAPITask*)other
@@ -95,12 +107,11 @@
 {
     AFHTTPRequestOperation * op = [[INAPIManager shared] HTTPRequestOperationWithRequest:[self buildAPIRequest] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self handleSuccess: operation withResponse: responseObject];
-        [self setInProgress: NO];
+        [self setState: INAPITaskStateFinished];
         callback(self, YES);
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self handleFailure:operation withError:error];
-        [self setInProgress: NO];
 		[self setPercentComplete: 0];
 
         NSURLRequest * request = [operation request];
@@ -110,12 +121,17 @@
             // no connection, server error / unavailable, use proxy, proxy auth required, request timeout
             // We received an error that indicates future API calls will fail too.
             // Pause the operations queue and add this operation to it again.
-            NSLog(@"The server returned response code %d for %@ %@. Change %@ failed.", code, [request HTTPMethod], [request URL], NSStringFromClass([self class]));
+            NSString * errorString = [NSString stringWithFormat:@"The server returned response code %d for %@ %@", code, [request HTTPMethod], [request URL]];
+            [_data setObject:errorString forKey:@"error"];
+            NSLog(@"%@. Change %@ failed.",errorString, NSStringFromClass([self class]));
+
+            [self setState: INAPITaskStateServerUnreachable];
             callback(self, NO);
         } else {
             // For some reason, we reached inbox and it rejected this operation. To maintain the consistency
             // of our cache, roll back the operation and we DO NOT try to send it again.
             NSLog(@"The server rejected %@ %@. Response code %d. To maintain the cache consistency, the update is being rolled back.", [request HTTPMethod], [request URL], code);
+            [self setState: INAPITaskStateServerRejected];
             [self rollbackLocally];
             callback(self, YES);
         }
@@ -125,8 +141,8 @@
 		[self setPercentComplete: (double)totalBytesWritten / (double)totalBytesExpectedToWrite];
 	}];
 
-    [self setInProgress: YES];
 	[self setPercentComplete: 0.01];
+    [self setState: INAPITaskStateInProgress];
     [[[INAPIManager shared] operationQueue] addOperation: op];
 }
 

@@ -232,7 +232,7 @@
 	// If our delegate wants to be notified of item-level changes, compute those. Please
 	// note that this code was designed for readability over efficiency. If it's too slow
 	// we'll come back to it :-)
-	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)] && ([self.items count] > 0)) {
+	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]) {
 		NSMutableArray * changes = [NSMutableArray array];
 		
 		for (INModelObject * item in removedModels) {

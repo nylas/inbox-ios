@@ -76,17 +76,18 @@
     // remove the draft from the local cache and then update it with the API response
     // and save it again. This is important, because the JSON that comes back gives the
     // draft a different ID and we want to replace the old draft since it's outdated.
-    [[INDatabaseManager shared] unpersistModel: draft];
-    [draft updateWithResourceDictionary: responseObject];
-    [[INDatabaseManager shared] persistModel: draft];
-
-    // if the draft ID changed, update our local cache so it has the new draft ID
-    if (![draftInitialID isEqualToString: [draft ID]]) {
-        INThread * thread = [draft thread];
-        [thread removeDraftID: draftInitialID];
-        [thread addDraftID: [draft ID]];
-        [[INDatabaseManager shared] persistModel: thread];
-    }
+    [[INDatabaseManager shared] unpersistModel: draft willResaveSameModel:YES completionBlock:^{
+        [draft updateWithResourceDictionary: responseObject];
+        [[INDatabaseManager shared] persistModel: draft];
+        
+        // if the draft ID changed, update our local cache so it has the new draft ID
+        if (![draftInitialID isEqualToString: [draft ID]]) {
+            INThread * thread = [draft thread];
+            [thread removeDraftID: draftInitialID];
+            [thread addDraftID: [draft ID]];
+            [[INDatabaseManager shared] persistModel: thread];
+        }
+    }];
 }
 
 - (void)applyLocally

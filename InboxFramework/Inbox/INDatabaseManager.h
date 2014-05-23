@@ -95,8 +95,8 @@
  Remove an object from the local database cache and notify observers of the change.
  
  @param model The object to remove.
-*/
-- (void)unpersistModel:(INModelObject *)model;
+ */
+- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completion;
 
 /**
  Select a single instance from the local database cache and return it synchronously.

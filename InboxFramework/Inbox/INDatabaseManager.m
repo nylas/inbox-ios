@@ -246,7 +246,7 @@ static void initialize_INDatabaseManager() {
 	});
 }
 
-- (void)unpersistModel:(INModelObject *)model
+- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completionBlock
 {
 	if (![self checkModelTable:[model class]])
 		return;
@@ -272,8 +272,10 @@ static void initialize_INDatabaseManager() {
 
 		dispatch_async(dispatch_get_main_queue(), ^{
 			// notify providers that models were updated. This may result in views being updated.
-			[[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidUnpersistModels:) withObject:@[model]];
-		});
+            if (!willResave)
+                [[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidUnpersistModels:) withObject:@[model]];
+            if (completionBlock) completionBlock();
+        });
 	});
 }
 
