@@ -80,7 +80,13 @@ static void initialize_INAPIManager() {
 - (void)loadTasks
 {
     _taskQueue = [NSMutableArray array];
-    [_taskQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
+	@try {
+		[_taskQueue addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithFile:OPERATIONS_FILE]];
+	}
+	@catch (NSException *exception) {
+		NSLog(@"Unable to unserialize tasks: %@", [exception description]);
+		[[NSFileManager defaultManager] removeItemAtPath:OPERATIONS_FILE error:NULL];
+	}
     
     NSArray * toStart = [_taskQueue copy];
 	for (INAPITask * task in toStart)
