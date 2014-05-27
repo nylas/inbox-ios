@@ -64,6 +64,13 @@ static void initialize_INAPIManager() {
 		}];
 		[self.reachabilityManager startMonitoring];
 
+
+		// make sure the application has an Inbox App ID in it's info.plist
+		NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
+		_appID = [info objectForKey: INAppIDInfoDictionaryKey];
+		NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
+
+
         NSString * token = [[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN_KEY];
         if (token) {
             // refresh the namespaces available to our token if we have one
@@ -226,30 +233,67 @@ static void initialize_INAPIManager() {
 
 #pragma Authentication
 
-- (BOOL)isSignedIn
+- (BOOL)isAuthenticated
 {
     return ([[NSUserDefaults standardUserDefaults] objectForKey:AUTH_TOKEN_KEY] != nil);
 }
 
-- (void)signIn:(ErrorBlock)completionBlock
+- (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
 {
-    NSString * authToken = @"whatevs";
-    
+	if (_authenticationCompletionBlock && (_authenticationCompletionBlock != completionBlock))
+		NSLog(@"A call to authenticateWithEmail: is replacing an authentication completion block that has not yet been fired. The old authentication block will never be called!");
+	_authenticationCompletionBlock = completionBlock;
+	
+	// make sure the application is registered for it's application url scheme
+	BOOL found = NO;
+	_appURLScheme = [[NSString stringWithFormat:@"in-%@", _appID] lowercaseString];
+	for (NSDictionary * urlType in [[NSBundle mainBundle] infoDictionary][@"CFBundleURLTypes"]) {
+		for (NSString * scheme in urlType[@"CFBundleURLSchemes"]) {
+			if ([[scheme lowercaseString] isEqualToString: _appURLScheme])
+				found = YES;
+		}
+	}
+	NSAssert(found, @"Your application's Info.plist should register your app for the '%@' URL scheme to handle Inbox authentication correctly.", _appURLScheme);
+
+	// make sure we can reach the server before we try to open the auth page in safari
+	if ([[self reachabilityManager] networkReachabilityStatus] <= AFNetworkReachabilityStatusNotReachable) {
+		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, you need to be connected to the internet to connect your account."}];
+		[self handleAuthenticationFinishedWithError: err];
+		return;
+	}
+		
+	// try to visit the auth URL in Safari
+	NSString * authPage = [NSString stringWithFormat: @"%@auth?app_id=%@&login_hint=%@", [API_URL absoluteString], _appID, address];
+	BOOL authOpened = [[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]];
+	
+	if (!authOpened) {
+		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, we weren't able to switch to Safari to open the authentication URL."}];
+		[self handleAuthenticationFinishedWithError: err];
+	}
+}
+
+- (void)authenticateWithAuthToken:(NSString*)authToken andCompletionBlock:(ErrorBlock)completionBlock
+{
+	if (_authenticationCompletionBlock && (_authenticationCompletionBlock != completionBlock))
+		NSLog(@"A call to authenticateWithAuthToken: is replacing an authentication completion block that has not yet been fired. The old authentication block will never be called!");
+	_authenticationCompletionBlock = completionBlock;
+	
 	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
     [self fetchNamespaces:^(NSArray *namespaces, NSError *error) {
         if (error) {
             [[self requestSerializer] clearAuthorizationHeader];
-            completionBlock(error);
+			[self handleAuthenticationFinishedWithError: error];
+
         } else {
             [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN_KEY];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
-            completionBlock(nil);
+			[self handleAuthenticationFinishedWithError: nil];
         }
     }];
 }
 
-- (void)signOut
+- (void)unauthenticate
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey: AUTH_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -262,6 +306,46 @@ static void initialize_INAPIManager() {
     [[NSNotificationCenter defaultCenter] postNotificationName:INTaskQueueChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
+}
+
+- (BOOL)handleURL:(NSURL*)url
+{
+	if (![[[url scheme] lowercaseString] isEqualToString: _appURLScheme])
+		return NO;
+		
+	if ([[url path] isEqualToString: @"auth-response"]) {
+		NSMutableDictionary * responseComponents = [NSMutableDictionary dictionary];
+
+		for (NSString * arg in [[url fragment] componentsSeparatedByString:@"&"]) {
+			NSArray * kv = [arg componentsSeparatedByString: @"="];
+			if ([kv count] < 2) continue;
+			[responseComponents setObject:kv[1] forKey:kv[0]];
+		}
+
+		if (responseComponents[@"token"]) {
+			// we got an auth token! Continue authentication with this token
+			[self authenticateWithAuthToken:responseComponents[@"token"] andCompletionBlock: _authenticationCompletionBlock];
+			
+		} else if (responseComponents[@"code"]) {
+			// we got a code that we need to exchange for an auth token. We can't do this locally
+			// because the client secret should never be in the application. Just report an error
+			NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Inbox received an auth code instead of an auth token and can't exchange the code for a valid token."}];
+			[self handleAuthenticationFinishedWithError: err];
+		}
+	}
+
+	return YES;
+}
+
+- (void)handleAuthenticationFinishedWithError:(NSError*)error
+{
+	if (_authenticationCompletionBlock) {
+		_authenticationCompletionBlock(error);
+		_authenticationCompletionBlock = nil;
+		
+	} else if (error) {
+		[[[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+	}
 }
 
 - (void)fetchNamespaces:(AuthenticationBlock)completionBlock

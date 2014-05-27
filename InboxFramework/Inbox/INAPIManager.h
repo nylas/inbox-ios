@@ -14,6 +14,8 @@ static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotific
 static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
 static NSString * INTaskQueueChangedNotification = @"INTaskQueueChangedNotification";
 
+static NSString * INAppIDInfoDictionaryKey = @"INAppID";
+
 @class INAPITask;
 @class INModelObject;
 @protocol INSyncEngine;
@@ -40,8 +42,12 @@ typedef void (^ VoidBlock)();
 @interface INAPIManager : AFHTTPRequestOperationManager
 {
 	NSArray * _namespaces;
+	NSString * _appID;
+	NSString * _appURLScheme;
     NSMutableArray * _taskQueue;
     int _changesInProgress;
+	
+	ErrorBlock _authenticationCompletionBlock;
 }
 
 @property (nonatomic, assign) BOOL taskQueueSuspended;
@@ -69,12 +75,15 @@ typedef void (^ VoidBlock)();
 
 #pragma Authentication
 
-- (BOOL)isSignedIn;
+- (BOOL)isAuthenticated;
 
-- (void)signIn:(ErrorBlock)completionBlock;
+- (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
 
-- (void)signOut;
+- (void)authenticateWithAuthToken:(NSString*)authToken andCompletionBlock:(ErrorBlock)completionBlock;
 
+- (void)unauthenticate;
+
+- (BOOL)handleURL:(NSURL*)url;
 
 - (void)fetchNamespaces:(AuthenticationBlock)completionBlock;
 

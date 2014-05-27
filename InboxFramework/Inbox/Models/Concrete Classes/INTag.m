@@ -24,7 +24,7 @@
 - (NSString*)name
 {
     // pretend we have localization
-    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDFlagged: @"Flagged"};
+    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDStarred: @"Starred"};
     if ([localized objectForKey: self.ID])
         return [localized objectForKey: self.ID];
     return [self.ID capitalizedString];
