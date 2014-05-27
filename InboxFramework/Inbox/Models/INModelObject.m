@@ -191,10 +191,10 @@
 		[self updateWithResourceDictionary:responseObject];
 		[[INDatabaseManager shared] persistModel:self];
 		if (callback)
-			callback(nil);
+			callback(YES, nil);
 	} failure:^(AFHTTPRequestOperation * operation, NSError * error) {
 		if (callback)
-			callback(error);
+			callback(NO, error);
 	}];
 }
 

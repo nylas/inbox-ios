@@ -24,8 +24,7 @@ static NSString * INKeychainAPITokenKey = @"inbox-api-token";
 typedef void (^ ResultsBlock)(NSArray * objects);
 typedef void (^ ModelBlock)(INModelObject * object);
 typedef void (^ LongBlock)(long count);
-typedef void (^ AuthenticationBlock)(NSArray * namespaces, NSError * error);
-typedef void (^ ErrorBlock)(NSError * error);
+typedef void (^ ErrorBlock)(BOOL success, NSError * error);
 typedef void (^ VoidBlock)();
 
 /**
@@ -48,6 +47,7 @@ typedef void (^ VoidBlock)();
     NSMutableArray * _taskQueue;
     int _changesInProgress;
 	
+	BOOL _authenticationWaitingForInboundURL;
 	ErrorBlock _authenticationCompletionBlock;
 }
 
@@ -86,7 +86,7 @@ typedef void (^ VoidBlock)();
 
 - (BOOL)handleURL:(NSURL*)url;
 
-- (void)fetchNamespaces:(AuthenticationBlock)completionBlock;
+- (void)fetchNamespaces:(ErrorBlock)completionBlock;
 
 /**
  @return The currently authenticated Inbox namespaces.

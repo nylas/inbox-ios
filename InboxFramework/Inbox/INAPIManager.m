@@ -52,6 +52,10 @@ static void initialize_INAPIManager() {
 		
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+		// Register for changes to application state
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAppBroughtToForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
+
+		// Start listening for reachability changes
         typeof(self) __weak __self = self;
 		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [API_URL host]];
 		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -66,18 +70,19 @@ static void initialize_INAPIManager() {
 		[self.reachabilityManager startMonitoring];
 
 
-		// make sure the application has an Inbox App ID in it's info.plist
+		// Make sure the application has an Inbox App ID in it's info.plist
 		NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
 		_appID = [info objectForKey: INAppIDInfoDictionaryKey];
 		NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
 
-
+		// Reload our API token and refresh the namespaces list
         NSString * token = [[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
+		[self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
         if (token) {
-            // refresh the namespaces available to our token if we have one
-            [self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
             [self fetchNamespaces: NULL];
         }
+		
+		// Restart paused tasks (sending mail, etc.)
         dispatch_async(dispatch_get_main_queue(), ^{
             [self loadTasks];
         });
@@ -259,17 +264,19 @@ static void initialize_INAPIManager() {
 	// make sure we can reach the server before we try to open the auth page in safari
 	if ([[self reachabilityManager] networkReachabilityStatus] <= AFNetworkReachabilityStatusNotReachable) {
 		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, you need to be connected to the internet to connect your account."}];
-		[self handleAuthenticationFinishedWithError: err];
+		[self handleAuthenticationCompleted: NO withError: err];
 		return;
 	}
-		
+	
 	// try to visit the auth URL in Safari
 	NSString * authPage = [NSString stringWithFormat: @"%@auth?app_id=%@&login_hint=%@", [API_URL absoluteString], _appID, address];
-	BOOL authOpened = [[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]];
-	
-	if (!authOpened) {
+
+	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
+		_authenticationWaitingForInboundURL = YES;
+
+	} else {
 		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, we weren't able to switch to Safari to open the authentication URL."}];
-		[self handleAuthenticationFinishedWithError: err];
+		[self handleAuthenticationCompleted: NO withError: err];
 	}
 }
 
@@ -280,16 +287,15 @@ static void initialize_INAPIManager() {
 	_authenticationCompletionBlock = completionBlock;
 	
 	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
-    [self fetchNamespaces:^(NSArray *namespaces, NSError *error) {
-        if (error) {
-            [[self requestSerializer] clearAuthorizationHeader];
-			[self handleAuthenticationFinishedWithError: error];
-
-        } else {
+    [self fetchNamespaces:^(BOOL success, NSError * error) {
+        if (success) {
             [[INPDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
-			[self handleAuthenticationFinishedWithError: nil];
+		} else {
+            [[self requestSerializer] clearAuthorizationHeader];
         }
+
+		[self handleAuthenticationCompleted: success withError: error];
     }];
 }
 
@@ -312,8 +318,9 @@ static void initialize_INAPIManager() {
 		return NO;
 		
 	if ([[url path] isEqualToString: @"auth-response"]) {
-		NSMutableDictionary * responseComponents = [NSMutableDictionary dictionary];
+		_authenticationWaitingForInboundURL = NO;
 
+		NSMutableDictionary * responseComponents = [NSMutableDictionary dictionary];
 		for (NSString * arg in [[url fragment] componentsSeparatedByString:@"&"]) {
 			NSArray * kv = [arg componentsSeparatedByString: @"="];
 			if ([kv count] < 2) continue;
@@ -328,25 +335,41 @@ static void initialize_INAPIManager() {
 			// we got a code that we need to exchange for an auth token. We can't do this locally
 			// because the client secret should never be in the application. Just report an error
 			NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Inbox received an auth code instead of an auth token and can't exchange the code for a valid token."}];
-			[self handleAuthenticationFinishedWithError: err];
+			[self handleAuthenticationCompleted: NO withError: err];
 		}
 	}
 
 	return YES;
 }
 
-- (void)handleAuthenticationFinishedWithError:(NSError*)error
+- (void)handleAppBroughtToForeground
 {
+	// If the app is brought to the foreground after being backgrounded during an authentication
+	// request, and we _don't_ receive a call to handleURL: after 0.5 seconds, we should assume
+	// that they're trying to get out of the auth process and end it.
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		if (_authenticationWaitingForInboundURL) {
+			[self handleAuthenticationCompleted: NO withError:nil];
+		}
+	});
+}
+
+- (void)handleAuthenticationCompleted:(BOOL)success withError:(NSError*)error
+{
+	_authenticationWaitingForInboundURL = NO;
+	
 	if (_authenticationCompletionBlock) {
-		_authenticationCompletionBlock(error);
+		_authenticationCompletionBlock(success, error);
 		_authenticationCompletionBlock = nil;
 		
-	} else if (error) {
-		[[[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+	} else {
+		if (error) {
+			[[[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+		}
 	}
 }
 
-- (void)fetchNamespaces:(AuthenticationBlock)completionBlock
+- (void)fetchNamespaces:(ErrorBlock)completionBlock
 {
     NSLog(@"Fetching Namespaces (/n/)");
     AFHTTPRequestOperation * operation = [self GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
@@ -354,11 +377,11 @@ static void initialize_INAPIManager() {
         _namespaces = namespaces;
         [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
         if (completionBlock)
-            completionBlock(namespaces, nil);
+            completionBlock(YES, nil);
 
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		if (completionBlock)
-			completionBlock(nil, error);
+			completionBlock(NO, error);
 	}];
     
     INModelResponseSerializer * serializer = [[INModelResponseSerializer alloc] initWithModelClass: [INNamespace class]];
