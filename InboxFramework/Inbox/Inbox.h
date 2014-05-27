@@ -35,5 +35,6 @@
 #import "INModelResponseSerializer.h"
 #import "INAttachment.h"
 #import "INDraft.h"
+#import "NSError+InboxErrors.h"
 
 #endif

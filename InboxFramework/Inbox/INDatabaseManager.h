@@ -98,6 +98,8 @@
  */
 - (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completion;
 
+- (void)unpersistModels:(NSArray *)models;
+
 /**
  Select a single instance from the local database cache and return it synchronously.
  

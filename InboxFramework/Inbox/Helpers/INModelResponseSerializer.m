@@ -10,6 +10,7 @@
 #import "INModelObject.h"
 #import "INModelObject+Uniquing.h"
 #import "INDatabaseManager.h"
+#import "NSError+InboxErrors.h"
 
 
 @implementation INModelResponseSerializer
@@ -35,12 +36,12 @@
 	BOOL badAPIResponse = ([responseObject isKindOfClass: [NSDictionary class]] && [responseObject[@"type"] isEqualToString: @"api_error"]);
 	
 	if (badAPIResponse) {
-		*error = [NSError errorWithDomain:@"IN" code:100 userInfo:@{NSLocalizedDescriptionKey: responseObject[@"message"]}];
+		*error = [NSError inboxErrorWithDescription: responseObject[@"message"]];
 		return nil;
 	}
 	
 	if (badJSONClass) {
-		*error = [NSError errorWithDomain:@"IN" code:100 userInfo:@{NSLocalizedDescriptionKey: @"The JSON object returned was not an NSArray"}];
+		*error = [NSError inboxErrorWithDescription: @"The JSON object returned was not an NSArray"];
 		return nil;
 	}
 

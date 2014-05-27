@@ -15,6 +15,7 @@ static NSString * INAuthenticationChangedNotification = @"INAuthenticationChange
 static NSString * INTaskQueueChangedNotification = @"INTaskQueueChangedNotification";
 
 static NSString * INAppIDInfoDictionaryKey = @"INAppID";
+static NSString * INAPIPathInfoDictionaryKey = @"INAPIPath";
 static NSString * INKeychainAPITokenKey = @"inbox-api-token";
 
 @class INAPITask;
@@ -22,6 +23,7 @@ static NSString * INKeychainAPITokenKey = @"inbox-api-token";
 @protocol INSyncEngine;
 
 typedef void (^ ResultsBlock)(NSArray * objects);
+typedef void (^ ResultBlock)(id result, NSError * error);
 typedef void (^ ModelBlock)(INModelObject * object);
 typedef void (^ LongBlock)(long count);
 typedef void (^ ErrorBlock)(BOOL success, NSError * error);

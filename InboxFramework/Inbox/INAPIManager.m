@@ -13,12 +13,7 @@
 #import "INDatabaseManager.h"
 #import "FMResultSet+INModelQueries.h"
 #import "INPDKeychainBindings.h"
-
-#if DEBUG
-  #define API_URL		[NSURL URLWithString:@"http://localhost:5555/"]
-#else
-  #define API_URL		[NSURL URLWithString:@"http://localhost:5555/"]
-#endif
+#import "NSError+InboxErrors.h"
 
 #define OPERATIONS_FILE [@"~/Documents/operations.plist" stringByExpandingTildeInPath]
 
@@ -43,7 +38,11 @@ static void initialize_INAPIManager() {
 
 - (id)init
 {
-	self = [super initWithBaseURL: API_URL];
+    NSString * api = [[NSBundle mainBundle] infoDictionary][INAPIPathInfoDictionaryKey];
+    if (!api)
+        api = @"http://api.inboxapp.com/";
+    
+	self = [super initWithBaseURL: [NSURL URLWithString: api]];
 	if (self) {
         [[self operationQueue] setMaxConcurrentOperationCount: 5];
 		[self setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments]];
@@ -57,7 +56,7 @@ static void initialize_INAPIManager() {
 
 		// Start listening for reachability changes
         typeof(self) __weak __self = self;
-		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [API_URL host]];
+		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [self.baseURL host]];
 		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 			BOOL hasConnection = (status == AFNetworkReachabilityStatusReachableViaWiFi) || (status == AFNetworkReachabilityStatusReachableViaWWAN);
 			BOOL hasSuspended = __self.taskQueueSuspended;
@@ -263,19 +262,19 @@ static void initialize_INAPIManager() {
 
 	// make sure we can reach the server before we try to open the auth page in safari
 	if ([[self reachabilityManager] networkReachabilityStatus] <= AFNetworkReachabilityStatusNotReachable) {
-		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, you need to be connected to the internet to connect your account."}];
+		NSError * err = [NSError inboxErrorWithDescription: @"Sorry, you need to be connected to the internet to connect your account."];
 		[self handleAuthenticationCompleted: NO withError: err];
 		return;
 	}
 	
 	// try to visit the auth URL in Safari
-	NSString * authPage = [NSString stringWithFormat: @"%@auth?app_id=%@&login_hint=%@", [API_URL absoluteString], _appID, address];
+	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?app_id=%@&login_hint=%@", [self.baseURL absoluteString], _appID, address];
 
 	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
 		_authenticationWaitingForInboundURL = YES;
 
 	} else {
-		NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Sorry, we weren't able to switch to Safari to open the authentication URL."}];
+		NSError * err = [NSError inboxErrorWithDescription: @"Sorry, we weren't able to switch to Safari to open the authentication URL."];
 		[self handleAuthenticationCompleted: NO withError: err];
 	}
 }
@@ -334,7 +333,7 @@ static void initialize_INAPIManager() {
 		} else if (responseComponents[@"code"]) {
 			// we got a code that we need to exchange for an auth token. We can't do this locally
 			// because the client secret should never be in the application. Just report an error
-			NSError * err = [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Inbox received an auth code instead of an auth token and can't exchange the code for a valid token."}];
+			NSError * err = [NSError inboxErrorWithDescription: @"Inbox received an auth code instead of an auth token and can't exchange the code for a valid token."];
 			[self handleAuthenticationCompleted: NO withError: err];
 		}
 	}

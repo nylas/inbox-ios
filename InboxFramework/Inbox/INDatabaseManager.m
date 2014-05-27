@@ -150,6 +150,17 @@ static void initialize_INDatabaseManager() {
 	return YES;
 }
 
+- (NSDictionary*)checkModelTablesForModels:(NSArray*)models
+{
+    NSMutableDictionary * tablesChecked = [NSMutableDictionary dictionary];
+    for (INModelObject * model in models) {
+        NSString * classKey = NSStringFromClass([model class]);
+        if (![tablesChecked objectForKey: classKey])
+            [tablesChecked setObject:@([self checkModelTable:[[models firstObject] class]]) forKey:classKey];
+    }
+    return tablesChecked;
+}
+
 - (void)initializeModelTable:(Class)klass inDatabase:(FMDatabase*)db
 {
 	NSString * tableName = [klass databaseTableName];
@@ -209,41 +220,25 @@ static void initialize_INDatabaseManager() {
 	}
 }
 
-#pragma mark Persisting Objects
+#pragma mark Persisting Objects (Public Interface)
 
 - (void)persistModel:(INModelObject *)model
 {
-	if (![self checkModelTable:[model class]])
-		return;
-    
-	dispatch_async(_queryDispatchQueue, ^{
-		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-			[self writeModel:model toDatabase:db];
-		}];
-		
-		dispatch_async(dispatch_get_main_queue(), ^{
-			// notify providers that this model was updated. This may result in views being updated.
-			[[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidPersistModels:) withObject:@[model]];
-		});
-	});
+    [self persistModels: @[model]];
 }
 
 - (void)persistModels:(NSArray *)models
 {
-	if (![self checkModelTable:[[models firstObject] class]])
-		return;
+    [self iterateOverModelsInTransaction:models withBlock:^(INModelObject *model, FMDatabase *db) {
+        [self writeModel:model toDatabase:db];
+    } withCompletionBlock:^{
+        [[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidPersistModels:) withObject:models];
+    }];
+}
 
-	dispatch_async(_queryDispatchQueue, ^{
-		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-			for (INModelObject * model in models)
-				[self writeModel:model toDatabase:db];
-		}];
-
-		dispatch_async(dispatch_get_main_queue(), ^{
-			// notify providers that models were updated. This may result in views being updated.
-			[[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidPersistModels:) withObject:models];
-		});
-	});
+- (void)unpersistModel:(INModelObject *)model
+{
+    [self unpersistModel:model willResaveSameModel:NO completionBlock:NULL];
 }
 
 - (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completionBlock
@@ -253,21 +248,7 @@ static void initialize_INDatabaseManager() {
 	
 	dispatch_async(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-			if ([model respondsToSelector:@selector(beforeUnpersist:)])
-				[model beforeUnpersist: db];
-			
-			NSString * tableName = [[model class] databaseTableName];
-			NSString * query = [NSString stringWithFormat:@"DELETE FROM %@ WHERE id = ?", tableName];
-			[db executeUpdate: query withArgumentsInArray:@[[model ID]]];
-
-			for (NSString * property in [[model class] databaseJoinTableProperties]) {
-				NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
-				NSString * deleteSQL = [NSString stringWithFormat: @"DELETE * FROM `%@` WHERE id = `?`", propertyTableName];
-				[db executeUpdate: deleteSQL, model.ID];
-			}
-
-			if ([model respondsToSelector:@selector(afterUnpersist:)])
-				[model afterUnpersist: db];
+            [self deleteModel:model fromDatabase:db];
 		}];
 
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -278,6 +259,40 @@ static void initialize_INDatabaseManager() {
         });
 	});
 }
+
+- (void)unpersistModels:(NSArray *)models
+{
+    [self iterateOverModelsInTransaction:models withBlock:^(INModelObject *model, FMDatabase *db) {
+        [self deleteModel:model fromDatabase:db];
+    } withCompletionBlock:^{
+        [[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidUnpersistModels:) withObject:models];
+    }];
+}
+
+- (void)iterateOverModelsInTransaction:(NSArray*)models withBlock:(void(^)(INModelObject * object, FMDatabase * db))eachBlock withCompletionBlock:(VoidBlock)completion
+{
+    NSDictionary * tablesChecked = [self checkModelTablesForModels: models];
+    
+	dispatch_async(_queryDispatchQueue, ^{
+		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            int skipped = 0;
+            for (INModelObject * model in models) {
+                if ([[tablesChecked objectForKey: NSStringFromClass([model class])] boolValue] == YES)
+                    eachBlock(model, db);
+                else
+                    skipped ++;
+            }
+            
+            if (skipped > 0)
+                NSLog(@"Skipped %d models in local cache transaction because the cache table(s) could not be prepared.", skipped);
+        }];
+
+        dispatch_async(dispatch_get_main_queue(), completion);
+    });
+
+}
+
+#pragma mark Persisting Objects (Private Methods)
 
 - (void)writeModel:(INModelObject *)model toDatabase:(FMDatabase *)db
 {
@@ -354,6 +369,25 @@ static void initialize_INDatabaseManager() {
             [[NSNotificationCenter defaultCenter] postNotificationName:INModelObjectChangedNotification object:model];
         });
 	}
+}
+
+- (void)deleteModel:(INModelObject*)model fromDatabase:(FMDatabase*)db
+{
+    if ([model respondsToSelector:@selector(beforeUnpersist:)])
+        [model beforeUnpersist: db];
+    
+    NSString * tableName = [[model class] databaseTableName];
+    NSString * query = [NSString stringWithFormat:@"DELETE FROM %@ WHERE id = ?", tableName];
+    [db executeUpdate: query withArgumentsInArray:@[[model ID]]];
+    
+    for (NSString * property in [[model class] databaseJoinTableProperties]) {
+        NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
+        NSString * deleteSQL = [NSString stringWithFormat: @"DELETE * FROM `%@` WHERE id = `?`", propertyTableName];
+        [db executeUpdate: deleteSQL, model.ID];
+    }
+    
+    if ([model respondsToSelector:@selector(afterUnpersist:)])
+        [model afterUnpersist: db];
 }
 
 #pragma mark Finding Objects
