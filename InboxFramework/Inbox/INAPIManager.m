@@ -12,7 +12,7 @@
 #import "INModelResponseSerializer.h"
 #import "INDatabaseManager.h"
 #import "FMResultSet+INModelQueries.h"
-#import "PDKeychainBindings.h"
+#import "INPDKeychainBindings.h"
 
 #if DEBUG
   #define API_URL		[NSURL URLWithString:@"http://localhost:5555/"]
@@ -72,7 +72,7 @@ static void initialize_INAPIManager() {
 		NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
 
 
-        NSString * token = [[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
+        NSString * token = [[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
         if (token) {
             // refresh the namespaces available to our token if we have one
             [self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
@@ -236,7 +236,7 @@ static void initialize_INAPIManager() {
 
 - (BOOL)isAuthenticated
 {
-    return ([[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey] != nil);
+    return ([[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey] != nil);
 }
 
 - (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
@@ -286,7 +286,7 @@ static void initialize_INAPIManager() {
 			[self handleAuthenticationFinishedWithError: error];
 
         } else {
-            [[PDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
+            [[INPDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
 			[self handleAuthenticationFinishedWithError: nil];
         }
@@ -296,7 +296,7 @@ static void initialize_INAPIManager() {
 - (void)unauthenticate
 {
 	[_taskQueue removeAllObjects];
-    [[PDKeychainBindings sharedKeychainBindings] removeObjectForKey: INKeychainAPITokenKey];
+    [[INPDKeychainBindings sharedKeychainBindings] removeObjectForKey: INKeychainAPITokenKey];
     [[self requestSerializer] clearAuthorizationHeader];
     [[INDatabaseManager shared] resetDatabase];
     _namespaces = nil;

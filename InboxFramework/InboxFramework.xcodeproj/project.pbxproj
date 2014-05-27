@@ -67,6 +67,10 @@
 		430E9874193011140078F430 /* INArchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA23192C364100E5C67D /* INArchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9875193011140078F430 /* INUnarchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9876193011140078F430 /* INSendDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1F192C35C900E5C67D /* INSendDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		438BF419193435A800544E6A /* INPDKeychainBindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BF415193435A800544E6A /* INPDKeychainBindings.h */; };
+		438BF41A193435A800544E6A /* INPDKeychainBindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BF416193435A800544E6A /* INPDKeychainBindings.m */; };
+		438BF41B193435A800544E6A /* INPDKeychainBindingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BF417193435A800544E6A /* INPDKeychainBindingsController.h */; };
+		438BF41C193435A800544E6A /* INPDKeychainBindingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BF418193435A800544E6A /* INPDKeychainBindingsController.m */; };
 		4391ABC61930138E000C337F /* INModelResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2B2191C049A00EF660E /* INModelResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4391ABC719301417000C337F /* INThreadProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2D9191C049A00EF660E /* INThreadProvider.m */; };
 		43A1E28A191C02A800EF660E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF123C191AF2E70043E2E6 /* XCTest.framework */; };
@@ -95,6 +99,10 @@
 		438BEA20192C35C900E5C67D /* INSendDraftTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSendDraftTask.m; sourceTree = "<group>"; };
 		438BEA23192C364100E5C67D /* INArchiveThreadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INArchiveThreadTask.h; sourceTree = "<group>"; };
 		438BEA24192C364100E5C67D /* INArchiveThreadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INArchiveThreadTask.m; sourceTree = "<group>"; };
+		438BF415193435A800544E6A /* INPDKeychainBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPDKeychainBindings.h; sourceTree = "<group>"; };
+		438BF416193435A800544E6A /* INPDKeychainBindings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPDKeychainBindings.m; sourceTree = "<group>"; };
+		438BF417193435A800544E6A /* INPDKeychainBindingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPDKeychainBindingsController.h; sourceTree = "<group>"; };
+		438BF418193435A800544E6A /* INPDKeychainBindingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPDKeychainBindingsController.m; sourceTree = "<group>"; };
 		43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUnarchiveThreadTask.h; sourceTree = "<group>"; };
 		43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUnarchiveThreadTask.m; sourceTree = "<group>"; };
 		43A14746192E75B7001AF02F /* INDraft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDraft.h; sourceTree = "<group>"; };
@@ -209,6 +217,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		438BF413193435A800544E6A /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				438BF414193435A800544E6A /* PDKeychainBindings */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		438BF414193435A800544E6A /* PDKeychainBindings */ = {
+			isa = PBXGroup;
+			children = (
+				438BF415193435A800544E6A /* INPDKeychainBindings.h */,
+				438BF416193435A800544E6A /* INPDKeychainBindings.m */,
+				438BF417193435A800544E6A /* INPDKeychainBindingsController.h */,
+				438BF418193435A800544E6A /* INPDKeychainBindingsController.m */,
+			);
+			path = PDKeychainBindings;
+			sourceTree = "<group>";
+		};
 		43A1E29F191C049A00EF660E /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +248,7 @@
 				43A1E2BE191C049A00EF660E /* Models */,
 				43A1E2A0191C049A00EF660E /* Categories */,
 				43A1E2B1191C049A00EF660E /* Helpers */,
+				438BF413193435A800544E6A /* Vendor */,
 				43A1E2BA191C049A00EF660E /* Inbox-Info.plist */,
 				43A1E2BB191C049A00EF660E /* Inbox-Prefix.pch */,
 			);
@@ -390,6 +418,7 @@
 				430E983E193010450078F430 /* Inbox.h in Headers */,
 				430E986F193010C60078F430 /* INMessageProvider.h in Headers */,
 				430E9872193011140078F430 /* INAddRemoveTagsTask.h in Headers */,
+				438BF419193435A800544E6A /* INPDKeychainBindings.h in Headers */,
 				430E986B193010B30078F430 /* INThread.h in Headers */,
 				430E9867193010B30078F430 /* INMessage.h in Headers */,
 				430E986C193010B30078F430 /* INThread+Private.h in Headers */,
@@ -398,6 +427,7 @@
 				430E9875193011140078F430 /* INUnarchiveThreadTask.h in Headers */,
 				430E986E193010C60078F430 /* INModelProvider.h in Headers */,
 				430E9870193010C60078F430 /* INThreadProvider.h in Headers */,
+				438BF41B193435A800544E6A /* INPDKeychainBindingsController.h in Headers */,
 				430E9869193010B30078F430 /* INAttachment.h in Headers */,
 				430E986D193010C60078F430 /* INModelObject.h in Headers */,
 				430E9841193010560078F430 /* INSyncEngine.h in Headers */,
@@ -565,6 +595,7 @@
 				430E98641930109E0078F430 /* INPredicateToSQLConverter.m in Sources */,
 				430E984B193010740078F430 /* INUploadAttachmentTask.m in Sources */,
 				430E98591930108E0078F430 /* INThread.m in Sources */,
+				438BF41A193435A800544E6A /* INPDKeychainBindings.m in Sources */,
 				430E985B193010950078F430 /* FMDatabase+INModelQueries.m in Sources */,
 				430E984F1930107F0078F430 /* INModelObject.m in Sources */,
 				430E985D193010970078F430 /* NSDictionary+FormatConversion.m in Sources */,
@@ -582,6 +613,7 @@
 				430E9851193010850078F430 /* INModelProvider.m in Sources */,
 				430E9847193010620078F430 /* INSaveDraftTask.m in Sources */,
 				430E9848193010640078F430 /* INDeleteDraftTask.m in Sources */,
+				438BF41C193435A800544E6A /* INPDKeychainBindingsController.m in Sources */,
 				430E98451930105E0078F430 /* INDatabaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
