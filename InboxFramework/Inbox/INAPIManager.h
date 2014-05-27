@@ -15,6 +15,7 @@ static NSString * INAuthenticationChangedNotification = @"INAuthenticationChange
 static NSString * INTaskQueueChangedNotification = @"INTaskQueueChangedNotification";
 
 static NSString * INAppIDInfoDictionaryKey = @"INAppID";
+static NSString * INKeychainAPITokenKey = @"inbox-api-token";
 
 @class INAPITask;
 @class INModelObject;

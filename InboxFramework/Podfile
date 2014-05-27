@@ -3,6 +3,7 @@
 
 pod 'FMDB'
 pod 'AFNetworking'
+pod 'PDKeychainBindingsController'
 
 # Avoid adding libPods to the "Link Binary with Libraries" phase
 # http://stackoverflow.com/questions/17092822/building-a-static-library-with-cocoapods
