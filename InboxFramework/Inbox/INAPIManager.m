@@ -268,7 +268,7 @@ static void initialize_INAPIManager() {
 	}
 	
 	// try to visit the auth URL in Safari
-	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?app_id=%@&login_hint=%@", [self.baseURL absoluteString], _appID, address];
+	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?app_id=%@&login_hint=%@", [API_URL absoluteString], _appID, address];
 
 	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
 		_authenticationWaitingForInboundURL = YES;
