@@ -69,6 +69,8 @@
 		430E9876193011140078F430 /* INSendDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1F192C35C900E5C67D /* INSendDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43105792193513CB00C5B1FC /* NSError+InboxErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = 43105790193513CB00C5B1FC /* NSError+InboxErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43105793193513CB00C5B1FC /* NSError+InboxErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 43105791193513CB00C5B1FC /* NSError+InboxErrors.m */; };
+		4310579B193557F600C5B1FC /* INMarkAsReadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43105799193557F600C5B1FC /* INMarkAsReadTask.h */; };
+		4310579C193557F600C5B1FC /* INMarkAsReadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4310579A193557F600C5B1FC /* INMarkAsReadTask.m */; };
 		438BF419193435A800544E6A /* INPDKeychainBindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BF415193435A800544E6A /* INPDKeychainBindings.h */; };
 		438BF41A193435A800544E6A /* INPDKeychainBindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BF416193435A800544E6A /* INPDKeychainBindings.m */; };
 		438BF41B193435A800544E6A /* INPDKeychainBindingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BF417193435A800544E6A /* INPDKeychainBindingsController.h */; };
@@ -92,6 +94,8 @@
 		430E98381930101F0078F430 /* Inbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inbox.h; sourceTree = "<group>"; };
 		43105790193513CB00C5B1FC /* NSError+InboxErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+InboxErrors.h"; sourceTree = "<group>"; };
 		43105791193513CB00C5B1FC /* NSError+InboxErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+InboxErrors.m"; sourceTree = "<group>"; };
+		43105799193557F600C5B1FC /* INMarkAsReadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INMarkAsReadTask.h; sourceTree = "<group>"; };
+		4310579A193557F600C5B1FC /* INMarkAsReadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INMarkAsReadTask.m; sourceTree = "<group>"; };
 		435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAddRemoveTagsTask.h; sourceTree = "<group>"; };
 		435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAddRemoveTagsTask.m; sourceTree = "<group>"; };
 		435764F719269E3900E6B340 /* INSaveDraftTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSaveDraftTask.h; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 				43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */,
 				438BEA1F192C35C900E5C67D /* INSendDraftTask.h */,
 				438BEA20192C35C900E5C67D /* INSendDraftTask.m */,
+				43105799193557F600C5B1FC /* INMarkAsReadTask.h */,
+				4310579A193557F600C5B1FC /* INMarkAsReadTask.m */,
 			);
 			path = "API Calls";
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 				430E9871193011140078F430 /* INDeleteDraftTask.h in Headers */,
 				430E9866193010B30078F430 /* INTag.h in Headers */,
 				430E9873193011140078F430 /* INUploadAttachmentTask.h in Headers */,
+				4310579B193557F600C5B1FC /* INMarkAsReadTask.h in Headers */,
 				430E9868193010B30078F430 /* INDraft.h in Headers */,
 				430E9876193011140078F430 /* INSendDraftTask.h in Headers */,
 				43105792193513CB00C5B1FC /* NSError+InboxErrors.h in Headers */,
@@ -595,6 +602,7 @@
 				430E98551930108A0078F430 /* INMessage.m in Sources */,
 				430E98561930108B0078F430 /* INDraft.m in Sources */,
 				430E98571930108C0078F430 /* INAttachment.m in Sources */,
+				4310579C193557F600C5B1FC /* INMarkAsReadTask.m in Sources */,
 				430E98621930109D0078F430 /* INModelResponseSerializer.m in Sources */,
 				430E984D1930107D0078F430 /* INUnarchiveThreadTask.m in Sources */,
 				430E985A193010930078F430 /* INThread+Private.m in Sources */,

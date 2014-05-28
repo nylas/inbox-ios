@@ -36,20 +36,15 @@
 
 - (void)refresh
 {
-	_numberOfUnreadItems = NSNotFound;
 	[super refresh];
 }
 
 - (void)countUnreadItemsWithCallback:(LongBlock)callback
 {
-	if (_numberOfUnreadItems != NSNotFound)
-        return callback(_numberOfUnreadItems);
-
     NSPredicate * unreadPredicate = [NSComparisonPredicate predicateWithFormat:@"ANY tagIDs = %@", INTagIDUnread];
     NSPredicate * predicate = [[NSCompoundPredicate alloc] initWithType:NSAndPredicateType subpredicates:@[[self fetchPredicate], unreadPredicate]];
     [[INDatabaseManager shared] countModelsOfClass:[INThread class] matching:predicate withCallback:^(long count) {
-        _numberOfUnreadItems = count;
-        callback(_numberOfUnreadItems);
+        callback(count);
     }];
 }
 

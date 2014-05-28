@@ -10,6 +10,7 @@
 #import "INMessageProvider.h"
 #import "INArchiveThreadTask.h"
 #import "INUnarchiveThreadTask.h"
+#import "INMarkAsReadTask.h"
 #import "INTag.h"
 
 @implementation INThread
@@ -98,6 +99,14 @@
 {
 	INUnarchiveThreadTask * unarchive = [INUnarchiveThreadTask operationForModel: self];
     [[INAPIManager shared] queueTask: unarchive];
+}
+
+- (void)markAsRead
+{
+    if ([self hasTagWithID: INTagIDUnread]) {
+        INMarkAsReadTask * markAsRead = [INMarkAsReadTask operationForModel: self];
+        [[INAPIManager shared] queueTask: markAsRead];
+    }
 }
 
 @end

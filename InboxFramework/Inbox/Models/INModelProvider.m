@@ -295,7 +295,11 @@
 
 	NSMutableArray * newItems = [NSMutableArray arrayWithArray: self.items];
 	[newItems removeObjectsInArray: models];
-	
+
+    // Exit early if no items were removed. We don't need to pass anything on to our delegate
+	if ([newItems count] == [self.items count])
+        return;
+    
 	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]) {
 		NSMutableArray * changes = [NSMutableArray array];
 		for (INModelObject * item in models) {
@@ -306,10 +310,10 @@
 
 		self.items = newItems;
 
-		INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
-		[set setChanges: changes];
-		[self.delegate provider:self dataAltered:set];
-
+        INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
+        [set setChanges: changes];
+        [self.delegate provider:self dataAltered:set];
+        
 	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged:)]) {
 		self.items = newItems;
 		[self.delegate providerDataChanged:self];

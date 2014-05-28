@@ -35,5 +35,6 @@
 #pragma mark Operations on Threads
 - (void)archive;
 - (void)unarchive;
+- (void)markAsRead;
 
 @end

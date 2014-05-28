@@ -10,9 +10,6 @@
 #import "INNamespace.h"
 
 @interface INThreadProvider : INModelProvider
-{
-	long _numberOfUnreadItems;
-}
 
 - (id)initWithNamespaceID:(NSString *)namespaceID;
 

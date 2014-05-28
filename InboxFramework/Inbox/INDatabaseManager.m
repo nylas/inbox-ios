@@ -81,6 +81,12 @@ static void initialize_INDatabaseManager() {
 	return version;
 }
 
+- (long long)databaseCacheSize
+{
+    NSDictionary * attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:DATABASE_PATH error:nil];
+    return [[attributes objectForKey: NSFileSize] longLongValue];
+}
+
 - (BOOL)executeSQLFileWithName:(NSString *)sqlFileName
 {
 	BOOL __block succeeded = NO;
@@ -271,6 +277,9 @@ static void initialize_INDatabaseManager() {
 
 - (void)iterateOverModelsInTransaction:(NSArray*)models withBlock:(void(^)(INModelObject * object, FMDatabase * db))eachBlock withCompletionBlock:(VoidBlock)completion
 {
+    if ([models count] == 0)
+        return;
+
     NSDictionary * tablesChecked = [self checkModelTablesForModels: models];
     
 	dispatch_async(_queryDispatchQueue, ^{
