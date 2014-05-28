@@ -40,10 +40,23 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  UI accordingly. */
 + (id)instanceWithID:(NSString*)ID inNamespaceID:(NSString*)namespaceID;
 
+/**
+ @return NO if the model has been synced to the Inbox API. YES, if the ID of the object is
+ self-assigned, indicating that it has not been saved to the API.
+*/
 - (BOOL)isUnsynced;
 
+/**
+ @return Call -isDataAvailable to determine if the model has been loaded completely. In some
+ cases, the Inbox API returns model instances which only have an ID and namespaceID, for example,
+ when you ask for an INMessage that is not available in the local cache. To fully load the model,
+ call -reload:.
+*/
 - (BOOL)isDataAvailable;
 
+/**
+@return The namespace this model is associated with.
+*/
 - (INNamespace*)namespace;
 
 /** @name Resource Representation */

@@ -22,8 +22,18 @@
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
 
+/*
+ @return The parent thread of this message. Depending on how this message instance was
+ loaded, the thread may or may not be available in the cache. After calling this method, 
+ you should check if the thread's data is loaded by calling -isDataAvailable, and call
+ -reload: if necessary to fully populate the thread.
+*/
 - (INThread*)thread;
 
+/* 
+ @return An array of INAttachment objects representing attachments to this message.
+ Attachment objects can be queried for previews, download links, etc.
+*/
 - (NSArray*)attachments;
 
 

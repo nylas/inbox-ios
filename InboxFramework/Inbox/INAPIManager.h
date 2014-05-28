@@ -60,7 +60,13 @@ typedef void (^ VoidBlock)();
 
 + (INAPIManager *)shared;
 
+/**
+Returns an immutable copy of the task queue so it can be inspected or displayed.
+
+@return a copy of the task queue
+*/
 - (NSArray*)taskQueue;
+
 /**
  Queue the API operation provided. API operations are persisted to disk until they are
  completed and automatically restarted after network reachability changes occur. 
@@ -71,8 +77,21 @@ typedef void (^ VoidBlock)();
  */
 - (BOOL)queueTask:(INAPITask *)change;
 
+/**
+Retry all the tasks which have failed with status INAPITaskStateServerUnreachable, 
+indicating that they can be retryed and may succeed.
+*/
 - (void)retryTasks;
 
+/**
+Suspend or resume the task queue. This method is called automatically when reachability
+status changes, but it may be useful to resume the queue menually in response to user
+action.
+
+@param suspended. YES to suspend the processing of queued API tasks, NO to resume
+processing tasks immediately. Note that the queue will be suspended again if a queued
+task fails.
+*/
 - (void)setTaskQueueSuspended:(BOOL)suspended;
 
 
@@ -86,8 +105,24 @@ typedef void (^ VoidBlock)();
 
 - (void)unauthenticate;
 
+/**
+ handleURL: should be called from your appication's app delegate in response to
+ application:openURL:sourceApplication:annotation:. Inbox uses a special URL scheme
+ to complete authentication and allow for deep linking.
+ 
+ @param url The URL that your application was asked to open
+
+ @return YES, if url was an Inbox URL and was handled by the INAPIManager, NO if your
+ application should futher handle the URL and process it on it's own.
+*/
 - (BOOL)handleURL:(NSURL*)url;
 
+/**
+Fetch the namespaces available to the app with the current auth token.
+
+@param completionBlock If the completion block parameters indicate that the request was
+successful, calls to -namespaces will return the fetched namespaces.
+*/
 - (void)fetchNamespaces:(ErrorBlock)completionBlock;
 
 /**

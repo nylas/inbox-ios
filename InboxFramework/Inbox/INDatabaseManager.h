@@ -93,11 +93,28 @@
 
 /**
  Remove an object from the local database cache and notify observers of the change.
+ This method calls willUnpersist: on the model, removes it and any child rows in 
+ associated tables, and then calls didUnpersist:.
  
  @param model The object to remove.
+
+ @param willResave Pass YES if you will resave this model immediately, for example,
+ if you are clearing the model from the cache, changing it's ID, and then resaving it.
+
+ @param completion An optional completion block that is called when the database
+ transaction has been completed. This method is asynchronous and removal happens in
+ the background, so if you want to destroy and re-save a model, it's important to wait
+ until unpersistModel: has completed.
  */
 - (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completion;
 
+/**
+ Remove a set of model objects from the database in a single database transaction. This is the
+ preferred way of removing multiple models, and you should try to use this method
+ whenever possible.
+ 
+ @param models The objects to remove from the local cache.
+ */
 - (void)unpersistModels:(NSArray *)models;
 
 /**
@@ -130,12 +147,18 @@
 - (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(NSUInteger)limit offset:(NSUInteger)offset withCallback:(ResultsBlock)callback;
 
 /**
-Find models using the provided query and query parameters (substitutions for ? in the query).
+Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
 This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback;
 
  This method is asynchronous, and the callback will be invoked on the main thread when objects are ready.
 */
 - (void)selectModelsOfClass:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback;
+
+/**
+Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
+This method is synchronous, and the callbackwill be invoked immediately on the main thread. This is useful for 
+some cases, but should be used with care.
+*/
 - (void)selectModelsOfClassSync:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback;
 
 /**
@@ -143,7 +166,6 @@ Find the number of models that match a particular query, synchronously.
 
  @param klass The type of models. Must be a subclass of INModelObject.
  @param wherePredicate A comparison or compound NSPredicate.
-
 */
 - (void)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate withCallback:(LongBlock)callback;
 

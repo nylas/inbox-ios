@@ -24,17 +24,60 @@
 @property (nonatomic, strong) NSArray * tagIDs;
 @property (nonatomic, assign) BOOL unread;
 
+/*
+@return An array of INTag objects for the tags on this thread.
+*/
 - (NSArray*)tags;
+
+/*
+ @return An array of NSString tag IDs for the tags on this thread.
+ */
 - (NSArray*)tagIDs;
+
+/*
+ @param ID The ID to check for.
+ @return YES if this thread has a tag with the given ID.
+ */
 - (BOOL)hasTagWithID:(NSString*)ID;
 
+/**
+ Initializes and returns a new INModelProvider for displaying messages in this thread.
+ To further filter the messages (for example, to show just messages with attachments in
+ the thread), you can set the itemFilterPredicate on the returned provider.
+ 
+ @return An initialized INModelProvider for displaying messages.
+ */
 - (INModelProvider*)newMessageProvider;
+
+/**
+ Initializes and returns a new INModelProvider for displaying drafts on this thread.
+ @return An initialized INModelProvider for displaying drafts.
+ */
 - (INModelProvider*)newDraftProvider;
 
-
 #pragma mark Operations on Threads
+
+/**
+ Archive the thread. This method updates the local cache to reflect the change 
+ immediately but may be performed later on the Inbox server if an internet
+ connection is not available.
+ */
 - (void)archive;
+
+/**
+ Unarchive the thread. This method updates the local cache to reflect the change
+ immediately but may be performed later on the Inbox server if an internet
+ connection is not available.
+ */
 - (void)unarchive;
+
+/**
+ Mark this thread as read. If the thread does not have the unread tag, this method
+ has no effect. 
+ 
+ This method updates the local cache to reflect the change immediately but may be
+ performed later on the Inbox server if an internet connection is not available.
+ */
 - (void)markAsRead;
 
 @end
