@@ -261,14 +261,14 @@ static void initialize_INAPIManager() {
 	NSAssert(found, @"Your application's Info.plist should register your app for the '%@' URL scheme to handle Inbox authentication correctly.", _appURLScheme);
 
 	// make sure we can reach the server before we try to open the auth page in safari
-	if ([[self reachabilityManager] networkReachabilityStatus] <= AFNetworkReachabilityStatusNotReachable) {
+	if ([[self reachabilityManager] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
 		NSError * err = [NSError inboxErrorWithDescription: @"Sorry, you need to be connected to the internet to connect your account."];
 		[self handleAuthenticationCompleted: NO withError: err];
 		return;
 	}
 	
 	// try to visit the auth URL in Safari
-	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?app_id=%@&login_hint=%@", [self.baseURL absoluteString], _appID, address];
+	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@", [self.baseURL absoluteString], _appID, address];
 
 	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
 		_authenticationWaitingForInboundURL = YES;
@@ -374,10 +374,17 @@ static void initialize_INAPIManager() {
     AFHTTPRequestOperation * operation = [self GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
         // broadcast a notification about this change
         _namespaces = namespaces;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:INNamespacesChangedNotification object:nil];
-        if (completionBlock)
-            completionBlock(YES, nil);
 
+        if ([namespaces count] == 0) {
+            if (completionBlock)
+                completionBlock(NO, [NSError inboxErrorWithDescription: @"The token was valid, but returned no namespaces."]);
+        } else {
+            if (completionBlock)
+                completionBlock(YES, nil);
+        }
+        
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		if (completionBlock)
 			completionBlock(NO, error);
