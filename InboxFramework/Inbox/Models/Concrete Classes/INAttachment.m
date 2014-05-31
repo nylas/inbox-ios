@@ -32,6 +32,11 @@
 
 - (id)initWithFilename:(NSString*)filename mimetype:(NSString*)mimetype andData:(NSData*)data andPreview:(UIImage*)previewOrNil inNamespace:(INNamespace*)namespace
 {
+	NSAssert(data, @"You must provide attachment data.");
+	NSAssert(filename, @"You must provide an attachment filename.");
+	NSAssert(mimetype, @"You must provide an attachment mimetype.");
+	NSAssert(namespace, @"You must provide an attachment namespace.");
+	
 	self = [super init];
 	if (self) {
 		self.namespaceID = [namespace ID];
@@ -48,6 +53,8 @@
 
 - (void)upload
 {
+	NSAssert(_localDataPath, @"Before calling -upload, you need to use one of the designated initializers to provide a reference to data to upload.");
+	
 	INUploadAttachmentTask * upload = [[INUploadAttachmentTask alloc] initWithModel: self];
 	[[INAPIManager shared] queueTask: upload];
 }

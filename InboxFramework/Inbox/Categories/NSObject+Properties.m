@@ -143,8 +143,6 @@
 		return nil;
 
 	NSString * result = [NSString stringWithUTF8String:str];
-	free((void *)str);
-
 	return result;
 }
 

@@ -13,6 +13,16 @@
 
 @implementation INUploadAttachmentTask
 
+- (void)applyLocally
+{
+	[[INDatabaseManager shared] persistModel: self.model];
+}
+
+- (void)rollbackLocally
+{
+	[[INDatabaseManager shared] unpersistModel:self.model willResaveSameModel:NO completionBlock:NULL];
+}
+
 - (NSURLRequest *)buildAPIRequest
 {
 	INAttachment * attachment = (INAttachment *)self.model;

@@ -36,12 +36,14 @@
 	BOOL badAPIResponse = ([responseObject isKindOfClass: [NSDictionary class]] && [responseObject[@"type"] isEqualToString: @"api_error"]);
 	
 	if (badAPIResponse) {
-		*error = [NSError inboxErrorWithDescription: responseObject[@"message"]];
+		if (error)
+			*error = [NSError inboxErrorWithDescription: responseObject[@"message"]];
 		return nil;
 	}
 	
 	if (badJSONClass) {
-		*error = [NSError inboxErrorWithDescription: @"The JSON object returned was not an NSArray"];
+		if (error)
+			*error = [NSError inboxErrorWithDescription: @"The JSON object returned was not an NSArray"];
 		return nil;
 	}
 
@@ -51,6 +53,11 @@
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		for (NSDictionary * modelDictionary in responseObject) {
 			BOOL created = NO;
+			
+			// TODO: Remove this so it continues and throw an exception
+			if (!modelDictionary[@"id"] || [modelDictionary[@"id"] isKindOfClass: [NSNull class]])
+				continue;
+				
 			INModelObject * object = [_modelClass attachedInstanceMatchingID: modelDictionary[@"id"] createIfNecessary: YES didCreate: &created];
 			
 			if (created) {
