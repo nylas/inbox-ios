@@ -25,7 +25,7 @@
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",
-	 @"attachmentIDs":@"attachments"
+	 @"attachmentIDs":@"files"
 	}];
 	return mapping;
 }

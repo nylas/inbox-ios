@@ -64,6 +64,7 @@
 
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
     NSMutableDictionary * params = [[self.model resourceDictionary] mutableCopy];
+    [params removeObjectForKey: @"id"];
     INThread * thread = [(INDraft*)self.model thread];
     if (thread) [params setObject:[thread ID] forKey:@"replying_to_thread"];
     

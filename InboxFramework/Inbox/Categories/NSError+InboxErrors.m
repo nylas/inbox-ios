@@ -10,13 +10,18 @@
 
 @implementation NSError (InboxErrors)
 
-+ (NSError*)inboxErrorWithDescription:(NSString *)format, ...
++ (NSError*)inboxErrorWithFormat:(NSString *)format, ...
 {
     va_list args;
     va_start(args, format);
     NSString * description = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     return [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: description}];
+}
+
++ (NSError*)inboxErrorWithDescription:(NSString *)desc
+{
+    return [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: desc}];
 }
 
 @end

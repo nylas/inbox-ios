@@ -230,7 +230,8 @@ static void initialize_INDatabaseManager() {
 
 - (void)persistModel:(INModelObject *)model
 {
-    [self persistModels: @[model]];
+    if (model)
+        [self persistModels: @[model]];
 }
 
 - (void)persistModels:(NSArray *)models

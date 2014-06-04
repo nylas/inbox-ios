@@ -69,6 +69,9 @@
     self.attachmentIDs = IDs;
 
     if ([attachment isUnsynced]) {
+        if (![attachment uploadTask])
+            [attachment upload];
+
         // we can't save with this attachment ID. Find the attachment upload task
         // and tell it to update us when the draft upload has finished.
         [[[attachment uploadTask] waitingDrafts] addObject: self];

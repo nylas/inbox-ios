@@ -54,7 +54,9 @@
 - (void)upload
 {
 	NSAssert(_localDataPath, @"Before calling -upload, you need to use one of the designated initializers to provide a reference to data to upload.");
-	
+	if ([self uploadTask])
+        return;
+    
 	INUploadAttachmentTask * upload = [[INUploadAttachmentTask alloc] initWithModel: self];
 	[[INAPIManager shared] queueTask: upload];
 }

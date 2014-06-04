@@ -49,17 +49,22 @@
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
 {
+    if ([responseObject isKindOfClass: [NSArray class]])
+        responseObject = [responseObject firstObject];
+    
     if (![responseObject isKindOfClass: [NSDictionary class]])
         return NSLog(@"SaveDraft weird response: %@", responseObject);
 
     NSString * oldID = [self.model ID];
 
  	INAttachment * attachment = (INAttachment *)self.model;
-    [attachment updateWithResourceDictionary: responseObject];
-    [[INDatabaseManager shared] persistModel: attachment];
-    
-    for (INDraft * draft in [self waitingDrafts])
-        [draft attachmentWithID:oldID uploadedAs: [self.model ID]];
+    [[INDatabaseManager shared] unpersistModel: attachment willResaveSameModel:YES completionBlock:^{
+        [attachment updateWithResourceDictionary: responseObject];
+        [[INDatabaseManager shared] persistModel: attachment];
+        
+        for (INDraft * draft in [self waitingDrafts])
+            [draft attachmentWithID:oldID uploadedAs: [self.model ID]];
+    }];
 }
 
 @end

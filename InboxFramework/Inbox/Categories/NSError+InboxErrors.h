@@ -10,6 +10,7 @@
 
 @interface NSError (InboxErrors)
 
-+ (NSError*)inboxErrorWithDescription:(NSString *)format, ...;
++ (NSError*)inboxErrorWithFormat:(NSString *)format, ...;
++ (NSError*)inboxErrorWithDescription:(NSString *)desc;
 
 @end
