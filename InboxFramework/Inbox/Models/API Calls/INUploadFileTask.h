@@ -8,7 +8,7 @@
 
 #import "INAPITask.h"
 
-@interface INUploadAttachmentTask : INAPITask
+@interface INUploadFileTask : INAPITask
 
 - (NSMutableArray *)waitingDrafts;
 

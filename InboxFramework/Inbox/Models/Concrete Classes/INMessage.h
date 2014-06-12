@@ -10,7 +10,7 @@
 
 @class INThread;
 @class INNamespace;
-@class INAttachment;
+@class INFile;
 
 @interface INMessage : INModelObject
 

@@ -12,4 +12,7 @@
 
 - (BOOL)providesCompleteCacheOf:(Class)klass;
 
+/* Clear all sync state, usually called during the logout process. */
+- (void)resetSyncState;
+
 @end

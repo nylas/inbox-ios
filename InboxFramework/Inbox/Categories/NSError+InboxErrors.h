@@ -12,5 +12,6 @@
 
 + (NSError*)inboxErrorWithFormat:(NSString *)format, ...;
 + (NSError*)inboxErrorWithDescription:(NSString *)desc;
++ (NSError*)inboxErrorWithDescription:(NSString *)desc underlyingError:(NSError*)underlying;
 
 @end

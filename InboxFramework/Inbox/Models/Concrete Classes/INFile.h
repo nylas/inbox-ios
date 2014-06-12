@@ -9,7 +9,7 @@
 #import "INModelObject.h"
 #import "INAPIManager.h"
 
-@class INUploadAttachmentTask;
+@class INUploadFileTask;
 
 typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 
@@ -17,7 +17,7 @@ typedef void (^ AttachmentDownloadBlock)(NSError * error, NSData * data);
 may be created, uploaded and attached to drafts, or fetched from the server for 
 existing messages.
 */
-@interface INAttachment : INModelObject
+@interface INFile : INModelObject
 
 @property (nonatomic, strong) NSString * localDataPath;
 @property (nonatomic, strong) UIImage * localPreview;
@@ -65,6 +65,6 @@ to call -upload.
  the progress of this upload, listen for INTaskProgressNotification notifications for this
  object.
 */
-- (INUploadAttachmentTask*)uploadTask;
+- (INUploadFileTask*)uploadTask;
 
 @end

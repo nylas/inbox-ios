@@ -12,7 +12,7 @@
 #import "INSaveDraftTask.h"
 #import "INSendDraftTask.h"
 #import "INDeleteDraftTask.h"
-#import "INUploadAttachmentTask.h"
+#import "INUploadFileTask.h"
 
 @implementation INDraft
 
@@ -55,12 +55,12 @@
     return m;
 }
 
-- (void)addAttachment:(INAttachment*)attachment
+- (void)addAttachment:(INFile*)attachment
 {
 	[self addAttachment:attachment atIndex:0];
 }
 
-- (void)addAttachment:(INAttachment*)attachment atIndex:(NSInteger)index
+- (void)addAttachment:(INFile*)attachment atIndex:(NSInteger)index
 {
     NSMutableArray * IDs = [self.attachmentIDs mutableCopy];
     if (!IDs) IDs = [NSMutableArray array];
@@ -78,7 +78,7 @@
     }
 }
 
-- (void)removeAttachment:(INAttachment*)attachment
+- (void)removeAttachment:(INFile*)attachment
 {
 	NSMutableArray * IDs = [self.attachmentIDs mutableCopy];
 	[IDs removeObject: [attachment ID]];

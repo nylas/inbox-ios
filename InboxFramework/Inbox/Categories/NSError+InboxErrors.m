@@ -24,4 +24,10 @@
     return [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: desc}];
 }
 
++ (NSError*)inboxErrorWithDescription:(NSString *)desc underlyingError:(NSError*)underlying
+{
+    desc = [desc stringByAppendingFormat: @" %@", [underlying localizedDescription]];
+    return [NSError errorWithDomain:@"Inbox" code:-1 userInfo:@{NSLocalizedDescriptionKey: desc, NSUnderlyingErrorKey: underlying}];
+}
+
 @end

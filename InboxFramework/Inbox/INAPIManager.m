@@ -8,6 +8,7 @@
 
 #import "INAPIManager.h"
 #import "INAPITask.h"
+#import "INSyncEngine.h"
 #import "INNamespace.h"
 #import "INModelResponseSerializer.h"
 #import "INDatabaseManager.h"
@@ -301,6 +302,7 @@ static void initialize_INAPIManager() {
 - (void)unauthenticate
 {
 	[_taskQueue removeAllObjects];
+    [_syncEngine resetSyncState];
     [[INPDKeychainBindings sharedKeychainBindings] removeObjectForKey: INKeychainAPITokenKey];
     [[self requestSerializer] clearAuthorizationHeader];
     [[INDatabaseManager shared] resetDatabase];

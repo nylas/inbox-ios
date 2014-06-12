@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INAttachment.h"
+#import "INFile.h"
 #import "INModelObject+Uniquing.h"
 #import "INNamespace.h"
-#import "INUploadAttachmentTask.h"
+#import "INUploadFileTask.h"
 
-@implementation INAttachment
+@implementation INFile
 
 + (NSMutableDictionary *)resourceMapping
 {
@@ -45,7 +45,7 @@
 		self.localPreview = previewOrNil;
 		self.localDataPath = [[NSString stringWithFormat: @"~/Documents/%@.data", self.ID] stringByExpandingTildeInPath];
 		[data writeToFile: _localDataPath atomically:NO];
-		[INAttachment attachInstance: self];
+		[INFile attachInstance: self];
 		
 	}
 	return self;
@@ -57,14 +57,14 @@
 	if ([self uploadTask])
         return;
     
-	INUploadAttachmentTask * upload = [[INUploadAttachmentTask alloc] initWithModel: self];
+	INUploadFileTask * upload = [[INUploadFileTask alloc] initWithModel: self];
 	[[INAPIManager shared] queueTask: upload];
 }
 
-- (INUploadAttachmentTask*)uploadTask
+- (INUploadFileTask*)uploadTask
 {
-	for (INUploadAttachmentTask * change in [[INAPIManager shared] taskQueue]) {
-		if ([change isKindOfClass: [INUploadAttachmentTask class]] && [[change model] isEqual: self])
+	for (INUploadFileTask * change in [[INAPIManager shared] taskQueue]) {
+		if ([change isKindOfClass: [INUploadFileTask class]] && [[change model] isEqual: self])
 			return change;
 	}
 	return nil;

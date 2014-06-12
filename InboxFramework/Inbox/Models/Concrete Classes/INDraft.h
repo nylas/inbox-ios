@@ -7,7 +7,7 @@
 //
 
 #import "INMessage.h"
-#import "INAttachment.h"
+#import "INFile.h"
 
 typedef enum : NSUInteger {
     INDraftStateUnsent,
@@ -61,14 +61,14 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
  @param attachment The INAttachment object to add to the draft.
  @param index The index where the draft should be attached.
 */
-- (void)addAttachment:(INAttachment*)attachment;
+- (void)addAttachment:(INFile*)attachment;
 
 /**
  Add an attachment to the thread at a particular index.
  @param attachment The INAttachment object to add to the draft.
  @param index The index where the draft should be attached.
 */
-- (void)addAttachment:(INAttachment*)attachment atIndex:(NSInteger)index;
+- (void)addAttachment:(INFile*)attachment atIndex:(NSInteger)index;
 
 /**
  Remove the provided attachment from the draft. Note that you need to call -save
@@ -76,7 +76,7 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
 
  @param attachment The attachment to remove from the draft.
 */
-- (void)removeAttachment:(INAttachment*)attachment;
+- (void)removeAttachment:(INFile*)attachment;
 
 /**
  Remove the provided attachment from the draft. Note that you need to call -save

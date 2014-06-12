@@ -13,7 +13,7 @@
 #import "INDeleteDraftTask.h"
 #import "INSendDraftTask.h"
 #import "INModelObject+Uniquing.h"
-#import "INUploadAttachmentTask.h"
+#import "INUploadFileTask.h"
 
 @implementation INSaveDraftTask
 
@@ -41,7 +41,7 @@
 	// are any requests uploading attachments that are referenced in our draft?
 	// we need to wait for those to finish...
 	for (INAPITask * other in others) {
-		if ([other isKindOfClass: [INUploadAttachmentTask class]]
+		if ([other isKindOfClass: [INUploadFileTask class]]
 			&& [[draft attachmentIDs] containsObject: [[other model] ID]])
 			[dependencies addObject: other];
 	}

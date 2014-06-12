@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
-#import "INUploadAttachmentTask.h"
-#import "INAttachment.h"
+#import "INUploadFileTask.h"
+#import "INFile.h"
 #import "INDatabaseManager.h"
 #import "INDraft.h"
 
-@implementation INUploadAttachmentTask
+@implementation INUploadFileTask
 
 - (void)applyLocally
 {
@@ -25,7 +25,7 @@
 
 - (NSURLRequest *)buildAPIRequest
 {
-	INAttachment * attachment = (INAttachment *)self.model;
+	INFile * attachment = (INFile *)self.model;
 	
     NSAssert(attachment, @"INUploadAttachmentChange asked to buildRequest with no model!");
 	NSAssert([attachment namespaceID], @"INUploadAttachmentChange asked to buildRequest with no namespace!");
@@ -57,7 +57,7 @@
 
     NSString * oldID = [self.model ID];
 
- 	INAttachment * attachment = (INAttachment *)self.model;
+ 	INFile * attachment = (INFile *)self.model;
     [[INDatabaseManager shared] unpersistModel: attachment willResaveSameModel:YES completionBlock:^{
         [attachment updateWithResourceDictionary: responseObject];
         [[INDatabaseManager shared] persistModel: attachment];

@@ -8,7 +8,7 @@
 
 #import "INMessage.h"
 #import "INThread.h"
-#import "INAttachment.h"
+#import "INFile.h"
 #import "NSString+FormatConversion.h"
 #import "INNamespace.h"
 
@@ -51,7 +51,7 @@
 {
 	NSMutableArray * attachments = [NSMutableArray array];
 	for (NSString * ID in _attachmentIDs) {
-		INAttachment * attachment = [INAttachment instanceWithID:ID inNamespaceID:[self namespaceID]];
+		INFile * attachment = [INFile instanceWithID:ID inNamespaceID:[self namespaceID]];
 		[attachments addObject: attachment];
 	}
 	return attachments;

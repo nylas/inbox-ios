@@ -23,7 +23,7 @@
 		430E9847193010620078F430 /* INSaveDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F819269E3900E6B340 /* INSaveDraftTask.m */; };
 		430E9848193010640078F430 /* INDeleteDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA1C192BC8CC00E5C67D /* INDeleteDraftTask.m */; };
 		430E984A193010730078F430 /* INAddRemoveTagsTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */; };
-		430E984B193010740078F430 /* INUploadAttachmentTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */; };
+		430E984B193010740078F430 /* INUploadFileTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADE9FD192D56A30048272B /* INUploadFileTask.m */; };
 		430E984C193010750078F430 /* INArchiveThreadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA24192C364100E5C67D /* INArchiveThreadTask.m */; };
 		430E984D1930107D0078F430 /* INUnarchiveThreadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14743192C447A001AF02F /* INUnarchiveThreadTask.m */; };
 		430E984E1930107E0078F430 /* INSendDraftTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 438BEA20192C35C900E5C67D /* INSendDraftTask.m */; };
@@ -35,7 +35,7 @@
 		430E9854193010890078F430 /* INTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2C8191C049A00EF660E /* INTag.m */; };
 		430E98551930108A0078F430 /* INMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2CA191C049A00EF660E /* INMessage.m */; };
 		430E98561930108B0078F430 /* INDraft.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14747192E75B7001AF02F /* INDraft.m */; };
-		430E98571930108C0078F430 /* INAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADEA05192D58160048272B /* INAttachment.m */; };
+		430E98571930108C0078F430 /* INFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ADEA05192D58160048272B /* INFile.m */; };
 		430E98581930108D0078F430 /* INNamespace.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2CC191C049A00EF660E /* INNamespace.m */; };
 		430E98591930108E0078F430 /* INThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1E2CE191C049A00EF660E /* INThread.m */; };
 		430E985A193010930078F430 /* INThread+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A1474B192E7E1E001AF02F /* INThread+Private.m */; };
@@ -53,7 +53,7 @@
 		430E9866193010B30078F430 /* INTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C7191C049A00EF660E /* INTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9867193010B30078F430 /* INMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2C9191C049A00EF660E /* INMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9868193010B30078F430 /* INDraft.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14746192E75B7001AF02F /* INDraft.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		430E9869193010B30078F430 /* INAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADEA04192D58160048272B /* INAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		430E9869193010B30078F430 /* INFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADEA04192D58160048272B /* INFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E986A193010B30078F430 /* INNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2CB191C049A00EF660E /* INNamespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E986B193010B30078F430 /* INThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2CD191C049A00EF660E /* INThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E986C193010B30078F430 /* INThread+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1474A192E7E1E001AF02F /* INThread+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,7 +63,7 @@
 		430E9870193010C60078F430 /* INThreadProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A1E2D8191C049A00EF660E /* INThreadProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9871193011140078F430 /* INDeleteDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1B192BC8CC00E5C67D /* INDeleteDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9872193011140078F430 /* INAddRemoveTagsTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		430E9873193011140078F430 /* INUploadAttachmentTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		430E9873193011140078F430 /* INUploadFileTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43ADE9FC192D56A30048272B /* INUploadFileTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9874193011140078F430 /* INArchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA23192C364100E5C67D /* INArchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9875193011140078F430 /* INUnarchiveThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		430E9876193011140078F430 /* INSendDraftTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 438BEA1F192C35C900E5C67D /* INSendDraftTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -172,10 +172,10 @@
 		43A1E312191C04A000EF660E /* InboxTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InboxTests-Info.plist"; sourceTree = "<group>"; };
 		43A1E314191C04A000EF660E /* INModelProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INModelProviderTests.m; sourceTree = "<group>"; };
 		43A9684C191C08F300F24844 /* Inbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Inbox.h; sourceTree = "<group>"; };
-		43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUploadAttachmentTask.h; sourceTree = "<group>"; };
-		43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUploadAttachmentTask.m; sourceTree = "<group>"; };
-		43ADEA04192D58160048272B /* INAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAttachment.h; sourceTree = "<group>"; };
-		43ADEA05192D58160048272B /* INAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAttachment.m; sourceTree = "<group>"; };
+		43ADE9FC192D56A30048272B /* INUploadFileTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INUploadFileTask.h; sourceTree = "<group>"; };
+		43ADE9FD192D56A30048272B /* INUploadFileTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INUploadFileTask.m; sourceTree = "<group>"; };
+		43ADEA04192D58160048272B /* INFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INFile.h; sourceTree = "<group>"; };
+		43ADEA05192D58160048272B /* INFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INFile.m; sourceTree = "<group>"; };
 		43FF122E191AF2E70043E2E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43FF123C191AF2E70043E2E6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6934FC4E75994D9D989C3502 /* Pods-InboxTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InboxTests.xcconfig"; path = "Pods/Pods-InboxTests.xcconfig"; sourceTree = "<group>"; };
@@ -330,8 +330,8 @@
 				438BEA1C192BC8CC00E5C67D /* INDeleteDraftTask.m */,
 				435764F319269E2B00E6B340 /* INAddRemoveTagsTask.h */,
 				435764F419269E2B00E6B340 /* INAddRemoveTagsTask.m */,
-				43ADE9FC192D56A30048272B /* INUploadAttachmentTask.h */,
-				43ADE9FD192D56A30048272B /* INUploadAttachmentTask.m */,
+				43ADE9FC192D56A30048272B /* INUploadFileTask.h */,
+				43ADE9FD192D56A30048272B /* INUploadFileTask.m */,
 				438BEA23192C364100E5C67D /* INArchiveThreadTask.h */,
 				438BEA24192C364100E5C67D /* INArchiveThreadTask.m */,
 				43A14742192C447A001AF02F /* INUnarchiveThreadTask.h */,
@@ -355,8 +355,8 @@
 				43A1E2CA191C049A00EF660E /* INMessage.m */,
 				43A14746192E75B7001AF02F /* INDraft.h */,
 				43A14747192E75B7001AF02F /* INDraft.m */,
-				43ADEA04192D58160048272B /* INAttachment.h */,
-				43ADEA05192D58160048272B /* INAttachment.m */,
+				43ADEA04192D58160048272B /* INFile.h */,
+				43ADEA05192D58160048272B /* INFile.m */,
 				43A1E2CB191C049A00EF660E /* INNamespace.h */,
 				43A1E2CC191C049A00EF660E /* INNamespace.m */,
 				43A1E2CD191C049A00EF660E /* INThread.h */,
@@ -421,7 +421,7 @@
 				4391ABC61930138E000C337F /* INModelResponseSerializer.h in Headers */,
 				430E9871193011140078F430 /* INDeleteDraftTask.h in Headers */,
 				430E9866193010B30078F430 /* INTag.h in Headers */,
-				430E9873193011140078F430 /* INUploadAttachmentTask.h in Headers */,
+				430E9873193011140078F430 /* INUploadFileTask.h in Headers */,
 				4310579B193557F600C5B1FC /* INMarkAsReadTask.h in Headers */,
 				430E9868193010B30078F430 /* INDraft.h in Headers */,
 				430E9876193011140078F430 /* INSendDraftTask.h in Headers */,
@@ -442,7 +442,7 @@
 				430E986E193010C60078F430 /* INModelProvider.h in Headers */,
 				430E9870193010C60078F430 /* INThreadProvider.h in Headers */,
 				438BF41B193435A800544E6A /* INPDKeychainBindingsController.h in Headers */,
-				430E9869193010B30078F430 /* INAttachment.h in Headers */,
+				430E9869193010B30078F430 /* INFile.h in Headers */,
 				430E986D193010C60078F430 /* INModelObject.h in Headers */,
 				430E9841193010560078F430 /* INSyncEngine.h in Headers */,
 				430E9842193010580078F430 /* INAPITask.h in Headers */,
@@ -601,14 +601,14 @@
 				430E9853193010880078F430 /* INContact.m in Sources */,
 				430E98551930108A0078F430 /* INMessage.m in Sources */,
 				430E98561930108B0078F430 /* INDraft.m in Sources */,
-				430E98571930108C0078F430 /* INAttachment.m in Sources */,
+				430E98571930108C0078F430 /* INFile.m in Sources */,
 				4310579C193557F600C5B1FC /* INMarkAsReadTask.m in Sources */,
 				430E98621930109D0078F430 /* INModelResponseSerializer.m in Sources */,
 				430E984D1930107D0078F430 /* INUnarchiveThreadTask.m in Sources */,
 				430E985A193010930078F430 /* INThread+Private.m in Sources */,
 				430E98631930109E0078F430 /* INPredicateToQueryParamConverter.m in Sources */,
 				430E98641930109E0078F430 /* INPredicateToSQLConverter.m in Sources */,
-				430E984B193010740078F430 /* INUploadAttachmentTask.m in Sources */,
+				430E984B193010740078F430 /* INUploadFileTask.m in Sources */,
 				430E98591930108E0078F430 /* INThread.m in Sources */,
 				438BF41A193435A800544E6A /* INPDKeychainBindings.m in Sources */,
 				430E985B193010950078F430 /* FMDatabase+INModelQueries.m in Sources */,
