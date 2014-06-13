@@ -100,13 +100,8 @@
 
  @param willResave Pass YES if you will resave this model immediately, for example,
  if you are clearing the model from the cache, changing it's ID, and then resaving it.
-
- @param completion An optional completion block that is called when the database
- transaction has been completed. This method is asynchronous and removal happens in
- the background, so if you want to destroy and re-save a model, it's important to wait
- until unpersistModel: has completed.
  */
-- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completion;
+- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave;
 
 /**
  Remove a set of model objects from the database in a single database transaction. This is the

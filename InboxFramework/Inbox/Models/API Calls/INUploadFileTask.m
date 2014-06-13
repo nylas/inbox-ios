@@ -20,7 +20,7 @@
 
 - (void)rollbackLocally
 {
-	[[INDatabaseManager shared] unpersistModel:self.model willResaveSameModel:NO completionBlock:NULL];
+	[[INDatabaseManager shared] unpersistModel:self.model willResaveSameModel:NO];
 }
 
 - (NSURLRequest *)buildAPIRequest
@@ -58,13 +58,12 @@
     NSString * oldID = [self.model ID];
 
  	INFile * attachment = (INFile *)self.model;
-    [[INDatabaseManager shared] unpersistModel: attachment willResaveSameModel:YES completionBlock:^{
-        [attachment updateWithResourceDictionary: responseObject];
-        [[INDatabaseManager shared] persistModel: attachment];
-        
-        for (INDraft * draft in [self waitingDrafts])
-            [draft attachmentWithID:oldID uploadedAs: [self.model ID]];
-    }];
+    [[INDatabaseManager shared] unpersistModel: attachment willResaveSameModel:YES];
+	[attachment updateWithResourceDictionary: responseObject];
+	[[INDatabaseManager shared] persistModel: attachment];
+	
+	for (INDraft * draft in [self waitingDrafts])
+		[draft attachmentWithID:oldID uploadedAs: [self.model ID]];
 }
 
 @end
