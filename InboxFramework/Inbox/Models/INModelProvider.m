@@ -145,7 +145,8 @@
 	[[INDatabaseManager shared] selectModelsOfClass:_modelClass matching:[self fetchPredicate] sortedBy:_itemSortDescriptors limit:_itemRange.length offset:_itemRange.location withCallback:^(NSArray * matchingItems) {
 		self.items = matchingItems;
 
-		if ([self.delegate respondsToSelector:@selector(providerDataChanged:)])
+ 		NSAssert([NSThread isMainThread], @"INModelProvider delegate should never be called on a background thread.");
+        if ([self.delegate respondsToSelector:@selector(providerDataChanged:)])
 			[self.delegate providerDataChanged:self];
 	}];
 }
@@ -174,10 +175,12 @@
 			[self fetchFromAPI];
 		}
 
+ 		NSAssert([NSThread isMainThread], @"INModelProvider delegate should never be called on a background thread.");
 		if ([self.delegate respondsToSelector:@selector(providerDataFetchCompleted:)])
 			[self.delegate providerDataFetchCompleted: self];
 		
 	} failure:^(AFHTTPRequestOperation * operation, NSError * error) {
+ 		NSAssert([NSThread isMainThread], @"INModelProvider delegate should never be called on a background thread.");
 		if ([self.delegate respondsToSelector:@selector(provider:dataFetchFailed:)])
 			[self.delegate provider:self dataFetchFailed:error];
 		_fetchOperation = nil;
