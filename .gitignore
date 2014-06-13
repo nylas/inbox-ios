@@ -57,3 +57,5 @@
 /InboxExamples/Triage/Triage.xcodeproj/xcuserdata
 
 /BigSur/BigSur.xcworkspace/xcuserdata/bengotow.xcuserdatad/UserInterfaceState.xcuserstate
+
+*.xcbkptlist
