@@ -46,7 +46,7 @@
 - (void)applyLocally
 {
     INDraft * draft = (INDraft *)[self model];
-	[[INDatabaseManager shared] unpersistModel: draft willResaveSameModel: NO completionBlock:NULL];
+	[[INDatabaseManager shared] unpersistModel: draft willResaveSameModel: NO];
 
     INThread * thread = [draft thread];
     if (thread) {

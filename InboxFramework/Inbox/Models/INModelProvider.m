@@ -88,6 +88,7 @@
 		return;
 	
 	_itemSortDescriptors = sortDescriptors;
+	[self empty];
 	[self performSelectorOnMainThreadOnce:@selector(refresh)];
 }
 
@@ -97,6 +98,7 @@
 		return;
 		
 	_itemFilterPredicate = predicate;
+	[self empty];
 	[self performSelectorOnMainThreadOnce:@selector(refresh)];
 }
 
@@ -112,6 +114,15 @@
 - (void)extendItemRange:(int)count
 {
     [self setItemRange: NSMakeRange(_itemRange.location, _itemRange.length + count)];
+}
+
+- (void)empty
+{
+	if ([_items count] > 0) {
+		self.items = @[];
+		if ([self.delegate respondsToSelector:@selector(providerDataChanged:)])
+			[self.delegate providerDataChanged:self];
+	}
 }
 
 - (void)refresh
@@ -201,6 +212,12 @@
 {
 	NSAssert([NSThread isMainThread], @"-managerDidPersistModels is not threadsafe.");
 	
+	// as an optimization, don't bother with all this change set stuff if we don't
+	// currently have any models. Just fetch matching models the easy way.
+	if (self.items == nil)
+		return [self fetchFromCache];
+		
+		
 	NSMutableSet * savedModels = [NSMutableSet set];
 	for (INModelObject * model in savedArray)
 		if ([model isMemberOfClass: _modelClass])

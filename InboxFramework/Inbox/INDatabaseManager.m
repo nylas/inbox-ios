@@ -245,25 +245,25 @@ static void initialize_INDatabaseManager() {
 
 - (void)unpersistModel:(INModelObject *)model
 {
-    [self unpersistModel:model willResaveSameModel:NO completionBlock:NULL];
+    [self unpersistModel:model willResaveSameModel:NO];
 }
 
-- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave completionBlock:(VoidBlock)completionBlock
+- (void)unpersistModel:(INModelObject *)model willResaveSameModel:(BOOL)willResave
 {
 	if (![self checkModelTable:[model class]])
 		return;
 	
-	dispatch_async(_queryDispatchQueue, ^{
+	dispatch_sync(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             [self deleteModel:model fromDatabase:db];
 		}];
 
-		dispatch_async(dispatch_get_main_queue(), ^{
-			// notify providers that models were updated. This may result in views being updated.
-            if (!willResave)
-                [[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidUnpersistModels:) withObject:@[model]];
-            if (completionBlock) completionBlock();
-        });
+		if (!willResave) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				// notify providers that models were updated. This may result in views being updated.
+				[[_observers setRepresentation] makeObjectsPerformSelector:@selector(managerDidUnpersistModels:) withObject:@[model]];
+			});
+		}
 	});
 }
 
@@ -283,20 +283,22 @@ static void initialize_INDatabaseManager() {
 
     NSDictionary * tablesChecked = [self checkModelTablesForModels: models];
     
-	dispatch_async(_queryDispatchQueue, ^{
+	dispatch_sync(_queryDispatchQueue, ^{
 		[_queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            int skipped = 0;
-            for (INModelObject * model in models) {
-                if ([[tablesChecked objectForKey: NSStringFromClass([model class])] boolValue] == YES)
-                    eachBlock(model, db);
-                else
-                    skipped ++;
-            }
-            
-            if (skipped > 0)
-                NSLog(@"Skipped %d models in local cache transaction because the cache table(s) could not be prepared.", skipped);
+			@autoreleasepool {
+				int skipped = 0;
+				for (INModelObject * model in models) {
+					if ([[tablesChecked objectForKey: NSStringFromClass([model class])] boolValue] == YES)
+						eachBlock(model, db);
+					else
+						skipped ++;
+				}
+				
+				if (skipped > 0)
+					NSLog(@"Skipped %d models in local cache transaction because the cache table(s) could not be prepared.", skipped);
+			}
         }];
-
+		NSLog(@"Iterated");
         dispatch_async(dispatch_get_main_queue(), completion);
     });
 
