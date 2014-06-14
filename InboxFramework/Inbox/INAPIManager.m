@@ -48,8 +48,12 @@ static void initialize_INAPIManager() {
         [[self operationQueue] setMaxConcurrentOperationCount: 5];
 		[self setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments]];
 		[self setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
-		[self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
-		
+
+        AFSecurityPolicy * policy = [AFSecurityPolicy defaultPolicy];
+        [policy setAllowInvalidCertificates: YES];
+        [self setSecurityPolicy: policy];
+        [self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
+    
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
 		// Register for changes to application state
