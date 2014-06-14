@@ -26,8 +26,6 @@
 #import "INAPITask.h"
 #import "INAddRemoveTagsTask.h"
 #import "INSendDraftTask.h"
-#import "INArchiveThreadTask.h"
-#import "INUnarchiveThreadTask.h"
 #import "INUploadFileTask.h"
 #import "INSaveDraftTask.h"
 #import "INDeleteDraftTask.h"

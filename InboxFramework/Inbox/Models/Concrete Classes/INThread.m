@@ -8,8 +8,6 @@
 
 #import "INThread.h"
 #import "INMessageProvider.h"
-#import "INArchiveThreadTask.h"
-#import "INUnarchiveThreadTask.h"
 #import "INMarkAsReadTask.h"
 #import "INTag.h"
 
@@ -91,14 +89,32 @@
 
 - (void)archive
 {
-	INArchiveThreadTask * archive = [INArchiveThreadTask operationForModel: self];
-    [[INAPIManager shared] queueTask: archive];
+	INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+    [[task tagIDsToRemove] addObject: INTagIDInbox];
+    [[task tagIDsToAdd] addObject: INTagIDArchive];
+    [[INAPIManager shared] queueTask: task];
 }
 
 - (void)unarchive
 {
-	INUnarchiveThreadTask * unarchive = [INUnarchiveThreadTask operationForModel: self];
-    [[INAPIManager shared] queueTask: unarchive];
+	INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+    [[task tagIDsToRemove] addObject: INTagIDArchive];
+    [[task tagIDsToAdd] addObject: INTagIDInbox];
+    [[INAPIManager shared] queueTask: task];
+}
+
+- (void)star
+{
+	INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+    [[task tagIDsToAdd] addObject: INTagIDStarred];
+    [[INAPIManager shared] queueTask: task];
+}
+
+- (void)unstar
+{
+	INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+    [[task tagIDsToRemove] addObject: INTagIDStarred];
+    [[INAPIManager shared] queueTask: task];
 }
 
 - (void)markAsRead

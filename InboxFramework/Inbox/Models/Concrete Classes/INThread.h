@@ -80,4 +80,21 @@
  */
 - (void)markAsRead;
 
+/** 
+ Star the thread. On some email platforms, this is known as 'flagging'.
+
+ This method updates the local cache to reflect the change immediately but may be
+ performed later on the Inbox server if an internet connection is not available.
+*/
+- (void)star;
+
+/**
+ Unstar the thread. On some email platforms, this is known as 'unflagging'.
+ 
+ This method updates the local cache to reflect the change immediately but may be
+ performed later on the Inbox server if an internet connection is not available.
+ */
+- (void)unstar;
+
+
 @end

@@ -79,4 +79,22 @@
     }
 }
 
+- (BOOL)canCancelPendingTask:(INAPITask*)other
+{
+    if ([[other model] isEqual: self.model] && [other isKindOfClass: [INAddRemoveTagsTask class]]) {
+        INAddRemoveTagsTask * otherTask = (INAddRemoveTagsTask*)other;
+        
+        // do we add ALL the tags 'other' is removing?
+        BOOL invalidatesRemoved = [[NSSet setWithArray: [otherTask tagIDsToRemove]] isSubsetOfSet:[NSSet setWithArray: [self tagIDsToAdd]]];
+
+        // do we remove ALL the tags 'other' is adding?
+        BOOL invalidatesAdded = [[NSSet setWithArray: [otherTask tagIDsToAdd]] isSubsetOfSet:[NSSet setWithArray: [self tagIDsToRemove]]];
+        
+        // if we do both, we effectively null the effect of this operation
+        return invalidatesRemoved && invalidatesAdded;
+    }
+    return NO;
+}
+
+
 @end
