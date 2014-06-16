@@ -73,7 +73,7 @@
         else
             _itemCachePolicy = INModelProviderCacheThenNetwork;
         
-		_itemRange = NSMakeRange(0, 1000);
+		_itemRange = NSMakeRange(0, 200);
 
 		// subscribe to updates about the local database cache. This creates
 		// a weak reference to us, so we don't have to worry about unregistering later.
@@ -136,6 +136,11 @@
 	[self markPerformedSelector: @selector(refresh)];
 }
 
+- (BOOL)isRefreshing
+{
+	return (_fetchOperation || _refetchRequested);
+}
+
 - (NSPredicate*)fetchPredicate
 {
 	NSMutableArray * predicates = [NSMutableArray array];
@@ -192,9 +197,9 @@
 		
 	} failure:^(AFHTTPRequestOperation * operation, NSError * error) {
  		NSAssert([NSThread isMainThread], @"INModelProvider delegate should never be called on a background thread.");
+		_fetchOperation = nil;
 		if ([self.delegate respondsToSelector:@selector(provider:dataFetchFailed:)])
 			[self.delegate provider:self dataFetchFailed:error];
-		_fetchOperation = nil;
 	}];
 	
 	INModelResponseSerializer * serializer = [[INModelResponseSerializer alloc] initWithModelClass: _modelClass];

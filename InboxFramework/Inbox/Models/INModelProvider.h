@@ -167,6 +167,11 @@ typedef enum : NSUInteger {
 */
 - (void)refresh;
 
+/**
+ @return YES if the provider is currently fetching items from the API. NO otherwise.
+*/
+- (BOOL)isRefreshing;
+
 - (void)extendItemRange:(int)count;
 
 
