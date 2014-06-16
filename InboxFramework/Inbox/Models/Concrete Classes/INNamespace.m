@@ -58,4 +58,9 @@
     return [[INMessageProvider alloc] initWithClass:[INDraft class] andNamespaceID:[self ID] andUnderlyingPredicate:nil];
 }
 
+- (INMessageProvider *)newMessageProvider
+{
+    return [[INMessageProvider alloc] initWithClass:[INMessage class] andNamespaceID:[self ID] andUnderlyingPredicate:nil];
+}
+
 @end

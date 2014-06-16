@@ -67,4 +67,12 @@ to call -upload.
 */
 - (INUploadFileTask*)uploadTask;
 
+/**
+ Asynchronously fetches the attachment data from the server.
+
+ @param callback The callback to invoke when attachment data has been successfully downloaded,
+ or an error has occurred.
+*/
+- (void)getDataWithCallback:(AttachmentDownloadBlock)callback;
+
 @end

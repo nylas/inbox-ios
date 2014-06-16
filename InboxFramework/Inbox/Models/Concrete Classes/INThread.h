@@ -8,6 +8,7 @@
 
 #import "INModelObject.h"
 #import "INModelProvider.h"
+#import "INMessageProvider.h"
 #import "INMessage.h"
 #import "INDraft.h"
 
@@ -47,13 +48,13 @@
  
  @return An initialized INModelProvider for displaying messages.
  */
-- (INModelProvider*)newMessageProvider;
+- (INMessageProvider*)newMessageProvider;
 
 /**
  Initializes and returns a new INModelProvider for displaying drafts on this thread.
  @return An initialized INModelProvider for displaying drafts.
  */
-- (INModelProvider*)newDraftProvider;
+- (INMessageProvider*)newDraftProvider;
 
 #pragma mark Operations on Threads
 

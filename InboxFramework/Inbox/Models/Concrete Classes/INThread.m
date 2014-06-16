@@ -7,9 +7,8 @@
 //
 
 #import "INThread.h"
-#import "INMessageProvider.h"
-#import "INMarkAsReadTask.h"
 #import "INTag.h"
+#import "INAddRemoveTagsTask.h"
 
 @implementation INThread
 
@@ -63,7 +62,7 @@
 	return [[self tagIDs] containsObject: ID];
 }
 
-- (INModelProvider*)newMessageProvider
+- (INMessageProvider*)newMessageProvider
 {
 	return [[INMessageProvider alloc] initForMessagesInThread: [self ID] andNamespaceID:[self namespaceID]];
 }
@@ -120,8 +119,9 @@
 - (void)markAsRead
 {
     if ([self hasTagWithID: INTagIDUnread]) {
-        INMarkAsReadTask * markAsRead = [INMarkAsReadTask operationForModel: self];
-        [[INAPIManager shared] queueTask: markAsRead];
+		INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+		[[task tagIDsToRemove] addObject: INTagIDUnread];
+		[[INAPIManager shared] queueTask: task];
     }
 }
 

@@ -48,4 +48,13 @@
  */
 - (INMessageProvider *)newDraftsProvider;
 
+/**
+ Initializes and returns a new INMessageProvider for displaying messages in this namespace.
+ Note that threads, not messages, are the objects you most often apply changes to. In many
+ cases, you should use threads instead of messages. For example, you archive a thread, not
+ a message.
+ @return An initialized INMessageProvider for displaying messages.
+ */
+- (INMessageProvider *)newMessageProvider;
+
 @end

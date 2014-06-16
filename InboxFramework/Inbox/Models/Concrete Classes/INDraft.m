@@ -41,6 +41,8 @@
 - (id)initInNamespace:(INNamespace*)namespace inReplyTo:(INThread*)thread
 {
     NSAssert(namespace, @"initInNamespace: called with a nil namespace.");
+	NSAssert([thread isUnsynced] == NO, @"It looks like you're creating a new draft on a new thread. Instead of creating an INThread and then creating a draft on that thread, just create a new draft with [INDraft initInNamespace:]. A new thread will be created automatically when you send the draft!");
+	
     INDraft * m = [[INDraft alloc] initInNamespace: namespace];
     
     NSMutableArray * recipients = [NSMutableArray array];
@@ -121,6 +123,11 @@
 
 - (void)send
 {
+	// Always save before sending, so the API consumer doesn't have to worry about it.
+	// If they call -save themselves, this new INSaveDraftTask should invalidate the
+	// other one and prevent a duplicate save anyway.
+	[self save];
+	
 	INSendDraftTask * send = [INSendDraftTask operationForModel: self];
 	[[INAPIManager shared] queueTask: send];
 }
