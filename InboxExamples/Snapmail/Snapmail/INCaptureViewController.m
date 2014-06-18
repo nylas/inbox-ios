@@ -54,32 +54,45 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+    UIImage * img = [info objectForKey: UIImagePickerControllerOriginalImage];
+    
+	if (!_thread) {
+        INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+		INContactsViewController * contacts = [[INContactsViewController alloc] initForSelectingContactInNamespace:namespace withCallback:^(INContact *object) {
+            [self sendImage: img to:@[object]];
+			[picker dismissViewControllerAnimated:NO completion:NULL];
+			[picker dismissViewControllerAnimated:NO completion:NULL];
+		}];
+		UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController: contacts];
+		[picker presentViewController: nav animated: NO completion: NULL];
+
+	} else {
+        [self sendImage: img to:nil];
+		[picker dismissViewControllerAnimated:YES completion:NULL];
+	}
+}
+
+- (void)sendImage:(UIImage*)image to:(NSArray*)contacts
+{
+    INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
 	INDraft * draft = nil;
 	
 	if (_thread) {
 		draft = [[INDraft alloc] initInNamespace:namespace inReplyTo:_thread];
 	} else {
 		draft = [[INDraft alloc] initInNamespace:namespace];
-		[draft setSubject: @"You've got a snap!"];
+		[draft setSubject: @"You've got a new snap!"];
 	}
 
-	INFile * file = [[INFile alloc] initWithImage:[info objectForKey: UIImagePickerControllerOriginalImage] inNamespace:namespace];
-	[file upload];
-	[draft addAttachment: file];
-	
-	if ([draft to] == nil) {
-		INContactsViewController * contacts = [[INContactsViewController alloc] initForSelectingContactInNamespace:namespace withCallback:^(INContact *object) {
-			[draft setTo: @[@{@"name": [object name], @"email": [object email]}]];
-			[draft send];
-			[picker dismissViewControllerAnimated:YES completion:NULL];
-		}];
-		UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController: contacts];
-		[picker presentViewController: nav animated: NO completion: NULL];
-	} else {
-		[draft send];
-		[picker dismissViewControllerAnimated:YES completion:NULL];
-	}
+    INFile * file = [[INFile alloc] initWithImage:image inNamespace:namespace];
+    [file upload];
+    [draft addAttachment: file];
+    
+    if (contacts)
+        [draft setTo: @[@{@"name": [[contacts firstObject] name], @"email": @"bengotow@gmail.com"}]];
+
+    [draft send];
+
 }
 
 @end

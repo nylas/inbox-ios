@@ -16,6 +16,7 @@
 	self = [super init];
 	if (self) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupProviders) name:INNamespacesChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAfterTasksChange) name:INTaskQueueChangedNotification object:nil];
 	}
 	return self;
 }
@@ -64,14 +65,11 @@
 		
 	[self setTitle: [[[namespace emailAddress] componentsSeparatedByString: @"@"] firstObject]];
 
-	NSPredicate * isSnapPredicate = [NSComparisonPredicate predicateWithFormat:@"subject = \"You've got a snap!\""];
+	NSPredicate * isSnapPredicate = [NSComparisonPredicate predicateWithFormat:@"subject = \"You've got a new snap!\""];
  	_inboxProvider = [namespace newThreadProvider];
-	_inboxProvider.itemFilterPredicate = isSnapPredicate;
+	_inboxProvider.itemSortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"lastMessageDate" ascending:NO]];
+    _inboxProvider.itemFilterPredicate = isSnapPredicate;
 	_inboxProvider.delegate = self;
-	
-	_sendingProvider = [namespace newDraftsProvider];
-	_sendingProvider.itemFilterPredicate = isSnapPredicate;
-	_sendingProvider.delegate = self;
 	
 	UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(rowLongPress:)];
 	[longPress setDelegate: self];
@@ -81,17 +79,37 @@
 - (void)refresh
 {
 	[_inboxProvider refresh];
-	[_sendingProvider refresh];
+}
+
+- (void)refreshAfterTasksChange
+{
+    if ([[[INAPIManager shared] taskQueue] count] == 0)
+        // We've probably finished sending a draft. Refresh now!
+        [self refresh];
+}
+
+- (NSString*)nameFromParticipants:(NSArray*)participants
+{
+	INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+
+    for (NSDictionary * participant in participants) {
+        if ([participant[@"email"] isEqualToString: [namespace emailAddress]])
+            continue;
+        if ([participant[@"name"] length] > 0)
+            return participant[@"name"];
+        else
+            return participant[@"email"];
+    }
+    return nil;
 }
 
 - (void)provider:(INModelProvider *)provider dataAltered:(INModelProviderChangeSet *)changeSet
 {
-	int section = (provider == _sendingProvider) ? 0 : 1;
 	[_tableView beginUpdates];
-	[_tableView deleteRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeRemove assumingSection:section] withRowAnimation:UITableViewRowAnimationAutomatic];
-	[_tableView insertRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeAdd assumingSection:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[_tableView deleteRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeRemove assumingSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[_tableView insertRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeAdd assumingSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 	[_tableView endUpdates];
-	[_tableView reloadRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeUpdate assumingSection:section] withRowAnimation:UITableViewRowAnimationNone];
+	[_tableView reloadRowsAtIndexPaths:[changeSet indexPathsFor:INModelProviderChangeUpdate assumingSection:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)providerDataChanged:(INModelProvider *)provider
@@ -101,7 +119,7 @@
 
 - (void)providerDataFetchCompleted:(INModelProvider *)provider
 {
-	if (([_inboxProvider isRefreshing] == NO) && ([_sendingProvider isRefreshing] == NO))
+	if ([_inboxProvider isRefreshing] == NO)
 		[_tableRefreshControl endRefreshing];
 }
 
@@ -111,17 +129,9 @@
 	[_tableRefreshControl endRefreshing];
 }
 
-- (int)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (section == 0)
-		return _sendingProvider.items.count;
-	else
-		return _inboxProvider.items.count;
+    return _inboxProvider.items.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,26 +139,24 @@
 	UITableViewCell * snapCell = [tableView dequeueReusableCellWithIdentifier: @"cell"];
 	if (!snapCell) snapCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
 	
-	if (indexPath.section == 0) {
-		INMessage * message = [[_sendingProvider items] objectAtIndex: [indexPath row]];
-		[[snapCell imageView] setImage: [UIImage imageNamed: @"snap-sending.png"]];
-		[[snapCell textLabel] setText: [[message to] description]];
-	} else {
-		INThread * thread = [[_inboxProvider items] objectAtIndex: [indexPath row]];
-		if ([thread hasTagWithID: INTagIDSent]) {
-			[[snapCell imageView] setImage: [UIImage imageNamed: @"snap-sent.png"]];
-		} else if ([thread hasTagWithID: INTagIDUnread]) {
-			[[snapCell imageView] setImage: [UIImage imageNamed: @"snap-unread.png"]];
-		} else {
-			[[snapCell imageView] setImage: [UIImage imageNamed: @"snap-read.png"]];
-		}
-		[[snapCell textLabel] setText: [[thread participants] description]];
-		
-		if ([thread hasTagWithID: INTagIDUnread])
-			[[snapCell detailTextLabel] setText: @"Tap to View"];
-		else
-			[[snapCell detailTextLabel] setText: @"Tap to Reply"];
-	}
+    INThread * thread = [[_inboxProvider items] objectAtIndex: [indexPath row]];
+    if ([thread hasTagWithID: INTagIDSent]) {
+        [[snapCell imageView] setImage: [UIImage imageNamed: @"snap-sent.png"]];
+
+    } else if ([thread hasTagWithID: INTagIDDraft]) {
+        [[snapCell imageView] setImage: [UIImage imageNamed: @"snap-sending.png"]];
+    
+    } else if ([thread hasTagWithID: INTagIDInbox]) {
+        if ([thread hasTagWithID: INTagIDUnread]) {
+            [[snapCell imageView] setImage: [UIImage imageNamed: @"snap-unread.png"]];
+            [[snapCell detailTextLabel] setText: @"Hold to View"];
+        } else {
+            [[snapCell imageView] setImage: [UIImage imageNamed: @"snap-read.png"]];
+            [[snapCell detailTextLabel] setText: @"Tap to Reply"];
+        }
+    }
+    [[snapCell textLabel] setText: [self nameFromParticipants: [thread participants]]];
+
 	return snapCell;
 }
 
@@ -174,15 +182,15 @@
 		INThread * thread = [[_inboxProvider items] objectAtIndex: [ip row]];
 		_snapController = [[INSnapViewController alloc] initWithThread: thread];
 		
-		[self.view addSubview: _snapController.view];
-		[self addChildViewController: _snapController];
+		[self.navigationController.view addSubview: _snapController.view];
+		[self.navigationController addChildViewController: _snapController];
 		[_snapController.view setAlpha: 0];
 		
 		[UIView animateWithDuration:0.3 animations:^{
 			[_snapController.view setAlpha: 1];
 		}];
 		[_snapController.view setTransform: CGAffineTransformMakeScale(0.8, 0.8)];
-		[UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+		[UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 			[_snapController.view setTransform: CGAffineTransformMakeScale(1.0, 1.0)];
 		} completion:NULL];
 	}
@@ -194,10 +202,9 @@
 
 - (void)dismissSnapViewController
 {
+    [_snapController viewWillDisappear: YES];
 	[UIView animateWithDuration:0.3 animations:^{
 		[_snapController.view setAlpha: 0];
-	}];
-	[UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 		[_snapController.view setTransform: CGAffineTransformMakeScale(0.8, 0.8)];
 	} completion:^(BOOL finished) {
 		[_snapController removeFromParentViewController];
@@ -210,7 +217,7 @@
 {
 	CGPoint p = [recognizer locationInView: _tableView];
 	NSIndexPath * ip = [_tableView indexPathForRowAtPoint: p];
-	if (!ip || (ip.section == 0))
+	if (!ip)
 		return NO;
 
 	INThread * thread = [[_inboxProvider items] objectAtIndex: [ip row]];
@@ -242,7 +249,6 @@
 	}
 	picker.navigationBarHidden = YES;
 	picker.toolbarHidden = YES;
-	
 	
 	[self presentViewController:picker animated:NO completion:NULL];
 }

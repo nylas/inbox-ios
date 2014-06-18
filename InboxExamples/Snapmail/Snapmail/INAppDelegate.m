@@ -14,6 +14,11 @@
 {
 	_viewController = [[INViewController alloc] init];
 
+    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:78/255.0 green:168/255.0 blue:133/255.0 alpha:1]];
+    [[UINavigationBar appearance] setTintColor: [UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
 	self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 	self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: _viewController];;
 	[self.window makeKeyAndVisible];

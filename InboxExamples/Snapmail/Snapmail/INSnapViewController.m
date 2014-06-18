@@ -25,36 +25,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[_tapSpinner startAnimating];
+    [_errorLabel setText: @""];
+	[_spinner startAnimating];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)displaySnapImage
 {
-	// TODO iterate over snaps and find the unread ones...
+	// TODO iterate over snaps and find the oldest unread one...
 	INMessage * message = nil;
 	for (INMessage * msg in [_provider items]) {
-//		if ([msg isUnread])
-		if ([[message attachmentIDs] count] > 0)
+		if ([[msg attachmentIDs] count] > 0)
 			message = msg;
 	}
 
+    if (message == nil)
+        return;
+    
 	INFile * file = [[message attachments] firstObject];
 	if (file == nil)
 		[(INViewController*)self.parentViewController dismissSnapViewController];
 		
 	[file getDataWithCallback:^(NSError *error, NSData *data) {
-		[_tapSpinner stopAnimating];
+		[_spinner stopAnimating];
 		if (error) {
 			[_errorLabel setText: [error localizedDescription]];
 			return;
 		}
 		
-		//TODO: [message markAsRead];
+        [message markAsRead];
 		
 		UIImage * img = [UIImage imageWithData: data];
 		[_imageView setImage: img];
@@ -80,7 +84,7 @@
 
 - (void)providerDataChanged:(INModelProvider *)provider
 {
-	[self displaySnapImage];
+    [self displaySnapImage];
 }
 
 - (void)provider:(INModelProvider *)provider dataFetchFailed:(NSError *)error

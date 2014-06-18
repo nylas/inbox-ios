@@ -10,7 +10,7 @@
 
 @interface INSnapViewController : UIViewController <INModelProviderDelegate>
 
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView * tapSpinner;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView * spinner;
 @property (nonatomic, weak) IBOutlet UIImageView * imageView;
 @property (nonatomic, weak) IBOutlet UILabel * errorLabel;
 @property (nonatomic, weak) IBOutlet UILabel * timeLabel;
