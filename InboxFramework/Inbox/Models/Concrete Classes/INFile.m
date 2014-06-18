@@ -51,6 +51,15 @@
 	return self;
 }
 
+- (UIImage*)localPreview
+{
+    if (_localPreview)
+        return _localPreview;
+    
+    // TODO: Return previews
+    return nil;
+}
+
 - (void)upload
 {
 	NSAssert(_localDataPath, @"Before calling -upload, you need to use one of the designated initializers to provide a reference to data to upload.");
@@ -73,11 +82,12 @@
 - (void)getDataWithCallback:(AttachmentDownloadBlock)callback
 {
 	NSString * path = [NSString stringWithFormat:@"/n/%@/files/%@/download", self.namespaceID, self.ID];
-	[[INAPIManager shared] GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	AFHTTPRequestOperation * op = [[INAPIManager shared] GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		callback(nil, responseObject);
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		callback(error, nil);
 	}];
+    [op setResponseSerializer: [AFHTTPResponseSerializer serializer]];
 }
 
 @end

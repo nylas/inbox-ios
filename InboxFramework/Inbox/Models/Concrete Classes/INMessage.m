@@ -11,6 +11,7 @@
 #import "INFile.h"
 #import "NSString+FormatConversion.h"
 #import "INNamespace.h"
+#import "INMarkMessageAsReadTask.h"
 
 @implementation INMessage
 
@@ -25,6 +26,7 @@
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",
+     @"unread": @"unread",
 	 @"attachmentIDs":@"files"
 	}];
 	return mapping;
@@ -55,6 +57,15 @@
 		[attachments addObject: attachment];
 	}
 	return attachments;
+}
+
+- (void)markAsRead
+{
+    if (self.unread == NO)
+        return;
+    
+    INMarkMessageAsReadTask * task = [[INMarkMessageAsReadTask alloc] initWithModel: self];
+    [[INAPIManager shared] queueTask: task];
 }
 
 

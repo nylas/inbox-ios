@@ -7,6 +7,7 @@
 //
 
 #import "INSendDraftTask.h"
+#import "INDatabaseManager.h"
 #import "INDeleteDraftTask.h"
 #import "INSaveDraftTask.h"
 #import "INTag.h"
@@ -53,5 +54,12 @@
 	}
 	return dependencies;
 }
+
+- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject
+{
+    [super handleSuccess: operation withResponse: responseObject];
+    [[INDatabaseManager shared] unpersistModel: [self model] willResaveSameModel: NO];
+}
+
 
 @end

@@ -73,13 +73,33 @@
 - (void)unarchive;
 
 /**
- Mark this thread as read. If the thread does not have the unread tag, this method
- has no effect. 
+ Mark this thread as read. This method removes the 'unread' tag, and marks every
+ message in the thread as read. If the thread does not have the unread tag, it
+ has no effect.
  
  This method updates the local cache to reflect the change immediately but may be
  performed later on the Inbox server if an internet connection is not available.
  */
 - (void)markAsRead;
+
+/**
+ Mark this thread as seen. You should mark threads as "seen" as soon as the user
+ views any part of the thread, or sees the thread subject and snippet onscreen.
+ This indicates that the user has seen the thread and the thread should not be 
+ presented as "new" from another device or application. If the thread does not have
+ the unseen tag, this method has no effect.
+ 
+ Your application should use the unseen tag, rather than the unread tag, to highlight
+ new threads the user may be interested in.
+ 
+ Additional notes:
+ - Threads become "unseen" again if new messages arrive in the thread.
+ - Threads become seen automatically if you mark any of their messages as read.
+ 
+ This method updates the local cache to reflect the change immediately but may be
+ performed later on the Inbox server if an internet connection is not available.
+ */
+- (void)markAsSeen;
 
 /** 
  Star the thread. On some email platforms, this is known as 'flagging'.

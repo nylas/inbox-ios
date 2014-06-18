@@ -127,12 +127,11 @@
 
 - (void)refresh
 {
-	[self fetchFromCache];
+	[self fetchFromCache:^{
+        if (_itemCachePolicy == INModelProviderCacheThenNetwork)
+            [self fetchFromAPI];
+    }];
 
-	// make an API request to refresh our data
-	if (_itemCachePolicy == INModelProviderCacheThenNetwork)
-		[self fetchFromAPI];
-		
 	[self markPerformedSelector: @selector(refresh)];
 }
 
@@ -155,7 +154,7 @@
 		return [predicates firstObject];
 }
 
-- (void)fetchFromCache
+- (void)fetchFromCache:(VoidBlock)callback
 {
 	// immediately refresh our data from what is now available in the cache
 	[[INDatabaseManager shared] selectModelsOfClass:_modelClass matching:[self fetchPredicate] sortedBy:_itemSortDescriptors limit:_itemRange.length offset:_itemRange.location withCallback:^(NSArray * matchingItems) {
@@ -164,7 +163,10 @@
  		NSAssert([NSThread isMainThread], @"INModelProvider delegate should never be called on a background thread.");
         if ([self.delegate respondsToSelector:@selector(providerDataChanged:)])
 			[self.delegate providerDataChanged:self];
-	}];
+
+        if (callback)
+            callback();
+    }];
 }
 
 - (void)fetchFromAPI
@@ -184,7 +186,8 @@
 
 		// The response serializer automatically inflates the returned objects and
 		// writes them to our local database. That database change propogates to us,
-		// and we compute added / removed / updated models. BOOM.
+		// and we compute added / removed / updated models. BOOM. READ : No need to
+        // update self.items
 		_fetchOperation = nil;
 		if (_refetchRequested) {
 			_refetchRequested = NO;
@@ -203,6 +206,7 @@
 	}];
 	
 	INModelResponseSerializer * serializer = [[INModelResponseSerializer alloc] initWithModelClass: _modelClass];
+    [serializer setModelsCurrentlyMatching: [NSArray arrayWithArray: self.items]];
 	[_fetchOperation setResponseSerializer:serializer];
 }
 
@@ -220,8 +224,8 @@
 	// as an optimization, don't bother with all this change set stuff if we don't
 	// currently have any models. Just fetch matching models the easy way.
 	if (self.items == nil)
-		return [self fetchFromCache];
-		
+		return [self fetchFromCache:NULL];
+    
 		
 	NSMutableSet * savedModels = [NSMutableSet set];
 	for (INModelObject * model in savedArray)

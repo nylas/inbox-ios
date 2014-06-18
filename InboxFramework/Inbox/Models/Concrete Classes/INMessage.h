@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSArray * attachmentIDs;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
+@property (nonatomic, assign) BOOL unread;
 
 /*
  @return The parent thread of this message. Depending on how this message instance was
@@ -36,5 +37,10 @@
 */
 - (NSArray*)attachments;
 
+/*
+ Mark the individual message as read. This change takes effect immediately in the local cache
+ but may not sync back to the server immediately.
+*/
+- (void)markAsRead;
 
 @end

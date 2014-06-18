@@ -125,4 +125,13 @@
     }
 }
 
+- (void)markAsSeen
+{
+    if ([self hasTagWithID: INTagIDUnseen]) {
+		INAddRemoveTagsTask * task = [INAddRemoveTagsTask operationForModel: self];
+		[[task tagIDsToRemove] addObject: INTagIDUnseen];
+		[[INAPIManager shared] queueTask: task];
+    }
+}
+
 @end

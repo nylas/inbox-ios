@@ -49,7 +49,8 @@
 
 	NSMutableArray * models = [NSMutableArray array];
 	NSMutableArray * modifiedOrUnloadedModels = [NSMutableArray array];
-	
+	NSMutableArray * modelsToDelete = [NSMutableArray arrayWithArray: _modelsCurrentlyMatching];
+    
 	dispatch_sync(dispatch_get_main_queue(), ^{
 		for (NSDictionary * modelDictionary in responseObject) {
 			BOOL created = NO;
@@ -59,7 +60,8 @@
 				continue;
 				
 			INModelObject * object = [_modelClass attachedInstanceMatchingID: modelDictionary[@"id"] createIfNecessary: YES didCreate: &created];
-			
+            [modelsToDelete removeObject: object];
+
 			if (created) {
 				// If we don't have a copy of the object in memory, inflate one and write it
 				// to the database. Note that these will probably be freed shortly.
@@ -84,7 +86,10 @@
 	// Save models to our local database. The database will notify it's
 	// observers that these models have been saved, and INModelProviders
 	// will automatically compute alterations, triggering UI updates.
+    [[INDatabaseManager shared] unpersistModels: modelsToDelete];
 	[[INDatabaseManager shared] persistModels: modifiedOrUnloadedModels];
+    _modelsCurrentlyMatching = nil;
+    
 	return models;
 }
 

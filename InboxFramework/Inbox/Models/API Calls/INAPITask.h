@@ -50,4 +50,6 @@ typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 - (void)applyRemotelyWithCallback:(CallbackBlock)callback;
 - (void)rollbackLocally;
 
+- (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject;
+
 @end

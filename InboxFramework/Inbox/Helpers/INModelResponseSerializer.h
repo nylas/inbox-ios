@@ -18,6 +18,7 @@
 @interface INModelResponseSerializer : AFJSONResponseSerializer
 
 @property (nonatomic, strong) Class modelClass;
+@property (nonatomic, strong) NSArray * modelsCurrentlyMatching;
 
 - (id)initWithModelClass:(Class)klass;
 

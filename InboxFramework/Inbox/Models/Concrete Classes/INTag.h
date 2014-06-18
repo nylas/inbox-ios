@@ -9,7 +9,9 @@
 #import "INModelObject.h"
 
 static NSString * INTagIDUnread = @"unread";
+static NSString * INTagIDUnseen = @"unseen";
 static NSString * INTagIDArchive = @"archive";
+static NSString * INTagIDDraft = @"drafts";
 static NSString * INTagIDInbox = @"inbox";
 static NSString * INTagIDStarred = @"starred";
 static NSString * INTagIDSent = @"sent";

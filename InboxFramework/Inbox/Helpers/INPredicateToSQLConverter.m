@@ -95,13 +95,17 @@ static NSString * SQLNullValueString = @"NULL";
 	if ([val isEqual:[NSNull null]])
 		return SQLNullValueString;
 
+    NSString * str = nil;
 	if ([val isKindOfClass:[NSString class]])
-		return val;
+		str = val;
+	else if ([val respondsToSelector:@selector(intValue)])
+		str = [val stringValue];
+    else
+        str = [val description];
 
-	if ([val respondsToSelector:@selector(intValue)])
-		return [val stringValue];
-
-	return [self SQLConstantForValue:[val description]];
+    // this is the strangest way of escaping single quotes... another single quote
+    str = [str stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+    return str;
 }
 
 - (NSString *)SQLExpressionForNSExpression:(NSExpression *)expression
