@@ -15,6 +15,8 @@
  listening on these models.
 */
 
+#import <AFNetworking/AFNetworking.h>
+
 @interface INModelResponseSerializer : AFJSONResponseSerializer
 
 @property (nonatomic, strong) Class modelClass;

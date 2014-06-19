@@ -6,8 +6,17 @@
 //  Copyright (c) 2014 Inbox. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 #ifndef InboxFramework_Inb_xh_h
 #define InboxFramework_Inb_xh_h
+
+//! Project version number for Inbox.
+FOUNDATION_EXPORT double InboxVersionNumber;
+
+//! Project version string for Inbox.
+FOUNDATION_EXPORT const unsigned char InboxVersionString[];
+
 
 /** If you're getting errors saying "Header could not be found," select the
  header file in Xcode and make sure it's visibility is "Public" in the framework
