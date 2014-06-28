@@ -273,7 +273,8 @@ static void initialize_INAPIManager() {
 	}
 	
 	// try to visit the auth URL in Safari
-	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@", [self.baseURL absoluteString], _appID, address];
+    NSString * uri = [NSString stringWithFormat: @"%@://app/auth-response", _appURLScheme];
+	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", [self.baseURL absoluteString], _appID, address, uri];
 
 	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
 		_authenticationWaitingForInboundURL = YES;
@@ -322,19 +323,19 @@ static void initialize_INAPIManager() {
 	if (![[[url scheme] lowercaseString] isEqualToString: _appURLScheme])
 		return NO;
 		
-	if ([[url path] isEqualToString: @"auth-response"]) {
+	if ([[url path] isEqualToString: @"/auth-response"]) {
 		_authenticationWaitingForInboundURL = NO;
 
 		NSMutableDictionary * responseComponents = [NSMutableDictionary dictionary];
-		for (NSString * arg in [[url fragment] componentsSeparatedByString:@"&"]) {
+		for (NSString * arg in [[url query] componentsSeparatedByString:@"&"]) {
 			NSArray * kv = [arg componentsSeparatedByString: @"="];
 			if ([kv count] < 2) continue;
 			[responseComponents setObject:kv[1] forKey:kv[0]];
 		}
 
-		if (responseComponents[@"token"]) {
+		if (responseComponents[@"access_token"]) {
 			// we got an auth token! Continue authentication with this token
-			[self authenticateWithAuthToken:responseComponents[@"token"] andCompletionBlock: _authenticationCompletionBlock];
+			[self authenticateWithAuthToken:responseComponents[@"access_token"] andCompletionBlock: _authenticationCompletionBlock];
 			
 		} else if (responseComponents[@"code"]) {
 			// we got a code that we need to exchange for an auth token. We can't do this locally
