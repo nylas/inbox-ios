@@ -245,11 +245,7 @@ core functionality related to object serialization and is intended to be subclas
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/instanceWithID:inNamespaceID:">+&nbsp;instanceWithID:inNamespaceID:</a></code>
-		<span class="tooltip"><p>An instance of the requested class. If a copy of this model is already in memory, this
-method returns the same instance. If it has been stored in the Inbox local cache, it will be
-retrieved from cache. If no copy of the object is available, an empty instance is returned.
-Subscribe to this instance to be notified when it&rsquo;s data becomes available and update your
-UI accordingly.</p></span>
+		<span class="tooltip"><p>The ID of the model. Required.</p></span>
 	</span>
 	
 	
@@ -297,7 +293,8 @@ to create a JSON-compatible NSDictionary.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/differentFromResourceDictionary:">&ndash;&nbsp;differentFromResourceDictionary:</a></code>
-		<span class="tooltip"><p>YES if the resource dictionary represents a change to the model.</p></span>
+		<span class="tooltip"><p>A JSON dictionary with one or more key-value pairs matching the ones
+declared in <a href="#//api/name/resourceMapping">resourceMapping</a>.</p></span>
 	</span>
 	
 	
@@ -384,7 +381,7 @@ indexing in a one-to-many fashion.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/setup">&ndash;&nbsp;setup</a></code>
 		<span class="tooltip"><p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p></span>
 	</span>
 	
@@ -552,6 +549,16 @@ with the same ID.</p>
 	
 	<div class="method-subsection method-declaration"><code>+ (void)attachInstance:(INModelObject *)<em>obj</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>obj</em></dt>
+			<dd><p>The object to attach as the official copy of this model.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -789,16 +796,27 @@ indexing in a one-to-many fashion.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>An instance of the requested class. If a copy of this model is already in memory, this
-method returns the same instance. If it has been stored in the Inbox local cache, it will be
-retrieved from cache. If no copy of the object is available, an empty instance is returned.
-Subscribe to this instance to be notified when it&rsquo;s data becomes available and update your
-UI accordingly.</p>
+		<p>The ID of the model. Required.</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>+ (id)instanceWithID:(NSString *)<em>ID</em> inNamespaceID:(NSString *)<em>namespaceID</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>ID</em></dt>
+			<dd><p>The ID of the model. Required.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>namespaceID</em></dt>
+			<dd><p>The <a href="#//api/name/namespace">namespace</a> ID the model should exist in. Required.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -905,19 +923,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	
@@ -1186,12 +1202,24 @@ This is useful if you want to clone an object to modify it and keep two versions
 	
 	
 	<div class="method-subsection brief-description">
-		<p>YES if the resource dictionary represents a change to the model.</p>
+		<p>A JSON dictionary with one or more key-value pairs matching the ones
+declared in <a href="#//api/name/resourceMapping">resourceMapping</a>.</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (BOOL)differentFromResourceDictionary:(NSDictionary *)<em>dict</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>dict</em></dt>
+			<dd><p>A JSON dictionary with one or more key-value pairs matching the ones
+declared in <a href="#//api/name/resourceMapping">resourceMapping</a>.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -1527,7 +1555,7 @@ to create a JSON-compatible NSDictionary.</p>
 	
 	<div class="method-subsection brief-description">
 		<p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p>
 	</div>		
 	
@@ -1544,7 +1572,7 @@ implementation does nothing.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p>
 	</div>
 	
@@ -1581,7 +1609,7 @@ pairs are present in the json.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>json</em></dt>
+			<dt><em>dict</em></dt>
 			<dd><p>A JSON dictionary with one or more key-value pairs matching the ones
 declared in <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>.</p></dd>
 		</dl>

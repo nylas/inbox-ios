@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -70,6 +72,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -138,6 +142,22 @@
 </tr>
 						</tbody></table></div>
 					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Namespaces are an important concept in Inbox. Typically, a user authenticates with
+the Inbox API and the access token you are given provides access to one namespace:
+the user&rsquo;s email account. Threads, messages, contacts, files, etc. live within the
+namespace, and the <a href="INNamespace.html">INNamespace</a> object provides convenience methods for creating
+model providers for these types. You can also use the properties on <a href="INNamespace.html">INNamespace</a>
+to determine the user&rsquo;s email address, check Inbox sync status, and more.</p>
+
+<p>Note: In the future, a single access token may grant you access to multiple namespaces,
+and a namespace may not always be an entire email account.</p>
+					</div>
 					
 					
 					
@@ -333,19 +353,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	

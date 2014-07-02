@@ -190,7 +190,7 @@ Inbox objects by subscribing to INModelObjectChangedNotification.</p>
 	<span class="tooltip">
 		<code><a href="#//api/name/addAttachment:">&ndash;&nbsp;addAttachment:</a></code>
 		<span class="tooltip"><p>Add an attachment to the thread. The attachment does not need to be fully uploaded
-to be attached to a draft. However, you should call [attachment upload] to start
+to be attached to a draft. However, you should call <a href="../Classes/INFile.html#//api/name/upload">[INFile upload]</a> to start
 the upload process before adding the attachment to the draft.</p></span>
 	</span>
 	
@@ -382,19 +382,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	
@@ -427,7 +425,7 @@ into JSON without additional glue code.</p>
 	
 	<div class="method-subsection brief-description">
 		<p>Add an attachment to the thread. The attachment does not need to be fully uploaded
-to be attached to a draft. However, you should call [attachment upload] to start
+to be attached to a draft. However, you should call <a href="../Classes/INFile.html#//api/name/upload">[INFile upload]</a> to start
 the upload process before adding the attachment to the draft.</p>
 	</div>		
 	
@@ -443,11 +441,6 @@ the upload process before adding the attachment to the draft.</p>
 			<dd><p>The INAttachment object to add to the draft.</p></dd>
 		</dl>
 		
-		<dl class="argument-def parameter-def">
-			<dt><em>index</em></dt>
-			<dd><p>The <a href="../docs/Documentation/index.html">index</a> where the draft should be attached.</p></dd>
-		</dl>
-		
 	</div>
 	
 	
@@ -459,7 +452,7 @@ the upload process before adding the attachment to the draft.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Add an attachment to the thread. The attachment does not need to be fully uploaded
-to be attached to a draft. However, you should call [attachment upload] to start
+to be attached to a draft. However, you should call <a href="../Classes/INFile.html#//api/name/upload">[INFile upload]</a> to start
 the upload process before adding the attachment to the draft.</p>
 
 <p>If attachments are still uploading when you call <a href="#//api/name/save">save</a>, the draft will not be
@@ -547,6 +540,21 @@ saved to the server until attachments have finished uploading.</p>
 	
 	<div class="method-subsection method-declaration"><code>- (void)attachmentWithID:(NSString *)<em>ID</em> uploadedAs:(NSString *)<em>uploadedID</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>ID</em></dt>
+			<dd><p>The ID that was initially assigned to the <a href="../Classes/INFile.html">INFile</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>uploadedID</em></dt>
+			<dd><p>The ID assigned by the server that now represents the <a href="../Classes/INFile.html">INFile</a>.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	

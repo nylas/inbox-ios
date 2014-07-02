@@ -251,7 +251,8 @@ whenever possible.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/selectModelsOfClass:withQuery:andParameters:andCallback:">&ndash;&nbsp;selectModelsOfClass:withQuery:andParameters:andCallback:</a></code>
 		<span class="tooltip"><p>Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
-This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback;</p></span>
+This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback that gives
+you full control over the entire query string while handling the inflation of the returned models.</p></span>
 	</span>
 	
 	
@@ -313,6 +314,11 @@ some cases, but should be used with care.</p></span>
 		<dl class="argument-def parameter-def">
 			<dt><em>wherePredicate</em></dt>
 			<dd><p>A comparison or compound NSPredicate.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callback</em></dt>
+			<dd><p>A block for retrieving the result. Called on the main thread at the completion of the query.</p></dd>
 		</dl>
 		
 	</div>
@@ -558,6 +564,11 @@ as an observer.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>klass</em></dt>
+			<dd><p>The model class. Must be a subclass of <a href="../Classes/INModelObject.html">INModelObject</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>ID</em></dt>
 			<dd><p>an optional instance ID. If an instance ID is not provided, the first
 available instance of the class in the database will be returned.</p></dd>
@@ -639,7 +650,7 @@ available instance of the class in the database will be returned.</p></dd>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>callback</em></dt>
-			<dd><p>A block that accepts an array of INModelObjects. At this time, the callback is called synchronously.</p></dd>
+			<dd><p>A block that accepts an array of INModelObjects. Called on the main thread at the completion of the query.</p></dd>
 		</dl>
 		
 	</div>
@@ -658,8 +669,8 @@ available instance of the class in the database will be returned.</p></dd>
 
 <p>Note that predicates and sort descriptors should reference class properties, not the underlying
 database columns. (&ldquo;namespaceID&rdquo;, not &ldquo;namespace_id&rdquo;). The predicates and sort descriptors you
-create can only reference properties returned from [class databaseIndexProperties], which have
-been indexed and have their own table columns under the hood, or [class databaseJoinTableProperties].</p>
+create can only reference properties returned from <a href="../Classes/INModelObject.html#//api/name/databaseIndexProperties">[INModelObject databaseIndexProperties]</a>, which have
+been indexed and have their own table columns under the hood, or <a href="../Classes/INModelObject.html#//api/name/databaseJoinTableProperties">[INModelObject databaseJoinTableProperties]</a>.</p>
 	</div>
 	
 	
@@ -684,12 +695,38 @@ been indexed and have their own table columns under the hood, or [class database
 	
 	<div class="method-subsection brief-description">
 		<p>Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
-This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback;</p>
+This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback that gives
+you full control over the entire query string while handling the inflation of the returned models.</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)selectModelsOfClass:(Class)<em>klass</em> withQuery:(NSString *)<em>query</em> andParameters:(NSDictionary *)<em>arguments</em> andCallback:(ResultsBlock)<em>callback</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>klass</em></dt>
+			<dd><p>The type of models. Must be a subclass of <a href="../Classes/INModelObject.html">INModelObject</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>query</em></dt>
+			<dd><p>A full SQLite query string, beginning with &ldquo;SELECT *&hellip;&rdquo;</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>arguments</em></dt>
+			<dd><p>An NSDictionary of arguments substituted into the query string using FMDB&rsquo;s &lsquo;:key&rsquo; snytax.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callback</em></dt>
+			<dd><p>A block that accepts an array of INModelObjects. Called on the main thread at the completion of the query.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -700,7 +737,8 @@ This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:of
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
-This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback;</p>
+This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback that gives
+you full control over the entire query string while handling the inflation of the returned models.</p>
 
 <p>This method is asynchronous, and the callback will be invoked on the main thread when objects are ready.</p>
 	</div>
@@ -734,6 +772,31 @@ some cases, but should be used with care.</p>
 	
 	<div class="method-subsection method-declaration"><code>- (void)selectModelsOfClassSync:(Class)<em>klass</em> withQuery:(NSString *)<em>query</em> andParameters:(NSDictionary *)<em>arguments</em> andCallback:(ResultsBlock)<em>callback</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>klass</em></dt>
+			<dd><p>The type of models. Must be a subclass of <a href="../Classes/INModelObject.html">INModelObject</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>query</em></dt>
+			<dd><p>A full SQLite query string, beginning with &ldquo;SELECT *&hellip;&rdquo;</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>arguments</em></dt>
+			<dd><p>An NSDictionary of arguments substituted into the query string using FMDB&rsquo;s &lsquo;:key&rsquo; snytax.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callback</em></dt>
+			<dd><p>A block that accepts an array of INModelObjects. At this time, the callback is called synchronously.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	

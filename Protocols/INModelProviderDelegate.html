@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -59,6 +61,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -115,6 +119,15 @@
 </tr>
 						</tbody></table></div>
 					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Implement the <a href="INModelProviderDelegate.html">INModelProviderDelegate</a> to update your UI based on changes to an
+INModelProvider&rsquo;s result set.</p>
+					</div>
 					
 					
 					
@@ -202,6 +215,11 @@ changes provided in the changeSet.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>provider</em></dt>
+			<dd><p>The <a href="../Classes/INModelProvider.html">INModelProvider</a> instance that has been altered.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>changeSet</em></dt>
 			<dd><p>The set of items and indexes that have been modified.</p></dd>
 		</dl>
@@ -256,6 +274,11 @@ or filter predicate, you may want to display the error provided.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>provider</em></dt>
+			<dd><p>The <a href="../Classes/INModelProvider.html">INModelProvider</a> instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>error</em></dt>
 			<dd><p>The error, with a display-ready message in -localizedDescription.</p></dd>
 		</dl>
@@ -304,6 +327,16 @@ refresh your interface completely to reflect the new items array.</p>
 	<div class="method-subsection method-declaration"><code>- (void)providerDataChanged:(INModelProvider *)<em>provider</em></code></div>
 	
 	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>provider</em></dt>
+			<dd><p>The <a href="../Classes/INModelProvider.html">INModelProvider</a> instance that has changed.</p></dd>
+		</dl>
+		
+	</div>
+	
 	
 	
 	
@@ -344,6 +377,16 @@ or a change in the item filter predicate or sort descriptors.</p>
 	
 	<div class="method-subsection method-declaration"><code>- (void)providerDataFetchCompleted:(INModelProvider *)<em>provider</em></code></div>
 	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>provider</em></dt>
+			<dd><p>The <a href="../Classes/INModelProvider.html">INModelProvider</a> instance that completed its fetch.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	

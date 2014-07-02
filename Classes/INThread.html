@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -80,6 +82,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -158,6 +162,33 @@
 </tr>
 						</tbody></table></div>
 					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The INThread class provides a native wrapper around Inbox threads
+<a href="http://inboxapp.com/docs/api">http://inboxapp.com/docs/api</a>#threads</p>
+
+<p>Threads are the central object of the Inbox API and the <a href="INThread.html">INThread</a> class
+provides convenience methods for performing many actions, such as tagging,
+archiving, and deleting threads.</p>
+
+<p>You should not create instances of <a href="INThread.html">INThread</a> directly. Instead, obtain an
+<a href="../Classes/INNamespace.html">INNamespace</a> object (representing an email account) and use an <a href="../Classes/INThreadProvider.html">INThreadProvider</a>:</p>
+
+<pre><code>NSPredicate * unread = [NSComparisonPredicate predicateWithFormat:@"ANY tagIDs = %@", INTagIDUnread];
+INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+self.threadProvider = [namespace newThreadProvider];
+self.threadProvider.itemFilterPredicate = unread;
+self.threadProvider.delegate = self;
+
+// Implement the INModelProviderDelegate protocol to get threads
+</code></pre>
+
+<p>If you&rsquo;re looking to create a new thread, see <a href="../Classes/INDraft.html">INDraft</a>.</p>
+					</div>
 					
 					
 					
@@ -497,19 +528,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	
@@ -918,7 +947,7 @@ pairs are present in the json.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>json</em></dt>
+			<dt><em>dict</em></dt>
 			<dd><p>A JSON dictionary with one or more key-value pairs matching the ones
 declared in <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>.</p></dd>
 		</dl>

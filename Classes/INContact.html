@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -62,6 +64,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -122,6 +126,15 @@
 </tr>
 						</tbody></table></div>
 					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The INContact class provides a native wrapper around Inbox contacts
+<a href="http://inboxapp.com/docs/api">http://inboxapp.com/docs/api</a>#contacts</p>
+					</div>
 					
 					
 					
@@ -190,7 +203,7 @@ predicates and sort descriptors.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/setup">&ndash;&nbsp;setup</a></code>
 		<span class="tooltip"><p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p></span>
 	</span>
 	
@@ -329,19 +342,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	
@@ -374,7 +385,7 @@ into JSON without additional glue code.</p>
 	
 	<div class="method-subsection brief-description">
 		<p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p>
 	</div>		
 	
@@ -391,7 +402,7 @@ implementation does nothing.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Setup should be overridden in subclasses to perform additional initialization
-that needs to take place after <a href="../Classes/INModelObject.html#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
+that needs to take place after <a href="#//api/name/initWithCoder:">initWithCoder:</a> or -initWithResourceDictionary: The base class
 implementation does nothing.</p>
 	</div>
 	

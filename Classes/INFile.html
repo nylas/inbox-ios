@@ -268,19 +268,17 @@ into JSON without additional glue code.</p>
 
 <p>A typical subclass implementation looks like this:</p>
 
-<ul>
-<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
-{
- NSMutableDictionary * mapping = [super resourceMapping];
- [mapping addEntriesFromDictionary: @{
-   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
-   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
-   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
- }];
- return mapping;
-}</li>
-</ul>
-
+<pre><code> + (NSMutableDictionary *)resourceMapping
+ {
+    NSMutableDictionary * mapping = [super resourceMapping];
+    [mapping addEntriesFromDictionary: @{
+       @"firstName": @"first_name",
+       @"lastName": @"last_name",
+       @"email": @"email"
+    }];
+    return mapping;
+ }
+</code></pre>
 	</div>
 	
 	
@@ -373,6 +371,11 @@ or an error has occurred.</p></dd>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
+			<dt><em>filename</em></dt>
+			<dd><p>The display filename of the attachment.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
 			<dt><em>mimetype</em></dt>
 			<dd><p>The mimetype of the attachment, such as &ldquo;image/jpeg&rdquo; or &ldquo;text/plain&rdquo;.</p></dd>
 		</dl>
@@ -392,11 +395,6 @@ may return nil.</p></dd>
 		<dl class="argument-def parameter-def">
 			<dt><em>namespace</em></dt>
 			<dd><p>The namespace to add this attachment in.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>image</em></dt>
-			<dd><p>The display filename of the attachment.</p></dd>
 		</dl>
 		
 	</div>
