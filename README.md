@@ -52,6 +52,23 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 
 <br><br>
 
+## Example Apps
+----
+
+#### Triage
+
+The 'Triage' demo app showcases the use of an `INModelProvider` to display threads from your mailbox, and the use of the `INMessageContentView` for displaying message bodies in custom views.
+
+<video style="width:320px; height:478px; background-color:gray;">
+	<source src="https://raw.githubusercontent.com/inboxapp/inbox-ios/master/InboxExamples/Triage/Documentation/demo.mov">
+</video>
+
+
+##### SnapMail
+
+The 'SnapMail' demo is a snapchat-style app that allows you to send and receive photos. Instead of using a custom backend, it uses your inbox—messages with the subject 'New snap from *' are displayed, and sending a snap sends an email to the recipient with the image attached. You can view the image attached to a 'New Snap' email with a snapchat-style peek interaction.
+
+
 
 ## Core Principles
 ----
