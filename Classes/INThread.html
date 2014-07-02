@@ -1,0 +1,1059 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>INThread Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 759)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">Inbox iOS SDK Documentation </a></h1>
+				<a id="developerHome" href="../index.html">Inbox App, Inc.</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">INThread Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/databaseIndexProperties">&nbsp;&nbsp;&nbsp;&nbsp;+ databaseIndexProperties</option>
+	
+	<option value="//api/name/databaseJoinTableProperties">&nbsp;&nbsp;&nbsp;&nbsp;+ databaseJoinTableProperties</option>
+	
+	<option value="//api/name/resourceAPIName">&nbsp;&nbsp;&nbsp;&nbsp;+ resourceAPIName</option>
+	
+	<option value="//api/name/resourceMapping">&nbsp;&nbsp;&nbsp;&nbsp;+ resourceMapping</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/archive">&nbsp;&nbsp;&nbsp;&nbsp;- archive</option>
+	
+	<option value="//api/name/markAsRead">&nbsp;&nbsp;&nbsp;&nbsp;- markAsRead</option>
+	
+	<option value="//api/name/markAsSeen">&nbsp;&nbsp;&nbsp;&nbsp;- markAsSeen</option>
+	
+	<option value="//api/name/newDraftProvider">&nbsp;&nbsp;&nbsp;&nbsp;- newDraftProvider</option>
+	
+	<option value="//api/name/newMessageProvider">&nbsp;&nbsp;&nbsp;&nbsp;- newMessageProvider</option>
+	
+	<option value="//api/name/star">&nbsp;&nbsp;&nbsp;&nbsp;- star</option>
+	
+	<option value="//api/name/unarchive">&nbsp;&nbsp;&nbsp;&nbsp;- unarchive</option>
+	
+	<option value="//api/name/unstar">&nbsp;&nbsp;&nbsp;&nbsp;- unstar</option>
+	
+	<option value="//api/name/updateWithResourceDictionary:">&nbsp;&nbsp;&nbsp;&nbsp;- updateWithResourceDictionary:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/databaseIndexProperties">databaseIndexProperties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/databaseJoinTableProperties">databaseJoinTableProperties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/resourceAPIName">resourceAPIName</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/resourceMapping">resourceMapping</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/archive">archive</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/markAsRead">markAsRead</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/markAsSeen">markAsSeen</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/newDraftProvider">newDraftProvider</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/newMessageProvider">newMessageProvider</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/star">star</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/unarchive">unarchive</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/unstar">unstar</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateWithResourceDictionary:">updateWithResourceDictionary:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="INThread Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">INThread Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value"><a href="../Classes/INModelObject.html">INModelObject</a> : NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">INThread.h<br />INThread.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/newMessageProvider">&ndash;&nbsp;newMessageProvider</a></code>
+		<span class="tooltip"><p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying messages in this thread.
+To further filter the messages (for example, to show just messages with attachments in
+the thread), you can set the itemFilterPredicate on the returned provider.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/newDraftProvider">&ndash;&nbsp;newDraftProvider</a></code>
+		<span class="tooltip"><p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying drafts on this thread.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/archive">&ndash;&nbsp;archive</a></code>
+		<span class="tooltip"><p>Archive the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/unarchive">&ndash;&nbsp;unarchive</a></code>
+		<span class="tooltip"><p>Un<a href="#//api/name/archive">archive</a> the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/markAsRead">&ndash;&nbsp;markAsRead</a></code>
+		<span class="tooltip"><p>Mark this thread as read. This method removes the &lsquo;unread&rsquo; tag, and marks every
+message in the thread as read. If the thread does not have the unread tag, it
+has no effect.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/markAsSeen">&ndash;&nbsp;markAsSeen</a></code>
+		<span class="tooltip"><p>Mark this thread as seen. You should mark threads as &ldquo;seen&rdquo; as soon as the user
+views any part of the thread, or sees the thread subject and snippet onscreen.
+This indicates that the user has seen the thread and the thread should not be
+presented as &ldquo;new&rdquo; from another device or application. If the thread does not have
+the unseen tag, this method has no effect.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/star">&ndash;&nbsp;star</a></code>
+		<span class="tooltip"><p>Star the thread. On some email platforms, this is known as &lsquo;flagging&rsquo;.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/unstar">&ndash;&nbsp;unstar</a></code>
+		<span class="tooltip"><p>Un<a href="#//api/name/star">star</a> the thread. On some email platforms, this is known as &lsquo;unflagging&rsquo;.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/resourceMapping">+&nbsp;resourceMapping</a></code>
+		<span class="tooltip"><p>Subclasses override <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a> to define the mapping between their
+Objective-C @property&rsquo;s and the key-value pairs in their JSON representations. Providing
+this mapping allows -initWithResourceDictionary: and <a href="../Classes/INModelObject.html#//api/name/resourceDictionary">resourceDictionary</a> to convert the instance
+into JSON without additional glue code.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/resourceAPIName">+&nbsp;resourceAPIName</a></code>
+		<span class="tooltip"><p>The name of this class (i.e. &ldquo;namespaces&rdquo;) for use in API URLs.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/updateWithResourceDictionary:">&ndash;&nbsp;updateWithResourceDictionary:</a></code>
+		<span class="tooltip"><p>Applies the JSON to the object, overriding existing property values when key-value
+pairs are present in the json.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/databaseIndexProperties">+&nbsp;databaseIndexProperties</a></code>
+		<span class="tooltip"><p>An array of property names other than ID and namespaceID that should be
+queryable. It&rsquo;s important to return all of the properties you may want to use in
+predicates and sort descriptors.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/databaseJoinTableProperties">+&nbsp;databaseJoinTableProperties</a></code>
+		<span class="tooltip"><p>An array of NSArray properties that should use separate tables to enable
+indexing in a one-to-many fashion.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/databaseIndexProperties" title="databaseIndexProperties"></a>
+	<h3 class="subsubtitle method-title">databaseIndexProperties</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An array of property names other than ID and namespaceID that should be
+queryable. It&rsquo;s important to return all of the properties you may want to use in
+predicates and sort descriptors.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSArray *)databaseIndexProperties</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An array of property names other than ID and namespaceID that should be
+queryable. It&rsquo;s important to return all of the properties you may want to use in
+predicates and sort descriptors.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INModelObject.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/databaseJoinTableProperties" title="databaseJoinTableProperties"></a>
+	<h3 class="subsubtitle method-title">databaseJoinTableProperties</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>An array of NSArray properties that should use separate tables to enable
+indexing in a one-to-many fashion.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSArray *)databaseJoinTableProperties</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An array of NSArray properties that should use separate tables to enable
+indexing in a one-to-many fashion.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INModelObject.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/resourceAPIName" title="resourceAPIName"></a>
+	<h3 class="subsubtitle method-title">resourceAPIName</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The name of this class (i.e. &ldquo;namespaces&rdquo;) for use in API URLs.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSString *)resourceAPIName</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The name of this class (i.e. &ldquo;namespaces&rdquo;) for use in API URLs.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INModelObject.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/resourceMapping" title="resourceMapping"></a>
+	<h3 class="subsubtitle method-title">resourceMapping</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Subclasses override <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a> to define the mapping between their
+Objective-C @property&rsquo;s and the key-value pairs in their JSON representations. Providing
+this mapping allows -initWithResourceDictionary: and <a href="../Classes/INModelObject.html#//api/name/resourceDictionary">resourceDictionary</a> to convert the instance
+into JSON without additional glue code.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (NSMutableDictionary *)resourceMapping</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A dictionary mapping iOS property names to JSON fields.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Subclasses override <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a> to define the mapping between their
+Objective-C @property&rsquo;s and the key-value pairs in their JSON representations. Providing
+this mapping allows -initWithResourceDictionary: and <a href="../Classes/INModelObject.html#//api/name/resourceDictionary">resourceDictionary</a> to convert the instance
+into JSON without additional glue code.</p>
+
+<p>A typical subclass implementation looks like this:</p>
+
+<ul>
+<li>(NSMutableDictionary *)<a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>
+{
+ NSMutableDictionary * mapping = [super resourceMapping];
+ [mapping addEntriesFromDictionary: @{
+   @&ldquo;firstName&rdquo;: @&ldquo;first_name&rdquo;,
+   @&ldquo;lastName&rdquo;: @&ldquo;last_name&rdquo;,
+   @&ldquo;email&rdquo;: @&ldquo;email&rdquo;
+ }];
+ return mapping;
+}</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INModelObject.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/archive" title="archive"></a>
+	<h3 class="subsubtitle method-title">archive</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Archive the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)archive</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Archive the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/markAsRead" title="markAsRead"></a>
+	<h3 class="subsubtitle method-title">markAsRead</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Mark this thread as read. This method removes the &lsquo;unread&rsquo; tag, and marks every
+message in the thread as read. If the thread does not have the unread tag, it
+has no effect.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)markAsRead</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Mark this thread as read. This method removes the &lsquo;unread&rsquo; tag, and marks every
+message in the thread as read. If the thread does not have the unread tag, it
+has no effect.</p>
+
+<p>This method updates the local cache to reflect the change immediately but may be
+performed later on the Inbox server if an internet connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/markAsSeen" title="markAsSeen"></a>
+	<h3 class="subsubtitle method-title">markAsSeen</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Mark this thread as seen. You should mark threads as &ldquo;seen&rdquo; as soon as the user
+views any part of the thread, or sees the thread subject and snippet onscreen.
+This indicates that the user has seen the thread and the thread should not be
+presented as &ldquo;new&rdquo; from another device or application. If the thread does not have
+the unseen tag, this method has no effect.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)markAsSeen</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Mark this thread as seen. You should mark threads as &ldquo;seen&rdquo; as soon as the user
+views any part of the thread, or sees the thread subject and snippet onscreen.
+This indicates that the user has seen the thread and the thread should not be
+presented as &ldquo;new&rdquo; from another device or application. If the thread does not have
+the unseen tag, this method has no effect.</p>
+
+<p>Your application should use the unseen tag, rather than the unread tag, to highlight
+new threads the user may be interested in.</p>
+
+<p>Additional notes:
+&ndash; Threads become &ldquo;unseen&rdquo; again if new messages arrive in the thread.
+&ndash; Threads become seen automatically if you mark any of their messages as read.</p>
+
+<p>This method updates the local cache to reflect the change immediately but may be
+performed later on the Inbox server if an internet connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/newDraftProvider" title="newDraftProvider"></a>
+	<h3 class="subsubtitle method-title">newDraftProvider</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying drafts on this thread.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (INMessageProvider *)newDraftProvider</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An initialized <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying drafts.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying drafts on this thread.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/newMessageProvider" title="newMessageProvider"></a>
+	<h3 class="subsubtitle method-title">newMessageProvider</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying messages in this thread.
+To further filter the messages (for example, to show just messages with attachments in
+the thread), you can set the itemFilterPredicate on the returned provider.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (INMessageProvider *)newMessageProvider</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An initialized <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying messages.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initializes and returns a new <a href="../Classes/INModelProvider.html">INModelProvider</a> for displaying messages in this thread.
+To further filter the messages (for example, to show just messages with attachments in
+the thread), you can set the itemFilterPredicate on the returned provider.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/star" title="star"></a>
+	<h3 class="subsubtitle method-title">star</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Star the thread. On some email platforms, this is known as &lsquo;flagging&rsquo;.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)star</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Star the thread. On some email platforms, this is known as &lsquo;flagging&rsquo;.</p>
+
+<p>This method updates the local cache to reflect the change immediately but may be
+performed later on the Inbox server if an internet connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/unarchive" title="unarchive"></a>
+	<h3 class="subsubtitle method-title">unarchive</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Un<a href="#//api/name/archive">archive</a> the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)unarchive</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Un<a href="#//api/name/archive">archive</a> the thread. This method updates the local cache to reflect the change
+immediately but may be performed later on the Inbox server if an internet
+connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/unstar" title="unstar"></a>
+	<h3 class="subsubtitle method-title">unstar</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Un<a href="#//api/name/star">star</a> the thread. On some email platforms, this is known as &lsquo;unflagging&rsquo;.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)unstar</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Un<a href="#//api/name/star">star</a> the thread. On some email platforms, this is known as &lsquo;unflagging&rsquo;.</p>
+
+<p>This method updates the local cache to reflect the change immediately but may be
+performed later on the Inbox server if an internet connection is not available.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INThread.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/updateWithResourceDictionary:" title="updateWithResourceDictionary:"></a>
+	<h3 class="subsubtitle method-title">updateWithResourceDictionary:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Applies the JSON to the object, overriding existing property values when key-value
+pairs are present in the json.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)updateWithResourceDictionary:(NSDictionary *)<em>dict</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>json</em></dt>
+			<dd><p>A JSON dictionary with one or more key-value pairs matching the ones
+declared in <a href="../Classes/INModelObject.html#//api/name/resourceMapping">resourceMapping</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Applies the JSON to the object, overriding existing property values when key-value
+pairs are present in the json.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INModelObject.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2014 Inbox App, Inc.. All rights reserved. (Last updated: 2014-07-02)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 759)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>

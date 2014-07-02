@@ -1,0 +1,737 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>INAPIManager Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 759)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">Inbox iOS SDK Documentation </a></h1>
+				<a id="developerHome" href="../index.html">Inbox App, Inc.</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">INAPIManager Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/fetchNamespaces:">&nbsp;&nbsp;&nbsp;&nbsp;- fetchNamespaces:</option>
+	
+	<option value="//api/name/handleURL:">&nbsp;&nbsp;&nbsp;&nbsp;- handleURL:</option>
+	
+	<option value="//api/name/namespaceEmailAddresses">&nbsp;&nbsp;&nbsp;&nbsp;- namespaceEmailAddresses</option>
+	
+	<option value="//api/name/namespaces">&nbsp;&nbsp;&nbsp;&nbsp;- namespaces</option>
+	
+	<option value="//api/name/queueTask:">&nbsp;&nbsp;&nbsp;&nbsp;- queueTask:</option>
+	
+	<option value="//api/name/retryTasks">&nbsp;&nbsp;&nbsp;&nbsp;- retryTasks</option>
+	
+	<option value="//api/name/setTaskQueueSuspended:">&nbsp;&nbsp;&nbsp;&nbsp;- setTaskQueueSuspended:</option>
+	
+	<option value="//api/name/taskQueue">&nbsp;&nbsp;&nbsp;&nbsp;- taskQueue</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fetchNamespaces:">fetchNamespaces:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleURL:">handleURL:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/namespaceEmailAddresses">namespaceEmailAddresses</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/namespaces">namespaces</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/queueTask:">queueTask:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/retryTasks">retryTasks</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setTaskQueueSuspended:">setTaskQueueSuspended:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/taskQueue">taskQueue</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="INAPIManager Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">INAPIManager Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">AFHTTPRequestOperationManager</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">INAPIManager.h<br />INAPIManager.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <a href="INAPIManager.html">INAPIManager</a> provides an interface for making authenticated Inbox API requests
+and handling user authentication flow.</p>
+
+<p>You can make Inbox API requests directly using the underlying AFHTTPRequestOperationManager
+methods -GET:, -POST:, -PUT:, etc. However, for user actions that trigger model changes,
+such as sending a message, flagging a thread, etc., you should create and queue
+INAPIOperations. In most cases, there are higher-level APIs for creating these operations,
+such as calling -markAsRead on an <a href="../Classes/INThread.html">INThread</a>, and you don&rsquo;t need to use the <a href="INAPIManager.html">INAPIManager</a> directly.
+The <a href="INAPIManager.html">INAPIManager</a> queues these operations and ensures that they are eventually performed
+on the server, even though an internet connection might not be immediately available.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/taskQueue">&ndash;&nbsp;taskQueue</a></code>
+		<span class="tooltip"><p>Returns an immutable copy of the task queue so it can be inspected or displayed.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/queueTask:">&ndash;&nbsp;queueTask:</a></code>
+		<span class="tooltip"><p>Queue the API operation provided. API operations are persisted to disk until they are
+completed and automatically restarted after network reachability changes occur.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/retryTasks">&ndash;&nbsp;retryTasks</a></code>
+		<span class="tooltip"><p>Retry all the tasks which have failed with status INAPITaskStateServerUnreachable,
+indicating that they can be retryed and may succeed.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setTaskQueueSuspended:">&ndash;&nbsp;setTaskQueueSuspended:</a></code>
+		<span class="tooltip"><p>Suspend or resume the task queue. This method is called automatically when reachability
+status changes, but it may be useful to resume the queue menually in response to user
+action.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/handleURL:">&ndash;&nbsp;handleURL:</a></code>
+		<span class="tooltip"><p><a href="#//api/name/handleURL:">handleURL:</a> should be called from your appication&rsquo;s app delegate in response to
+application:openURL:sourceApplication:annotation:. Inbox uses a special URL scheme
+to complete authentication and allow for deep linking.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fetchNamespaces:">&ndash;&nbsp;fetchNamespaces:</a></code>
+		<span class="tooltip"><p>Fetch the <a href="#//api/name/namespaces">namespaces</a> available to the app with the current auth token.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/namespaces">&ndash;&nbsp;namespaces</a></code>
+		<span class="tooltip"><p>The currently authenticated Inbox <a href="#//api/name/namespaces">namespaces</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/namespaceEmailAddresses">&ndash;&nbsp;namespaceEmailAddresses</a></code>
+		<span class="tooltip"><p>The email addresses of the currently authenticated <a href="#//api/name/namespaces">namespaces</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/fetchNamespaces:" title="fetchNamespaces:"></a>
+	<h3 class="subsubtitle method-title">fetchNamespaces:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fetch the <a href="#//api/name/namespaces">namespaces</a> available to the app with the current auth token.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)fetchNamespaces:(ErrorBlock)<em>completionBlock</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>completionBlock</em></dt>
+			<dd><p>If the completion block parameters indicate that the request was
+successful, calls to <a href="#//api/name/namespaces">namespaces</a> will return the fetched <a href="#//api/name/namespaces">namespaces</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Fetch the <a href="#//api/name/namespaces">namespaces</a> available to the app with the current auth token.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/handleURL:" title="handleURL:"></a>
+	<h3 class="subsubtitle method-title">handleURL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p><a href="#//api/name/handleURL:">handleURL:</a> should be called from your appication&rsquo;s app delegate in response to
+application:openURL:sourceApplication:annotation:. Inbox uses a special URL scheme
+to complete authentication and allow for deep linking.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)handleURL:(NSURL *)<em>url</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>url</em></dt>
+			<dd><p>The URL that your application was asked to open</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES, if url was an Inbox URL and was handled by the <a href="INAPIManager.html">INAPIManager</a>, NO if your
+application should futher handle the URL and process it on it&rsquo;s own.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p><a href="#//api/name/handleURL:">handleURL:</a> should be called from your appication&rsquo;s app delegate in response to
+application:openURL:sourceApplication:annotation:. Inbox uses a special URL scheme
+to complete authentication and allow for deep linking.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/namespaceEmailAddresses" title="namespaceEmailAddresses"></a>
+	<h3 class="subsubtitle method-title">namespaceEmailAddresses</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The email addresses of the currently authenticated <a href="#//api/name/namespaces">namespaces</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)namespaceEmailAddresses</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The email addresses of the currently authenticated <a href="#//api/name/namespaces">namespaces</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/namespaces" title="namespaces"></a>
+	<h3 class="subsubtitle method-title">namespaces</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The currently authenticated Inbox <a href="#//api/name/namespaces">namespaces</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)namespaces</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The currently authenticated Inbox <a href="#//api/name/namespaces">namespaces</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/queueTask:" title="queueTask:"></a>
+	<h3 class="subsubtitle method-title">queueTask:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Queue the API operation provided. API operations are persisted to disk until they are
+completed and automatically restarted after network reachability changes occur.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)queueTask:(INAPITask *)<em>change</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>operation</em></dt>
+			<dd><p>The INAPIOperation to be performed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES, if the change was successfully queued. NO if the change could not be
+queued because of another change that is already in progress and would conflict.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Queue the API operation provided. API operations are persisted to disk until they are
+completed and automatically restarted after network reachability changes occur.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/retryTasks" title="retryTasks"></a>
+	<h3 class="subsubtitle method-title">retryTasks</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Retry all the tasks which have failed with status INAPITaskStateServerUnreachable,
+indicating that they can be retryed and may succeed.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)retryTasks</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Retry all the tasks which have failed with status INAPITaskStateServerUnreachable,
+indicating that they can be retryed and may succeed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setTaskQueueSuspended:" title="setTaskQueueSuspended:"></a>
+	<h3 class="subsubtitle method-title">setTaskQueueSuspended:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Suspend or resume the task queue. This method is called automatically when reachability
+status changes, but it may be useful to resume the queue menually in response to user
+action.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)setTaskQueueSuspended:(BOOL)<em>suspended</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>suspended.</em></dt>
+			<dd><p>YES to suspend the processing of queued API tasks, NO to resume
+processing tasks immediately. Note that the queue will be suspended again if a queued
+task fails.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Suspend or resume the task queue. This method is called automatically when reachability
+status changes, but it may be useful to resume the queue menually in response to user
+action.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/taskQueue" title="taskQueue"></a>
+	<h3 class="subsubtitle method-title">taskQueue</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an immutable copy of the task queue so it can be inspected or displayed.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSArray *)taskQueue</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>a copy of the task queue</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an immutable copy of the task queue so it can be inspected or displayed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">INAPIManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2014 Inbox App, Inc.. All rights reserved. (Last updated: 2014-07-02)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 759)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+		</script>
+	</body>
+</html>
