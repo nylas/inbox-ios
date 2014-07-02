@@ -33,13 +33,13 @@ To run OCLint, choose the OCLint target and make sure you have OCLint installed.
 Xcode DocSet format:
 
 ```
-appledoc --include ./Documentation/. --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "InboxApp, Inc." --company-id com.inbox.ios -d -n --docset-bundle-id com.inbox.ios  --docset-bundle-name "PARWorks iOS SDK Documentation"  --ignore=JSON --docset-copyright 2014 ./BigSur
+appledoc --include ./Documentation/. --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "Inbox App, Inc." --company-id com.inbox.ios -d -n --docset-bundle-id com.inbox.ios  --docset-bundle-name "Inbox iOS SDK Documentation"  --ignore=JSON --docset-copyright 2014 ./Inbox
 ```
 
 HTML format:
 
 ```
-appledoc --include ./Documentation/. --no-create-docset --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "InboxApp, Inc." --company-id com.inbox.ios --ignore=JSON ./BigSur
+appledoc --include ./Documentation/. --no-create-docset --index-desc ./Documentation/index-template.txt -o ./ -p "Inbox iOS SDK Documentation" -v 1.0 -c "Inbox App, Inc." --company-id com.inbox.ios --ignore=JSON ./Inbox
 ```
 
 
@@ -59,9 +59,7 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 
 The 'Triage' demo app showcases the use of an `INModelProvider` to display threads from your mailbox, and the use of the `INMessageContentView` for displaying message bodies in custom views.
 
-<video style="width:320px; height:478px; background-color:gray;">
-	<source src="https://raw.githubusercontent.com/inboxapp/inbox-ios/master/InboxExamples/Triage/Documentation/demo.mov">
-</video>
+[Video of Triage in Action](https://raw.githubusercontent.com/inboxapp/inbox-ios/master/InboxExamples/Triage/Documentation/demo.mov)
 
 
 ##### SnapMail
