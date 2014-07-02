@@ -39,10 +39,14 @@ static void initialize_INAPIManager() {
 
 - (id)init
 {
-    NSString * api = [[NSBundle mainBundle] infoDictionary][INAPIPathInfoDictionaryKey];
-    if (!api)
+	NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
+	NSString * api = info[INAPIPathInfoDictionaryKey];
+
+	NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5000/'");
+    if (!api) {
         api = @"http://api.inboxapp.com/";
-    
+	}
+
 	self = [super initWithBaseURL: [NSURL URLWithString: api]];
 	if (self) {
         [[self operationQueue] setMaxConcurrentOperationCount: 5];
@@ -75,9 +79,10 @@ static void initialize_INAPIManager() {
 
 
 		// Make sure the application has an Inbox App ID in it's info.plist
-		NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
 		_appID = [info objectForKey: INAppIDInfoDictionaryKey];
-		NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
+
+		// TODO: Assertion disabled because clients are using their own local instances
+		// NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
 
 		// Reload our API token and refresh the namespaces list
         NSString * token = [[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];

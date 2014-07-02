@@ -15,12 +15,13 @@
 @property (weak, nonatomic) IBOutlet TRMessageActionButton *saveButton;
 @property (weak, nonatomic) IBOutlet TRMessageActionButton *archiveButton;
 @property (weak, nonatomic) IBOutlet UIView *emptyView;
+@property (weak, nonatomic) IBOutlet UILabel *emptyTextLabel;
 
 @property (nonatomic, strong) UIPanGestureRecognizer * messageDragRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer * messageDTapRecognizer;
 @property (nonatomic, strong) NSMutableArray * messageViews;
 @property (nonatomic, strong) UIDynamicAnimator * animator;
 
-@property (nonatomic, strong) INModelProvider * threadsProvider;
+@property (nonatomic, strong) INModelProvider * threadProvider;
 
 @end

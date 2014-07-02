@@ -22,8 +22,8 @@
         [[self layer] setShadowOpacity: 0.2];
         [[self layer] setShadowRadius: 3];
         
-        _bodyView = [[INMessageContentWebView alloc] initWithFrame: CGRectMake(0,0, frame.size.width - INSET * 2, 1)];
-        [_bodyView setMargin: UIEdgeInsetsMake(INSET, INSET, INSET, INSET)];
+        _bodyView = [[INMessageContentView alloc] initWithFrame: CGRectMake(0,0, frame.size.width - INSET * 2, 1)];
+		[_bodyView setContentMargin: UIEdgeInsetsMake(INSET, INSET, INSET, INSET)];
         [[_bodyView scrollView] setScrollIndicatorInsets: UIEdgeInsetsZero];
         [[_bodyView scrollView] setDelegate: self];
         [_bodyView setUserInteractionEnabled:NO];
@@ -74,7 +74,7 @@
     [super layoutSubviews];
     [[self layer] setShadowPath: CGPathCreateWithRect(self.bounds, NULL)];
 
-    float w = self.frame.size.width - INSET * 2;
+    float w = self.bounds.size.width - INSET * 2;
 
     [UIView setAnimationsEnabled: NO];
     if ([_exitButton isHidden])
@@ -84,26 +84,28 @@
     [_subjectLabel sizeToFit];
     [UIView setAnimationsEnabled: YES];
     
-    [_exitButton setFrame: CGRectMake( self.frame.size.width - 23 - INSET, INSET + 2, 23, 23)];
+    [_exitButton setFrame: CGRectMake( self.bounds.size.width - 23 - INSET, INSET + 2, 23, 23)];
     [_fromLabel setFrame: CGRectMake(INSET, INSET + _subjectLabel.frame.size.height, w, 25)];
     
     float y = INSET + _fromLabel.frame.size.height + _subjectLabel.frame.size.height;
-    [_headersView setFrame: CGRectMake(0, 0, self.frame.size.width, y)];
+    [_headersView setFrame: CGRectMake(0, 0, self.bounds.size.width, y)];
     [[_headersView layer] setShadowPath: CGPathCreateWithRect(_headersView.bounds, NULL)];
     
-    float remainingHeight = self.frame.size.height - INSET - y;
+    float remainingHeight = self.bounds.size.height - INSET - y;
     
     if ([_replyView isHidden]) {
-        [_bodyView setFrame: CGRectMake(0, y + 0, self.frame.size.width, remainingHeight)];
+        [_bodyView setFrame: CGRectMake(0, y + 0, self.bounds.size.width, remainingHeight)];
         [_replyView setFrame: CGRectMake(INSET, y + INSET + remainingHeight, w, 1)];
         [[_bodyView scrollView] setScrollEnabled: NO];
         
     } else {
         float replyHeight = fmaxf(28, fminf(100, [_replyView contentSize].height));
         float bodyHeight = fminf([_bodyView bodyHeight], remainingHeight - (replyHeight + INSET * 2));
-        [_bodyView setFrame: CGRectMake(0, y, self.frame.size.width, bodyHeight)];
+        [_bodyView setFrame: CGRectMake(0, y, self.bounds.size.width, bodyHeight)];
         [_replyView setFrame: CGRectMake(INSET, y + INSET + bodyHeight + INSET, w, replyHeight)];
-        [[_bodyView scrollView] setScrollEnabled: ([_bodyView frame].size.height < [_bodyView bodyHeight] - 1.0)];
+		
+		BOOL largerThanFrame = ([_bodyView frame].size.height < [_bodyView bodyHeight] - 1.0);
+        [[_bodyView scrollView] setScrollEnabled: largerThanFrame];
     }
 }
 
@@ -124,12 +126,12 @@
 - (void)setThread:(INThread*)thread
 {
     NSString * messageID = [[thread messageIDs] lastObject];
-    INMessage * message = [INMessage instanceWithID: messageID];
+    INMessage * message = [INMessage instanceWithID:messageID inNamespaceID:[thread namespaceID]];
     [message setNamespaceID: [thread namespaceID]];
     
     if (![message body]) {
         [_bodyView setAlpha: 0];
-        [message reload:^(NSError *error) {
+        [message reload:^(BOOL success, NSError *error) {
             [self populateWithThread:thread andMessage:message];
         }];
     } else {
@@ -142,7 +144,7 @@
 
 - (void)populateWithThread:(INThread*)thread andMessage:(INMessage*)message
 {
-    [_bodyView setMessageHTML: [message body]];
+    [_bodyView setContent: [message body]];
 
     // figure out the name of the sender
     NSString * from = [[[message from] firstObject] objectForKey:@"name"];

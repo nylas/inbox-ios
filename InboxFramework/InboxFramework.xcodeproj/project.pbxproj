@@ -88,6 +88,12 @@
 		43B27E0F19525EC2002532D3 /* INPDKeychainBindingsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B27DC219525EC2002532D3 /* INPDKeychainBindingsController.h */; };
 		43B27E1019525EC2002532D3 /* INPDKeychainBindingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B27DC319525EC2002532D3 /* INPDKeychainBindingsController.m */; };
 		43B27E12195260B4002532D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B27E11195260B4002532D3 /* libPods.a */; };
+		43F9F4AA196481800048ABE8 /* UIView+FrameAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F9F4A3196481800048ABE8 /* UIView+FrameAdditions.h */; };
+		43F9F4AB196481800048ABE8 /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F4A4196481800048ABE8 /* UIView+FrameAdditions.m */; };
+		43F9F4AC196481800048ABE8 /* INMessageContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F9F4A6196481800048ABE8 /* INMessageContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43F9F4AD196481800048ABE8 /* INMessageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F4A7196481800048ABE8 /* INMessageContentView.m */; };
+		43F9F4AE196481800048ABE8 /* INRecipientsLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F9F4A8196481800048ABE8 /* INRecipientsLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43F9F4AF196481800048ABE8 /* INRecipientsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F4A9196481800048ABE8 /* INRecipientsLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -178,6 +184,12 @@
 		43B27DC219525EC2002532D3 /* INPDKeychainBindingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPDKeychainBindingsController.h; sourceTree = "<group>"; };
 		43B27DC319525EC2002532D3 /* INPDKeychainBindingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPDKeychainBindingsController.m; sourceTree = "<group>"; };
 		43B27E11195260B4002532D3 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		43F9F4A3196481800048ABE8 /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameAdditions.h"; sourceTree = "<group>"; };
+		43F9F4A4196481800048ABE8 /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameAdditions.m"; sourceTree = "<group>"; };
+		43F9F4A6196481800048ABE8 /* INMessageContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INMessageContentView.h; sourceTree = "<group>"; };
+		43F9F4A7196481800048ABE8 /* INMessageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INMessageContentView.m; sourceTree = "<group>"; };
+		43F9F4A8196481800048ABE8 /* INRecipientsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INRecipientsLabel.h; sourceTree = "<group>"; };
+		43F9F4A9196481800048ABE8 /* INRecipientsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INRecipientsLabel.m; sourceTree = "<group>"; };
 		43FF122E191AF2E70043E2E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43FF123C191AF2E70043E2E6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6934FC4E75994D9D989C3502 /* Pods-InboxTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InboxTests.xcconfig"; path = "Pods/Pods-InboxTests.xcconfig"; sourceTree = "<group>"; };
@@ -382,10 +394,40 @@
 			path = PDKeychainBindings;
 			sourceTree = "<group>";
 		};
+		43F9F49A196481040048ABE8 /* InboxUI */ = {
+			isa = PBXGroup;
+			children = (
+				43F9F4A2196481800048ABE8 /* Categories */,
+				43F9F4A5196481800048ABE8 /* Views */,
+			);
+			path = InboxUI;
+			sourceTree = "<group>";
+		};
+		43F9F4A2196481800048ABE8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				43F9F4A3196481800048ABE8 /* UIView+FrameAdditions.h */,
+				43F9F4A4196481800048ABE8 /* UIView+FrameAdditions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		43F9F4A5196481800048ABE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				43F9F4A6196481800048ABE8 /* INMessageContentView.h */,
+				43F9F4A7196481800048ABE8 /* INMessageContentView.m */,
+				43F9F4A8196481800048ABE8 /* INRecipientsLabel.h */,
+				43F9F4A9196481800048ABE8 /* INRecipientsLabel.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		43FF1222191AF2E70043E2E6 = {
 			isa = PBXGroup;
 			children = (
 				43B27D6E19525EC2002532D3 /* Inbox */,
+				43F9F49A196481040048ABE8 /* InboxUI */,
 				43A1E30F191C04A000EF660E /* InboxTests */,
 				430E98321930101F0078F430 /* Supporting Files */,
 				43B27D6319525E0A002532D3 /* InboxTests */,
@@ -433,6 +475,7 @@
 				43B27E0B19525EC2002532D3 /* INThreadProvider.h in Headers */,
 				43B27DFA19525EC2002532D3 /* INNamespace.h in Headers */,
 				43B27DF819525EC2002532D3 /* INMessage.h in Headers */,
+				43F9F4AA196481800048ABE8 /* UIView+FrameAdditions.h in Headers */,
 				43B27DF219525EC2002532D3 /* INContact.h in Headers */,
 				43B27DF419525EC2002532D3 /* INDraft.h in Headers */,
 				43B27E0019525EC2002532D3 /* INThread.h in Headers */,
@@ -446,6 +489,7 @@
 				43B27E0219525EC2002532D3 /* INMessageProvider.h in Headers */,
 				43B27DE619525EC2002532D3 /* INAPITask.h in Headers */,
 				43B27DC819525EC2002532D3 /* NSDictionary+FormatConversion.h in Headers */,
+				43F9F4AC196481800048ABE8 /* INMessageContentView.h in Headers */,
 				43B27DF019525EC2002532D3 /* INUploadFileTask.h in Headers */,
 				43B27DEE19525EC2002532D3 /* INSendDraftTask.h in Headers */,
 				43B27DE319525EC2002532D3 /* INSyncEngine.h in Headers */,
@@ -460,6 +504,7 @@
 				43B27DC619525EC2002532D3 /* FMResultSet+INModelQueries.h in Headers */,
 				43B27DC419525EC2002532D3 /* FMDatabase+INModelQueries.h in Headers */,
 				43B27DD919525EC2002532D3 /* INPredicateToSQLConverter.h in Headers */,
+				43F9F4AE196481800048ABE8 /* INRecipientsLabel.h in Headers */,
 				43B27E0819525EC2002532D3 /* INModelProvider+Private.h in Headers */,
 				43B27DCE19525EC2002532D3 /* NSObject+Properties.h in Headers */,
 				43B27E0F19525EC2002532D3 /* INPDKeychainBindingsController.h in Headers */,
@@ -610,6 +655,7 @@
 				43B27DDC19525EC2002532D3 /* INAPIManager.m in Sources */,
 				43B27DD319525EC2002532D3 /* NSString+FormatConversion.m in Sources */,
 				43B27E0119525EC2002532D3 /* INThread.m in Sources */,
+				43F9F4AD196481800048ABE8 /* INMessageContentView.m in Sources */,
 				43B27E0519525EC2002532D3 /* INModelObject+Uniquing.m in Sources */,
 				43B27DC919525EC2002532D3 /* NSDictionary+FormatConversion.m in Sources */,
 				43B27DFF19525EC2002532D3 /* INThread+Private.m in Sources */,
@@ -617,6 +663,7 @@
 				43B27DE119525EC2002532D3 /* INDatabaseManager.m in Sources */,
 				43B27DEB19525EC2002532D3 /* INMarkMessageAsReadTask.m in Sources */,
 				43B27DCD19525EC2002532D3 /* NSObject+AssociatedObjects.m in Sources */,
+				43F9F4AF196481800048ABE8 /* INRecipientsLabel.m in Sources */,
 				43B27E0E19525EC2002532D3 /* INPDKeychainBindings.m in Sources */,
 				43B27DE719525EC2002532D3 /* INAPITask.m in Sources */,
 				43B27E0719525EC2002532D3 /* INModelObject.m in Sources */,
@@ -637,6 +684,7 @@
 				43B27DEF19525EC2002532D3 /* INSendDraftTask.m in Sources */,
 				43B27DF719525EC2002532D3 /* INFile.m in Sources */,
 				43B27DD119525EC2002532D3 /* NSPredicate+Inspection.m in Sources */,
+				43F9F4AB196481800048ABE8 /* UIView+FrameAdditions.m in Sources */,
 				43B27DE519525EC2002532D3 /* INAddRemoveTagsTask.m in Sources */,
 				43B27DCB19525EC2002532D3 /* NSError+InboxErrors.m in Sources */,
 				43B27E0A19525EC2002532D3 /* INModelProvider.m in Sources */,

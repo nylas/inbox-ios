@@ -44,4 +44,9 @@ FOUNDATION_EXPORT const unsigned char InboxVersionString[];
 #import "INDraft.h"
 #import "NSError+InboxErrors.h"
 
+#ifdef TARGET_OS_IPHONE
+#import "INMessageContentView.h"
+#import "INRecipientsLabel.h"
+#endif
+
 #endif

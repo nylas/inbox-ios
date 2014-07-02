@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "INMessageContentWebView.h"
-#import "INRecipientsLabel.h"
 #import "INPlaceholderTextView.h"
 
 @interface TRMessageCardView : UIView <UIScrollViewDelegate>
@@ -16,7 +14,7 @@
 @property (nonatomic, strong) UIView * headersView;
 @property (nonatomic, strong) UILabel * subjectLabel;
 @property (nonatomic, strong) INRecipientsLabel * fromLabel;
-@property (nonatomic, strong) INMessageContentWebView * bodyView;
+@property (nonatomic, strong) INMessageContentView * bodyView;
 @property (nonatomic, strong) INPlaceholderTextView * replyView;
 @property (nonatomic, strong) UIButton * exitButton;
 

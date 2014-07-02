@@ -31,7 +31,8 @@
     [_animator setDelegate: self];
     
     [_messageDismissView setAlpha: 0];
-    [_emptyView setAlpha: 0];
+    [_emptyView setAlpha: 1];
+	[_emptyTextLabel setText:@"Make sure the Inbox Sync Engine is running and that http://localhost:5555/n/ returns your synced account info."];
 }
 
 - (void)dealloc
@@ -48,25 +49,25 @@
 {
 	INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
 
-    if (!_threadsProvider || ([_threadsProvider namespaceID] != [namespace ID])) {
-        self.threadsProvider = [namespace newThreadsProvider];
-        [_threadsProvider setItemSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]]];
-        [_threadsProvider setDelegate:self];
-        [_threadsProvider setItemRange: NSMakeRange(0, 10)];
+    if (!_threadProvider || ([_threadProvider namespaceID] != [namespace ID])) {
+        self.threadProvider = [namespace newThreadProvider];
+        [_threadProvider setItemSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]]];
+        [_threadProvider setDelegate:self];
+        [_threadProvider setItemRange: NSMakeRange(0, 10)];
     }
-	[_threadsProvider refresh];
+	[_threadProvider refresh];
 }
 
 - (IBAction)refreshTapped:(id)sender
 {
-    [_threadsProvider refresh];
+    [_threadProvider refresh];
 }
 
-- (void)providerDataChanged
+- (void)providerDataChanged:(INModelProvider *)provider
 {
     [_messageViews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    for (int ii = 0; ii < [[self.threadsProvider items] count]; ii++) {
-        INThread * thread = [[self.threadsProvider items] objectAtIndex: ii];
+    for (int ii = 0; ii < [[self.threadProvider items] count]; ii++) {
+        INThread * thread = [[self.threadProvider items] objectAtIndex: ii];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ii * 0.12 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self insertThread:thread atIndex: 100000];
             [self activateFrontCard];
@@ -74,7 +75,7 @@
     }
 }
 
-- (void)providerDataAltered:(INModelProviderChangeSet *)changeSet
+- (void)provider:(INModelProvider *)provider dataAltered:(INModelProviderChangeSet *)changeSet
 {
     for (INModelProviderChange * change in [changeSet changes]) {
         if (change.type == INModelProviderChangeAdd)
@@ -84,12 +85,12 @@
     }
 }
 
-- (void)providerDataFetchFailed:(NSError *)error
+- (void)provider:(INModelProvider *)provider dataFetchFailed:(NSError *)error
 {
 	[[[UIAlertView alloc] initWithTitle:@"An Error Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 }
 
-- (void)providerDataFetchCompleted
+- (void)providerDataFetchCompleted:(INModelProvider *)provider
 {
 }
 
@@ -168,6 +169,7 @@
         [message setCenter: self.view.center];
     
     } else {
+		[_emptyTextLabel setText: @"Mission accomplished. You've handled all your unread mail."];
         [UIView animateWithDuration:0.3 animations:^{
             [_emptyView setAlpha: 1];
         }];

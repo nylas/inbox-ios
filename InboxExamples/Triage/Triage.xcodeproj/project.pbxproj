@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		433711B4191C0BCB00E7F793 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433711B3191C0BCB00E7F793 /* Inbox.framework */; };
-		433711B9191C107000E7F793 /* INMessageContentWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433711B8191C107000E7F793 /* INMessageContentWebView.m */; };
-		433711BD191C13A100E7F793 /* INRecipientsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 433711BC191C13A100E7F793 /* INRecipientsLabel.m */; };
-		433711C0191C21A200E7F793 /* UIView+FrameAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 433711BF191C21A200E7F793 /* UIView+FrameAdditions.m */; };
-		433711C3191C352A00E7F793 /* INPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433711C2191C352A00E7F793 /* INPlaceholderTextView.m */; };
 		436F7D60191AF973005A4489 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436F7D5F191AF973005A4489 /* Foundation.framework */; };
 		436F7D62191AF973005A4489 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436F7D61191AF973005A4489 /* CoreGraphics.framework */; };
 		436F7D64191AF973005A4489 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436F7D63191AF973005A4489 /* UIKit.framework */; };
@@ -28,6 +24,7 @@
 		436F7D98191AFC09005A4489 /* TRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 436F7D97191AFC09005A4489 /* TRViewController.xib */; };
 		436F7D9B191BFADF005A4489 /* TRMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 436F7D9A191BFADF005A4489 /* TRMessageCardView.m */; };
 		43AA39F2191C4A6300B54DE1 /* TRMessageActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AA39F1191C4A6300B54DE1 /* TRMessageActionButton.m */; };
+		43F9F4A1196481490048ABE8 /* INPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F9F4A0196481490048ABE8 /* INPlaceholderTextView.m */; };
 		8EA28BEC77DB45C3867C6C65 /* libPods-Triage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C0F8DF81F24A90BC14C372 /* libPods-Triage.a */; };
 /* End PBXBuildFile section */
 
@@ -45,14 +42,6 @@
 		31C0F8DF81F24A90BC14C372 /* libPods-Triage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Triage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		433711B3191C0BCB00E7F793 /* Inbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Inbox.framework; path = "../../InboxFramework/build/Debug-iphoneos/Inbox.framework"; sourceTree = "<group>"; };
 		433711B5191C0BF100E7F793 /* libPods-Inbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Inbox.a"; path = "../../InboxFramework/Pods/build/Debug-iphoneos/libPods-Inbox.a"; sourceTree = "<group>"; };
-		433711B7191C107000E7F793 /* INMessageContentWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INMessageContentWebView.h; path = ../../../BigSur/BigSur/Views/INMessageContentWebView.h; sourceTree = "<group>"; };
-		433711B8191C107000E7F793 /* INMessageContentWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INMessageContentWebView.m; path = ../../../BigSur/BigSur/Views/INMessageContentWebView.m; sourceTree = "<group>"; };
-		433711BB191C13A100E7F793 /* INRecipientsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INRecipientsLabel.h; path = ../../../BigSur/BigSur/Views/INRecipientsLabel.h; sourceTree = "<group>"; };
-		433711BC191C13A100E7F793 /* INRecipientsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INRecipientsLabel.m; path = ../../../BigSur/BigSur/Views/INRecipientsLabel.m; sourceTree = "<group>"; };
-		433711BE191C21A200E7F793 /* UIView+FrameAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FrameAdditions.h"; path = "../../../BigSur/BigSur/Categories/UIView+FrameAdditions.h"; sourceTree = "<group>"; };
-		433711BF191C21A200E7F793 /* UIView+FrameAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FrameAdditions.m"; path = "../../../BigSur/BigSur/Categories/UIView+FrameAdditions.m"; sourceTree = "<group>"; };
-		433711C1191C352A00E7F793 /* INPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INPlaceholderTextView.h; path = ../../../BigSur/BigSur/Views/INPlaceholderTextView.h; sourceTree = "<group>"; };
-		433711C2191C352A00E7F793 /* INPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INPlaceholderTextView.m; path = ../../../BigSur/BigSur/Views/INPlaceholderTextView.m; sourceTree = "<group>"; };
 		436F7D5C191AF973005A4489 /* Triage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Triage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		436F7D5F191AF973005A4489 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		436F7D61191AF973005A4489 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,6 +65,8 @@
 		436F7D9A191BFADF005A4489 /* TRMessageCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRMessageCardView.m; sourceTree = "<group>"; };
 		43AA39F0191C4A6300B54DE1 /* TRMessageActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRMessageActionButton.h; sourceTree = "<group>"; };
 		43AA39F1191C4A6300B54DE1 /* TRMessageActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRMessageActionButton.m; sourceTree = "<group>"; };
+		43F9F49F196481490048ABE8 /* INPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPlaceholderTextView.h; sourceTree = "<group>"; };
+		43F9F4A0196481490048ABE8 /* INPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPlaceholderTextView.m; sourceTree = "<group>"; };
 		A5E388D796144F48AA9970A5 /* Pods-Triage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Triage.xcconfig"; path = "Pods/Pods-Triage.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,21 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		433711BA191C107500E7F793 /* Referenced from BigSur */ = {
-			isa = PBXGroup;
-			children = (
-				433711C1191C352A00E7F793 /* INPlaceholderTextView.h */,
-				433711C2191C352A00E7F793 /* INPlaceholderTextView.m */,
-				433711BE191C21A200E7F793 /* UIView+FrameAdditions.h */,
-				433711BF191C21A200E7F793 /* UIView+FrameAdditions.m */,
-				433711BB191C13A100E7F793 /* INRecipientsLabel.h */,
-				433711BC191C13A100E7F793 /* INRecipientsLabel.m */,
-				433711B7191C107000E7F793 /* INMessageContentWebView.h */,
-				433711B8191C107000E7F793 /* INMessageContentWebView.m */,
-			);
-			name = "Referenced from BigSur";
-			sourceTree = "<group>";
-		};
 		436F7D53191AF973005A4489 = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +142,8 @@
 				43AA39F1191C4A6300B54DE1 /* TRMessageActionButton.m */,
 				436F7D99191BFADF005A4489 /* TRMessageCardView.h */,
 				436F7D9A191BFADF005A4489 /* TRMessageCardView.m */,
-				433711BA191C107500E7F793 /* Referenced from BigSur */,
+				43F9F49F196481490048ABE8 /* INPlaceholderTextView.h */,
+				43F9F4A0196481490048ABE8 /* INPlaceholderTextView.m */,
 				436F7D7A191AF974005A4489 /* Images.xcassets */,
 				436F7D66191AF973005A4489 /* Supporting Files */,
 			);
@@ -336,13 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AA39F2191C4A6300B54DE1 /* TRMessageActionButton.m in Sources */,
-				433711C0191C21A200E7F793 /* UIView+FrameAdditions.m in Sources */,
 				436F7D70191AF973005A4489 /* TRAppDelegate.m in Sources */,
 				436F7D6C191AF973005A4489 /* main.m in Sources */,
-				433711B9191C107000E7F793 /* INMessageContentWebView.m in Sources */,
-				433711C3191C352A00E7F793 /* INPlaceholderTextView.m in Sources */,
-				433711BD191C13A100E7F793 /* INRecipientsLabel.m in Sources */,
 				436F7D9B191BFADF005A4489 /* TRMessageCardView.m in Sources */,
+				43F9F4A1196481490048ABE8 /* INPlaceholderTextView.m in Sources */,
 				436F7D79191AF974005A4489 /* TRViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
