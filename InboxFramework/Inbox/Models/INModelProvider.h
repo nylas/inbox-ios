@@ -37,7 +37,12 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger index;
 
 /** 
-  Creates and returns a new INModelProviderChange object for representing a particular change.
+  Creates and returns a new INModelProviderChange object for representing 
+  a particular change.
+  
+  @param type The type of change that took place.
+  @param item The item that was changed.
+  @param index The index of that item in the previous provider result set.
 */
 + (INModelProviderChange *)changeOfType:(INModelProviderChangeType)type forItem:(INModelObject *)item atIndex:(NSInteger)index;
 @end
@@ -75,11 +80,16 @@ typedef enum : NSUInteger {
 
 @class INModelProvider;
 
+/**
+ Implement the INModelProviderDelegate to update your UI based on changes to an 
+ INModelProvider's result set.
+*/
 @protocol INModelProviderDelegate <NSObject>
 @optional
 /**
  Called when the items array of the provider has changed substantially. You should
  refresh your interface completely to reflect the new items array.
+ @param provider The INModelProvider instance that has changed.
 */
 - (void)providerDataChanged:(INModelProvider*)provider;
 
@@ -89,6 +99,7 @@ typedef enum : NSUInteger {
  connection. You may choose to refresh your interface completely or apply the individual
  changes provided in the changeSet.
  
+ @param provider The INModelProvider instance that has been altered.
  @param changeSet The set of items and indexes that have been modified.
  */
 - (void)provider:(INModelProvider*)provider dataAltered:(INModelProviderChangeSet *)changeSet;
@@ -98,6 +109,7 @@ typedef enum : NSUInteger {
  the fetch by calling -refresh on the model provider or modifying the sort descriptors
  or filter predicate, you may want to display the error provided.
 
+ @param provider The INModelProvider instance.
  @param error The error, with a display-ready message in -localizedDescription.
 */
 - (void)provider:(INModelProvider*)provider dataFetchFailed:(NSError *)error;
@@ -105,6 +117,8 @@ typedef enum : NSUInteger {
 /**
  Called when the provider has fully refresh in response to an explicit refresh request
  or a change in the item filter predicate or sort descriptors.
+
+ @param provider The INModelProvider instance that completed its fetch.
 */
 - (void)providerDataFetchCompleted:(INModelProvider*)provider;
 

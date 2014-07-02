@@ -13,6 +13,9 @@
 #import "INModelObject.h"
 
 
+/** Implement the INDatabaseObserver protocol and call [INDatabaseManager registerCacheObserver:]
+to receive updates when models are persisted and removed from the local SQLite cache.
+*/
 @protocol INDatabaseObserver <NSObject>
 @required
 /**
@@ -115,6 +118,7 @@
 /**
  Select a single instance from the local database cache and return it synchronously.
  
+ @param klass The model class. Must be a subclass of INModelObject.
  @param ID an optional instance ID. If an instance ID is not provided, the first
  available instance of the class in the database will be returned.
  
@@ -129,23 +133,29 @@
  
  Note that predicates and sort descriptors should reference class properties, not the underlying
  database columns. ("namespaceID", not "namespace_id"). The predicates and sort descriptors you
- create can only reference properties returned from [class databaseIndexProperties], which have 
- been indexed and have their own table columns under the hood, or [class databaseJoinTableProperties].
+ create can only reference properties returned from [INModelObject databaseIndexProperties], which have
+ been indexed and have their own table columns under the hood, or [INModelObject databaseJoinTableProperties].
  
  @param klass The type of models. Must be a subclass of INModelObject.
  @param wherePredicate A comparison or compound NSPredicate.
  @param sortDescriptors One or more sort descriptors.
  @param limit The maximum number of objects to return.
  @param offset The initial offset into the results. Useful when paging.
- @param callback A block that accepts an array of INModelObjects. At this time, the callback is called synchronously.
+ @param callback A block that accepts an array of INModelObjects. Called on the main thread at the completion of the query.
 */
 - (void)selectModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate sortedBy:(NSArray *)sortDescriptors limit:(NSUInteger)limit offset:(NSUInteger)offset withCallback:(ResultsBlock)callback;
 
 /**
-Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
-This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback;
+ Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
+ This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:offset:withCallback that gives
+ you full control over the entire query string while handling the inflation of the returned models.
 
  This method is asynchronous, and the callback will be invoked on the main thread when objects are ready.
+
+ @param klass The type of models. Must be a subclass of INModelObject.
+ @param query A full SQLite query string, beginning with "SELECT *..."
+ @param arguments An NSDictionary of arguments substituted into the query string using FMDB's ':key' snytax.
+ @param callback A block that accepts an array of INModelObjects. Called on the main thread at the completion of the query.
 */
 - (void)selectModelsOfClass:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback;
 
@@ -153,6 +163,11 @@ This is a more direct version of -selectModelsOfClass:matching:sortedBy:limit:of
 Find models using the provided query and query parameters (substitutions for :foo, :bar in the query string).
 This method is synchronous, and the callbackwill be invoked immediately on the main thread. This is useful for 
 some cases, but should be used with care.
+
+ @param klass The type of models. Must be a subclass of INModelObject.
+ @param query A full SQLite query string, beginning with "SELECT *..."
+ @param arguments An NSDictionary of arguments substituted into the query string using FMDB's ':key' snytax.
+ @param callback A block that accepts an array of INModelObjects. At this time, the callback is called synchronously.
 */
 - (void)selectModelsOfClassSync:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback;
 
@@ -161,6 +176,7 @@ Find the number of models that match a particular query, synchronously.
 
  @param klass The type of models. Must be a subclass of INModelObject.
  @param wherePredicate A comparison or compound NSPredicate.
+ @param callback A block for retrieving the result. Called on the main thread at the completion of the query.
 */
 - (void)countModelsOfClass:(Class)klass matching:(NSPredicate *)wherePredicate withCallback:(LongBlock)callback;
 

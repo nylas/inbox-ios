@@ -14,6 +14,26 @@
 
 @class INTag;
 
+/** The INThread class provides a native wrapper around Inbox threads
+ http://inboxapp.com/docs/api#threads
+
+Threads are the central object of the Inbox API and the INThread class 
+provides convenience methods for performing many actions, such as tagging,
+archiving, and deleting threads.
+
+You should not create instances of INThread directly. Instead, obtain an
+INNamespace object (representing an email account) and use an INThreadProvider:
+ 
+    NSPredicate * unread = [NSComparisonPredicate predicateWithFormat:@"ANY tagIDs = %@", INTagIDUnread];
+    INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+    self.threadProvider = [namespace newThreadProvider];
+    self.threadProvider.itemFilterPredicate = unread;
+    self.threadProvider.delegate = self;
+ 
+    // Implement the INModelProviderDelegate protocol to get threads
+	
+If you're looking to create a new thread, see INDraft.
+*/
 @interface INThread : INModelObject
 
 @property (nonatomic, strong) NSString * subject;

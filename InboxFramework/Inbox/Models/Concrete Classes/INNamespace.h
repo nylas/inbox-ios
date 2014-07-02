@@ -12,6 +12,17 @@
 @class INThreadProvider;
 @class INMessageProvider;
 
+/**
+Namespaces are an important concept in Inbox. Typically, a user authenticates with
+the Inbox API and the access token you are given provides access to one namespace:
+the user's email account. Threads, messages, contacts, files, etc. live within the
+namespace, and the INNamespace object provides convenience methods for creating
+model providers for these types. You can also use the properties on INNamespace
+to determine the user's email address, check Inbox sync status, and more.
+
+Note: In the future, a single access token may grant you access to multiple namespaces,
+and a namespace may not always be an entire email account.
+*/
 @interface INNamespace : INModelObject
 
 @property (nonatomic, strong) NSString * emailAddress;

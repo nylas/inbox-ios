@@ -8,6 +8,9 @@
 
 #import "INModelObject.h"
 
+/** The INContact class provides a native wrapper around Inbox contacts
+ http://inboxapp.com/docs/api#contacts
+*/
 @interface INContact : INModelObject
 
 @property (nonatomic, strong) NSString * name;

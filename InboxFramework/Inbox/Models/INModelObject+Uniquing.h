@@ -40,6 +40,7 @@
  Locks the instance table and attaches the provided model. This method throws an 
  exception if another model of the same class is already in the instance table 
  with the same ID.
+ @param obj The object to attach as the official copy of this model.
 */
 + (void)attachInstance:(INModelObject *)obj;
 

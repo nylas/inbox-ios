@@ -71,7 +71,7 @@ Returns an immutable copy of the task queue so it can be inspected or displayed.
  Queue the API operation provided. API operations are persisted to disk until they are
  completed and automatically restarted after network reachability changes occur. 
 
- @param operation The INAPIOperation to be performed.
+ @param change The INAPIOperation to be performed.
  @return YES, if the change was successfully queued. NO if the change could not be
  queued because of another change that is already in progress and would conflict.
  */
@@ -88,7 +88,7 @@ Suspend or resume the task queue. This method is called automatically when reach
 status changes, but it may be useful to resume the queue menually in response to user
 action.
 
-@param suspended. YES to suspend the processing of queued API tasks, NO to resume
+@param suspended YES to suspend the processing of queued API tasks, NO to resume
 processing tasks immediately. Note that the queue will be suspended again if a queued
 task fails.
 */

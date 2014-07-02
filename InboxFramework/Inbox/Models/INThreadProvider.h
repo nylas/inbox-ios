@@ -9,6 +9,10 @@
 #import "INModelProvider.h"
 #import "INNamespace.h"
 
+/** A concrete subclass of INModelProvider that exposes convenience functions
+for counting unread threads and supports additional query parameters on underlying
+API requests.
+*/
 @interface INThreadProvider : INModelProvider
 
 /*

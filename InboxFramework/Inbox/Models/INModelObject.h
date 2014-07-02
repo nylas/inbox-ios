@@ -33,11 +33,15 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
 /** @name Retrieving Instances */
 
 /**
+ @param ID The ID of the model. Required.
+ @param namespaceID The namespace ID the model should exist in. Required.
+
  @return An instance of the requested class. If a copy of this model is already in memory, this
  method returns the same instance. If it has been stored in the Inbox local cache, it will be
  retrieved from cache. If no copy of the object is available, an empty instance is returned.
  Subscribe to this instance to be notified when it's data becomes available and update your
- UI accordingly. */
+ UI accordingly. 
+ */
 + (id)instanceWithID:(NSString*)ID inNamespaceID:(NSString*)namespaceID;
 
 /**
@@ -70,6 +74,8 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
 - (NSMutableDictionary *)resourceDictionary;
 
 /**
+ @param dict A JSON dictionary with one or more key-value pairs matching the ones
+ declared in resourceMapping.
  @return YES if the resource dictionary represents a change to the model.
  */
 - (BOOL)differentFromResourceDictionary:(NSDictionary *)dict;
@@ -78,7 +84,7 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
  Applies the JSON to the object, overriding existing property values when key-value
  pairs are present in the json.
 
- @param json A JSON dictionary with one or more key-value pairs matching the ones
+ @param dict A JSON dictionary with one or more key-value pairs matching the ones
  declared in resourceMapping.
 */
 - (void)updateWithResourceDictionary:(NSDictionary *)dict;
@@ -106,16 +112,16 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
 
  A typical subclass implementation looks like this:
 
- + (NSMutableDictionary *)resourceMapping
- {
-   NSMutableDictionary * mapping = [super resourceMapping];
-   [mapping addEntriesFromDictionary: @{
-     @"firstName": @"first_name",
-     @"lastName": @"last_name",
-     @"email": @"email"
-   }];
-   return mapping;
- }
+     + (NSMutableDictionary *)resourceMapping
+     {
+        NSMutableDictionary * mapping = [super resourceMapping];
+        [mapping addEntriesFromDictionary: @{
+           @"firstName": @"first_name",
+           @"lastName": @"last_name",
+           @"email": @"email"
+        }];
+        return mapping;
+     }
 
  @return A dictionary mapping iOS property names to JSON fields.
  */

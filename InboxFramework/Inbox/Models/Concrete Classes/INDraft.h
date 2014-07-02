@@ -52,14 +52,13 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
 
 /**
  Add an attachment to the thread. The attachment does not need to be fully uploaded
- to be attached to a draft. However, you should call [attachment upload] to start
+ to be attached to a draft. However, you should call [INFile upload] to start
  the upload process before adding the attachment to the draft.
 
  If attachments are still uploading when you call -save, the draft will not be 
  saved to the server until attachments have finished uploading.
 
  @param attachment The INAttachment object to add to the draft.
- @param index The index where the draft should be attached.
 */
 - (void)addAttachment:(INFile*)attachment;
 
@@ -88,6 +87,8 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
 
 /**
  Called internally when an attachment has finished uploading and it's ID has changed.
+ @param ID The ID that was initially assigned to the INFile.
+ @param uploadedID The ID assigned by the server that now represents the INFile.
 */
 - (void)attachmentWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID;
 

@@ -40,7 +40,7 @@ to call -upload.
 /**
  Initialize an INAttachment with the arbitrary file data provided.
  
- @param image The display filename of the attachment.
+ @param filename The display filename of the attachment.
  @param mimetype The mimetype of the attachment, such as "image/jpeg" or "text/plain".
  @param data The attachment data.
  @param previewOrNil A small UIImage to use for displaying this attachment in your app.

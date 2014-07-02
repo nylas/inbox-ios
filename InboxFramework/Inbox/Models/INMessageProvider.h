@@ -8,6 +8,10 @@
 
 #import "INModelProvider.h"
 
+/** A concrete subclass of INModelProvider specifically for managing result sets
+of messages and drafts. This subclass adds support for API query parameters that
+are specific to messages and drafts.
+*/
 @interface INMessageProvider : INModelProvider
 
 /**

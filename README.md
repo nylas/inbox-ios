@@ -4,7 +4,7 @@ Inbox iOS SDK
 
 #### Documentation
 
-See the [Inbox iOS Documentation](http://inboxapp.com/docs/ios) for getting started guides and the [Inbox API Reference](inboxapp.com/docs/api) for information about Inbox's REST API. Class-level documentation has been compiled with [AppleDoc](http://gentlebytes.com/appledoc/) and published to the `gh-pages` branch of this repository.
+See the [Inbox iOS Documentation](http://inboxapp.com/docs/ios) for getting started guides and the [Inbox API Reference](inboxapp.com/docs/api) for information about Inbox's REST API. Class-level documentation has been compiled with [AppleDoc](http://gentlebytes.com/appledoc/) and published to the [`gh-pages` branch](http://inboxapp.github.com/inbox-ios) of this repository.
 
 #### Environment Setup
 

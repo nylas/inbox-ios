@@ -16,10 +16,13 @@ static NSString * INTagIDInbox = @"inbox";
 static NSString * INTagIDStarred = @"starred";
 static NSString * INTagIDSent = @"sent";
 
+/** A simple wrapper around an Inbox tag. See the Inbox Tags documentation for 
+more information about tags: http://inboxapp.com/docs/api#tags
+*/
 @interface INTag : INModelObject
 
 /**
- @param A tag ID. May be a user-generated ID, or one of the built-in Inbox tag IDs:
+ @param ID A tag ID. May be a user-generated ID, or one of the built-in Inbox tag IDs:
  INTagIDUnread, INTagIDSent, etc.
  
  @return An INTag model with the given ID.

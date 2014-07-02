@@ -12,6 +12,20 @@
 @class INNamespace;
 @class INFile;
 
+/** The INMessage class provides access to message attributes and convenience 
+methods for accessing attachments, marking as read, etc.
+
+You should not create INMessage objects directly. You can fetch messages by
+asking an INNamespace for a newMessageProvider and configuring that provider to 
+return the result set you want (for example, all unread messages.)
+
+To compose or send a new message, create an instance of INDraft and call it's 
+-save and -send methods, respectively.
+
+The Inbox platform is similar to Gmail in that many actions are taken on threads,
+not on messages. If you're looking to archive, label, or delete a message, see
+the documentation for INThread.
+*/
 @interface INMessage : INModelObject
 
 @property (nonatomic, strong) NSString * body;
