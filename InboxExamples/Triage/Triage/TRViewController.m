@@ -45,26 +45,41 @@
     [self prepareForDisplay];
 }
 
+- (IBAction)refreshTapped:(id)sender
+{
+    [self prepareForDisplay];
+}
+
 - (void)prepareForDisplay
 {
+    // All threads, messages, etc. live within an Inbox namespace. For this demo, let's
+    // just use the first available namespace.
 	INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
 
+    // Avoid re-creating a thread provider unless our namespace has changed.
+    // If we created a new one each time you tapped 'Refresh', the entire thread
+    // stack would animate in, instead of just new threads.
     if (!_threadProvider || ([_threadProvider namespaceID] != [namespace ID])) {
         self.threadProvider = [namespace newThreadProvider];
+
+        // Configure our thread provider to display ten messages ordered by date
+        // In the future, we could set the itemFilterPredicate to show unread emails only.
         [_threadProvider setItemSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]]];
-        [_threadProvider setDelegate:self];
         [_threadProvider setItemRange: NSMakeRange(0, 10)];
+        [_threadProvider setDelegate:self];
     }
 	[_threadProvider refresh];
 }
 
-- (IBAction)refreshTapped:(id)sender
-{
-    [_threadProvider refresh];
-}
+
+#pragma mark INModelProvider Delegate
 
 - (void)providerDataChanged:(INModelProvider *)provider
 {
+    /**
+     Called when the items array of the provider has changed substantially. We
+     refresh your interface completely to reflect the new items array.
+     */
     [_messageViews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     for (int ii = 0; ii < [[self.threadProvider items] count]; ii++) {
         INThread * thread = [[self.threadProvider items] objectAtIndex: ii];
@@ -77,6 +92,12 @@
 
 - (void)provider:(INModelProvider *)provider dataAltered:(INModelProviderChangeSet *)changeSet
 {
+    /**
+     Called when objects have been added, removed, or modified in the items array, usually
+     as a result of new data being fetched from the Inbox API or published on a real-time
+     connection. You may choose to refresh your interface completely or apply the individual
+     changes provided in the changeSet.
+     */
     for (INModelProviderChange * change in [changeSet changes]) {
         if (change.type == INModelProviderChangeAdd)
             [self insertThread:change.item atIndex:change.index];
@@ -87,11 +108,28 @@
 
 - (void)provider:(INModelProvider *)provider dataFetchFailed:(NSError *)error
 {
+    // Called when an attempt to load data from the Inbox API has failed.
 	[[[UIAlertView alloc] initWithTitle:@"An Error Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 }
 
 - (void)providerDataFetchCompleted:(INModelProvider *)provider
 {
+}
+
+
+#pragma mark Layout & Animation
+
+- (void)layoutThreads
+{
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionAllowUserInteraction animations:^{
+        for (int ii = 0; ii < [_messageViews count]; ii ++) {
+            TRMessageCardView * item = [_messageViews objectAtIndex: ii];
+            CGAffineTransform t = CGAffineTransformMakeRotation(item.angle);
+            t = CGAffineTransformTranslate(t, 0, ([_messageViews count] - (ii+1)) * 5);
+            [item setTransform: t];
+            [item setAlpha: 1];
+        }
+    } completion:NULL];
 }
 
 - (void)insertThread:(id)thread atIndex:(int)index
@@ -108,19 +146,19 @@
         [_messageViews addObject: view];
     }
     
-    float randAngle = (rand() % 1000) / 1000.0 * M_PI * 2;
-    float dist = fmaxf(self.view.frame.size.height, self.view.frame.size.width) + [view frame].size.width;
-
     float displayAngle = (rand() % 1000) / 2000.0 - 0.25;
-    
     [view setAngle: displayAngle];
-    [view setCenter: CGPointMake(cosf(randAngle) * dist, sinf(randAngle) * dist)];
+
+    // Animate the thread to the center stack from a random direction
+    float incomingDist = fmaxf(self.view.frame.size.height, self.view.frame.size.width) + [view frame].size.width;
+    float incomingAngle = (rand() % 1000) / 1000.0 * M_PI * 2;
+    [view setCenter: CGPointMake(cosf(incomingAngle) * incomingDist, sinf(incomingAngle) * incomingDist)];
+
     [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [view setCenter: self.view.center];
-
-    } completion:^(BOOL finished) {
-    }];
+    } completion: NULL];
     
+    // Layout the stack, moving threads down a bit based on their location in the array.
     [self layoutThreads];
 }
 
@@ -132,19 +170,6 @@
     
     if (index == [_messageViews count]) // item was last object
         [self activateFrontCard];
-}
-
-- (void)layoutThreads
-{
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionAllowUserInteraction animations:^{
-        for (int ii = 0; ii < [_messageViews count]; ii ++) {
-            TRMessageCardView * item = [_messageViews objectAtIndex: ii];
-            CGAffineTransform t = CGAffineTransformMakeRotation(item.angle);
-            t = CGAffineTransformTranslate(t, 0, ([_messageViews count] - (ii+1)) * 5);
-            [item setTransform: t];
-            [item setAlpha: 1];//0.7 + 0.3 * ((ii+1.0) / [_messageViews count])];
-        }
-    } completion:NULL];
 }
 
 - (void)activateFrontCard
@@ -186,9 +211,12 @@
 {
     TRMessageCardView * message = (TRMessageCardView*)[tapGesture view];
 
+    // Prevent interaction while the animation is in progress
     [_messageDragRecognizer setEnabled: NO];
     [[message bodyView] setUserInteractionEnabled: YES];
     [[message replyView] setDelegate: self];
+
+    // Remove the message shadow, because it slows down animations
     [[message layer] setShadowOpacity:0];
 
     [UIView animateWithDuration:0.25 animations:^{
@@ -197,9 +225,13 @@
         [_messageDismissView setAlpha: 1];
     }];
     
+    // Arrange the views so the message can appear over the action buttons
     [self.view bringSubviewToFront: _messageDismissView];
     [self.view bringSubviewToFront: message];
     
+    // Expand the card horizontally first, because the width change triggers
+    // the web view displaying the content to re-layout. If we do the layout
+    // while the card is expanding vertically, it's less noticeable.
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         CGRect expanded = CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.width / message.frame.size.width) * message.frame.size.height);
         expanded.origin.y = message.frame.origin.y - (expanded.size.height - message.frame.size.height) / 2 - 20;
@@ -212,10 +244,12 @@
         float heightMax = self.view.frame.size.height - 70;
         height = fminf(height, heightMax);
         
+        // Expand the card vertically based on the space it requires
         [UIView animateWithDuration:0.7 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             [message setFrame: CGRectMake(0, 20 + (heightMax - height) / 2, self.view.frame.size.width, height)];
         } completion:^(BOOL finished) {
             
+            // Animate the shadow back in slowly so nobody notices it was gone.
             [message.layer addAnimation:((^ {
                 CABasicAnimation *transition = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
                 transition.fromValue = (id)@(0);
@@ -248,20 +282,6 @@
         
     } completion:^(BOOL finished) {
     }];
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    TRMessageCardView * message = [_messageViews lastObject];
-    [UIView animateWithDuration:0.28 animations:^{
-        [message setFrame: CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20 - 216)];
-    }];
-}
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    TRMessageCardView * message = [_messageViews lastObject];
-    [message setNeedsLayout];
 }
 
 - (void)drag:(UIPanGestureRecognizer*)panGesture
@@ -337,12 +357,23 @@
             }
         }];
     });
-
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [super didReceiveMemoryWarning];
+    TRMessageCardView * message = [_messageViews lastObject];
+    [UIView animateWithDuration:0.28 animations:^{
+        [message setFrame: CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20 - 216)];
+    }];
 }
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    TRMessageCardView * message = [_messageViews lastObject];
+    [message setNeedsLayout];
+}
+
 
 @end
