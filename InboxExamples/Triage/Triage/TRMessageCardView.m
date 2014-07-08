@@ -125,6 +125,8 @@
 
 - (void)setThread:(INThread*)thread
 {
+	_thread = thread;
+	
     NSString * messageID = [[thread messageIDs] lastObject];
     INMessage * message = [INMessage instanceWithID:messageID inNamespaceID:[thread namespaceID]];
     [message setNamespaceID: [thread namespaceID]];

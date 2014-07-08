@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIButton * exitButton;
 
 @property (nonatomic, assign) float angle;
+@property (nonatomic, strong) INThread * thread;
 
 - (void)setThread:(INThread*)thread;
 - (void)setShowReplyView:(BOOL)showReply;

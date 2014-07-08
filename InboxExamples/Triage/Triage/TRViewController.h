@@ -17,9 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIView *emptyView;
 @property (weak, nonatomic) IBOutlet UILabel *emptyTextLabel;
 
-@property (nonatomic, strong) UIPanGestureRecognizer * messageDragRecognizer;
-@property (nonatomic, strong) UITapGestureRecognizer * messageDTapRecognizer;
-@property (nonatomic, strong) NSMutableArray * messageViews;
+@property (nonatomic, strong) UIPanGestureRecognizer * cardDragRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer * cardDTapRecognizer;
+@property (nonatomic, strong) NSMutableArray * cardViews;
 @property (nonatomic, strong) UIDynamicAnimator * animator;
 
 @property (nonatomic, strong) INModelProvider * threadProvider;

@@ -42,7 +42,7 @@ static void initialize_INAPIManager() {
 	NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
 	NSString * api = info[INAPIPathInfoDictionaryKey];
 
-	NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5000/'");
+	NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5555/'");
     if (!api) {
         api = @"http://api.inboxapp.com/";
 	}
