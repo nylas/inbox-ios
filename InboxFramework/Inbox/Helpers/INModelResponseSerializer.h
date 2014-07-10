@@ -15,7 +15,7 @@
  listening on these models.
 */
 
-#import <AFNetworking/AFNetworking.h>
+@class AFJSONResponseSerializer;
 
 @interface INModelResponseSerializer : AFJSONResponseSerializer
 

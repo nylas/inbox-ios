@@ -32,9 +32,9 @@
 	NSAssert([attachment localDataPath], @"INUploadAttachmentChange asked to upload an attachment with no local data.");
 	
     NSString * path = [NSString stringWithFormat:@"/n/%@/files", [attachment namespaceID]];
-    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
 
-	return [[[INAPIManager shared] requestSerializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+	return [[[[INAPIManager shared] AF] requestSerializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 		NSURL * fileURL = [NSURL fileURLWithPath: [attachment localDataPath]];
 		[formData appendPartWithFileURL:fileURL name:@"file" fileName:[attachment filename] mimeType:[attachment mimetype] error:NULL];
 	} error:NULL];

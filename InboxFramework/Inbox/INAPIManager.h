@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFNetworking.h>
-#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+
+@class AFHTTPRequestOperationManager;
 
 static NSString * INNamespacesChangedNotification = @"INNamespacesChangedNotification";
 static NSString * INAuthenticationChangedNotification = @"INAuthenticationChangedNotification";
@@ -20,6 +20,8 @@ static NSString * INKeychainAPITokenKey = @"inbox-api-token";
 
 @class INAPITask;
 @class INModelObject;
+@class AFHTTPRequestSerializer;
+@class AFHTTPResponseSerializer;
 @protocol INSyncEngine;
 
 typedef void (^ ResultsBlock)(NSArray * objects);
@@ -41,7 +43,7 @@ typedef void (^ VoidBlock)();
  The INAPIManager queues these operations and ensures that they are eventually performed
  on the server, even though an internet connection might not be immediately available.
 */
-@interface INAPIManager : AFHTTPRequestOperationManager
+@interface INAPIManager : NSObject
 {
 	NSArray * _namespaces;
 	NSString * _appID;
@@ -54,7 +56,7 @@ typedef void (^ VoidBlock)();
 }
 
 @property (nonatomic, assign) BOOL taskQueueSuspended;
-
+@property (nonatomic, strong) AFHTTPRequestOperationManager * AF;
 @property (nonatomic, strong) NSObject<INSyncEngine> * syncEngine;
 
 
@@ -93,6 +95,11 @@ processing tasks immediately. Note that the queue will be suspended again if a q
 task fails.
 */
 - (void)setTaskQueueSuspended:(BOOL)suspended;
+
+
+#pragma Convenience Serializers
+
+- (AFHTTPResponseSerializer*)responseSerializerForClass:(Class)klass;
 
 
 #pragma Authentication

@@ -5,6 +5,17 @@
 //
 
 #ifdef __OBJC__
+
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFNetworking.h>
+
+#import "INDependencyNamespacing.h"
+
+#import "AFNetworking.h"
+
+#import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
+#import "FMResultSet.h"
+#import "FMResultSet+INModelQueries.h"
+#import "FMDatabaseAdditions.h"
+
 #endif

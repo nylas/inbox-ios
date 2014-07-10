@@ -10,6 +10,7 @@
 #import "INDatabaseManager.h"
 
 @class INNamespace;
+@class AFHTTPRequestOperation;
 
 typedef enum : NSUInteger {
 	INModelProviderCacheOnly,

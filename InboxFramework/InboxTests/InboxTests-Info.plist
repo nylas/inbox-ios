@@ -18,5 +18,7 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>INAPIPath</key>
+	<string>http://localhost:5555/</string>
 </dict>
 </plist>

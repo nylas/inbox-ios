@@ -10,6 +10,7 @@
 #import "INModelObject.h"
 
 @class INMessage;
+@class AFHTTPRequestOperation;
 
 static NSString * INTaskProgressNotification = @"INTaskProgressNotification";
 

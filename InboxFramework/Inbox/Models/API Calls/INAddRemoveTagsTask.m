@@ -9,7 +9,6 @@
 #import "INAddRemoveTagsTask.h"
 #import "INThread.h"
 #import "INMessage.h"
-#import "INDatabaseManager.h"
 
 @implementation INAddRemoveTagsTask
 
@@ -42,15 +41,15 @@
     NSAssert([self thread], @"INSaveDraftChange asked to buildRequest with no access to a thread model!");
 	NSAssert([[self thread] namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
 
-	NSError * error = nil;
+    NSError * error = nil;
     NSString * path = [[self thread] resourceAPIPath];
-    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     [params setObject:[self tagIDsToAdd] forKey:@"add_tags"];
     [params setObject:[self tagIDsToRemove] forKey:@"remove_tags"];
     
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
 }
 
 - (void)applyLocally

@@ -187,7 +187,7 @@
 
 - (void)reload:(ErrorBlock)callback
 {
-	[[INAPIManager shared] GET:[self resourceAPIPath] parameters:@{} success:^(AFHTTPRequestOperation * operation, id responseObject) {
+	[[INAPIManager shared].AF GET:[self resourceAPIPath] parameters:@{} success:^(AFHTTPRequestOperation * operation, id responseObject) {
 		[self updateWithResourceDictionary:responseObject];
 		[[INDatabaseManager shared] persistModel:self];
 		if (callback)

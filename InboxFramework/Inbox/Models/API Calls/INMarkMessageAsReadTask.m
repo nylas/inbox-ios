@@ -16,14 +16,14 @@
     NSAssert([self model], @"INMarkMessageAsReadTask asked to buildRequest with no access to a message model!");
 	NSAssert([[self model] namespaceID], @"INMarkMessageAsReadTask asked to buildRequest with no namespace!");
     
-	NSError * error = nil;
+    NSError * error = nil;
     NSString * path = [self.model resourceAPIPath];
-    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     [params setObject:@(NO) forKey:@"unread"];
     
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"PUT" URLString:url parameters:params error:&error];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"PUT" URLString:url parameters:params error:&error];
 }
 
 - (void)applyLocally

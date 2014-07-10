@@ -1,0 +1,12 @@
+[submodule "InboxFramework/Submodules/AFNetworking"]
+	path = InboxFramework/Submodules/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "InboxFramework/Submodules/FMDB"]
+	path = InboxFramework/Submodules/FMDB
+	url = https://github.com/ccgus/fmdb.git
+[submodule "InboxFramework/Submodules/Kiwi"]
+	path = InboxFramework/Submodules/Kiwi
+	url = https://github.com/kiwi-bdd/Kiwi.git
+[submodule "InboxFramework/Submodules/PDKeychainBindingsController"]
+	path = InboxFramework/Submodules/PDKeychainBindingsController
+	url = https://github.com/carlbrown/PDKeychainBindingsController.git

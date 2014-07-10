@@ -53,7 +53,7 @@
 {
     NSAssert(self.model, @"INSaveDraftChange asked to buildRequest with no model!");
 	NSAssert([self.model namespaceID], @"INSaveDraftChange asked to buildRequest with no namespace!");
-	
+    
     NSError * error = nil;
     NSString * path = nil;
     
@@ -62,13 +62,13 @@
     else
         path = [NSString stringWithFormat:@"/n/%@/drafts/%@", [self.model namespaceID], [self.model ID]];
 
-    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     NSMutableDictionary * params = [[self.model resourceDictionary] mutableCopy];
     [params removeObjectForKey: @"id"];
     INThread * thread = [(INDraft*)self.model thread];
     if (thread) [params setObject:[thread ID] forKey:@"replying_to_thread"];
     
-    return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
+    return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation withResponse:(id)responseObject

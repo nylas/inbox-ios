@@ -8,8 +8,6 @@
 
 #import "INDatabaseManager.h"
 #import "INPredicateToSQLConverter.h"
-#import "FMResultSet+INModelQueries.h"
-#import "FMDatabaseAdditions.h"
 #import "NSObject+Properties.h"
 #import "INModelObject+Uniquing.h"
 

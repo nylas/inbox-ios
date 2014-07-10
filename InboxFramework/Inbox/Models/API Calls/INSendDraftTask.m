@@ -37,9 +37,9 @@
 	
     NSError * error = nil;
     NSString * sendPath = [NSString stringWithFormat:@"/n/%@/send", [self.model namespaceID]];
-    NSString * url = [[NSURL URLWithString:sendPath relativeToURL:[INAPIManager shared].baseURL] absoluteString];
+    NSString * url = [[NSURL URLWithString:sendPath relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:@{@"draft_id": [self.model ID]} error:&error];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:@{@"draft_id": [self.model ID]} error:&error];
 }
 
 - (NSArray*)dependenciesIn:(NSArray*)others

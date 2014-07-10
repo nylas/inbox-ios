@@ -11,10 +11,10 @@
 #import "INSyncEngine.h"
 #import "INNamespace.h"
 #import "INModelResponseSerializer.h"
-#import "INDatabaseManager.h"
 #import "FMResultSet+INModelQueries.h"
-#import "INPDKeychainBindings.h"
+#import "PDKeychainBindings.h"
 #import "NSError+InboxErrors.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 #define OPERATIONS_FILE [@"~/Documents/operations.plist" stringByExpandingTildeInPath]
 
@@ -42,21 +42,23 @@ static void initialize_INAPIManager() {
 	NSDictionary * info = [[NSBundle mainBundle] infoDictionary];
 	NSString * api = info[INAPIPathInfoDictionaryKey];
 
-	NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5555/'");
+    NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5555/'");
     if (!api) {
         api = @"http://api.inboxapp.com/";
 	}
 
-	self = [super initWithBaseURL: [NSURL URLWithString: api]];
+    self = [super init];
 	if (self) {
-        [[self operationQueue] setMaxConcurrentOperationCount: 5];
-		[self setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments]];
-		[self setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
+        _AF = [[AFHTTPRequestOperationManager alloc] initWithBaseURL: [NSURL URLWithString: api]];
+        
+        [[_AF operationQueue] setMaxConcurrentOperationCount: 5];
+		[_AF setResponseSerializer:[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments]];
+		[_AF setRequestSerializer:[AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted]];
 
         AFSecurityPolicy * policy = [AFSecurityPolicy defaultPolicy];
         [policy setAllowInvalidCertificates: YES];
-        [self setSecurityPolicy: policy];
-        [self.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
+        [_AF setSecurityPolicy: policy];
+        [_AF.requestSerializer setCachePolicy: NSURLRequestReloadRevalidatingCacheData];
     
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
@@ -65,8 +67,8 @@ static void initialize_INAPIManager() {
 
 		// Start listening for reachability changes
         typeof(self) __weak __self = self;
-		self.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [self.baseURL host]];
-		[self.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+		_AF.reachabilityManager = [AFNetworkReachabilityManager managerForDomain: [_AF.baseURL host]];
+		[_AF.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
 			BOOL hasConnection = (status == AFNetworkReachabilityStatusReachableViaWiFi) || (status == AFNetworkReachabilityStatusReachableViaWWAN);
 			BOOL hasSuspended = __self.taskQueueSuspended;
             
@@ -75,7 +77,7 @@ static void initialize_INAPIManager() {
 			else if (!hasConnection && !hasSuspended)
 				[__self setTaskQueueSuspended: YES];
 		}];
-		[self.reachabilityManager startMonitoring];
+		[_AF.reachabilityManager startMonitoring];
 
 
 		// Make sure the application has an Inbox App ID in it's info.plist
@@ -85,8 +87,8 @@ static void initialize_INAPIManager() {
 		// NSAssert(_appID, @"Your application's Info.plist should include, INAppID, your Inbox App ID. If you don't have an app ID, grab one from developer.inboxapp.com");
 
 		// Reload our API token and refresh the namespaces list
-        NSString * token = [[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
-		[self.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
+        NSString * token = [[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
+		[_AF.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
         if (token) {
             [self fetchNamespaces: NULL];
         }
@@ -245,12 +247,19 @@ static void initialize_INAPIManager() {
     return YES;
 }
 
+#pragma Convenience Serializers
+
+- (AFHTTPResponseSerializer*)responseSerializerForClass:(Class)klass
+{
+    return [[INModelResponseSerializer alloc] initWithModelClass: klass];
+}
+
 
 #pragma Authentication
 
 - (BOOL)isAuthenticated
 {
-    return ([[INPDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey] != nil);
+    return ([[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey] != nil);
 }
 
 - (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
@@ -271,7 +280,7 @@ static void initialize_INAPIManager() {
 	NSAssert(found, @"Your application's Info.plist should register your app for the '%@' URL scheme to handle Inbox authentication correctly.", _appURLScheme);
 
 	// make sure we can reach the server before we try to open the auth page in safari
-	if ([[self reachabilityManager] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+	if ([[_AF reachabilityManager] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
 		NSError * err = [NSError inboxErrorWithDescription: @"Sorry, you need to be connected to the internet to connect your account."];
 		[self handleAuthenticationCompleted: NO withError: err];
 		return;
@@ -279,7 +288,7 @@ static void initialize_INAPIManager() {
 	
 	// try to visit the auth URL in Safari
     NSString * uri = [NSString stringWithFormat: @"%@://app/auth-response", _appURLScheme];
-	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", [self.baseURL absoluteString], _appID, address, uri];
+	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", [_AF.baseURL absoluteString], _appID, address, uri];
 
 	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
 		_authenticationWaitingForInboundURL = YES;
@@ -296,13 +305,13 @@ static void initialize_INAPIManager() {
 		NSLog(@"A call to authenticateWithAuthToken: is replacing an authentication completion block that has not yet been fired. The old authentication block will never be called!");
 	_authenticationCompletionBlock = completionBlock;
 	
-	[[self requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
+	[[_AF requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
     [self fetchNamespaces:^(BOOL success, NSError * error) {
         if (success) {
-            [[INPDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
+            [[PDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
             [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
 		} else {
-            [[self requestSerializer] clearAuthorizationHeader];
+            [[_AF requestSerializer] clearAuthorizationHeader];
         }
 
 		[self handleAuthenticationCompleted: success withError: error];
@@ -313,8 +322,8 @@ static void initialize_INAPIManager() {
 {
 	[_taskQueue removeAllObjects];
     [_syncEngine resetSyncState];
-    [[INPDKeychainBindings sharedKeychainBindings] removeObjectForKey: INKeychainAPITokenKey];
-    [[self requestSerializer] clearAuthorizationHeader];
+    [[PDKeychainBindings sharedKeychainBindings] removeObjectForKey: INKeychainAPITokenKey];
+    [[_AF requestSerializer] clearAuthorizationHeader];
     [[INDatabaseManager shared] resetDatabase];
     _namespaces = nil;
     
@@ -383,7 +392,7 @@ static void initialize_INAPIManager() {
 - (void)fetchNamespaces:(ErrorBlock)completionBlock
 {
     NSLog(@"Fetching Namespaces (/n/)");
-    AFHTTPRequestOperation * operation = [self GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
+    AFHTTPRequestOperation * operation = [_AF GET:@"/n/" parameters:nil success:^(AFHTTPRequestOperation *operation, id namespaces) {
         // broadcast a notification about this change
         _namespaces = namespaces;
         

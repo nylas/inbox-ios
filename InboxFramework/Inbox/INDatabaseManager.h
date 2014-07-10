@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FMDB/FMDatabase.h>
-#import <FMDB/FMDatabaseQueue.h>
-#import <FMDB/FMResultSet.h>
 #import "INModelObject.h"
 
+@class FMDatabaseQueue;
 
 /** Implement the INDatabaseObserver protocol and call [INDatabaseManager registerCacheObserver:]
 to receive updates when models are persisted and removed from the local SQLite cache.

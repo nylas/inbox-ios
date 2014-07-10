@@ -39,8 +39,8 @@
 	NSAssert([self.model namespaceID], @"INDeleteDraftChange asked to buildRequest with no namespace!");
 	
     NSError * error = nil;
-    NSString * url = [[NSURL URLWithString:[self.model resourceAPIPath] relativeToURL:[INAPIManager shared].baseURL] absoluteString];
-	return [[[INAPIManager shared] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:nil error:&error];
+    NSString * url = [[NSURL URLWithString:[self.model resourceAPIPath] relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"DELETE" URLString:url parameters:nil error:&error];
 }
 
 - (void)applyLocally

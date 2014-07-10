@@ -105,7 +105,7 @@
 
 - (void)applyRemotelyWithCallback:(CallbackBlock)callback
 {
-    AFHTTPRequestOperation * op = [[INAPIManager shared] HTTPRequestOperationWithRequest:[self buildAPIRequest] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperation * op = [[[INAPIManager shared] AF] HTTPRequestOperationWithRequest:[self buildAPIRequest] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self handleSuccess: operation withResponse: responseObject];
         [self setState: INAPITaskStateFinished];
         callback(self, YES);
@@ -143,7 +143,7 @@
 
 	[self setPercentComplete: 0.01];
     [self setState: INAPITaskStateInProgress];
-    [[[INAPIManager shared] operationQueue] addOperation: op];
+    [[[[INAPIManager shared] AF] operationQueue] addOperation: op];
 }
 
 - (void)rollbackLocally

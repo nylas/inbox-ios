@@ -181,7 +181,7 @@
 	if (_namespaceID)
 		path = [NSString stringWithFormat:@"/n/%@/%@", _namespaceID, path];
 
-	_fetchOperation = [[INAPIManager shared] GET:path parameters:params success:^(AFHTTPRequestOperation * operation, NSArray * models) {
+	_fetchOperation = [[INAPIManager shared].AF GET:path parameters:params success:^(AFHTTPRequestOperation * operation, NSArray * models) {
 		NSLog(@"GET %@ (%@) RETRIEVED %lu %@s", path, [params description], (unsigned long)[models count], NSStringFromClass(_modelClass));
 
 		// The response serializer automatically inflates the returned objects and

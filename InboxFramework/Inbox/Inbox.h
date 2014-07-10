@@ -22,6 +22,7 @@ FOUNDATION_EXPORT const unsigned char InboxVersionString[];
  header file in Xcode and make sure it's visibility is "Public" in the framework
  build target.
 */
+
 #import "INAPIManager.h"
 #import "INDatabaseManager.h"
 #import "INMessageProvider.h"
@@ -39,7 +40,6 @@ FOUNDATION_EXPORT const unsigned char InboxVersionString[];
 #import "INSaveDraftTask.h"
 #import "INDeleteDraftTask.h"
 #import "INSyncEngine.h"
-#import "INModelResponseSerializer.h"
 #import "INFile.h"
 #import "INDraft.h"
 #import "NSError+InboxErrors.h"

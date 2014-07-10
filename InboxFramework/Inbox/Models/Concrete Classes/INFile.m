@@ -82,7 +82,7 @@
 - (void)getDataWithCallback:(AttachmentDownloadBlock)callback
 {
 	NSString * path = [NSString stringWithFormat:@"/n/%@/files/%@/download", self.namespaceID, self.ID];
-	AFHTTPRequestOperation * op = [[INAPIManager shared] GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	AFHTTPRequestOperation * op = [[INAPIManager shared].AF GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		callback(nil, responseObject);
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		callback(error, nil);

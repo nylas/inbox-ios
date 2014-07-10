@@ -153,25 +153,25 @@ describe(@"managerDidPersistModels:", ^{
 		[[exception shouldEventually] beNonNil];
 	});
 
-	context(@"if the delegate responds to provider:(INModelProvider*)provider dataAltered:", ^{
+	context(@"if the delegate responds to provider:dataAltered:", ^{
 		it(@"should send changes", ^{
 			id delegateMock = [KWMock mockForProtocol: @protocol(INModelProviderDelegate)];
-			[[delegateMock should] receive:@selector(provider:(INModelProvider*)provider dataAltered:)];
+			[[delegateMock should] receive:@selector(provider:dataAltered:)];
 			[provider setDelegate: delegateMock];
 			[provider managerDidPersistModels: savedItems];
 		});
 	});
 
-	context(@"if the delegate only responds to providerDataChanged:(INModelProvider*)provider", ^{
+	context(@"if the delegate only responds to providerDataChanged:", ^{
 		it(@"should call that instead", ^{
 			// FAILING:
 			// Filed bug report: https://github.com/allending/Kiwi/issues/511
 			
 			id delegateMock = [KWMock mock];
-			[delegateMock stub: @selector(providerDataChanged:(INModelProvider*)provider)];
-			BOOL responds = [delegateMock respondsToSelector: @selector(providerDataChanged:(INModelProvider*)provider)];
+			[delegateMock stub: @selector(providerDataChanged:)];
+			BOOL responds = [delegateMock respondsToSelector: @selector(providerDataChanged:)];
 			
-			[[delegateMock should] receive:@selector(providerDataChanged:(INModelProvider*)provider)];
+			[[delegateMock should] receive:@selector(providerDataChanged:)];
 			[provider setDelegate: delegateMock];
 			[provider managerDidPersistModels: savedItems];
 		});
@@ -203,10 +203,10 @@ describe(@"managerDidUnpersistModels:", ^{
 		[[exception shouldEventually] beNonNil];
 	});
 	
-	context(@"if the delegate responds to provider:(INModelProvider*)provider dataAltered:", ^{
+	context(@"if the delegate responds to provider:dataAltered:", ^{
 		it(@"should send a correct set of changes", ^{
 			id delegateMock = [KWMock mockForProtocol: @protocol(INModelProviderDelegate)];
-			KWCaptureSpy * changesSpy = [delegateMock captureArgument:@selector(provider:(INModelProvider*)provider dataAltered:) atIndex:0];
+			KWCaptureSpy * changesSpy = [delegateMock captureArgument:@selector(provider:dataAltered:) atIndex:0];
 			[provider setDelegate: delegateMock];
 			[provider managerDidUnpersistModels: twoItems];
 
@@ -228,15 +228,15 @@ describe(@"managerDidUnpersistModels:", ^{
 				[twoItemsNotInSet addObject: [[INMessage alloc] init]];
 				
 			id delegateMock = [KWMock mockForProtocol: @protocol(INModelProviderDelegate)];
-			[[delegateMock shouldNot] receive: @selector(provider:(INModelProvider*)provider dataAltered:)];
+			[[delegateMock shouldNot] receive: @selector(provider:dataAltered:)];
 			[provider managerDidUnpersistModels: twoItemsNotInSet];
 		});
 	});
 	
-	context(@"if the delegate only responds to providerDataChanged:(INModelProvider*)provider", ^{
-		it(@"should call providerDataChanged:(INModelProvider*)provider", ^{
+	context(@"if the delegate only responds to providerDataChanged:", ^{
+		it(@"should call providerDataChanged:", ^{
 			id delegateMock = [KWMock mock];
-			[delegateMock expect: @selector(providerDataChanged:(INModelProvider*)provider)];
+			[delegateMock expect: @selector(providerDataChanged:)];
 
 			[provider setDelegate: delegateMock];
 			[provider managerDidUnpersistModels: twoItems];
