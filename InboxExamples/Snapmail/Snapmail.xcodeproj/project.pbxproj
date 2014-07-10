@@ -7,44 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4324ED6C194F769F00C24E88 /* INContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4324ED6A194F769F00C24E88 /* INContactsViewController.m */; };
-		4324ED6D194F769F00C24E88 /* INContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4324ED6B194F769F00C24E88 /* INContactsViewController.xib */; };
+		43032FC6196627D8008A8A24 /* INContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43032FC4196627D8008A8A24 /* INContactsViewController.m */; };
+		43032FC7196627D8008A8A24 /* INContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43032FC5196627D8008A8A24 /* INContactsViewController.xib */; };
 		43D13ED4194F4EE900103097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13ED3194F4EE900103097 /* Foundation.framework */; };
 		43D13ED6194F4EE900103097 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13ED5194F4EE900103097 /* CoreGraphics.framework */; };
 		43D13ED8194F4EE900103097 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13ED7194F4EE900103097 /* UIKit.framework */; };
 		43D13EDE194F4EE900103097 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D13EDC194F4EE900103097 /* InfoPlist.strings */; };
 		43D13EE0194F4EE900103097 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EDF194F4EE900103097 /* main.m */; };
 		43D13EE4194F4EE900103097 /* INAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EE3194F4EE900103097 /* INAppDelegate.m */; };
-		43D13EED194F4EE900103097 /* INViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EEC194F4EE900103097 /* INViewController.m */; };
+		43D13EED194F4EE900103097 /* INHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EEC194F4EE900103097 /* INHomeViewController.m */; };
 		43D13EEF194F4EE900103097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43D13EEE194F4EE900103097 /* Images.xcassets */; };
-		43D13EF6194F4EE900103097 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13EF5194F4EE900103097 /* XCTest.framework */; };
-		43D13EF7194F4EE900103097 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13ED3194F4EE900103097 /* Foundation.framework */; };
-		43D13EF8194F4EE900103097 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13ED7194F4EE900103097 /* UIKit.framework */; };
-		43D13F00194F4EE900103097 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D13EFE194F4EE900103097 /* InfoPlist.strings */; };
-		43D13F02194F4EE900103097 /* SnapmailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13F01194F4EE900103097 /* SnapmailTests.m */; };
 		43D13F0C194F50E700103097 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13F0B194F50E700103097 /* Inbox.framework */; };
-		43D13F0E194F589200103097 /* INViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F0D194F589200103097 /* INViewController.xib */; };
+		43D13F0E194F589200103097 /* INHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F0D194F589200103097 /* INHomeViewController.xib */; };
 		43D13F12194F59EF00103097 /* INSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13F10194F59EF00103097 /* INSnapViewController.m */; };
 		43D13F13194F59EF00103097 /* INSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F11194F59EF00103097 /* INSnapViewController.xib */; };
 		43D13F17194F5FDD00103097 /* INCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13F15194F5FDD00103097 /* INCaptureViewController.m */; };
 		43D13F18194F5FDD00103097 /* INCaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F16194F5FDD00103097 /* INCaptureViewController.xib */; };
-		AEDCEF4ED73140FABC7694E2 /* libPods-Snapmail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE685086EA4E8EA4BF0048 /* libPods-Snapmail.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		43D13EF9194F4EE900103097 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 43D13EC8194F4EE900103097 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43D13ECF194F4EE900103097;
-			remoteInfo = Snapmail;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		4324ED69194F769F00C24E88 /* INContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INContactsViewController.h; path = ../../../BigSur/BigSur/Controllers/INContactsViewController.h; sourceTree = "<group>"; };
-		4324ED6A194F769F00C24E88 /* INContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INContactsViewController.m; path = ../../../BigSur/BigSur/Controllers/INContactsViewController.m; sourceTree = "<group>"; };
-		4324ED6B194F769F00C24E88 /* INContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = INContactsViewController.xib; path = ../../../BigSur/BigSur/Controllers/INContactsViewController.xib; sourceTree = "<group>"; };
+		43032FC3196627D8008A8A24 /* INContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContactsViewController.h; sourceTree = "<group>"; };
+		43032FC4196627D8008A8A24 /* INContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContactsViewController.m; sourceTree = "<group>"; };
+		43032FC5196627D8008A8A24 /* INContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INContactsViewController.xib; sourceTree = "<group>"; };
+		432AA721196DC71D009976E8 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../InboxFramework/Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		43D13ED0194F4EE900103097 /* Snapmail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapmail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D13ED3194F4EE900103097 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43D13ED5194F4EE900103097 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,23 +40,18 @@
 		43D13EE1194F4EE900103097 /* Snapmail-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snapmail-Prefix.pch"; sourceTree = "<group>"; };
 		43D13EE2194F4EE900103097 /* INAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INAppDelegate.h; sourceTree = "<group>"; };
 		43D13EE3194F4EE900103097 /* INAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INAppDelegate.m; sourceTree = "<group>"; };
-		43D13EEB194F4EE900103097 /* INViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INViewController.h; sourceTree = "<group>"; };
-		43D13EEC194F4EE900103097 /* INViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INViewController.m; sourceTree = "<group>"; };
+		43D13EEB194F4EE900103097 /* INHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INHomeViewController.h; sourceTree = "<group>"; };
+		43D13EEC194F4EE900103097 /* INHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INHomeViewController.m; sourceTree = "<group>"; };
 		43D13EEE194F4EE900103097 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		43D13EF4194F4EE900103097 /* SnapmailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapmailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D13EF5194F4EE900103097 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		43D13EFD194F4EE900103097 /* SnapmailTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SnapmailTests-Info.plist"; sourceTree = "<group>"; };
-		43D13EFF194F4EE900103097 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		43D13F01194F4EE900103097 /* SnapmailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapmailTests.m; sourceTree = "<group>"; };
 		43D13F0B194F50E700103097 /* Inbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Inbox.framework; path = "../iOS/BigSur/InboxFramework/build/Debug-iphoneos/Inbox.framework"; sourceTree = "<group>"; };
-		43D13F0D194F589200103097 /* INViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INViewController.xib; sourceTree = "<group>"; };
+		43D13F0D194F589200103097 /* INHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INHomeViewController.xib; sourceTree = "<group>"; };
 		43D13F0F194F59EF00103097 /* INSnapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSnapViewController.h; sourceTree = "<group>"; };
 		43D13F10194F59EF00103097 /* INSnapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSnapViewController.m; sourceTree = "<group>"; };
 		43D13F11194F59EF00103097 /* INSnapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INSnapViewController.xib; sourceTree = "<group>"; };
 		43D13F14194F5FDD00103097 /* INCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INCaptureViewController.h; sourceTree = "<group>"; };
 		43D13F15194F5FDD00103097 /* INCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INCaptureViewController.m; sourceTree = "<group>"; };
 		43D13F16194F5FDD00103097 /* INCaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INCaptureViewController.xib; sourceTree = "<group>"; };
-		8D96B618C1804CF2822F5FD7 /* Pods-Snapmail.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snapmail.xcconfig"; path = "Pods/Pods-Snapmail.xcconfig"; sourceTree = "<group>"; };
 		FCCE685086EA4E8EA4BF0048 /* libPods-Snapmail.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Snapmail.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -84,17 +64,6 @@
 				43D13ED6194F4EE900103097 /* CoreGraphics.framework in Frameworks */,
 				43D13ED8194F4EE900103097 /* UIKit.framework in Frameworks */,
 				43D13ED4194F4EE900103097 /* Foundation.framework in Frameworks */,
-				AEDCEF4ED73140FABC7694E2 /* libPods-Snapmail.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43D13EF1194F4EE900103097 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43D13EF6194F4EE900103097 /* XCTest.framework in Frameworks */,
-				43D13EF8194F4EE900103097 /* UIKit.framework in Frameworks */,
-				43D13EF7194F4EE900103097 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,10 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				43D13ED9194F4EE900103097 /* Snapmail */,
-				43D13EFB194F4EE900103097 /* SnapmailTests */,
 				43D13ED2194F4EE900103097 /* Frameworks */,
 				43D13ED1194F4EE900103097 /* Products */,
-				8D96B618C1804CF2822F5FD7 /* Pods-Snapmail.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				43D13ED0194F4EE900103097 /* Snapmail.app */,
-				43D13EF4194F4EE900103097 /* SnapmailTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,6 +90,7 @@
 		43D13ED2194F4EE900103097 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				432AA721196DC71D009976E8 /* libPods.a */,
 				43D13F0B194F50E700103097 /* Inbox.framework */,
 				43D13ED3194F4EE900103097 /* Foundation.framework */,
 				43D13ED5194F4EE900103097 /* CoreGraphics.framework */,
@@ -139,12 +106,12 @@
 			children = (
 				43D13EE2194F4EE900103097 /* INAppDelegate.h */,
 				43D13EE3194F4EE900103097 /* INAppDelegate.m */,
-				43D13EEB194F4EE900103097 /* INViewController.h */,
-				43D13EEC194F4EE900103097 /* INViewController.m */,
-				43D13F0D194F589200103097 /* INViewController.xib */,
-				4324ED69194F769F00C24E88 /* INContactsViewController.h */,
-				4324ED6A194F769F00C24E88 /* INContactsViewController.m */,
-				4324ED6B194F769F00C24E88 /* INContactsViewController.xib */,
+				43D13EEB194F4EE900103097 /* INHomeViewController.h */,
+				43D13EEC194F4EE900103097 /* INHomeViewController.m */,
+				43D13F0D194F589200103097 /* INHomeViewController.xib */,
+				43032FC3196627D8008A8A24 /* INContactsViewController.h */,
+				43032FC4196627D8008A8A24 /* INContactsViewController.m */,
+				43032FC5196627D8008A8A24 /* INContactsViewController.xib */,
 				43D13F14194F5FDD00103097 /* INCaptureViewController.h */,
 				43D13F15194F5FDD00103097 /* INCaptureViewController.m */,
 				43D13F16194F5FDD00103097 /* INCaptureViewController.xib */,
@@ -168,24 +135,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		43D13EFB194F4EE900103097 /* SnapmailTests */ = {
-			isa = PBXGroup;
-			children = (
-				43D13F01194F4EE900103097 /* SnapmailTests.m */,
-				43D13EFC194F4EE900103097 /* Supporting Files */,
-			);
-			path = SnapmailTests;
-			sourceTree = "<group>";
-		};
-		43D13EFC194F4EE900103097 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				43D13EFD194F4EE900103097 /* SnapmailTests-Info.plist */,
-				43D13EFE194F4EE900103097 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,11 +142,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43D13F05194F4EE900103097 /* Build configuration list for PBXNativeTarget "Snapmail" */;
 			buildPhases = (
-				B51EAACC5C424CF19F3D9079 /* Check Pods Manifest.lock */,
 				43D13ECC194F4EE900103097 /* Sources */,
 				43D13ECD194F4EE900103097 /* Frameworks */,
 				43D13ECE194F4EE900103097 /* Resources */,
-				44D1FB482FB64C6E966DBF6C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,24 +155,6 @@
 			productReference = 43D13ED0194F4EE900103097 /* Snapmail.app */;
 			productType = "com.apple.product-type.application";
 		};
-		43D13EF3194F4EE900103097 /* SnapmailTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43D13F08194F4EE900103097 /* Build configuration list for PBXNativeTarget "SnapmailTests" */;
-			buildPhases = (
-				43D13EF0194F4EE900103097 /* Sources */,
-				43D13EF1194F4EE900103097 /* Frameworks */,
-				43D13EF2194F4EE900103097 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				43D13EFA194F4EE900103097 /* PBXTargetDependency */,
-			);
-			name = SnapmailTests;
-			productName = SnapmailTests;
-			productReference = 43D13EF4194F4EE900103097 /* SnapmailTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,11 +164,6 @@
 				CLASSPREFIX = IN;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Foundry 376, LLC";
-				TargetAttributes = {
-					43D13EF3194F4EE900103097 = {
-						TestTargetID = 43D13ECF194F4EE900103097;
-					};
-				};
 			};
 			buildConfigurationList = 43D13ECB194F4EE900103097 /* Build configuration list for PBXProject "Snapmail" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -255,7 +179,6 @@
 			projectRoot = "";
 			targets = (
 				43D13ECF194F4EE900103097 /* Snapmail */,
-				43D13EF3194F4EE900103097 /* SnapmailTests */,
 			);
 		};
 /* End PBXProject section */
@@ -265,57 +188,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43032FC7196627D8008A8A24 /* INContactsViewController.xib in Resources */,
 				43D13EEF194F4EE900103097 /* Images.xcassets in Resources */,
 				43D13F18194F5FDD00103097 /* INCaptureViewController.xib in Resources */,
-				4324ED6D194F769F00C24E88 /* INContactsViewController.xib in Resources */,
 				43D13F13194F59EF00103097 /* INSnapViewController.xib in Resources */,
 				43D13EDE194F4EE900103097 /* InfoPlist.strings in Resources */,
-				43D13F0E194F589200103097 /* INViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43D13EF2194F4EE900103097 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43D13F00194F4EE900103097 /* InfoPlist.strings in Resources */,
+				43D13F0E194F589200103097 /* INHomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		44D1FB482FB64C6E966DBF6C /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Snapmail-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B51EAACC5C424CF19F3D9079 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		43D13ECC194F4EE900103097 /* Sources */ = {
@@ -324,44 +206,20 @@
 			files = (
 				43D13EE0194F4EE900103097 /* main.m in Sources */,
 				43D13F12194F59EF00103097 /* INSnapViewController.m in Sources */,
-				4324ED6C194F769F00C24E88 /* INContactsViewController.m in Sources */,
+				43032FC6196627D8008A8A24 /* INContactsViewController.m in Sources */,
 				43D13EE4194F4EE900103097 /* INAppDelegate.m in Sources */,
 				43D13F17194F5FDD00103097 /* INCaptureViewController.m in Sources */,
-				43D13EED194F4EE900103097 /* INViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43D13EF0194F4EE900103097 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43D13F02194F4EE900103097 /* SnapmailTests.m in Sources */,
+				43D13EED194F4EE900103097 /* INHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		43D13EFA194F4EE900103097 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43D13ECF194F4EE900103097 /* Snapmail */;
-			targetProxy = 43D13EF9194F4EE900103097 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		43D13EDC194F4EE900103097 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				43D13EDD194F4EE900103097 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		43D13EFE194F4EE900103097 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43D13EFF194F4EE900103097 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -443,11 +301,9 @@
 		};
 		43D13F06194F4EE900103097 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D96B618C1804CF2822F5FD7 /* Pods-Snapmail.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapmail/Snapmail-Prefix.pch";
 				INFOPLIST_FILE = "Snapmail/Snapmail-Info.plist";
@@ -458,56 +314,14 @@
 		};
 		43D13F07194F4EE900103097 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D96B618C1804CF2822F5FD7 /* Pods-Snapmail.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapmail/Snapmail-Prefix.pch";
 				INFOPLIST_FILE = "Snapmail/Snapmail-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		43D13F09194F4EE900103097 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Snapmail.app/Snapmail";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snapmail/Snapmail-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SnapmailTests/SnapmailTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		43D13F0A194F4EE900103097 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Snapmail.app/Snapmail";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Snapmail/Snapmail-Prefix.pch";
-				INFOPLIST_FILE = "SnapmailTests/SnapmailTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -528,15 +342,6 @@
 			buildConfigurations = (
 				43D13F06194F4EE900103097 /* Debug */,
 				43D13F07194F4EE900103097 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		43D13F08194F4EE900103097 /* Build configuration list for PBXNativeTarget "SnapmailTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43D13F09194F4EE900103097 /* Debug */,
-				43D13F0A194F4EE900103097 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

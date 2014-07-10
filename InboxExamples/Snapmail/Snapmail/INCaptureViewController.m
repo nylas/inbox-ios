@@ -3,7 +3,7 @@
 //  Snapmail
 //
 //  Created by Ben Gotow on 6/16/14.
-//  Copyright (c) 2014 Foundry 376, LLC. All rights reserved.
+//  Copyright (c) 2014 InboxApp, Inc. All rights reserved.
 //
 
 #import "INCaptureViewController.h"
@@ -58,8 +58,8 @@
     
 	if (!_thread) {
         INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
-		INContactsViewController * contacts = [[INContactsViewController alloc] initForSelectingContactInNamespace:namespace withCallback:^(INContact *object) {
-            [self sendImage: img to:@[object]];
+		INContactsViewController * contacts = [[INContactsViewController alloc] initForSelectingContactInNamespace:namespace withCallback:^(NSArray * contacts) {
+            [self sendImage: img to: contacts];
 			[picker dismissViewControllerAnimated:NO completion:NULL];
 			[picker dismissViewControllerAnimated:NO completion:NULL];
 		}];

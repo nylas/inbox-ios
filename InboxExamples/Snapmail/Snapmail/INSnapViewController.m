@@ -3,11 +3,11 @@
 //  Snapmail
 //
 //  Created by Ben Gotow on 6/16/14.
-//  Copyright (c) 2014 Foundry 376, LLC. All rights reserved.
+//  Copyright (c) 2014 InboxApp, Inc. All rights reserved.
 //
 
 #import "INSnapViewController.h"
-#import "INViewController.h"
+#import "INHomeViewController.h"
 
 @implementation INSnapViewController
 
@@ -49,7 +49,7 @@
     
 	INFile * file = [[message attachments] firstObject];
 	if (file == nil)
-		[(INViewController*)self.parentViewController dismissSnapViewController];
+		[(INHomeViewController*)self.parentViewController dismissSnapViewController];
 		
 	[file getDataWithCallback:^(NSError *error, NSData *data) {
 		[_spinner stopAnimating];

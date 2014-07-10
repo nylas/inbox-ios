@@ -3,7 +3,7 @@
 //  Snapmail
 //
 //  Created by Ben Gotow on 6/16/14.
-//  Copyright (c) 2014 Foundry 376, LLC. All rights reserved.
+//  Copyright (c) 2014 InboxApp, Inc. All rights reserved.
 //
 
 #import "INAppDelegate.h"
@@ -12,7 +12,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	_viewController = [[INViewController alloc] init];
+	_viewController = [[INHomeViewController alloc] init];
 
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:78/255.0 green:168/255.0 blue:133/255.0 alpha:1]];

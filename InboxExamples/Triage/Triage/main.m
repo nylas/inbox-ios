@@ -1,9 +1,10 @@
+
 //
 //  main.m
-//  Triage
+//  Snapmail
 //
-//  Created by Ben Gotow on 5/7/14.
-//  Copyright (c) 2014 Inbox. All rights reserved.
+//  Created by Ben Gotow on 6/16/14.
+//  Copyright (c) 2014 InboxApp, Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,7 +13,7 @@
 
 int main(int argc, char * argv[])
 {
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([TRAppDelegate class]));
-    }
+	@autoreleasepool {
+	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([TRAppDelegate class]));
+	}
 }

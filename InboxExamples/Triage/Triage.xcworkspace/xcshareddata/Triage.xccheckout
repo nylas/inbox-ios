@@ -5,36 +5,84 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>69FF086D-B7F0-48C3-8E91-820BA65E94A4</string>
+	<string>4B071380-DE19-4FD3-BB01-0F4E8393917E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Triage</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7EBB2FB5-AFA2-4B00-BDE7-F39D138A689C</key>
-		<string>ssh://github.com/inboxapp/bigsur.git</string>
+		<key>21843676-FCFA-4C94-A1CF-EBB014F04A61</key>
+		<string>https://github.com/AFNetworking/AFNetworking.git</string>
+		<key>6856FBDA-253E-4BE7-9730-5976AA79DAF9</key>
+		<string>https://github.com/ccgus/fmdb.git</string>
+		<key>8C60F177-8ABF-49D8-BB28-C99D1396DA6B</key>
+		<string>https://github.com/carlbrown/PDKeychainBindingsController.git</string>
+		<key>B826D945-4642-4126-A7E4-6C79EEF16CCD</key>
+		<string>https://github.com/kiwi-bdd/Kiwi.git</string>
+		<key>FBE67DFB-9C6E-4C3F-80B5-43B7DA4F759B</key>
+		<string>ssh://github.com/inboxapp/inbox-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>InboxExamples/Triage/Triage.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7EBB2FB5-AFA2-4B00-BDE7-F39D138A689C</key>
+		<key>21843676-FCFA-4C94-A1CF-EBB014F04A61</key>
+		<string>../../../InboxFramework/Submodules/AFNetworking</string>
+		<key>6856FBDA-253E-4BE7-9730-5976AA79DAF9</key>
+		<string>../../../InboxFramework/Submodules/FMDB</string>
+		<key>8C60F177-8ABF-49D8-BB28-C99D1396DA6B</key>
+		<string>../../../InboxFramework/Submodules/PDKeychainBindingsController</string>
+		<key>B826D945-4642-4126-A7E4-6C79EEF16CCD</key>
+		<string>../../../InboxFramework/Submodules/Kiwi</string>
+		<key>FBE67DFB-9C6E-4C3F-80B5-43B7DA4F759B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/inboxapp/bigsur.git</string>
+	<string>ssh://github.com/inboxapp/inbox-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7EBB2FB5-AFA2-4B00-BDE7-F39D138A689C</string>
+	<string>FBE67DFB-9C6E-4C3F-80B5-43B7DA4F759B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7EBB2FB5-AFA2-4B00-BDE7-F39D138A689C</string>
+			<string>21843676-FCFA-4C94-A1CF-EBB014F04A61</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Inbox BigSur</string>
+			<string>AFNetworking</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6856FBDA-253E-4BE7-9730-5976AA79DAF9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FMDB</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBE67DFB-9C6E-4C3F-80B5-43B7DA4F759B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Inbox-iOS</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B826D945-4642-4126-A7E4-6C79EEF16CCD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Kiwi</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8C60F177-8ABF-49D8-BB28-C99D1396DA6B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PDKeychainBindingsController</string>
 		</dict>
 	</array>
 </dict>
