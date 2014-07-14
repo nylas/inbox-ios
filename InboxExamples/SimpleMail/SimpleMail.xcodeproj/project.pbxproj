@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		438F5C141974482600F3029C /* SMInboxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438F5C111974482600F3029C /* SMInboxTableViewController.m */; };
+		438F5C151974482600F3029C /* SMThreadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 438F5C131974482600F3029C /* SMThreadTableViewCell.m */; };
 		43C5DE9D196C47C8009A487E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DE9C196C47C8009A487E /* Foundation.framework */; };
 		43C5DE9F196C47C8009A487E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DE9E196C47C8009A487E /* CoreGraphics.framework */; };
 		43C5DEA1196C47C8009A487E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DEA0196C47C8009A487E /* UIKit.framework */; };
@@ -14,13 +16,13 @@
 		43C5DEA9196C47C8009A487E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C5DEA8196C47C8009A487E /* main.m */; };
 		43C5DEAD196C47C8009A487E /* SMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C5DEAC196C47C8009A487E /* SMAppDelegate.m */; };
 		43C5DEB0196C47C8009A487E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43C5DEAE196C47C8009A487E /* Main.storyboard */; };
-		43C5DEB3196C47C8009A487E /* SMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C5DEB2196C47C8009A487E /* SMViewController.m */; };
 		43C5DEB5196C47C8009A487E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C5DEB4196C47C8009A487E /* Images.xcassets */; };
 		43C5DEBC196C47C8009A487E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DEBB196C47C8009A487E /* XCTest.framework */; };
 		43C5DEBD196C47C8009A487E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DE9C196C47C8009A487E /* Foundation.framework */; };
 		43C5DEBE196C47C8009A487E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C5DEA0196C47C8009A487E /* UIKit.framework */; };
 		43C5DEC6196C47C8009A487E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C5DEC4196C47C8009A487E /* InfoPlist.strings */; };
 		43C5DEC8196C47C8009A487E /* SimpleMailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C5DEC7196C47C8009A487E /* SimpleMailTests.m */; };
+		43DA986119744960004D8563 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DA986019744960004D8563 /* Inbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43323FB61974492A006E7821 /* Inbox-Mk8.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Inbox-Mk8.framework"; path = "../../InboxFramework/build/Debug-iphoneos/Inbox-Mk8.framework"; sourceTree = "<group>"; };
+		438F5C101974482600F3029C /* SMInboxTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMInboxTableViewController.h; sourceTree = "<group>"; };
+		438F5C111974482600F3029C /* SMInboxTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMInboxTableViewController.m; sourceTree = "<group>"; };
+		438F5C121974482600F3029C /* SMThreadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMThreadTableViewCell.h; sourceTree = "<group>"; };
+		438F5C131974482600F3029C /* SMThreadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMThreadTableViewCell.m; sourceTree = "<group>"; };
+		438F5C161974485000F3029C /* Inbox-Mk8.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Inbox-Mk8.framework"; path = "../../InboxFramework/build/Debug-iphoneos/Inbox-Mk8.framework"; sourceTree = "<group>"; };
 		43C5DE99196C47C8009A487E /* SimpleMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43C5DE9C196C47C8009A487E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43C5DE9E196C47C8009A487E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -45,14 +53,13 @@
 		43C5DEAB196C47C8009A487E /* SMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMAppDelegate.h; sourceTree = "<group>"; };
 		43C5DEAC196C47C8009A487E /* SMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMAppDelegate.m; sourceTree = "<group>"; };
 		43C5DEAF196C47C8009A487E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		43C5DEB1196C47C8009A487E /* SMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMViewController.h; sourceTree = "<group>"; };
-		43C5DEB2196C47C8009A487E /* SMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMViewController.m; sourceTree = "<group>"; };
 		43C5DEB4196C47C8009A487E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43C5DEBA196C47C8009A487E /* SimpleMailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleMailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43C5DEBB196C47C8009A487E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43C5DEC3196C47C8009A487E /* SimpleMailTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleMailTests-Info.plist"; sourceTree = "<group>"; };
 		43C5DEC5196C47C8009A487E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43C5DEC7196C47C8009A487E /* SimpleMailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleMailTests.m; sourceTree = "<group>"; };
+		43DA986019744960004D8563 /* Inbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Inbox.framework; path = "../../InboxFramework/build/Debug-iphoneos/Inbox.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43DA986119744960004D8563 /* Inbox.framework in Frameworks */,
 				43C5DE9F196C47C8009A487E /* CoreGraphics.framework in Frameworks */,
 				43C5DEA1196C47C8009A487E /* UIKit.framework in Frameworks */,
 				43C5DE9D196C47C8009A487E /* Foundation.framework in Frameworks */,
@@ -101,6 +109,9 @@
 		43C5DE9B196C47C8009A487E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43DA986019744960004D8563 /* Inbox.framework */,
+				43323FB61974492A006E7821 /* Inbox-Mk8.framework */,
+				438F5C161974485000F3029C /* Inbox-Mk8.framework */,
 				43C5DE9C196C47C8009A487E /* Foundation.framework */,
 				43C5DE9E196C47C8009A487E /* CoreGraphics.framework */,
 				43C5DEA0196C47C8009A487E /* UIKit.framework */,
@@ -114,9 +125,11 @@
 			children = (
 				43C5DEAB196C47C8009A487E /* SMAppDelegate.h */,
 				43C5DEAC196C47C8009A487E /* SMAppDelegate.m */,
+				438F5C101974482600F3029C /* SMInboxTableViewController.h */,
+				438F5C111974482600F3029C /* SMInboxTableViewController.m */,
+				438F5C121974482600F3029C /* SMThreadTableViewCell.h */,
+				438F5C131974482600F3029C /* SMThreadTableViewCell.m */,
 				43C5DEAE196C47C8009A487E /* Main.storyboard */,
-				43C5DEB1196C47C8009A487E /* SMViewController.h */,
-				43C5DEB2196C47C8009A487E /* SMViewController.m */,
 				43C5DEB4196C47C8009A487E /* Images.xcassets */,
 				43C5DEA3196C47C8009A487E /* Supporting Files */,
 			);
@@ -251,8 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				43C5DEAD196C47C8009A487E /* SMAppDelegate.m in Sources */,
-				43C5DEB3196C47C8009A487E /* SMViewController.m in Sources */,
+				438F5C151974482600F3029C /* SMThreadTableViewCell.m in Sources */,
 				43C5DEA9196C47C8009A487E /* main.m in Sources */,
+				438F5C141974482600F3029C /* SMInboxTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +471,7 @@
 				43C5DECD196C47C9009A487E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43C5DECE196C47C9009A487E /* Build configuration list for PBXNativeTarget "SimpleMailTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +480,7 @@
 				43C5DED0196C47C9009A487E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

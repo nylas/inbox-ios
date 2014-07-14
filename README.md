@@ -14,6 +14,9 @@ The Inbox Xcode project declares two framework targets you can use in your proje
 
 - **For Xcode 6 / iOS 8:** The `Inbox` framework target is an **Xcode 6 "Cocoa Touch Framework"**. This means that you need Xcode 6 to compile the framework, and it can only be used in apps that target iOS 8 and above. We anticipate that Xcode 6 will be out of beta before the widespread release of the Inbox hosted service, and plan for this to eventually be the only version of the framework.
 
+**All of the sample projects included with the Inbox framework use the Xcode 6 "Cocoa Touch Framework", and require the Xcode 6 beta.**
+
+
 
 
 #### Testing & Linting
@@ -54,13 +57,16 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 
 The 'Triage' demo app showcases the use of an `INModelProvider` to display threads from your mailbox, and the use of the `INMessageContentView` for displaying message bodies in custom views.
 
-[Video of Triage in Action](https://raw.githubusercontent.com/inboxapp/inbox-ios/master/InboxExamples/Triage/Documentation/demo.mov)
+[Video of Triage in Action](https://dl.dropboxusercontent.com/u/4803975/triage_demo.mov)
 
 
 ##### SnapMail
 
 The 'SnapMail' demo is a snapchat-style app that allows you to send and receive photos. Instead of using a custom backend, it uses your inbox—messages with the subject 'New snap from *' are displayed, and sending a snap sends an email to the recipient with the image attached. You can view the image attached to a 'New Snap' email with a snapchat-style peek interaction.
 
+##### SimpleMail
+
+The Simple Mail app displays a list of threads in your Inbox and allows you to archive them. As we open-source more UI components, SimpleMail will allow you to view and compose messages as well.
 
 
 ## Core Principles

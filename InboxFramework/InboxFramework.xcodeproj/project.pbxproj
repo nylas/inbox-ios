@@ -1577,9 +1577,9 @@
 			projectRoot = "";
 			targets = (
 				43B27D5419525E0A002532D3 /* Inbox */,
+				4318A4BD1973B5260053DD42 /* Inbox-Mk8 */,
 				43A1E288191C02A800EF660E /* InboxTests */,
 				43E90F7E196DE1A400990344 /* InboxDependencies */,
-				4318A4BD1973B5260053DD42 /* Inbox-Mk8 */,
 			);
 		};
 /* End PBXProject section */
@@ -2194,6 +2194,7 @@
 				4318A4CC1973B5260053DD42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43A1E29C191C02A800EF660E /* Build configuration list for PBXNativeTarget "InboxTests" */ = {
 			isa = XCConfigurationList;
