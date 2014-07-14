@@ -7,6 +7,8 @@
 //
 
 #import "INMarkMessageAsReadTask.h"
+#import "INMessage.h"
+#import "INDatabaseManager.h"
 
 @implementation INMarkMessageAsReadTask
 
