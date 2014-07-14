@@ -19,23 +19,14 @@ Pod::Spec.new do |s|
   s.author             = { "Ben Gotow" => "ben@inboxapp.com" }
   s.social_media_url   = "http://twitter.com/bengotow"
 
-  s.prefix_header_contents = <<-EOS
-      #import "AFNetworking.h"
-      #import "FMDatabase.h"
-      #import "FMDatabaseQueue.h"
-      #import "FMResultSet.h"
-      #import "FMResultSet+INModelQueries.h"
-      #import "FMDatabaseAdditions.h"
-    EOS
+  s.prefix_header_file = "InboxFramework/Inbox/Inbox-Prefix.pch"
 
-  s.source       = { :git => "https://github.com/inboxapp/inbox-ios.git" }
-  s.source_files  = "InboxFramework/Inbox/*.{h,m}", "InboxFramework/Inbox/**/*.{h,m}", "InboxFramework/InboxUI/**/*.{h,m}"
+  s.source       = { :git => "https://github.com/inboxapp/inbox-ios.git", :submodules => true }
+  s.source_files  = "InboxFramework/Submodules/INDependencyNamespacing.h", "InboxFramework/Submodules/**/*.{h,m}", "InboxFramework/Inbox/*.{h,m}", "InboxFramework/Inbox/**/*.{h,m}", "InboxFramework/InboxUI/**/*.{h,m}"
+
+  s.public_header_files = "InboxFramework/Inbox/*.h", "InboxFramework/Inbox/**/*.h", "InboxFramework/InboxUI/**/*.h"
 
   s.libraries = "sqlite3"
   s.requires_arc = true
-
-  s.dependency "AFNetworking", "2.3.1"
-  s.dependency "FMDB", "2.3"
-  s.dependency "PDKeychainBindingsController"
 
 end
