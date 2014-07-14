@@ -2,21 +2,28 @@ Inbox iOS SDK
 ======
 ----
 
-#### Documentation
 
-See the [Inbox iOS Documentation](http://inboxapp.com/docs/ios) for getting started guides and the [Inbox API Reference](inboxapp.com/docs/api) for information about Inbox's REST API. Class-level documentation has been compiled with [AppleDoc](http://gentlebytes.com/appledoc/) and published to the [`gh-pages` branch](http://inboxapp.github.com/inbox-ios) of this repository.
+#### Using the SDK via Cocoapods
 
-#### Environment Setup
+Cocoapods is a dependency management system for Xcode and is the easiest way to create and maintain projects that have dependencies. You can learn more about Cocoapods in the [CocoaPods Getting Started Guide](http://guides.cocoapods.org/using/getting-started.html).
 
-The Inbox Xcode project declares two framework targets you can use in your projects:
+- Add `pod 'InboxSDK'` to your Podfile
+- Run `pod install`
+- Add `#import "Inbox.h"` to your App's prefix header (.pch file)
+
+
+#### Using the SDK as a Framework
+
+The Inbox Xcode project declares two framework targets that you can use in your projects if you're not interested in using Cocoapods.
 
 - **For General Use:** The `Inbox-Mk8` framework target is compatible with iOS 7+ and Xcode 5. It uses the "Real" Framework target template assembled by Karl Stenerud. To build it, [download and install](https://github.com/kstenerud/iOS-Universal-Framework) the "Real" framework template into Xcode. This allows you to make Xcode frameworks, right from the "New Project" menu. Unfortunately, this approach is broken in Xcode 6 and will likely be replaced by Xcode 6's new Cocoa Touch Framework.
 
 - **For Xcode 6 / iOS 8:** The `Inbox` framework target is an **Xcode 6 "Cocoa Touch Framework"**. This means that you need Xcode 6 to compile the framework, and it can only be used in apps that target iOS 8 and above. We anticipate that Xcode 6 will be out of beta before the widespread release of the Inbox hosted service, and plan for this to eventually be the only version of the framework.
 
-**All of the sample projects included with the Inbox framework use the Xcode 6 "Cocoa Touch Framework", and require the Xcode 6 beta.**
 
+#### Documentation
 
+See the [Inbox iOS Documentation](http://inboxapp.com/docs/ios) for getting started guides and the [Inbox API Reference](inboxapp.com/docs/api) for information about Inbox's REST API. Class-level documentation has been compiled with [AppleDoc](http://gentlebytes.com/appledoc/) and published to the [`gh-pages` branch](http://inboxapp.github.com/inbox-ios) of this repository.
 
 
 #### Testing & Linting
@@ -52,6 +59,8 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 
 ## Example Apps
 ----
+
+> Note: All of the sample apps use Cocoapods. To run one of the demo apps, `cd` to the project directory and run `pod install`. If you haven't used cocoapods before, you'll need to install it by doing `sudo gem install cocoapods`
 
 #### Triage
 

@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.prefix_header_file = "InboxFramework/Inbox/Inbox-Prefix.pch"
 
   s.source       = { :git => "https://github.com/inboxapp/inbox-ios.git", :submodules => true }
-  s.source_files  = "InboxFramework/Submodules/INDependencyNamespacing.h", "InboxFramework/Submodules/**/*.{h,m}", "InboxFramework/Inbox/*.{h,m}", "InboxFramework/Inbox/**/*.{h,m}", "InboxFramework/InboxUI/**/*.{h,m}"
+  s.source_files  = "InboxFramework/Submodules/INDependencyNamespacing.h", "InboxFramework/Submodules/FMDB/src/fmdb/*.{h,m}", "InboxFramework/Submodules/AFNetworking/AFNetworking/*.{h,m}", "InboxFramework/Submodules/AFNetworking/UIKit+AFNetworking/*.{h,m}", "InboxFramework/Submodules/PDKeychainBindingsController/PDKeychainBindingsController/*.{h,m}", "InboxFramework/Inbox/*.{h,m}", "InboxFramework/Inbox/**/*.{h,m}", "InboxFramework/InboxUI/**/*.{h,m}"
 
   s.public_header_files = "InboxFramework/Inbox/*.h", "InboxFramework/Inbox/**/*.h", "InboxFramework/InboxUI/**/*.h"
 

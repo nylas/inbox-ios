@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2462A18FE2AA478BAE128E22 /* libPods-Triage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D7C43DA4B046BD9BDDE829 /* libPods-Triage.a */; };
 		438D1ECB196E0EB0009F241C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 438D1ECA196E0EB0009F241C /* main.m */; };
 		439B4DCE196E028400CDA357 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439B4DBF196E028400CDA357 /* InfoPlist.strings */; };
 		439B4DCF196E028400CDA357 /* INPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B4DC2196E028400CDA357 /* INPlaceholderTextView.m */; };
@@ -15,7 +16,6 @@
 		439B4DD3196E028400CDA357 /* TRMessageCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B4DCA196E028400CDA357 /* TRMessageCardView.m */; };
 		439B4DD4196E028400CDA357 /* TRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439B4DCC196E028400CDA357 /* TRViewController.m */; };
 		439B4DD5196E028400CDA357 /* TRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439B4DCD196E028400CDA357 /* TRViewController.xib */; };
-		439B4DDB196E02CF00CDA357 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439B4DDA196E02CF00CDA357 /* Inbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,8 @@
 		439B4DCB196E028400CDA357 /* TRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRViewController.h; sourceTree = "<group>"; };
 		439B4DCC196E028400CDA357 /* TRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRViewController.m; sourceTree = "<group>"; };
 		439B4DCD196E028400CDA357 /* TRViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRViewController.xib; sourceTree = "<group>"; };
-		439B4DDA196E02CF00CDA357 /* Inbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Inbox.framework; path = "../../InboxFramework/build/Debug-iphoneos/Inbox.framework"; sourceTree = "<group>"; };
+		62DC6BD36B2B4EADBE283281 /* Pods-Triage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Triage.xcconfig"; path = "Pods/Pods-Triage.xcconfig"; sourceTree = "<group>"; };
+		89D7C43DA4B046BD9BDDE829 /* libPods-Triage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Triage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				439B4DDB196E02CF00CDA357 /* Inbox.framework in Frameworks */,
+				2462A18FE2AA478BAE128E22 /* libPods-Triage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,10 +63,11 @@
 		439B4D95196E026F00CDA357 = {
 			isa = PBXGroup;
 			children = (
-				439B4DDA196E02CF00CDA357 /* Inbox.framework */,
 				439B4DBE196E028400CDA357 /* Triage */,
 				438D1ECC196E0EB4009F241C /* Supporting Files */,
 				439B4D9F196E026F00CDA357 /* Products */,
+				62DC6BD36B2B4EADBE283281 /* Pods-Triage.xcconfig */,
+				5976937118D440A8862EFC27 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +98,14 @@
 			path = Triage;
 			sourceTree = "<group>";
 		};
+		5976937118D440A8862EFC27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				89D7C43DA4B046BD9BDDE829 /* libPods-Triage.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +113,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 439B4DB8196E026F00CDA357 /* Build configuration list for PBXNativeTarget "Triage" */;
 			buildPhases = (
+				6A58A92ACEAF40B99F88D7CF /* Check Pods Manifest.lock */,
 				439B4D9A196E026F00CDA357 /* Sources */,
 				439B4D9B196E026F00CDA357 /* Frameworks */,
 				439B4D9C196E026F00CDA357 /* Resources */,
+				C9267EB4440C489FA737FCEE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,6 +170,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A58A92ACEAF40B99F88D7CF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C9267EB4440C489FA737FCEE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Triage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		439B4D9A196E026F00CDA357 /* Sources */ = {
@@ -221,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -256,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -265,6 +310,7 @@
 		};
 		439B4DB9196E026F00CDA357 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DC6BD36B2B4EADBE283281 /* Pods-Triage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -278,6 +324,7 @@
 		};
 		439B4DBA196E026F00CDA357 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62DC6BD36B2B4EADBE283281 /* Pods-Triage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

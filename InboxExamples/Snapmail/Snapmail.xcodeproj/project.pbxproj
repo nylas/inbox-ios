@@ -17,15 +17,16 @@
 		43D13EE4194F4EE900103097 /* INAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EE3194F4EE900103097 /* INAppDelegate.m */; };
 		43D13EED194F4EE900103097 /* INHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13EEC194F4EE900103097 /* INHomeViewController.m */; };
 		43D13EEF194F4EE900103097 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43D13EEE194F4EE900103097 /* Images.xcassets */; };
-		43D13F0C194F50E700103097 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D13F0B194F50E700103097 /* Inbox.framework */; };
 		43D13F0E194F589200103097 /* INHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F0D194F589200103097 /* INHomeViewController.xib */; };
 		43D13F12194F59EF00103097 /* INSnapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13F10194F59EF00103097 /* INSnapViewController.m */; };
 		43D13F13194F59EF00103097 /* INSnapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F11194F59EF00103097 /* INSnapViewController.xib */; };
 		43D13F17194F5FDD00103097 /* INCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D13F15194F5FDD00103097 /* INCaptureViewController.m */; };
 		43D13F18194F5FDD00103097 /* INCaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D13F16194F5FDD00103097 /* INCaptureViewController.xib */; };
+		CEEC096DB1AC4DE6B9AB0E6E /* libPods-Snapmail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCCE685086EA4E8EA4BF0048 /* libPods-Snapmail.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D8BE67C24CF4E2A9C011895 /* Pods-Snapmail.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snapmail.xcconfig"; path = "Pods/Pods-Snapmail.xcconfig"; sourceTree = "<group>"; };
 		43032FC3196627D8008A8A24 /* INContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INContactsViewController.h; sourceTree = "<group>"; };
 		43032FC4196627D8008A8A24 /* INContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INContactsViewController.m; sourceTree = "<group>"; };
 		43032FC5196627D8008A8A24 /* INContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INContactsViewController.xib; sourceTree = "<group>"; };
@@ -60,10 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43D13F0C194F50E700103097 /* Inbox.framework in Frameworks */,
 				43D13ED6194F4EE900103097 /* CoreGraphics.framework in Frameworks */,
 				43D13ED8194F4EE900103097 /* UIKit.framework in Frameworks */,
 				43D13ED4194F4EE900103097 /* Foundation.framework in Frameworks */,
+				CEEC096DB1AC4DE6B9AB0E6E /* libPods-Snapmail.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +77,7 @@
 				43D13ED9194F4EE900103097 /* Snapmail */,
 				43D13ED2194F4EE900103097 /* Frameworks */,
 				43D13ED1194F4EE900103097 /* Products */,
+				1D8BE67C24CF4E2A9C011895 /* Pods-Snapmail.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,9 +144,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43D13F05194F4EE900103097 /* Build configuration list for PBXNativeTarget "Snapmail" */;
 			buildPhases = (
+				5CBBF689FB7D44E9B290AB98 /* Check Pods Manifest.lock */,
 				43D13ECC194F4EE900103097 /* Sources */,
 				43D13ECD194F4EE900103097 /* Frameworks */,
 				43D13ECE194F4EE900103097 /* Resources */,
+				F89DBBB12FE44E72A5F56B2D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -198,6 +202,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CBBF689FB7D44E9B290AB98 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F89DBBB12FE44E72A5F56B2D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Snapmail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		43D13ECC194F4EE900103097 /* Sources */ = {
@@ -301,6 +338,7 @@
 		};
 		43D13F06194F4EE900103097 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D8BE67C24CF4E2A9C011895 /* Pods-Snapmail.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -314,6 +352,7 @@
 		};
 		43D13F07194F4EE900103097 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D8BE67C24CF4E2A9C011895 /* Pods-Snapmail.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

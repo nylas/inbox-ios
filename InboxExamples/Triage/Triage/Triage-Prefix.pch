@@ -13,5 +13,6 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import <Inbox/Inbox.h>
+
+    #import "Inbox.h"
 #endif
