@@ -8,17 +8,12 @@ See the [Inbox iOS Documentation](http://inboxapp.com/docs/ios) for getting star
 
 #### Environment Setup
 
-The Inbox.framework target is an **Xcode 6 "Cocoa Touch Framework"**. This means that you need Xcode 6 to compile the framework. We anticipate that Xcode 6 will be out of beta before the widespread release of the Inbox hosted service.
+The Inbox Xcode project declares two framework targets you can use in your projects:
 
-The Inbox framework and some sample apps use Cocoapods, a dependency management system for iOS apps similiar to npm and rpm. To set up your local development environment, you'll need to install cocoapods and do a pod install:
+- **For General Use:** The `Inbox-Mk8` framework target is compatible with iOS 7+ and Xcode 5. It uses the "Real" Framework target template assembled by Karl Stenerud. To build it, [download and install](https://github.com/kstenerud/iOS-Universal-Framework) the "Real" framework template into Xcode. This allows you to make Xcode frameworks, right from the "New Project" menu. Unfortunately, this approach is broken in Xcode 6 and will likely be replaced by Xcode 6's new Cocoa Touch Framework.
 
-1. `sudo gem install cocoapods`
+- **For Xcode 6 / iOS 8:** The `Inbox` framework target is an **Xcode 6 "Cocoa Touch Framework"**. This means that you need Xcode 6 to compile the framework, and it can only be used in apps that target iOS 8 and above. We anticipate that Xcode 6 will be out of beta before the widespread release of the Inbox hosted service, and plan for this to eventually be the only version of the framework.
 
-2. `cd <project directory>`
-
-3. `pod install`
-
-After Cocoapods has installed dependencies, open the project's .xcworkspace (not the .xcproj). Have fun.
 
 
 #### Testing & Linting
