@@ -400,7 +400,7 @@
 		430E98331930101F0078F430 /* Inbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inbox-Info.plist"; sourceTree = "<group>"; };
 		430E98351930101F0078F430 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		430E98371930101F0078F430 /* Inbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inbox-Prefix.pch"; sourceTree = "<group>"; };
-		4318A4BE1973B5260053DD42 /* Inbox-Mk8.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = "Inbox-Mk8.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4318A4BE1973B5260053DD42 /* Inbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = Inbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		432AA723196DC7E3009976E8 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		43A1E289191C02A800EF660E /* InboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A1E28C191C02A800EF660E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1291,7 +1291,7 @@
 				43A1E289191C02A800EF660E /* InboxTests.xctest */,
 				43B27D5519525E0A002532D3 /* Inbox.framework */,
 				43E90F7F196DE1A400990344 /* libInboxDependencies.a */,
-				4318A4BE1973B5260053DD42 /* Inbox-Mk8.framework */,
+				4318A4BE1973B5260053DD42 /* Inbox.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1484,7 +1484,7 @@
 			);
 			name = "Inbox-Mk8";
 			productName = "Inbox-Mk8";
-			productReference = 4318A4BE1973B5260053DD42 /* Inbox-Mk8.framework */;
+			productReference = 4318A4BE1973B5260053DD42 /* Inbox.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
 		43A1E288191C02A800EF660E /* InboxTests */ = {
@@ -1950,7 +1950,7 @@
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = $TARGET_NAME;
+				PRODUCT_NAME = Inbox;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1972,7 +1972,7 @@
 				INFOPLIST_FILE = Inbox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = $TARGET_NAME;
+				PRODUCT_NAME = Inbox;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
