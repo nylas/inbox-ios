@@ -49,7 +49,7 @@
     [params setObject:[self tagIDsToAdd] forKey:@"add_tags"];
     [params setObject:[self tagIDsToRemove] forKey:@"remove_tags"];
     
-	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:params error:&error];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"PUT" URLString:url parameters:params error:&error];
 }
 
 - (void)applyLocally
