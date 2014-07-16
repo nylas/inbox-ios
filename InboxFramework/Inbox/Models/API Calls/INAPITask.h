@@ -40,6 +40,8 @@ typedef void (^ CallbackBlock)(INAPITask * change, BOOL finished);
 - (id)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 
+- (NSString*)extendedDescription;
+
 - (BOOL)canCancelPendingTask:(INAPITask*)other;
 - (BOOL)canStartAfterTask:(INAPITask*)other;
 - (NSArray*)dependenciesIn:(NSArray*)others;

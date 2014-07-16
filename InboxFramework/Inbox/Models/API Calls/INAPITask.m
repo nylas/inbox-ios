@@ -62,6 +62,14 @@
     [aCoder encodeObject:_data forKey:@"data"];
 }
 
+- (NSString*)extendedDescription
+{
+    NSArray * queue = [[INAPIManager shared] taskQueue];
+    NSString * dependencyIDs = [[[self dependenciesIn: queue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
+    NSString * stateString = @[@"waiting", @"in progress", @"finished", @"server-unreachable", @"server-rejected"][[self state]];
+    return [NSString stringWithFormat: @"%@\r     - state: %@ \r     - error: %@ \r     - dependencies: %@", [self description], stateString, [self error], dependencyIDs];
+}
+
 - (void)setPercentComplete:(float)percentComplete
 {
 	_percentComplete = percentComplete;

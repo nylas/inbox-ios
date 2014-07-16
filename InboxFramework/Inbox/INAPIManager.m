@@ -197,9 +197,7 @@ static void initialize_INAPIManager() {
 	[description appendFormat:@"\r---------- Tasks (%lu) Suspended: %d -----------", (unsigned long)_taskQueue.count, _taskQueueSuspended];
 
 	for (INAPITask * change in _taskQueue) {
-		NSString * dependencyIDs = [[[change dependenciesIn: _taskQueue] valueForKey: @"description"] componentsJoinedByString:@"\r          "];
-        NSString * stateString = @[@"waiting", @"in progress", @"finished", @"server-unreachable", @"server-rejected"][[change state]];
-		[description appendFormat:@"\r%@\r     - state: %@ \r     - error: %@ \r     - dependencies: %@", [change description], stateString, [change error], dependencyIDs];
+		[description appendFormat:@"\r%@", [change extendedDescription]];
 	}
     [description appendFormat:@"\r-------- ------ ------ ------ ------ ---------"];
 
