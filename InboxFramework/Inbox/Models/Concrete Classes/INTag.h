@@ -11,6 +11,7 @@
 static NSString * INTagIDUnread = @"unread";
 static NSString * INTagIDUnseen = @"unseen";
 static NSString * INTagIDArchive = @"archive";
+static NSString * INTagIDTrash = @"trash";
 static NSString * INTagIDDraft = @"drafts";
 static NSString * INTagIDInbox = @"inbox";
 static NSString * INTagIDStarred = @"starred";
@@ -20,6 +21,8 @@ static NSString * INTagIDSent = @"sent";
 more information about tags: http://inboxapp.com/docs/api#tags
 */
 @interface INTag : INModelObject
+
+@property (nonatomic, strong) NSString * providedName;
 
 /**
  @param ID A tag ID. May be a user-generated ID, or one of the built-in Inbox tag IDs:

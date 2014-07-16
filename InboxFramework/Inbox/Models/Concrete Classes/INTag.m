@@ -16,6 +16,16 @@
     return [self instanceWithID: ID inNamespaceID: nil];
 }
 
+
++ (NSMutableDictionary *)resourceMapping
+{
+	NSMutableDictionary * mapping = [super resourceMapping];
+	[mapping addEntriesFromDictionary:@{
+        @"providedName": @"name"
+    }];
+	return mapping;
+}
+
 + (NSString *)resourceAPIName
 {
 	return @"tags";
@@ -24,9 +34,11 @@
 - (NSString*)name
 {
     // pretend we have localization
-    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDStarred: @"Starred"};
+    NSDictionary * localized = @{INTagIDArchive: @"Archive", INTagIDInbox: @"Inbox", INTagIDTrash: @"Trash", INTagIDUnread: @"Unread", INTagIDSent: @"Sent", INTagIDStarred: @"Starred"};
     if ([localized objectForKey: self.ID])
         return [localized objectForKey: self.ID];
+    if (self.providedName)
+        return self.providedName;
     return [self.ID capitalizedString];
 }
 
