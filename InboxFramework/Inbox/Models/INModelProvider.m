@@ -217,145 +217,104 @@
 
 #pragma mark Receiving Updates from the Database
 
-- (void)managerDidPersistModels:(NSArray *)savedArray
+- (void)managerDidPersistModels:(NSArray *)affectedModels
 {
 	NSAssert([NSThread isMainThread], @"-managerDidPersistModels is not threadsafe.");
 	
-	// as an optimization, don't bother with all this change set stuff if we don't
-	// currently have any models. Just fetch matching models the easy way.
-	if (self.items == nil)
+	// as an optimization, don't bother computing a change set if we don't
+	// have any models or if our delegate isn't watching for change sets.
+    // Just fetch matching models the easy way.
+    BOOL resultSetEmpty = (self.items == nil);
+    BOOL resultSetAlterationsConsumed = ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]);
+    
+    if (resultSetEmpty || !resultSetAlterationsConsumed)
 		return [self fetchFromCache:NULL];
     
-		
-	NSMutableSet * savedModels = [NSMutableSet set];
-	for (INModelObject * model in savedArray)
-		if ([model isMemberOfClass: _modelClass])
-			[savedModels addObject: model];
+    // determine if our result set contains any of the affected models, or if
+    // they match our predicate. We may not need to run any updates!
+    BOOL resultSetImpactedByModels = NO;
+    NSPredicate * fetchPredicate = [self fetchPredicate];
 
-	if ([savedModels count] == 0) {
-		return;
-	}
-	
-	NSMutableSet * savedMatchingModels = [savedModels mutableCopy];
-	NSSet * existingModels = [NSSet setWithArray: self.items];
-
-	NSPredicate * fetchPredicate = [self fetchPredicate];
-	if (fetchPredicate)
-		[savedMatchingModels filterUsingPredicate: fetchPredicate];
-	
-	// compute the models that were added   (saved & matching - currently in our set)
-	NSMutableSet * addedModels = [savedMatchingModels mutableCopy];
-	[addedModels minusSet: existingModels];
-
-	// compute the models that were changed (saved & matching - added)
-	NSMutableSet * changedModels = [savedMatchingModels mutableCopy];
-	[changedModels intersectSet: existingModels];
-	[changedModels minusSet: addedModels];
-
-	// compute the models that were changed and no longer match our predicate (in existing and not in matching)
-	NSMutableSet * removedModels = [savedModels mutableCopy];
-	[removedModels minusSet: savedMatchingModels];
-	[removedModels intersectSet: existingModels];
-
-	if (([addedModels count] == 0) && ([changedModels count] == 0) && ([removedModels count] == 0))
-		return;
-
-	// Add the addedModels to our cached set and then resort
-	NSMutableArray * allItems = [self.items mutableCopy];
-
-	// If our delegate wants to be notified of item-level changes, compute those. Please
-	// note that this code was designed for readability over efficiency. If it's too slow
-	// we'll come back to it :-)
-	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]) {
-		NSMutableArray * changes = [NSMutableArray array];
-		
-		for (INModelObject * item in removedModels) {
-			NSInteger index = [self.items indexOfObjectIdenticalTo:item];
-			[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
-		}
-
-		[allItems removeObjectsInArray: [removedModels allObjects]];
-		[allItems addObjectsFromArray: [addedModels allObjects]];
-		[allItems sortUsingDescriptors: self.itemSortDescriptors];
-		
-		NSArray * allItemsInRange = [allItems subarrayWithRange: NSMakeRange(MIN(_itemRange.location, [allItems count]-1), MIN(_itemRange.length, [allItems count] - _itemRange.location))];
-		
-		for (INModelObject * item in self.items) {
-			if ([allItemsInRange indexOfObjectIdenticalTo:item] == NSNotFound) {
-				NSInteger index = [self.items indexOfObjectIdenticalTo:item];
-                BOOL alreadyRemoved = [removedModels containsObject:item];
-
-				if (!alreadyRemoved)
-                    [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
-			}
-		}
-
-		self.items = allItemsInRange;
-		
-		for (INModelObject * item in addedModels) {
-			NSInteger index = [_items indexOfObjectIdenticalTo:item];
-			if (index != NSNotFound)
-				[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeAdd forItem:item atIndex:index]];
-		}
-		for (INModelObject * item in changedModels) {
-			NSInteger index = [_items indexOfObjectIdenticalTo:item];
-			if (index != NSNotFound)
-				[changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeUpdate forItem:item atIndex:index]];
-		}
-		
-		if ([changes count] > 0) {
-			INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
-			[set setChanges: changes];
-			[self.delegate provider:self dataAltered:set];
-		}
-								
-	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged:)]) {
-		[allItems addObjectsFromArray: [addedModels allObjects]];
-		[allItems removeObjectsInArray: [removedModels allObjects]];
-		[allItems sortUsingDescriptors:self.itemSortDescriptors];
-		self.items = [allItems subarrayWithRange: NSMakeRange(MIN(_itemRange.location, [allItems count]-1), MIN(_itemRange.length, [allItems count] - _itemRange.location))];
-		[self.delegate providerDataChanged:self];
-	}
+	for (INModelObject * model in affectedModels) {
+        if ([model isMemberOfClass: _modelClass] && (([fetchPredicate evaluateWithObject: model]) || ([self.items containsObject: model]))) {
+            resultSetImpactedByModels = YES;
+            break;
+        }
+    }
+    if (!resultSetImpactedByModels)
+        return;
+    
+    // Hit the database and then compare the new result set against our
+    // existing result set to find changes.
+    [self sendChangeSetForPersistedModels: affectedModels];
 }
+
 
 - (void)managerDidUnpersistModels:(NSArray*)models
 {
 	NSAssert([NSThread isMainThread], @"-managerDidUnpersistModels is not threadsafe.");
 
-	NSMutableArray * newItems = [NSMutableArray arrayWithArray: self.items];
-	[newItems removeObjectsInArray: models];
-
-    // Exit early if no items were removed. We don't need to pass anything on to our delegate
-	if ([newItems count] == [self.items count])
+    // If no items were removed from our result set, bail early!
+	if (!self.items || ![[NSSet setWithArray: self.items] intersectsSet: [NSSet setWithArray: models]])
         return;
     
 	if ([self.delegate respondsToSelector:@selector(provider:dataAltered:)]) {
-		NSMutableArray * changes = [NSMutableArray array];
-		for (INModelObject * item in models) {
-			NSInteger index = [self.items indexOfObjectIdenticalTo:item];
-            if (index != NSNotFound)
-                [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex:index]];
-		}
-
-		self.items = newItems;
-
-        INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
-        [set setChanges: changes];
-        [self.delegate provider:self dataAltered:set];
+        [self sendChangeSetForPersistedModels: @[]];
         
-	} else if ([self.delegate respondsToSelector:@selector(providerDataChanged:)]) {
-		self.items = newItems;
-		[self.delegate providerDataChanged:self];
-
 	} else {
-		self.items = newItems;
-	}
+		[self fetchFromCache:NULL];
+    }
 }
 
 - (void)managerDidReset
 {
 	NSAssert([NSThread isMainThread], @"-managerDidReset is not threadsafe.");
 	[self refresh];
+}
+
+
+#pragma mark Helpers for Computing Change Sets
+
+- (void)sendChangeSetForPersistedModels:(NSArray *)affectedModels
+{
+    // fetch a new set of items and compare them to find the items removed, added, modified.
+    // We go back to the database, because the removal of an item means we need another item
+    // to take it's spot in our set, etc. (Trust me, it's much easier to hit the database than
+    // try to manually account for these scenarios...)
+	[[INDatabaseManager shared] selectModelsOfClass:_modelClass matching:[self fetchPredicate] sortedBy:_itemSortDescriptors limit:_itemRange.length offset:_itemRange.location withCallback:^(NSArray * newItems) {
+        NSMutableArray * changes = [NSMutableArray array];
+        
+        // find items that no longer exist in our result set
+        for (int ii = 0; ii < [self.items count]; ii++) {
+            INModelObject * item = [self.items objectAtIndex: ii];
+            if (![newItems containsObject: item])
+                [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeRemove forItem:item atIndex: ii]];
+        }
+        
+        // find added and modified items
+        for (int ii = 0; ii < [newItems count]; ii++) {
+            INModelObject * item = [newItems objectAtIndex: ii];
+            
+            if ([self.items containsObject: item]) {
+                // the item hasn't been added or removed. was it modified?
+                if ([affectedModels containsObject: item])
+                    [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeUpdate forItem:item atIndex:ii]];
+                
+            } else {
+                // the item has been added to our result set
+                [changes addObject:[INModelProviderChange changeOfType:INModelProviderChangeAdd forItem:item atIndex:ii]];
+            }
+        }
+        
+        self.items = newItems;
+        
+        // only broadcast changes to our delegate if changes were actually made
+        if ([changes count] > 0) {
+            INModelProviderChangeSet * set = [[INModelProviderChangeSet alloc] init];
+            [set setChanges: changes];
+            [self.delegate provider:self dataAltered:set];
+        }
+    }];
 }
 
 @end
