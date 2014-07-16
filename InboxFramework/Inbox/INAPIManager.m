@@ -88,6 +88,8 @@ static void initialize_INAPIManager() {
 
 		// Reload our API token and refresh the namespaces list
         NSString * token = [[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey];
+		NSLog(@"DEBUG: Auth token is %@", token);
+
 		[_AF.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:nil];
         if (token) {
             [self fetchNamespaces: NULL];
@@ -304,6 +306,8 @@ static void initialize_INAPIManager() {
 	if (_authenticationCompletionBlock && (_authenticationCompletionBlock != completionBlock))
 		NSLog(@"A call to authenticateWithAuthToken: is replacing an authentication completion block that has not yet been fired. The old authentication block will never be called!");
 	_authenticationCompletionBlock = completionBlock;
+	
+	NSLog(@"DEBUG: Auth token is %@", authToken);
 	
 	[[_AF requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
     [self fetchNamespaces:^(BOOL success, NSError * error) {
