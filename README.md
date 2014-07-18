@@ -3,16 +3,16 @@ Inbox iOS SDK
 ----
 
 
-#### Using the SDK via Cocoapods
+#### Using InboxKit via Cocoapods
 
 Cocoapods is a dependency management system for Xcode and is the easiest way to create and maintain projects that have dependencies. You can learn more about Cocoapods in the [CocoaPods Getting Started Guide](http://guides.cocoapods.org/using/getting-started.html).
 
-- Add `pod 'InboxSDK'` to your Podfile
+- Add `pod 'InboxKit'` to your Podfile
 - Run `pod install`
 - Add `#import "Inbox.h"` to your App's prefix header (.pch file)
 
 
-#### Using the SDK as a Framework
+#### Using InboxKit as a Framework
 
 The Inbox Xcode project declares two framework targets that you can use in your projects if you're not interested in using Cocoapods.
 
