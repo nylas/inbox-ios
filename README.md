@@ -60,7 +60,11 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 ## Example Apps
 ----
 
-> Note: All of the sample apps use Cocoapods. To run one of the demo apps, `cd` to the project directory and run `pod install`. If you haven't used cocoapods before, you'll need to install it by doing `sudo gem install cocoapods`
+> Note: Most of the sample apps use Cocoapods. To run one of the demo apps, `cd` to the project directory and run `pod install`. If you haven't used cocoapods before, you'll need to install it by doing `sudo gem install cocoapods`
+
+#### EightBall (Swift)
+
+The EightBall app displays a single unread thread from your Inbox. When you shake the device, it marks it as read and shows another thread. 
 
 #### Triage
 
@@ -69,14 +73,13 @@ The 'Triage' demo app showcases the use of an `INModelProvider` to display threa
 [Video of Triage in Action](https://dl.dropboxusercontent.com/u/4803975/triage_demo.mov)
 
 
-##### SnapMail
+#### SnapMail
 
 The 'SnapMail' demo is a snapchat-style app that allows you to send and receive photos. Instead of using a custom backend, it uses your inbox—messages with the subject 'New snap from *' are displayed, and sending a snap sends an email to the recipient with the image attached. You can view the image attached to a 'New Snap' email with a snapchat-style peek interaction.
 
-##### SimpleMail
+#### SimpleMail
 
-The Simple Mail app displays a list of threads in your Inbox and allows you to archive them. As we open-source more UI components, SimpleMail will allow you to view and compose messages as well.
-
+The Simple Mail app displays a list of threads in your Inbox using an `INModelProvider` and allows you to archive them. As we open-source more UI components, SimpleMail will be expanded to allow you to view and compose messages as well.
 
 ## Core Principles
 ----
