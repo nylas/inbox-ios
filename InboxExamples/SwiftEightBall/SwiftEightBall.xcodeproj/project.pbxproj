@@ -10,7 +10,6 @@
 		43AC5DCA19895D420018BD88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC5DC419895D420018BD88 /* AppDelegate.swift */; };
 		43AC5DCB19895D420018BD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AC5DC519895D420018BD88 /* Main.storyboard */; };
 		43AC5DCC19895D420018BD88 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43AC5DC719895D420018BD88 /* Images.xcassets */; };
-		43AC5DCD19895D420018BD88 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43AC5DC819895D420018BD88 /* Info.plist */; };
 		43AC5DCE19895D420018BD88 /* ThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC5DC919895D420018BD88 /* ThreadViewController.swift */; };
 		43AC5DD219895D890018BD88 /* Inbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43AC5DD119895D890018BD88 /* Inbox.framework */; };
 /* End PBXBuildFile section */
@@ -125,7 +124,6 @@
 			files = (
 				43AC5DCB19895D420018BD88 /* Main.storyboard in Resources */,
 				43AC5DCC19895D420018BD88 /* Images.xcassets in Resources */,
-				43AC5DCD19895D420018BD88 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

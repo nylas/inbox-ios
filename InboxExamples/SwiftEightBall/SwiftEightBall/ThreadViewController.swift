@@ -25,6 +25,14 @@ class ThreadViewController: UIViewController, INModelProviderDelegate {
         INAPIManager.shared().authenticateWithAuthToken("not-required", {(success:Bool, error: NSError?) -> Void in
             // Since we're connecting to the open source Inbox sync engine,
             // we don't need an API token.
+            if (!success || error) {
+                var msg = "The Inbox server did not respond. Make sure you've installed the Inbox Sync Engine and try again!"
+                var alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return;
+            }
+            
             var namespaces = INAPIManager.shared().namespaces()
             var namespace = namespaces[0] as? INNamespace
             
