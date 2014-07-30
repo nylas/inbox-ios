@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CXB-dd-cMi">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+    </dependencies>
+    <scenes>
+        <!--Thread View Controller-->
+        <scene sceneID="TpQ-nR-4F0">
+            <objects>
+                <viewController id="CXB-dd-cMi" customClass="ThreadViewController" customModule="SwiftEightBall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ha0-CY-6g6"/>
+                        <viewControllerLayoutGuide type="bottom" id="zb6-wh-2kK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IT1-8c-4GK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="9:29AM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxg-J0-N95">
+                                <rect key="frame" x="20" y="48" width="280" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="ZFj-Mq-hSV"/>
+                                    <constraint firstAttribute="height" constant="21" id="sP9-i0-WyK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Participant A, Participant B and me" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="3gy-Ze-JdF">
+                                <rect key="frame" x="20" y="156" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lorem ipsum this is the subject and stuff." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="uL5-tp-hU8">
+                                <rect key="frame" x="20" y="92" width="280" height="56"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lorem ipsum this is the snippet and stuff. The snippet is usually two lines of text." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="U4C-p8-FMB">
+                                <rect key="frame" x="20" y="185" width="280" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCJ-RN-rhR">
+                                <rect key="frame" x="23" y="323" width="275" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Tap here or shake to view the next thread!">
+                                    <color key="titleColor" red="0.054901964962482452" green="0.37254902720451355" blue="0.79215693473815918" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="markThreadAsRead" destination="CXB-dd-cMi" eventType="touchUpInside" id="167-5e-t6z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18039216101169586" green="0.21568629145622253" blue="0.32549020648002625" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="U4C-p8-FMB" secondAttribute="trailing" constant="20" id="Bjr-Yg-Zbr"/>
+                            <constraint firstItem="U4C-p8-FMB" firstAttribute="top" secondItem="3gy-Ze-JdF" secondAttribute="bottom" constant="8" id="C40-Qh-GAK"/>
+                            <constraint firstItem="uL5-tp-hU8" firstAttribute="top" secondItem="cxg-J0-N95" secondAttribute="bottom" constant="23" id="Edd-bA-cPZ"/>
+                            <constraint firstItem="3gy-Ze-JdF" firstAttribute="top" secondItem="uL5-tp-hU8" secondAttribute="bottom" constant="8" id="Pmw-dC-P9i"/>
+                            <constraint firstItem="3gy-Ze-JdF" firstAttribute="leading" secondItem="uL5-tp-hU8" secondAttribute="leading" id="Ppd-ZR-c5S"/>
+                            <constraint firstItem="U4C-p8-FMB" firstAttribute="leading" secondItem="IT1-8c-4GK" secondAttribute="leading" constant="20" id="bAl-Wb-6Ij"/>
+                            <constraint firstItem="cxg-J0-N95" firstAttribute="top" secondItem="Ha0-CY-6g6" secondAttribute="bottom" constant="28" id="f50-QT-puv"/>
+                            <constraint firstItem="cxg-J0-N95" firstAttribute="leading" secondItem="uL5-tp-hU8" secondAttribute="leading" id="ma3-Y2-thb"/>
+                            <constraint firstItem="3gy-Ze-JdF" firstAttribute="leading" secondItem="U4C-p8-FMB" secondAttribute="leading" id="nEY-YT-qoE"/>
+                            <constraint firstItem="3gy-Ze-JdF" firstAttribute="leading" secondItem="IT1-8c-4GK" secondAttribute="leading" constant="20" id="nUW-Xn-QWT"/>
+                            <constraint firstItem="uL5-tp-hU8" firstAttribute="leading" secondItem="IT1-8c-4GK" secondAttribute="leading" constant="20" id="o2w-49-7R0"/>
+                            <constraint firstAttribute="trailing" secondItem="uL5-tp-hU8" secondAttribute="trailing" constant="20" id="oCB-8G-ynI"/>
+                            <constraint firstAttribute="trailing" secondItem="3gy-Ze-JdF" secondAttribute="trailing" constant="20" id="sjt-XT-646"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="cxg-J0-N95" id="k1I-Sg-fcj"/>
+                        <outlet property="participantsLabel" destination="3gy-Ze-JdF" id="MYG-i6-Sn1"/>
+                        <outlet property="snippetLabel" destination="U4C-p8-FMB" id="Kip-Rt-fYl"/>
+                        <outlet property="subjectLabel" destination="uL5-tp-hU8" id="Gsk-Ey-XpG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pI6-Kk-SpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189" y="22"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination">
+            <size key="portraitSize" width="320" height="480"/>
+            <size key="landscapeSize" width="480" height="320"/>
+        </simulatedScreenMetrics>
+    </simulatedMetricsContainer>
+</document>

@@ -168,6 +168,14 @@
 #define AFNetworkingOperationFailingURLResponseErrorKey __NS_SYMBOL(AFNetworkingOperationFailingURLResponseErrorKey)
 #endif
 
+#ifndef AFURLRequestSerializationErrorDomain
+#define AFURLRequestSerializationErrorDomain __NS_SYMBOL(AFURLRequestSerializationErrorDomain)
+#endif
+
+#ifndef AFNetworkingOperationFailingURLRequestErrorKey
+#define AFNetworkingOperationFailingURLRequestErrorKey __NS_SYMBOL(AFNetworkingOperationFailingURLRequestErrorKey)
+#endif
+
 #ifndef AFNetworkingTaskDidResumeNotification
 #define AFNetworkingTaskDidResumeNotification __NS_SYMBOL(AFNetworkingTaskDidResumeNotification)
 #endif
@@ -234,14 +242,6 @@
 
 #ifndef AFNetworkingTaskDidFinishAssetPathKey
 #define AFNetworkingTaskDidFinishAssetPathKey __NS_SYMBOL(AFNetworkingTaskDidFinishAssetPathKey)
-#endif
-
-#ifndef AFURLRequestSerializationErrorDomain
-#define AFURLRequestSerializationErrorDomain __NS_SYMBOL(AFURLRequestSerializationErrorDomain)
-#endif
-
-#ifndef AFNetworkingOperationFailingURLRequestErrorKey
-#define AFNetworkingOperationFailingURLRequestErrorKey __NS_SYMBOL(AFNetworkingOperationFailingURLRequestErrorKey)
 #endif
 
 #ifndef AFNetworkingOperationDidStartNotification
