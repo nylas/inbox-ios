@@ -27,12 +27,24 @@
 - (NSDictionary *)queryParamsForPredicate:(NSPredicate*)predicate
 {
 	INPredicateToQueryParamConverter * converter = [[INPredicateToQueryParamConverter alloc] init];
-	[converter setKeysToParamsTable: @{@"to": @"to", @"from": @"from", @"cc": @"cc", @"bcc": @"bcc", @"threadID": @"thread", @"label": @"label"}];
+	[converter setKeysToParamsTable: @{@"to": @"to", @"from": @"from", @"cc": @"cc", @"bcc": @"bcc", @"tagIDs":@"tag"}];
 	[converter setKeysToLIKEParamsTable: @{@"subject": @"subject"}];
 	
 	NSMutableDictionary * params = [[converter paramsForPredicate: predicate] mutableCopy];
     [params addEntriesFromDictionary: [super queryParamsForPredicate: predicate]];
-	return params;
+	
+    NSSortDescriptor * descriptor = [[self itemSortDescriptors] firstObject];
+    if (descriptor) {
+        if ([[descriptor key] isEqualToString: @"lastMessageDate"])
+            [params setObject:@"date" forKey:@"order_by"];
+        else if ([[descriptor key] isEqualToString: @"subject"])
+            [params setObject:@"subject" forKey:@"order_by"];
+        else
+            NSAssert(false, @"Sorry, the backend only supports ordering threads by `lastMessageDate` and `subject`, so this provider cannot load threads.");
+    }
+    
+
+    return params;
 }
 
 - (void)refresh
