@@ -26,7 +26,9 @@
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",
-     @"unread": @"unread",
+	 @"cc": @"cc",
+   @"bcc": @"bcc",
+   @"unread": @"unread",
 	 @"attachmentIDs":@"files"
 	}];
 	return mapping;
@@ -63,7 +65,7 @@
 {
     if (self.unread == NO)
         return;
-    
+
     INMarkMessageAsReadTask * task = [[INMarkMessageAsReadTask alloc] initWithModel: self];
     [[INAPIManager shared] queueTask: task];
 }
