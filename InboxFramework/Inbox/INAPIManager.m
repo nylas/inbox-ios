@@ -44,7 +44,7 @@ static void initialize_INAPIManager() {
 
     NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5555/'");
     if (!api) {
-        api = @"http://api.inboxapp.com/";
+        api = @"https://api.inboxapp.com/";
 	}
 
     self = [super init];
