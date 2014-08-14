@@ -310,7 +310,7 @@ static void initialize_INAPIManager() {
 	[[_AF requestSerializer] setAuthorizationHeaderFieldWithUsername:authToken password:@""];
     [self fetchNamespaces:^(BOOL success, NSError * error) {
         if (success) {
-            [[PDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey];
+            [[PDKeychainBindings sharedKeychainBindings] setObject:authToken forKey:INKeychainAPITokenKey accessibleAttribute:kSecAttrAccessibleAfterFirstUnlock];
             [[NSNotificationCenter defaultCenter] postNotificationName:INAuthenticationChangedNotification object:nil];
 		} else {
             [[_AF requestSerializer] clearAuthorizationHeader];
