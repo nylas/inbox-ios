@@ -25,6 +25,11 @@
 	return mapping;
 }
 
++ (NSString *)resourceAPIName
+{
+    return @"files";
+}
+
 - (id)initWithImage:(UIImage*)image inNamespace:(INNamespace*)namespace
 {
 	return [self initWithFilename:@"image.jpg" mimetype:@"image/jpeg" andData:UIImageJPEGRepresentation(image, 0.85) andPreview: image inNamespace:namespace];
@@ -36,7 +41,7 @@
 	NSAssert(filename, @"You must provide an attachment filename.");
 	NSAssert(mimetype, @"You must provide an attachment mimetype.");
 	NSAssert(namespace, @"You must provide an attachment namespace.");
-	
+
 	self = [super init];
 	if (self) {
 		self.namespaceID = [namespace ID];
@@ -46,7 +51,7 @@
 		self.localDataPath = [[NSString stringWithFormat: @"~/Documents/%@.data", self.ID] stringByExpandingTildeInPath];
 		[data writeToFile: _localDataPath atomically:NO];
 		[INFile attachInstance: self];
-		
+
 	}
 	return self;
 }
@@ -55,7 +60,7 @@
 {
     if (_localPreview)
         return _localPreview;
-    
+
     // TODO: Return previews
     return nil;
 }
@@ -65,7 +70,7 @@
 	NSAssert(_localDataPath, @"Before calling -upload, you need to use one of the designated initializers to provide a reference to data to upload.");
 	if ([self uploadTask])
         return;
-    
+
 	INUploadFileTask * upload = [[INUploadFileTask alloc] initWithModel: self];
 	[[INAPIManager shared] queueTask: upload];
 }
