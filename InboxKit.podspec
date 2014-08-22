@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "InboxKit"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "The Inbox iOS framework provides a native interface to the Inbox API."
   s.description  = "The Inbox iOS framework provides a native interface to the Inbox API, with additional features that make it easy to build full-fledged mail apps for iOS or add the email functionality you need to existing applications."
   s.homepage     = "https://github.com/inboxapp/inbox-ios"
