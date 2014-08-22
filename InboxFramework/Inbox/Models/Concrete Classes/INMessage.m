@@ -27,8 +27,8 @@
 	 @"from": @"from",
 	 @"to": @"to",
 	 @"cc": @"cc",
-   @"bcc": @"bcc",
-   @"unread": @"unread",
+     @"bcc": @"bcc",
+     @"unread": @"unread",
 	 @"attachmentIDs":@"files"
 	}];
 	return mapping;
