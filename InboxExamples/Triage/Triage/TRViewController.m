@@ -37,8 +37,28 @@
     [_animator setDelegate: self];
     
     [_messageDismissView setAlpha: 0];
-    [_emptyView setAlpha: 1];
-	[_emptyTextLabel setText:@"Make sure the Inbox Sync Engine is running and that http://localhost:5555/n/ returns your synced account info."];
+    [_emptyView setAlpha: 0];
+    
+    [self authenticateIfNecessary];
+}
+
+- (void)authenticateIfNecessary
+{
+    if ([[INAPIManager shared] isAuthenticated])
+        return;
+    
+    [[INAPIManager shared] authenticateWithCompletionBlock:^(BOOL success, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            return;
+        }
+    }];
+}
+
+- (IBAction)logout:(id)sender
+{
+    [[INAPIManager shared] unauthenticate];
+    [self authenticateIfNecessary];
 }
 
 - (void)dealloc
@@ -66,6 +86,9 @@
     // If we created a new one each time you tapped 'Refresh', the entire thread
     // stack would animate in, instead of just new threads.
     if (!_threadProvider || ([_threadProvider namespaceID] != [namespace ID])) {
+        [_cardViews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+        [_cardViews removeAllObjects];
+        
         self.threadProvider = [namespace newThreadProvider];
 
         // Configure our thread provider to display ten messages ordered by date
@@ -87,6 +110,8 @@
      refresh your interface completely to reflect the new items array.
      */
     [_cardViews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    [_cardViews removeAllObjects];
+    
     for (int ii = 0; ii < [[self.threadProvider items] count]; ii++) {
         INThread * thread = [[self.threadProvider items] objectAtIndex: ii];
 		
@@ -113,6 +138,8 @@
         if (change.type == INModelProviderChangeRemove)
             [self removeThread:change.item atIndex:change.index];
     }
+
+    [self activateFrontCard];
 }
 
 - (void)provider:(INModelProvider *)provider dataFetchFailed:(NSError *)error

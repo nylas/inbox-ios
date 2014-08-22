@@ -20,10 +20,27 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleURLName</key>
+			<string>in-6fqe68ue317qr4qvddcwjfncd</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>in-6fqe68ue317qr4qvddcwjfncd</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>INAPIPath</key>
-	<string>http://localhost:5555/</string>
+	<string>https://api.inboxapp.com/</string>
+	<key>INAppID</key>
+	<string>6fqe68ue317qr4qvddcwjfncd</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>

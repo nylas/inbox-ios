@@ -16,26 +16,52 @@
     [super viewDidLoad];
     
 	[self.navigationItem setLeftBarButtonItem: self.editButtonItem];
-	[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+	[self.navigationItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)]];
+	
+    [self setRefreshControl: [[UIRefreshControl alloc] init]];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
 
-	[[INAPIManager shared] authenticateWithAuthToken:@"no-open-source-auth" andCompletionBlock:^(BOOL success, NSError *error) {
-		if (error) {
-			[[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-			return;
-		}
-		
-		INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
-		self.threadProvider = [namespace newThreadProvider];
-		self.threadProvider.itemSortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]];
-		self.threadProvider.itemRange = NSMakeRange(0, 100);
-		self.threadProvider.delegate = self;
-	}];
+    // Listen for changes to available Inbox namespaces. This usually means that the
+    // user has logged out or logged in, and we need to update the INModelProvider
+    // that is backing our table view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(namespacesChanged:) name:INNamespacesChangedNotification object:nil];
 
+    // Bounce out to login to Inbox if necessary
+    [self authenticateIfNecessary];
+}
+
+- (void)namespacesChanged:(NSNotification*)notif
+{
+    INNamespace * namespace = [[[INAPIManager shared] namespaces] firstObject];
+    self.threadProvider = [namespace newThreadProvider];
+    self.threadProvider.itemFilterPredicate = [NSComparisonPredicate predicateWithFormat:@"ANY tagIDs = %@", INTagIDInbox];
+    self.threadProvider.itemSortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastMessageDate" ascending:NO]];
+    self.threadProvider.itemRange = NSMakeRange(0, 100);
+    self.threadProvider.delegate = self;
 }
 
 - (void)refresh
 {
 	[self.threadProvider refresh];
+}
+
+- (void)logout
+{
+    [[INAPIManager shared] unauthenticate];
+    [self authenticateIfNecessary];
+}
+
+- (void)authenticateIfNecessary
+{
+    if ([[INAPIManager shared] isAuthenticated])
+        return;
+    
+    [[INAPIManager shared] authenticateWithCompletionBlock:^(BOOL success, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            return;
+        }
+    }];
 }
 
 #pragma mark - INModelProvider delegate
@@ -128,10 +154,16 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-	
 	INThread * thread = [[self.threadProvider items] objectAtIndex: indexPath.row];
 	[thread archive];
+
+    // Normally, you would animate the cell deletion here. We don't need to do that,
+    // because -archive removes the inbox tag from the thread, which causes our
+    // INModelProvider's result set to change. That means that -provider:dataAltered:
+    // will be called with the deleted item, and the cell will be animated away thre.
+    
+    // This is great, because once the Inbox SDK is real-time, changes will animate
+    // across all of your devices. ;-)
 }
 
 #pragma mark - Navigation

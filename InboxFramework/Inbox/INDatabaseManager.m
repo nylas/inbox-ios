@@ -296,7 +296,6 @@ static void initialize_INDatabaseManager() {
 					NSLog(@"Skipped %d models in local cache transaction because the cache table(s) could not be prepared.", skipped);
 			}
         }];
-		NSLog(@"Iterated");
         dispatch_async(dispatch_get_main_queue(), completion);
     });
 

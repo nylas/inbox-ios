@@ -19,14 +19,6 @@
 	self.window.rootViewController = _viewController;
 	[self.window makeKeyAndVisible];
     
-    
-	if (![[INAPIManager shared] namespaces]) {
-		[[INAPIManager shared] authenticateWithAuthToken:@"no-open-source-auth" andCompletionBlock:^(BOOL success, NSError *error) {
-			if (error)
-				[[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-		}];
-	}
-
     return YES;
 }
 							
@@ -55,6 +47,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+	return [[INAPIManager shared] handleURL: url];
 }
 
 @end

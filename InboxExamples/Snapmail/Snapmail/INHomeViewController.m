@@ -7,7 +7,7 @@
 //
 
 #import "INHomeViewController.h"
-
+#import "INAPIManager.h"
 
 @implementation INHomeViewController
 
@@ -40,33 +40,51 @@
     [longPress setDelegate: self];
     [_tableView addGestureRecognizer: longPress];
 
-    // Check Inbox authentication state. The open-source version of Inbox does not support authentication, so
-    // we can authenticate with any token we want. (The hosted Inbox service coming this fall will support auth,
-    // and we'd show an INLoginPanelController here to obtain an auth token for the user's email account.)
+    // Bounce out to login to Inbox if necessary
+    [self authenticateIfNecessary];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self refresh];
+}
+
+- (void)authenticateIfNecessary
+{
+    if ([[INAPIManager shared] isAuthenticated])
+        return [self authenticated];
     
-	if ([[INAPIManager shared] isAuthenticated]) {
-		[self authenticated];
-	} else {
-		[[INAPIManager shared] authenticateWithAuthToken:@"no-open-source-auth" andCompletionBlock:^(BOOL success, NSError *error) {
-			if (error)
-				[[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-			if (success)
-				[self authenticated];
-		}];
-	}
+    [[INAPIManager shared] authenticateWithCompletionBlock:^(BOOL success, NSError *error) {
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:@"Auth Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        }
+        if (success) {
+            [self authenticated];
+        }
+    }];
 }
 
 - (void)authenticated
 {
     // Now that we're authenticated, show the new snap button and the table view
-	UIBarButtonItem * newSnapButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"capture-button.png"] landscapeImagePhone:nil style:UIBarButtonItemStyleBordered target:self action:@selector(startCapture)];
-	[self.navigationItem setRightBarButtonItem: newSnapButton];
-	[_statusLabel setHidden: YES];
+	UIBarButtonItem * newSnap = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"capture-button.png"] landscapeImagePhone:nil style:UIBarButtonItemStyleBordered target:self action:@selector(startCapture)];
+	[self.navigationItem setRightBarButtonItem: newSnap];
+
+    UIBarButtonItem * logout = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
+	[self.navigationItem setLeftBarButtonItem: logout];
+
+    [_statusLabel setHidden: YES];
 	[_tableView setHidden: NO];
 
     // Now that we're authenticated we have a set of Inbox namespaces available to us.
     // Create the INThreadProvider that will give us a set of threads to display.
 	[self setupThreadProvider];
+}
+
+- (void)logout
+{
+    [[INAPIManager shared] unauthenticate];
+    [self authenticateIfNecessary];
 }
 
 - (void)setupThreadProvider
