@@ -106,10 +106,30 @@ task fails.
 
 - (BOOL)isAuthenticated;
 
-- (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
-
+/**
+ Set the current Auth Token and fetch available namespaces. Calls the completionBlock
+ after the namespaces request returns.
+*/
 - (void)authenticateWithAuthToken:(NSString*)authToken andCompletionBlock:(ErrorBlock)completionBlock;
 
+/**
+ Bounces out to Safari and prompts the user to enter their email address. Then directs the
+ user to the appropriate sign-in page for their email address. Inbox triggers a redirect back
+ to the app with the auth token, and the completionBlock is fired after the token is saved and
+ namespaces for the token are fetched.
+*/
+- (void)authenticateWithCompletionBlock:(ErrorBlock)completionBlock;
+
+/**
+ Bounces out to Safari and directs the user to the appropriate sign-in page for their email address.
+ Inbox triggers a redirect back to the app with the auth token, and the completionBlock is fired
+ after the token is saved and namespaces for the token are fetched.
+ */
+ - (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
+
+/**
+ Clears the cached authentication token and signs out.
+ */
 - (void)unauthenticate;
 
 /**

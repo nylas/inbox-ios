@@ -262,6 +262,11 @@ static void initialize_INAPIManager() {
     return ([[PDKeychainBindings sharedKeychainBindings] objectForKey:INKeychainAPITokenKey] != nil);
 }
 
+- (void)authenticateWithCompletionBlock:(ErrorBlock)completionBlock;
+{
+    [self authenticateWithEmail:nil andCompletionBlock:completionBlock];
+}
+
 - (void)authenticateWithEmail:(NSString*)address andCompletionBlock:(ErrorBlock)completionBlock;
 {
 	if (_authenticationCompletionBlock && (_authenticationCompletionBlock != completionBlock))
@@ -287,16 +292,20 @@ static void initialize_INAPIManager() {
 	}
 	
 	// try to visit the auth URL in Safari
+    if (address == nil)
+        address = @"";
     NSString * uri = [NSString stringWithFormat: @"%@://app/auth-response", _appURLScheme];
-	NSString * authPage = [NSString stringWithFormat: @"%@oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", [_AF.baseURL absoluteString], _appID, address, uri];
+	NSString * authPage = [NSString stringWithFormat: @"https://www.inboxapp.com/oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", _appID, address, uri];
 
-	if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
-		_authenticationWaitingForInboundURL = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
+            _authenticationWaitingForInboundURL = YES;
 
-	} else {
-		NSError * err = [NSError inboxErrorWithDescription: @"Sorry, we weren't able to switch to Safari to open the authentication URL."];
-		[self handleAuthenticationCompleted: NO withError: err];
-	}
+        } else {
+            NSError * err = [NSError inboxErrorWithDescription: @"Sorry, we weren't able to switch to Safari to open the authentication URL."];
+            [self handleAuthenticationCompleted: NO withError: err];
+        }
+    });
 }
 
 - (void)authenticateWithAuthToken:(NSString*)authToken andCompletionBlock:(ErrorBlock)completionBlock
@@ -319,6 +328,7 @@ static void initialize_INAPIManager() {
 		[self handleAuthenticationCompleted: success withError: error];
     }];
 }
+
 
 - (void)unauthenticate
 {
