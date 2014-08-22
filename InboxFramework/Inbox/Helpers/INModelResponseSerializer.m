@@ -29,7 +29,7 @@
 - (id)responseObjectForResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError * __autoreleasing *)error
 {
 	id responseObject = [super responseObjectForResponse:response data:data error:error];
-    if (!responseObject && error)
+    if (!responseObject || (error && *error))
         return nil;
     
 	BOOL badJSONClass = ([responseObject isKindOfClass:[NSArray class]] == NO);
