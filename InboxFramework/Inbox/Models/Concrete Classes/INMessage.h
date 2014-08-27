@@ -29,6 +29,7 @@ the documentation for INThread.
 @interface INMessage : INModelObject
 
 @property (nonatomic, strong) NSString * body;
+@property (nonatomic, strong) NSString * snippet;
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) NSString * subject;
 @property (nonatomic, strong) NSString * threadID;

@@ -22,6 +22,7 @@
 	[mapping addEntriesFromDictionary:@{
  	 @"subject": @"subject",
  	 @"body": @"body",
+     @"snippet": @"snippet",
 	 @"threadID": @"thread",
 	 @"date": @"date",
 	 @"from": @"from",
