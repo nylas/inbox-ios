@@ -22,14 +22,14 @@
 	[mapping addEntriesFromDictionary:@{
  	 @"subject": @"subject",
  	 @"body": @"body",
-     @"snippet": @"snippet",
+	 @"snippet": @"snippet",
 	 @"threadID": @"thread",
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",
 	 @"cc": @"cc",
-     @"bcc": @"bcc",
-     @"unread": @"unread",
+	 @"bcc": @"bcc",
+	 @"unread": @"unread",
 	}];
 	return mapping;
 }
