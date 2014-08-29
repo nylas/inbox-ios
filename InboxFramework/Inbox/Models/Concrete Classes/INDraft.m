@@ -57,49 +57,48 @@
     return m;
 }
 
-- (void)addAttachment:(INFile*)attachment
+- (void)addFile:(INFile*)file
 {
-	[self addAttachment:attachment atIndex:0];
+	[self addFile:file atIndex:0];
 }
 
-- (void)addAttachment:(INFile*)attachment atIndex:(NSInteger)index
+- (void)addFile:(INFile*)file atIndex:(NSInteger)index
 {
-    NSMutableArray * IDs = [self.attachmentIDs mutableCopy];
-    if (!IDs) IDs = [NSMutableArray array];
-    if (![IDs containsObject: [attachment ID]])
-        [IDs insertObject:[attachment ID] atIndex: index];
-    self.attachmentIDs = IDs;
+    NSMutableArray * files = [self.files mutableCopy];
+    if (!files) files = [NSMutableArray array];
+    if (![files containsObject: file])
+        [files insertObject:file atIndex: index];
+    self.files = files;
+    
+    if ([file isUnsynced]) {
+        if (![file uploadTask])
+            [file upload];
 
-    if ([attachment isUnsynced]) {
-        if (![attachment uploadTask])
-            [attachment upload];
-
-        // we can't save with this attachment ID. Find the attachment upload task
+        // we can't save with this file ID. Find the file upload task
         // and tell it to update us when the draft upload has finished.
-        [[[attachment uploadTask] waitingDrafts] addObject: self];
+        [[[file uploadTask] waitingDrafts] addObject: self];
     }
 }
 
-- (void)removeAttachment:(INFile*)attachment
+- (void)removeFile:(INFile*)file
 {
-	NSMutableArray * IDs = [self.attachmentIDs mutableCopy];
-	[IDs removeObject: [attachment ID]];
-	self.attachmentIDs = IDs;
+	NSMutableArray * files = [self.files mutableCopy];
+	[files removeObject: file];
+	self.files = files;
 
-    [[[attachment uploadTask] waitingDrafts] removeObject: self];
+    [[[file uploadTask] waitingDrafts] removeObject: self];
 }
 
-- (void)removeAttachmentAtIndex:(NSInteger)index
+- (void)removeFileAtIndex:(NSInteger)index
 {
-    [self removeAttachment: [self.attachments objectAtIndex: index]];
+    [self removeFile: [self.files objectAtIndex: index]];
 }
 
-- (void)attachmentWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID
+- (void)fileWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID
 {
-    NSMutableArray * IDs = [self.attachmentIDs mutableCopy];
-    if ([IDs containsObject: ID])
-        [IDs replaceObjectAtIndex:[IDs indexOfObject: ID] withObject:uploadedID];
-    [self setAttachmentIDs: IDs];
+    // No longer necessary, since the files array references the same
+    // INFile objects that are being modified. Not refactoring this away
+    // completely, because it may be useful in the future.
 }
 
 - (INDraftState)state

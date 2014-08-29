@@ -38,11 +38,10 @@
 	NSMutableArray * dependencies = [NSMutableArray array];
 	INMessage * draft = (INMessage *)[self model];
 
-	// are any requests uploading attachments that are referenced in our draft?
+	// are any requests uploading files that are referenced in our draft?
 	// we need to wait for those to finish...
 	for (INAPITask * other in others) {
-		if ([other isKindOfClass: [INUploadFileTask class]]
-			&& [[draft attachmentIDs] containsObject: [[other model] ID]])
+		if ([other isKindOfClass: [INUploadFileTask class]] && [[draft files] containsObject: [other model]])
 			[dependencies addObject: other];
 	}
 	

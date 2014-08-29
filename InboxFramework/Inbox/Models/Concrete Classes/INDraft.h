@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
 
 /**
 Drafts are messages that may be sent, saved, and deleted. You can create new drafts
-using one of the designated initializers, save them, add attachments, and send them using
+using one of the designated initializers, save them, add files, and send them using
 the methods documented below. The Inbox framework takes care of persisting pending
 draft operations, ensuring that -save, -send and other methods are eventually persistent,
 even if they are called when the user is offline.
@@ -51,46 +51,46 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
 - (id)initInNamespace:(INNamespace*)namespace inReplyTo:(INThread*)thread;
 
 /**
- Add an attachment to the thread. The attachment does not need to be fully uploaded
+ Add a file to the thread. The file does not need to be fully uploaded
  to be attached to a draft. However, you should call [INFile upload] to start
- the upload process before adding the attachment to the draft.
+ the upload process before adding the file to the draft.
 
- If attachments are still uploading when you call -save, the draft will not be 
- saved to the server until attachments have finished uploading.
+ If files are still uploading when you call -save, the draft will not be
+ saved to the server until files have finished uploading.
 
- @param attachment The INAttachment object to add to the draft.
+ @param file The INFile object to add to the draft.
 */
-- (void)addAttachment:(INFile*)attachment;
+- (void)addFile:(INFile*)file;
 
 /**
- Add an attachment to the thread at a particular index.
- @param attachment The INAttachment object to add to the draft.
+ Add a file to the thread at a particular index.
+ @param file The INFile object to add to the draft.
  @param index The index where the draft should be attached.
 */
-- (void)addAttachment:(INFile*)attachment atIndex:(NSInteger)index;
+- (void)addFile:(INFile*)file atIndex:(NSInteger)index;
 
 /**
- Remove the provided attachment from the draft. Note that you need to call -save
+ Remove the provided file from the draft. Note that you need to call -save
  to commit your changes to Inbox after modifying the draft.
 
- @param attachment The attachment to remove from the draft.
+ @param file The file to remove from the draft.
 */
-- (void)removeAttachment:(INFile*)attachment;
+- (void)removeFile:(INFile*)file;
 
 /**
- Remove the provided attachment from the draft. Note that you need to call -save
+ Remove the provided file from the draft. Note that you need to call -save
  to commit your changes to Inbox after modifying the draft.
 
- @param index The index of the attachment to remove from the draft.
+ @param index The index of the file to remove from the draft.
  */
-- (void)removeAttachmentAtIndex:(NSInteger)index;
+- (void)removeFileAtIndex:(NSInteger)index;
 
 /**
- Called internally when an attachment has finished uploading and it's ID has changed.
+ Called internally when an file has finished uploading and it's ID has changed.
  @param ID The ID that was initially assigned to the INFile.
  @param uploadedID The ID assigned by the server that now represents the INFile.
 */
-- (void)attachmentWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID;
+- (void)fileWithID:(NSString*)ID uploadedAs:(NSString*)uploadedID;
 
 /**
 The current state of the draft. See INDraftState for a list of available states.
@@ -104,8 +104,8 @@ The current state of the draft. See INDraftState for a list of available states.
  the change immediately but may be performed later on the Inbox server if an internet
  connection is not available.
  
- If you've added attachments to the draft and attachments are still uploading, the
- draft will not be saved to the server until attachment uploads are complete.
+ If you've added files to the draft and files are still uploading, the
+ draft will not be saved to the server until file uploads are complete.
 */
 - (void)save;
 
@@ -113,7 +113,7 @@ The current state of the draft. See INDraftState for a list of available states.
  Send the draft. This method is eventually persistent and may
  be performed later if an internet connection is not available.
  
- Drafts will not be sent until all pending saves are complete and attachments have
+ Drafts will not be sent until all pending saves are complete and files have
  been uploaded. It's safe to call -save and -send back to back
  */
 - (void)send;

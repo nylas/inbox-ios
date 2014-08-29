@@ -30,7 +30,6 @@
 	 @"cc": @"cc",
      @"bcc": @"bcc",
      @"unread": @"unread",
-	 @"attachmentIDs":@"files"
 	}];
 	return mapping;
 }
@@ -52,14 +51,27 @@
     return [INThread instanceWithID: [self threadID] inNamespaceID: [self namespaceID]];
 }
 
-- (NSArray*)attachments
+- (NSMutableDictionary *)resourceDictionary
 {
-	NSMutableArray * attachments = [NSMutableArray array];
-	for (NSString * ID in _attachmentIDs) {
-		INFile * attachment = [INFile instanceWithID:ID inNamespaceID:[self namespaceID]];
-		[attachments addObject: attachment];
-	}
-	return attachments;
+    NSMutableDictionary * dict = [super resourceDictionary];
+    NSMutableArray * files = [NSMutableArray array];
+    for (INFile * file in _files)
+        [files addObject: [file resourceDictionary]];
+    [dict setObject:files forKey:@"files"];
+    return dict;
+}
+
+- (void)updateWithResourceDictionary:(NSDictionary *)dict
+{
+    [super updateWithResourceDictionary: dict];
+    
+    NSMutableArray * files = [NSMutableArray array];
+    for (NSDictionary * fileDict in dict[@"files"]) {
+        INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
+        [file updateWithResourceDictionary: fileDict];
+        [files addObject: file];
+    }
+    _files = [NSArray arrayWithArray: files];
 }
 
 - (void)markAsRead

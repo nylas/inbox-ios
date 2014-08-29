@@ -33,7 +33,7 @@ the documentation for INThread.
 @property (nonatomic, strong) NSDate * date;
 @property (nonatomic, strong) NSString * subject;
 @property (nonatomic, strong) NSString * threadID;
-@property (nonatomic, strong) NSArray * attachmentIDs;
+@property (nonatomic, strong) NSArray * files;
 @property (nonatomic, strong) NSArray * from;
 @property (nonatomic, strong) NSArray * to;
 @property (nonatomic, strong) NSArray * cc;

@@ -1,5 +1,5 @@
 //
-//  INSaveAttachmentChange.m
+//  INUploadFileTask.m
 //  InboxFramework
 //
 //  Created by Ben Gotow on 5/21/14.
@@ -7,8 +7,8 @@
 //
 
 #import "INUploadFileTask.h"
-#import "INFile.h"
 #import "INDatabaseManager.h"
+#import "INFile.h"
 #import "INDraft.h"
 
 @implementation INUploadFileTask
@@ -25,18 +25,18 @@
 
 - (NSURLRequest *)buildAPIRequest
 {
-	INFile * attachment = (INFile *)self.model;
+	INFile * file = (INFile *)self.model;
 	
-    NSAssert(attachment, @"INUploadAttachmentChange asked to buildRequest with no model!");
-	NSAssert([attachment namespaceID], @"INUploadAttachmentChange asked to buildRequest with no namespace!");
-	NSAssert([attachment localDataPath], @"INUploadAttachmentChange asked to upload an attachment with no local data.");
+    NSAssert(file, @"INUploadFileTask asked to buildRequest with no model!");
+	NSAssert([file namespaceID], @"INUploadFileTask asked to buildRequest with no namespace!");
+	NSAssert([file localDataPath], @"INUploadFileTask asked to upload a file with no local data.");
 	
-    NSString * path = [NSString stringWithFormat:@"/n/%@/files", [attachment namespaceID]];
+    NSString * path = [NSString stringWithFormat:@"/n/%@/files", [file namespaceID]];
     NSString * url = [[NSURL URLWithString:path relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
 
 	return [[[[INAPIManager shared] AF] requestSerializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-		NSURL * fileURL = [NSURL fileURLWithPath: [attachment localDataPath]];
-		[formData appendPartWithFileURL:fileURL name:@"file" fileName:[attachment filename] mimeType:[attachment mimetype] error:NULL];
+		NSURL * fileURL = [NSURL fileURLWithPath: [file localDataPath]];
+		[formData appendPartWithFileURL:fileURL name:@"file" fileName:[file filename] mimeType:[file mimetype] error:NULL];
 	} error:NULL];
 }
 
@@ -57,13 +57,13 @@
 
     NSString * oldID = [self.model ID];
 
- 	INFile * attachment = (INFile *)self.model;
-    [[INDatabaseManager shared] unpersistModel: attachment willResaveSameModel:YES];
-	[attachment updateWithResourceDictionary: responseObject];
-	[[INDatabaseManager shared] persistModel: attachment];
+ 	INFile * file = (INFile *)self.model;
+    [[INDatabaseManager shared] unpersistModel: file willResaveSameModel:YES];
+	[file updateWithResourceDictionary: responseObject];
+	[[INDatabaseManager shared] persistModel: file];
 	
 	for (INDraft * draft in [self waitingDrafts])
-		[draft attachmentWithID:oldID uploadedAs: [self.model ID]];
+        [draft fileWithID:oldID uploadedAs:[self.model ID]];
 }
 
 @end
