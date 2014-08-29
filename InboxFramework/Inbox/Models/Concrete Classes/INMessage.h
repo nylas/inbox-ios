@@ -49,10 +49,10 @@ the documentation for INThread.
 - (INThread*)thread;
 
 /*
- @return An array of INAttachment objects representing attachments to this message.
- Attachment objects can be queried for previews, download links, etc.
+ @return An array of INFile objects representing files on this message.
+ INFile objects can be queried for previews, download links, etc.
 */
-- (NSArray*)attachments;
+- (NSArray*)files;
 
 /*
  Mark the individual message as read. This change takes effect immediately in the local cache
