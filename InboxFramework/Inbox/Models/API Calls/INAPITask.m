@@ -145,6 +145,7 @@
         }
     }];
     
+    [op setShouldExecuteAsBackgroundTaskWithExpirationHandler: NULL];
 	[op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
 		[self setPercentComplete: (double)totalBytesWritten / (double)totalBytesExpectedToWrite];
 	}];
