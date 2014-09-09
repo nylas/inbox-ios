@@ -19,7 +19,7 @@
 + (NSMutableDictionary *)resourceMapping
 {
 	NSMutableDictionary * mapping = [super resourceMapping];
-	[mapping addEntriesFromDictionary:@{ @"internalState": @"state" }];
+	[mapping addEntriesFromDictionary:@{ @"internalState": @"state", @"version":@"version" }];
 	return mapping;
 }
 

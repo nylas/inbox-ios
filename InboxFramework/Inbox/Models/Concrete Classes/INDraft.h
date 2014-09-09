@@ -31,6 +31,7 @@ Inbox objects by subscribing to INModelObjectChangedNotification.
 */
 @interface INDraft : INMessage
 
+@property (nonatomic, strong) NSString * version;
 @property (nonatomic, strong) NSString * internalState;
 
 /*

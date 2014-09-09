@@ -10,6 +10,7 @@
 #import "INDatabaseManager.h"
 #import "INDeleteDraftTask.h"
 #import "INSaveDraftTask.h"
+#import "INDraft.h"
 #import "INTag.h"
 
 @implementation INSendDraftTask
@@ -36,10 +37,11 @@
 	NSAssert([self.model namespaceID], @"INSendDraftChange asked to buildRequest with no namespace!");
 	
     NSError * error = nil;
-    NSString * sendPath = [NSString stringWithFormat:@"/n/%@/send", [self.model namespaceID]];
+    INDraft * draft = (INDraft*)self.model;
+    NSString * sendPath = [NSString stringWithFormat:@"/n/%@/send", [draft namespaceID]];
     NSString * url = [[NSURL URLWithString:sendPath relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     
-	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:@{@"draft_id": [self.model ID]} error:&error];
+	return [[[[INAPIManager shared] AF] requestSerializer] requestWithMethod:@"POST" URLString:url parameters:@{@"draft_id": [draft ID], @"version": [draft version]} error:&error];
 }
 
 - (NSArray*)dependenciesIn:(NSArray*)others
