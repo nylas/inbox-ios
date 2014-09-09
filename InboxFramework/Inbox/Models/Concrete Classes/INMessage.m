@@ -23,7 +23,7 @@
  	 @"subject": @"subject",
  	 @"body": @"body",
 	 @"snippet": @"snippet",
-	 @"threadID": @"thread",
+	 @"threadID": @"thread_id",
 	 @"date": @"date",
 	 @"from": @"from",
 	 @"to": @"to",

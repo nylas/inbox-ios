@@ -33,11 +33,13 @@
 
 - (NSURLRequest *)buildAPIRequest
 {
+    INDraft * draft = (INDraft*)self.model;
+
     NSAssert(self.model, @"INSendDraftChange asked to buildRequest with no model!");
 	NSAssert([self.model namespaceID], @"INSendDraftChange asked to buildRequest with no namespace!");
+	NSAssert([self.model namespaceID], @"The Inbox API now requires drafts with versions. Refresh this INDraft object to get one with a version.");
 	
     NSError * error = nil;
-    INDraft * draft = (INDraft*)self.model;
     NSString * sendPath = [NSString stringWithFormat:@"/n/%@/send", [draft namespaceID]];
     NSString * url = [[NSURL URLWithString:sendPath relativeToURL:[INAPIManager shared].AF.baseURL] absoluteString];
     

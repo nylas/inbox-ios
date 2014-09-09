@@ -20,9 +20,8 @@
 		@"subject": @"subject",
 		@"participants": @"participants",
 		@"lastMessageDate": @"last_message_timestamp",
-		@"messageIDs": @"messages",
-        @"draftIDs": @"drafts",
-		@"tagIDs": @"tags",
+		@"messageIDs": @"message_ids",
+        @"draftIDs": @"draft_ids",
 		@"snippet": @"snippet"
 	}];
 	return mapping;

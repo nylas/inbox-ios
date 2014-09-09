@@ -203,7 +203,7 @@
 
 + (NSMutableDictionary *)resourceMapping
 {
-	return [@{@"ID": @"id", @"namespaceID": @"namespace", @"createdAt": @"created_at", @"updatedAt": @"updated_at"} mutableCopy];
+	return [@{@"ID": @"id", @"namespaceID": @"namespace_id", @"createdAt": @"created_at", @"updatedAt": @"updated_at"} mutableCopy];
 }
 
 + (NSString *)resourceAPIName
