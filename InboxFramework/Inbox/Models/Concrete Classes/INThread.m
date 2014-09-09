@@ -22,6 +22,7 @@
 		@"lastMessageDate": @"last_message_timestamp",
 		@"messageIDs": @"message_ids",
         @"draftIDs": @"draft_ids",
+        @"tagIDs": @"tags",
 		@"snippet": @"snippet"
 	}];
 	return mapping;
