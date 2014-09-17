@@ -31,11 +31,13 @@
 - (id)initInNamespace:(INNamespace*)namespace
 {
     NSAssert(namespace, @"initInNamespace: called with a nil namespace.");
-    INDraft * m = [[INDraft alloc] init];
-    [m setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
-    [m setNamespaceID: [namespace ID]];
-    [m setDate: [NSDate date]];
-    return m;
+    self = [super init];
+    if (self) {
+        [self setFrom: @[@{@"email": [namespace emailAddress], @"name": [namespace emailAddress]}]];
+        [self setNamespaceID: [namespace ID]];
+        [self setDate: [NSDate date]];
+    }
+    return self;
 }
 
 - (id)initInNamespace:(INNamespace*)namespace inReplyTo:(INThread*)thread
@@ -43,18 +45,18 @@
     NSAssert(namespace, @"initInNamespace: called with a nil namespace.");
 	NSAssert([thread isUnsynced] == NO, @"It looks like you're creating a new draft on a new thread. Instead of creating an INThread and then creating a draft on that thread, just create a new draft with [INDraft initInNamespace:]. A new thread will be created automatically when you send the draft!");
 	
-    INDraft * m = [[INDraft alloc] initInNamespace: namespace];
-    
-    NSMutableArray * recipients = [NSMutableArray array];
-    for (NSDictionary * recipient in [thread participants])
-        if (![[[INAPIManager shared] namespaceEmailAddresses] containsObject: recipient[@"email"]])
-            [recipients addObject: recipient];
-    
-    [m setTo: recipients];
-    [m setSubject: thread.subject];
-    [m setThreadID: [thread ID]];
-    
-    return m;
+    self = [self initInNamespace: namespace];
+    if (self) {
+        NSMutableArray * recipients = [NSMutableArray array];
+        for (NSDictionary * recipient in [thread participants])
+            if (![[[INAPIManager shared] namespaceEmailAddresses] containsObject: recipient[@"email"]])
+                [recipients addObject: recipient];
+        
+        [self setTo: recipients];
+        [self setSubject: thread.subject];
+        [self setThreadID: [thread ID]];
+    }
+    return self;
 }
 
 - (void)addFile:(INFile*)file
