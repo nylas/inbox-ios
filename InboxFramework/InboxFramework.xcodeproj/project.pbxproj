@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4307F74019CA39BC00B37A24 /* INSaveTagTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 4307F73E19CA39BC00B37A24 /* INSaveTagTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4307F74119CA39BC00B37A24 /* INSaveTagTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 4307F73E19CA39BC00B37A24 /* INSaveTagTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4307F74219CA39BC00B37A24 /* INSaveTagTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307F73F19CA39BC00B37A24 /* INSaveTagTask.m */; };
+		4307F74319CA39BC00B37A24 /* INSaveTagTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307F73F19CA39BC00B37A24 /* INSaveTagTask.m */; };
 		4318A4BF1973B5260053DD42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FF122E191AF2E70043E2E6 /* Foundation.framework */; };
 		4318A4CE1973B5A60053DD42 /* INAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B27D8A19525EC2002532D3 /* INAPIManager.m */; };
 		4318A4CF1973B5A60053DD42 /* INDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B27D8F19525EC2002532D3 /* INDatabaseManager.m */; };
@@ -397,6 +401,8 @@
 		1D6AA3EAE06C40EDB2393D2E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43032FC8196DC0BE008A8A24 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		43032FCA196DC2E6008A8A24 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		4307F73E19CA39BC00B37A24 /* INSaveTagTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSaveTagTask.h; sourceTree = "<group>"; };
+		4307F73F19CA39BC00B37A24 /* INSaveTagTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSaveTagTask.m; sourceTree = "<group>"; };
 		430E98331930101F0078F430 /* Inbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inbox-Info.plist"; sourceTree = "<group>"; };
 		430E98351930101F0078F430 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		430E98371930101F0078F430 /* Inbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inbox-Prefix.pch"; sourceTree = "<group>"; };
@@ -857,6 +863,8 @@
 		43B27D9319525EC2002532D3 /* API Calls */ = {
 			isa = PBXGroup;
 			children = (
+				4307F73E19CA39BC00B37A24 /* INSaveTagTask.h */,
+				4307F73F19CA39BC00B37A24 /* INSaveTagTask.m */,
 				43B27D9419525EC2002532D3 /* INAddRemoveTagsTask.h */,
 				43B27D9519525EC2002532D3 /* INAddRemoveTagsTask.m */,
 				43B27D9619525EC2002532D3 /* INAPITask.h */,
@@ -1337,6 +1345,7 @@
 				4318A5171973B5CA0053DD42 /* INFile.h in Headers */,
 				4318A5181973B5CA0053DD42 /* INMessage.h in Headers */,
 				4318A5191973B5CA0053DD42 /* INNamespace.h in Headers */,
+				4307F74119CA39BC00B37A24 /* INSaveTagTask.h in Headers */,
 				4318A51A1973B5CA0053DD42 /* INTag.h in Headers */,
 				4318A51B1973B5CA0053DD42 /* INThread+Private.h in Headers */,
 				4318A51C1973B5CA0053DD42 /* INThread.h in Headers */,
@@ -1396,6 +1405,7 @@
 			files = (
 				43B27DDF19525EC2002532D3 /* Inbox.h in Headers */,
 				43E90FEA196DE3B500990344 /* AFHTTPRequestOperationManager.h in Headers */,
+				4307F74019CA39BC00B37A24 /* INSaveTagTask.h in Headers */,
 				43B27DE019525EC2002532D3 /* INDatabaseManager.h in Headers */,
 				43B27DEC19525EC2002532D3 /* INSaveDraftTask.h in Headers */,
 				43B27DD519525EC2002532D3 /* INModelResponseSerializer.h in Headers */,
@@ -1664,6 +1674,7 @@
 				4318A4DF1973B5A60053DD42 /* INMessageProvider.m in Sources */,
 				4318A4E01973B5A60053DD42 /* INModelObject+Uniquing.m in Sources */,
 				4318A4E11973B5A60053DD42 /* INModelObject.m in Sources */,
+				4307F74319CA39BC00B37A24 /* INSaveTagTask.m in Sources */,
 				4318A4E21973B5A60053DD42 /* INModelProvider.m in Sources */,
 				4318A4E31973B5A60053DD42 /* INThreadProvider.m in Sources */,
 				4318A4E41973B5A60053DD42 /* FMDatabase+INModelQueries.m in Sources */,
@@ -1821,6 +1832,7 @@
 				43B27DCD19525EC2002532D3 /* NSObject+AssociatedObjects.m in Sources */,
 				43E91002196DE3B800990344 /* UIButton+AFNetworking.m in Sources */,
 				43F9F4AF196481800048ABE8 /* INRecipientsLabel.m in Sources */,
+				4307F74219CA39BC00B37A24 /* INSaveTagTask.m in Sources */,
 				43B27DE719525EC2002532D3 /* INAPITask.m in Sources */,
 				43E91007196DE3B800990344 /* UIProgressView+AFNetworking.m in Sources */,
 				43E90FFC196DE3B800990344 /* AFNetworkActivityIndicatorManager.m in Sources */,
