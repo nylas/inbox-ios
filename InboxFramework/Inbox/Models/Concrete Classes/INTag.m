@@ -73,4 +73,9 @@
     [[INAPIManager shared] queueTask: save];
 }
 
++ (NSArray *)databaseIndexProperties
+{
+    return [[super databaseIndexProperties] arrayByAddingObjectsFromArray: @[@"providedName"]];
+}
+
 @end
