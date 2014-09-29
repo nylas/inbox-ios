@@ -479,6 +479,15 @@ static void initialize_INDatabaseManager() {
             [__results addObject: jsonData];
         }
         [resultSet close];
+        
+        // perform the corresponding update to last_accessed_date
+        NSString * select = [NSString stringWithFormat:@"SELECT * FROM %@", [klass databaseTableName]];
+        NSString * update = [NSString stringWithFormat:@"UPDATE %@ SET last_accessed_at = date('now')", [klass databaseTableName]];
+        
+        if ([query hasPrefix: select] && ([__results count] > 0)) {
+            NSString * updateQuery = [query stringByReplacingOccurrencesOfString:select withString:update];
+            [db executeUpdate:updateQuery withParameterDictionary: arguments];
+        }
     }];
     
     // Inflate the data into JSON on our background query processing queue.

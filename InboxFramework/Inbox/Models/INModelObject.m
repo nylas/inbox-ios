@@ -203,7 +203,11 @@
 
 + (NSMutableDictionary *)resourceMapping
 {
-	return [@{@"ID": @"id", @"namespaceID": @"namespace_id", @"createdAt": @"created_at", @"updatedAt": @"updated_at"} mutableCopy];
+	return [@{@"ID": @"id",
+              @"namespaceID": @"namespace_id",
+              @"createdAt": @"created_at",
+              @"updatedAt": @"updated_at",
+              @"lastAccessedAt": @"last_accessed_at"} mutableCopy];
 }
 
 + (NSString *)resourceAPIName
@@ -219,7 +223,7 @@
 
 + (NSArray *)databaseIndexProperties
 {
-	return @[@"ID", @"namespaceID"];
+	return @[@"ID", @"namespaceID", @"lastAccessedAt"];
 }
 
 + (NSArray *)databaseJoinTableProperties

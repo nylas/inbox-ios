@@ -27,6 +27,7 @@ static NSString * INModelObjectChangedNotification = @"model_changed";
 @property (nonatomic, strong) NSString * namespaceID;
 @property (nonatomic, strong) NSDate * createdAt;
 @property (nonatomic, strong) NSDate * updatedAt;
+@property (nonatomic, strong) NSDate * lastAccessedAt;
 
 #pragma Getting Instances
 
