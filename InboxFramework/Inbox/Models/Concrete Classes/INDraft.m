@@ -47,12 +47,13 @@
 	
     self = [self initInNamespace: namespace];
     if (self) {
-        NSMutableArray * recipients = [NSMutableArray array];
-        for (NSDictionary * recipient in [thread participants])
-            if (![[[INAPIManager shared] namespaceEmailAddresses] containsObject: recipient[@"email"]])
-                [recipients addObject: recipient];
-        
-        [self setTo: recipients];
+        NSMutableDictionary * recipients = [NSMutableDictionary dictionary];
+        for (NSDictionary * recipient in [thread participants]) {
+            BOOL isMe = [[[INAPIManager shared] namespaceEmailAddresses] containsObject: recipient[@"email"]];
+            if (!isMe)
+               [recipients setObject: recipient forKey: recipient[@"email"]];
+        }
+        [self setTo: [recipients allValues]];
         [self setSubject: thread.subject];
         [self setThreadID: [thread ID]];
     }
