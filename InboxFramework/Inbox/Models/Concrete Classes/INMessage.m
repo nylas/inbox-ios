@@ -55,9 +55,14 @@
 {
     NSMutableDictionary * dict = [super resourceDictionary];
     NSMutableArray * files = [NSMutableArray array];
-    for (INFile * file in _files)
+    NSMutableArray * fileIDs = [NSMutableArray array];
+    for (INFile * file in _files) {
         [files addObject: [file resourceDictionary]];
+        [fileIDs addObject: [file ID]];
+    }
     [dict setObject:files forKey:@"files"];
+    [dict setObject:fileIDs forKey:@"file_ids"];
+
     return dict;
 }
 
@@ -66,10 +71,17 @@
     [super updateWithResourceDictionary: dict];
     
     NSMutableArray * files = [NSMutableArray array];
-    for (NSDictionary * fileDict in dict[@"files"]) {
-        INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
-        [file updateWithResourceDictionary: fileDict];
-        [files addObject: file];
+    if (dict[@"files"]) {
+        for (NSDictionary * fileDict in dict[@"files"]) {
+            INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
+            [file updateWithResourceDictionary: fileDict];
+            [files addObject: file];
+        }
+    } else {
+        for (NSDictionary * fileDict in dict[@"file_ids"]) {
+            INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
+            [files addObject: file];
+        }
     }
     _files = [NSArray arrayWithArray: files];
 }
