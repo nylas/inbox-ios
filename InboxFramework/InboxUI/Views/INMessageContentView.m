@@ -192,15 +192,15 @@ height:auto;\
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-	CGSize s = _webView.scrollView.contentSize;
-	[_webView in_setFrameHeight: s.height];
-	[_webView setAlpha: 1];
+    int height = [[_webView stringByEvaluatingJavaScriptFromString:@"window.document.body.scrollHeight"] intValue];
+    [_webView in_setFrameHeight: height];
+    [_webView setAlpha: 1];
 
     _contentLoadCompleted = YES;
     
     if ([self.delegate respondsToSelector: @selector(messageContentViewSizeDetermined:)]) {
-        [self.delegate messageContentViewSizeDetermined: s];
-	}
+        [self.delegate messageContentViewSizeDetermined: _webView.frame.size];
+    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
