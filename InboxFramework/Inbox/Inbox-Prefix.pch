@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef COCOAPODS
 #import "INDependencyNamespacing.h"
+#endif
 
 #import "AFNetworking.h"
 
