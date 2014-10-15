@@ -10,6 +10,7 @@
 #import "INThread.h"
 #import "INFile.h"
 #import "NSString+FormatConversion.h"
+#import "INModelObject+Uniquing.h"
 #import "INNamespace.h"
 #import "INMarkMessageAsReadTask.h"
 
@@ -73,13 +74,13 @@
     NSMutableArray * files = [NSMutableArray array];
     if (dict[@"files"]) {
         for (NSDictionary * fileDict in dict[@"files"]) {
-            INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
+            INFile * file = [INFile attachedInstanceMatchingID: fileDict[@"id"] createIfNecessary:YES didCreate: NULL];
             [file updateWithResourceDictionary: fileDict];
             [files addObject: file];
         }
     } else {
-        for (NSDictionary * fileDict in dict[@"file_ids"]) {
-            INFile * file = [INFile instanceWithID:fileDict[@"id"] inNamespaceID:[self namespaceID]];
+        for (NSDictionary * ID in dict[@"file_ids"]) {
+            INFile * file = [INFile attachedInstanceMatchingID: ID createIfNecessary:YES didCreate: NULL];
             [files addObject: file];
         }
     }
