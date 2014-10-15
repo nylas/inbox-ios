@@ -391,7 +391,7 @@ static void initialize_INDatabaseManager() {
     
     for (NSString * property in [[model class] databaseJoinTableProperties]) {
         NSString * propertyTableName = [NSString stringWithFormat: @"%@-%@", tableName, property];
-        NSString * deleteSQL = [NSString stringWithFormat: @"DELETE * FROM `%@` WHERE id = `?`", propertyTableName];
+        NSString * deleteSQL = [NSString stringWithFormat: @"DELETE FROM `%@` WHERE id = `?`", propertyTableName];
         [db executeUpdate: deleteSQL, model.ID];
     }
     
@@ -456,11 +456,11 @@ static void initialize_INDatabaseManager() {
 
 - (void)selectModelsOfClassSync:(Class)klass withQuery:(NSString *)query andParameters:(NSDictionary *)arguments andCallback:(ResultsBlock)callback
 {
-	NSAssert(callback, @"-selectModelsOfClass called without a valid callback.");
-	NSAssert(query, @"-selectModelsOfClass called without a valid query.");
-	
-	if (![self checkModelTable:klass])
-		return;
+    NSAssert(callback, @"-selectModelsOfClass called without a valid callback.");
+    NSAssert(query, @"-selectModelsOfClass called without a valid query.");
+    
+    if (![self checkModelTable:klass])
+        return;
     
     NSMutableArray * __block __results = [NSMutableArray array];
     NSDate * __block startDB = nil;
@@ -474,20 +474,20 @@ static void initialize_INDatabaseManager() {
         startDB = [NSDate date];
         FMResultSet * resultSet = [db executeQuery:query withParameterDictionary:arguments];
         endDB = [NSDate date];
+        
+        NSMutableArray * IDs = [NSMutableArray array];
         while ([resultSet next]) {
             NSData * jsonData = [resultSet dataForColumn:@"data"];
             [__results addObject: jsonData];
+            
+            [IDs addObject: [resultSet stringForColumn: @"id"]];
         }
         [resultSet close];
         
-        // perform the corresponding update to last_accessed_date
-        NSString * select = [NSString stringWithFormat:@"SELECT * FROM %@", [klass databaseTableName]];
-        NSString * update = [NSString stringWithFormat:@"UPDATE %@ SET last_accessed_at = date('now')", [klass databaseTableName]];
-        
-        if ([query hasPrefix: select] && ([__results count] > 0)) {
-            NSString * updateQuery = [query stringByReplacingOccurrencesOfString:select withString:update];
-            [db executeUpdate:updateQuery withParameterDictionary: arguments];
-        }
+        // Update all of the rows which we retrieved, marking that they were accessed. This is important
+        // so that we can wipe the app's local cache of messages that have not been viewed in a while.
+        NSString * updateQuery = [NSString stringWithFormat:@"UPDATE %@ SET last_accessed_at = date('now') WHERE id IN ('%@')", [klass databaseTableName], [IDs componentsJoinedByString:@"','"]];
+        [db executeUpdate:updateQuery withParameterDictionary: arguments];
     }];
     
     // Inflate the data into JSON on our background query processing queue.
