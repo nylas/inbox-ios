@@ -1,9 +1,7 @@
 Inbox iOS SDK
 ======
 
-## **NOTE** This framework is currently not actively maintained. Please feel free to use it and send us a pull request if you fix anything or add a feature, though. :)
-
-----
+## **NOTE**: This framework is currently not actively maintained. Please feel free to use it and send us a pull request if you fix anything or add a feature, though. :)
 
 #### Using InboxKit via Cocoapods
 
