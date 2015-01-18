@@ -26,6 +26,7 @@ and a namespace may not always be an entire email account.
 @interface INNamespace : INModelObject
 
 @property (nonatomic, strong) NSString * emailAddress;
+@property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * provider;
 @property (nonatomic, strong) NSString * status;
 @property (nonatomic, strong) NSArray * scope;
