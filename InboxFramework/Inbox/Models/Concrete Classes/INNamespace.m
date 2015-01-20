@@ -23,7 +23,8 @@
  	 @"provider": @"provider",
 	 @"status": @"status",
 	 @"scope": @"scope",
-	 @"lastSync": @"last_sync"
+	 @"lastSync": @"last_sync",
+	 @"name": @"name"
 	}];
 	return mapping;
 }
