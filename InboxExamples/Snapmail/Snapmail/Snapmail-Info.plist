@@ -36,7 +36,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>INAPIPath</key>
-	<string>https://api.inboxapp.com/</string>
+	<string>https://api.nylas.com/</string>
 	<key>INAppID</key>
 	<string>c3ozq7z6yx0yigb6kv132o2cr</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -123,7 +123,7 @@ There are several core design principles at the heart of the Inbox iOS SDK.
 ## Authentication
 ---
 
-If you're building an application against the hosted version of the Inbox API, you need to authenticate your users with Inbox before making API requests. The Inbox SDK for iOS provides convenience methods for moving through the OAuth process, and is very similar to Facebook. Your users click "Sign In" within your app and are directed to www.inboxapp.com in Safari. After they've signed in to your email, your app receives a callback that includes an authentication token.
+If you're building an application against the hosted version of the Inbox API, you need to authenticate your users with Inbox before making API requests. The Inbox SDK for iOS provides convenience methods for moving through the OAuth process, and is very similar to Facebook. Your users click "Sign In" within your app and are directed to www.nylas.com in Safari. After they've signed in to your email, your app receives a callback that includes an authentication token.
 
 
 1. Add your Inbox App ID to your application's `Info.plist` file as `INAppID`.
@@ -145,7 +145,7 @@ If you're building an application against the hosted version of the Inbox API, y
 
 ```
 :::objc
-NSString * email = @"ben@inboxapp.com";
+NSString * email = @"ben@nylas.com";
 [[INAPIManager shared] authenticateWithEmail:email andCompletionBlock:^(BOOL success, NSError *error) {
 	if (success)
 		// the user approved us to access their account - let's go!

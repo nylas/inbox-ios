@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
   s.platform     = :ios, "7.0"
 
-  s.author             = { "Ben Gotow" => "ben@inboxapp.com" }
+  s.author             = { "Ben Gotow" => "ben@nylas.com" }
   s.social_media_url   = "http://twitter.com/bengotow"
 
   s.prefix_header_file = "InboxFramework/Inbox/Inbox-Prefix.pch"

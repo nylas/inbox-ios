@@ -44,7 +44,7 @@ static void initialize_INAPIManager() {
 
     NSAssert(api, @"Please add INAPIPath to your Info.plist. If you're using your local development environment, you probably want the value 'http://localhost:5555/'");
     if (!api) {
-        api = @"https://api.inboxapp.com/";
+        api = @"https://api.nylas.com/";
 	}
 
     self = [super init];
@@ -295,7 +295,7 @@ static void initialize_INAPIManager() {
     if (address == nil)
         address = @"";
     NSString * uri = [NSString stringWithFormat: @"%@://app/auth-response", _appURLScheme];
-	NSString * authPage = [NSString stringWithFormat: @"https://www.inboxapp.com/oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", _appID, address, uri];
+	NSString * authPage = [NSString stringWithFormat: @"https://api.nylas.com/oauth/authorize?client_id=%@&response_type=token&login_hint=%@&redirect_uri=%@", _appID, address, uri];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([[UIApplication sharedApplication] openURL: [NSURL URLWithString:authPage]]) {
