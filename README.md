@@ -22,9 +22,9 @@ InboxKit:
 
 
 
-#### Using InboxKit via Cocoapods
+#### Using InboxKit via CocoaPods
 
-Cocoapods is a dependency management system for Xcode and is the easiest way to create and maintain projects that have dependencies. You can learn more about Cocoapods in the [CocoaPods Getting Started Guide](http://guides.cocoapods.org/using/getting-started.html).
+CocoaPods is a dependency management system for Xcode and is the easiest way to create and maintain projects that have dependencies. You can learn more about CocoaPods in the [CocoaPods Getting Started Guide](http://guides.cocoapods.org/using/getting-started.html).
 
 - Add `pod 'InboxKit'` to your Podfile
 - Run `pod install`
@@ -33,7 +33,7 @@ Cocoapods is a dependency management system for Xcode and is the easiest way to 
 
 #### Using InboxKit as a Framework
 
-The Inbox Xcode project declares two framework targets that you can use in your projects if you're not interested in using Cocoapods.
+The Inbox Xcode project declares two framework targets that you can use in your projects if you're not interested in using CocoaPods.
 
 - **For General Use:** The `Inbox-Mk8` framework target is compatible with iOS 7+ and Xcode 5. It uses the "Real" Framework target template assembled by Karl Stenerud. To build it, [download and install](https://github.com/kstenerud/iOS-Universal-Framework) the "Real" framework template into Xcode. This allows you to make Xcode frameworks, right from the "New Project" menu. Unfortunately, this approach is broken in Xcode 6 and will likely be replaced by Xcode 6's new Cocoa Touch Framework.
 
@@ -79,7 +79,7 @@ The [Charles web development proxy](http://www.charlesproxy.com) makes it easy t
 ## Example Apps
 ----
 
-> Note: Most of the sample apps use Cocoapods. To run one of the demo apps, `cd` to the project directory and run `pod install`. If you haven't used cocoapods before, you'll need to install it by doing `sudo gem install cocoapods`
+> Note: Most of the sample apps use CocoaPods. To run one of the demo apps, `cd` to the project directory and run `pod install`. If you haven't used cocoapods before, you'll need to install it by doing `sudo gem install cocoapods`
 
 #### EightBall (Swift)
 
